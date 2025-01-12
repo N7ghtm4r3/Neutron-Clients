@@ -9,7 +9,12 @@ compose-multiplatform = "1.7.3"
 equinox = "1.0.6"
 kotlin = "2.1.0"
 kotlinx-coroutines = "1.9.0"
+neutroncore = "1.0.1"
+octocatkdu = "1.0.5"
 precompose = "1.7.0-alpha03"
+kotlinxSerializationJson = "1.7.3"
+appUpdate = "2.1.0"
+review = "2.0.2"
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
@@ -18,7 +23,14 @@ androidx-lifecycle-runtime-compose = { group = "org.jetbrains.androidx.lifecycle
 equinox-compose = { module = "io.github.n7ghtm4r3:equinox-compose", version.ref = "equinox" }
 equinox-core = { module = "io.github.n7ghtm4r3:equinox-core", version.ref = "equinox" }
 kotlinx-coroutines-swing = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines" }
+neutroncore = { module = "com.tecknobit.neutroncore:neutroncore", version.ref = "neutroncore" }
+octocatkdu = { module = "io.github.n7ghtm4r3:octocatkdu", version.ref = "octocatkdu" }
 precompose = { module = "moe.tlaster:precompose", version.ref = "precompose" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
+review = { module = "com.google.android.play:review", version.ref = "review" }
+review-ktx = { module = "com.google.android.play:review-ktx", version.ref = "review" }
+app-update = { module = "com.google.android.play:app-update", version.ref = "appUpdate" }
+app-update-ktx = { module = "com.google.android.play:app-update-ktx", version.ref = "appUpdate" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

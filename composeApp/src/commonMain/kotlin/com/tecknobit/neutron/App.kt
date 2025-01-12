@@ -3,9 +3,11 @@ package com.tecknobit.neutron
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.ui.text.font.FontFamily
-import com.tecknobit.neutron.ui.helpers.NeutronLocalUser
-import com.tecknobit.neutron.ui.helpers.NeutronRequester
+import com.tecknobit.neutron.helpers.NeutronLocalUser
+import com.tecknobit.neutron.helpers.NeutronRequester
 import com.tecknobit.neutron.ui.screens.SplashScreen
+import com.tecknobit.neutron.ui.screens.auth.presenter.AuthScreen
+import com.tecknobit.neutron.ui.screens.revenues.presenter.RevenuesScreen
 import moe.tlaster.precompose.PreComposeApp
 import moe.tlaster.precompose.navigation.NavHost
 import moe.tlaster.precompose.navigation.Navigator
@@ -78,6 +80,16 @@ fun App() {
             ) {
                 SplashScreen().ShowContent()
             }
+            scene(
+                route = AUTH_SCREEN
+            ) {
+                AuthScreen().ShowContent()
+            }
+            scene(
+                route = REVENUES_SCREEN
+            ) {
+                RevenuesScreen().ShowContent()
+            }
         }
     }
 }
@@ -101,10 +113,10 @@ fun startSession() {
         userId = localUser.userId,
         userToken = localUser.userToken
     )
-    val route = if (localUser.userId == null)
-        AUTH_SCREEN
-    else
+    val route = if (localUser.isAuthenticated)
         REVENUES_SCREEN
+    else
+        AUTH_SCREEN
     setUserLanguage()
     navigator.navigate(route)
 }
@@ -121,4 +133,5 @@ expect fun setUserLanguage()
  */
 @Composable
 @NonRestartableComposable
+// TODO: TO IMPLEMENT IN EACH PLATFORM
 expect fun CloseApplicationOnNavBack()

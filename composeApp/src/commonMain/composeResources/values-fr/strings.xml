@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Neutron</string>
-    <string name="app_version">1.0.0</string>
+    <string name="app_version">1.0.1</string>
     <string name="earnings">Les revenus</string>
     <string name="last_month">Le mois dernier</string>
     <string name="revenue">Les recettes :</string>
@@ -32,7 +32,7 @@
     <string name="opening_time">Heure d'ouverture</string>
     <string name="closing_time">Heure de fermeture</string>
     <string name="closed">Fermé</string>
-    <string name="email">E-mail</string>
+    <string name="email">email</string>
     <string name="password">Mot de passe</string>
     <string name="language">Langue</string>
     <string name="theme">Thème</string>
@@ -42,7 +42,7 @@
     <string name="delete">Supprimer</string>
     <string name="logout_message">Si vous confirmez, vous serez déconnecté de ce dispositif.</string>
     <string name="delete_message">Si vous confirmez, votre compte sera définitivement supprimé et vos données ne seront plus récupérables.</string>
-    <string name="change_email">Changer l'e-mail</string>
+    <string name="change_email">Changer l'email</string>
     <string name="new_email">Nouveau courriel</string>
     <string name="new_password">Nouveau mot de passe</string>
     <string name="change_password">Changer le mot de passe</string>
@@ -59,8 +59,8 @@
     <string name="surname">Nom de famille</string>
     <string name="sign_in">S'inscrire !</string>
     <string name="sign_in_btn">S'inscrire</string>
-    <string name="are_you_new_to_neutron">Vous êtes nouveau sur Neutron \?</string>
-    <string name="have_an_account">Avoir un compte\?</string>
+    <string name="are_you_new_to_neutron">Vous êtes nouveau sur Neutron ?</string>
+    <string name="have_an_account">Avoir un compte?</string>
     <string name="sign_up">Inscrivez-vous !</string>
     <string name="sign_up_btn">S'inscrire</string>
     <string name="store_data_online">Stocker des données en ligne</string>
@@ -96,5 +96,5 @@
     <string name="description_not_valid">Description non valide</string>
     <string name="not_authorized_or_wrong_details">Données non autorisées ou erronées</string>
     <string name="wrong_procedure">Procédure erronée</string>
-    <string name="operation_executed_successfully">L\'opération a été exécutée avec succès</string>
+    <string name="operation_executed_successfully">L'opération a été exécutée avec succès</string>
 </resources>

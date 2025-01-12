@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.sp
 import com.tecknobit.equinoxcompose.session.EquinoxScreen
 import com.tecknobit.equinoxcompose.viewmodels.EquinoxViewModel
 import com.tecknobit.neutron.CheckForUpdatesAndLaunch
+import com.tecknobit.neutron.CloseApplicationOnNavBack
 import com.tecknobit.neutron.bodyFontFamily
 import com.tecknobit.neutron.displayFontFamily
 import com.tecknobit.neutron.ui.theme.NeutronTheme
@@ -31,6 +32,7 @@ class SplashScreen : EquinoxScreen<EquinoxViewModel>() {
      */
     @Composable
     override fun ArrangeScreenContent() {
+        CloseApplicationOnNavBack()
         NeutronTheme {
             Column (
                 modifier = Modifier

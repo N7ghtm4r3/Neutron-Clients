@@ -1,4 +1,4 @@
-package com.tecknobit.neutron.ui.helpers
+package com.tecknobit.neutron.helpers
 
 import com.tecknobit.equinoxcompose.session.EquinoxLocalUser
 

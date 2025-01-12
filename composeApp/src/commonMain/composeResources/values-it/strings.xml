@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Neutron</string>
-    <string name="app_version">1.0.0</string>
+    <string name="app_version">1.0.1</string>
     <string name="earnings">Guadagni</string>
     <string name="last_month">ultimo mese</string>
     <string name="revenue">Ricavi:</string>
@@ -42,8 +42,8 @@
     <string name="delete">Cancella</string>
     <string name="logout_message">Se confermi, verrai disconness da questo dispositivo.</string>
     <string name="delete_message">Se confermi, il tuo account sarà definitivamente cancellato e i tuoi dati non saranno più recuperabili.</string>
-    <string name="change_email">Modifica dell'e-mail</string>
-    <string name="new_email">Nuova e-mail</string>
+    <string name="change_email">Modifica dell'email</string>
+    <string name="new_email">Nuova email</string>
     <string name="new_password">Nuova password</string>
     <string name="change_password">Modifica password</string>
     <string name="change_storage_location">Cambia la posizione di archiviazione</string>
@@ -59,8 +59,8 @@
     <string name="surname">Cognome</string>
     <string name="sign_in">Accedi!</string>
     <string name="sign_in_btn">Accedi</string>
-    <string name="are_you_new_to_neutron">Sei nuov a Neutron\?</string>
-    <string name="have_an_account">Hai un account\?</string>
+    <string name="are_you_new_to_neutron">Sei nuov a Neutron?</string>
+    <string name="have_an_account">Hai un account?</string>
     <string name="sign_up">Iscriviti!</string>
     <string name="sign_up_btn">Iscriviti</string>
     <string name="store_data_online">Memorizza dati online</string>
