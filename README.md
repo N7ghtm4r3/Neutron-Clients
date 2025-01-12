@@ -6,9 +6,9 @@ This project, based on Java and the Spring Boot framework, iis an open source or
 projects
 you are developing
 
-Trace your revenues with **Neutron**!
+Trace your revenues with`Neutron**!
 
-This repository contains the desktop version of **Neutron**,
+This repository contains the desktop version of`Neutron**,
 so if you want to customize you can fork it and work on it, if there are any errors, fixes to do or some
 idea to upgrade this project, please open a ticket or contact us to talk about, thanks and good
 use!
@@ -31,7 +31,7 @@ steps:
 
 ## Usages
 
-See how to use the **Neutron** service reading the <a href="https://github.com/N7ghtm4r3/Neutron#readme">Neutron backend
+See how to use the`Neutron** service reading the <a href="https://github.com/N7ghtm4r3/Neutron#readme">Neutron backend
 procedures</a>
 
 ## Customize the application
@@ -45,7 +45,7 @@ core library</a> implemented in your project and published into maven local syst
 - Clone the repository or download the zip file of the current version available
 
 - Open the folder file in your development environment and publish to maven local with the
-  **publishMavenPublicationToMavenLocal** gradle task, take a
+ `publishMavenPublicationToMavenLocal** gradle task, take a
   look <a href="https://docs.gradle.org/current/userguide/publishing_maven.html">here</a>
   for a help
 
@@ -114,8 +114,8 @@ If you want support project and developer
 
 | Crypto                                                                                              | Address                                        | Network  |
 |-----------------------------------------------------------------------------------------------------|------------------------------------------------|----------|
-| ![](https://img.shields.io/badge/Bitcoin-000000?style=for-the-badge&logo=bitcoin&logoColor=white)   | **3H3jyCzcRmnxroHthuXh22GXXSmizin2yp**         | Bitcoin  |
-| ![](https://img.shields.io/badge/Ethereum-3C3C3D?style=for-the-badge&logo=Ethereum&logoColor=white) | **0x1b45bc41efeb3ed655b078f95086f25fc83345c4** | Ethereum |
+| ![](https://img.shields.io/badge/Bitcoin-000000?style=for-the-badge&logo=bitcoin&logoColor=white)   |`3H3jyCzcRmnxroHthuXh22GXXSmizin2yp**         | Bitcoin  |
+| ![](https://img.shields.io/badge/Ethereum-3C3C3D?style=for-the-badge&logo=Ethereum&logoColor=white) |`0x1b45bc41efeb3ed655b078f95086f25fc83345c4** | Ethereum |
 
 If you want support project and developer
 with <a href="https://www.paypal.com/donate/?hosted_button_id=5QMN5UQH7LDT4">PayPal</a>

@@ -73,6 +73,8 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtime.compose)
             implementation(libs.equinox.compose)
             implementation(libs.equinox.core)
+            implementation(libs.precompose)
+
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
@@ -152,4 +154,8 @@ compose.desktop {
             obfuscate.set(true)
         }
     }
+}
+
+configurations.all {
+    exclude("io.github.n7ghtm4r3", "Equinox-Compose-android")
 }

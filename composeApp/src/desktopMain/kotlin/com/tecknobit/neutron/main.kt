@@ -11,7 +11,7 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 /**
- * Method to start the of **Neutron** desktop app
+ * Method to start the of`Neutron** desktop app
  *
  */
 fun main() = application {

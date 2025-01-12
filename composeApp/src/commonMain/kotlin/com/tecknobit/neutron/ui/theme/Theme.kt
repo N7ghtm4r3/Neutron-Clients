@@ -9,7 +9,7 @@ import com.tecknobit.equinoxcompose.session.EquinoxLocalUser.ApplicationTheme.Li
 import com.tecknobit.neutron.localUser
 
 /**
- * **lightScheme** default light colors scheme
+ *`lightScheme** default light colors scheme
  */
 private val lightScheme = lightColorScheme(
     primary = primaryLight,
@@ -50,7 +50,7 @@ private val lightScheme = lightColorScheme(
 )
 
 /**
- * **darkScheme** default dark colors scheme
+ *`darkScheme** default dark colors scheme
  */
 private val darkScheme = darkColorScheme(
     primary = primaryDark,
@@ -91,7 +91,7 @@ private val darkScheme = darkColorScheme(
 )
 
 /**
- * **mediumContrastLightColorScheme** default light colors scheme
+ *`mediumContrastLightColorScheme** default light colors scheme
  */
 private val mediumContrastLightColorScheme = lightColorScheme(
     primary = primaryLightMediumContrast,
@@ -132,7 +132,7 @@ private val mediumContrastLightColorScheme = lightColorScheme(
 )
 
 /**
- * **highContrastLightColorScheme** default light colors scheme
+ *`highContrastLightColorScheme** default light colors scheme
  */
 private val highContrastLightColorScheme = lightColorScheme(
     primary = primaryLightHighContrast,
@@ -173,7 +173,7 @@ private val highContrastLightColorScheme = lightColorScheme(
 )
 
 /**
- * **mediumContrastDarkColorScheme** default dark colors scheme
+ *`mediumContrastDarkColorScheme** default dark colors scheme
  */
 private val mediumContrastDarkColorScheme = darkColorScheme(
     primary = primaryDarkMediumContrast,
@@ -214,7 +214,7 @@ private val mediumContrastDarkColorScheme = darkColorScheme(
 )
 
 /**
- * **highContrastDarkColorScheme** default dark colors scheme
+ *`highContrastDarkColorScheme** default dark colors scheme
  */
 private val highContrastDarkColorScheme = darkColorScheme(
     primary = primaryDarkHighContrast,

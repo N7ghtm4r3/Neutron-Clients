@@ -5,12 +5,12 @@ import com.tecknobit.neutron.bodyFontFamily
 import com.tecknobit.neutron.displayFontFamily
 
 /**
- * **baseline** -> the Neutron's baseline
+ *`baseline` the Neutron's baseline
  */
 val baseline = Typography()
 
 /**
- * **Typography** -> the Neutron's Typography
+ *`Typography` the Neutron's Typography
  */
 val AppTypography = Typography(
     displayLarge = baseline.displayLarge.copy(fontFamily = displayFontFamily),
