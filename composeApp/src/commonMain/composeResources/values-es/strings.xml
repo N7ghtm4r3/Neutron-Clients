@@ -1,11 +1,4 @@
 <resources>
-    <string name="app_name">Neutron</string>
-    <string name="app_version">1.0.1</string>
-    <string name="earnings">Ganancias</string>
-    <string name="last_month">El mes pasado</string>
-    <string name="revenue">Ingresos: %1$d%2$s</string>
-    <string name="date">Date: %1$s</string>
-    <string name="project">Proyecto</string>
     <string name="total_revenues">Ingresos totales: %1$s%2$s</string>
     <string name="initial_revenue">Ingresos iniciales</string>
     <string name="opening_date">Fecha de apertura:</string>
@@ -84,8 +77,7 @@
     <string name="no_revenues_yet">Aún no hay ingresos</string>
     <string name="no_tickets_yet">Aún no hay entradas</string>
     <string name="an_error_occurred">Se ha producido un error</string>
-    <string name="login_required">Inicio de sesión obligatorio</string>
-    <string name="enter_your_credentials_to_continue">Introduzca sus credenciales para continuar</string>
+    <string name="go_back">Volver atrás</string>
     <string name="host_address_not_valid">Dirección de host no válida</string>
     <string name="server_secret_not_valid">El secreto del servidor no es válido</string>
     <string name="name_not_valid">Nombre no válido</string>
@@ -97,4 +89,18 @@
     <string name="not_authorized_or_wrong_details">Datos no autorizados o erróneos</string>
     <string name="wrong_procedure">Procedimiento incorrecto</string>
     <string name="operation_executed_successfully">Operación ejecutada con éxito</string>
+
+    <!-- TODO CHECK TO REMOVE OLD RESOURCES -->
+    <string name="app_name">Neutron</string>
+    <string name="app_version">1.0.1</string>
+    <string name="earnings">Ganancias</string>
+    <string name="revenue">Ingresos: %1$d%2$s</string>
+    <string name="date">Date: %1$s</string>
+    <string name="project">Proyecto</string>
+    <string name="last_week_period">semana pasada</string>
+    <string name="last_month_period">último mes</string>
+    <string name="last_tres_months">últimos 90 días</string>
+    <string name="last_six_months">últimos 6 meses</string>
+    <string name="last_year">el año pasado</string>
+    
 </resources>

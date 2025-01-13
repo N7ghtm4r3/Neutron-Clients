@@ -3,6 +3,7 @@ package com.tecknobit.neutron
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.unit.dp
 import com.tecknobit.neutron.helpers.NeutronLocalUser
 import com.tecknobit.neutron.helpers.NeutronRequester
 import com.tecknobit.neutron.ui.screens.SplashScreen
@@ -63,6 +64,8 @@ const val AUTH_SCREEN = "AuthScreen"
  * `REVENUES_SCREEN` route to navigate to the [com.tecknobit.neutron.ui.screens.auth.presenter.AuthScreen]
  */
 const val REVENUES_SCREEN = "RevenuesScreen"
+
+val MAX_CONTAINER_WIDTH = 1200.dp
 
 @Composable
 @Preview
@@ -133,5 +136,4 @@ expect fun setUserLanguage()
  */
 @Composable
 @NonRestartableComposable
-// TODO: TO IMPLEMENT IN EACH PLATFORM
 expect fun CloseApplicationOnNavBack()

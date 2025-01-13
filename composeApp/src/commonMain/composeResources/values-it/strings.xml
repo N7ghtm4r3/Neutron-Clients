@@ -1,11 +1,4 @@
 <resources>
-    <string name="app_name">Neutron</string>
-    <string name="app_version">1.0.1</string>
-    <string name="earnings">Guadagni</string>
-    <string name="last_month">ultimo mese</string>
-    <string name="revenue">Ricavi: %1$d%2$s</string>
-    <string name="date">Data: %1$s</string>
-    <string name="project">Progetto</string>
     <string name="total_revenues">Ricavi totali: %1$s%2$s</string>
     <string name="initial_revenue">Ricavi iniziali</string>
     <string name="opening_date">Data di apertura:</string>
@@ -84,8 +77,7 @@
     <string name="no_revenues_yet">Non ci sono ancora entrate</string>
     <string name="no_tickets_yet">Non ci sono ancora ticket</string>
     <string name="an_error_occurred">Si è verificato un errore</string>
-    <string name="login_required">Accesso richiesto</string>
-    <string name="enter_your_credentials_to_continue">Inserire le proprie credenziali per continuare</string>
+    <string name="go_back">Torna indietro</string>
     <string name="host_address_not_valid">Indirizzo host non valido</string>
     <string name="server_secret_not_valid">Server secret non valido</string>
     <string name="name_not_valid">Nome non valido</string>
@@ -97,4 +89,18 @@
     <string name="not_authorized_or_wrong_details">Non autorizzat o dati errati</string>
     <string name="wrong_procedure">Procedura sbagliata</string>
     <string name="operation_executed_successfully">Operazione eseguita con successo</string>
+
+    <!-- TODO CHECK TO REMOVE OLD RESOURCES -->
+    <string name="app_name">Neutron</string>
+    <string name="app_version">1.0.1</string>
+    <string name="earnings">Guadagni</string>
+    <string name="revenue">Ricavi: %1$d%2$s</string>
+    <string name="date">Data: %1$s</string>
+    <string name="project">Progetto</string>
+    <string name="last_week_period">ultima settimana</string>
+    <string name="last_month_period">ultimo mese</string>
+    <string name="last_three_months">ultimi 90 giorni</string>
+    <string name="last_six_months">ultimi 6 mesi</string>
+    <string name="last_year">ultimo anno</string>
+    
 </resources>

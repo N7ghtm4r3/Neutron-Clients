@@ -9,12 +9,39 @@ import com.tecknobit.neutron.ui.screens.revenues.data.GeneralRevenue
 import com.tecknobit.neutron.ui.screens.revenues.data.ProjectRevenue
 import com.tecknobit.neutron.ui.screens.revenues.data.Revenue
 import com.tecknobit.neutron.ui.screens.revenues.data.RevenueLabel
+import com.tecknobit.neutroncore.dtos.WalletStatus
+import com.tecknobit.neutroncore.enums.RevenuePeriod
+import com.tecknobit.neutroncore.enums.RevenuePeriod.LAST_MONTH
 import io.github.ahmad_hamwi.compose.pagination.PaginationState
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlin.random.Random
 
 class RevenuesScreenViewModel : EquinoxViewModel(
     snackbarHostState = SnackbarHostState()
 ) {
+
+    private val _walletStatus = MutableStateFlow<WalletStatus?>(
+        value = null
+    )
+    val walletStatus: StateFlow<WalletStatus?> = _walletStatus
+
+    private val _revenuePeriod = MutableStateFlow(
+        value = LAST_MONTH
+    )
+    val revenuePeriod: StateFlow<RevenuePeriod> = _revenuePeriod
+
+    fun getWalletStatus() {
+        // TODO: MAKE THE REQUEST THEN
+        // APPLY THE FILTERS
+        _walletStatus.value = WalletStatus(
+            totalEarnings = 566.0,
+            trend = if(Random.nextBoolean())
+                -10.12
+            else
+                10.12
+        )
+    }
 
     val revenuesState = PaginationState<Int, Revenue>(
         initialPageKey = PaginatedResponse.DEFAULT_PAGE,
@@ -29,6 +56,7 @@ class RevenuesScreenViewModel : EquinoxViewModel(
         page: Int,
     ) {
         // TODO: MAKE THE REQUEST THEN
+        // APPLY THE FILTERS
         val revenues = listOf(
             ProjectRevenue(
                 Random.nextLong().toString(),
@@ -81,7 +109,12 @@ class RevenuesScreenViewModel : EquinoxViewModel(
         revenue: Revenue
     ) {
         // TODO: MAKE THE REQUEST THEN
+        refreshData()
+    }
+
+    private fun refreshData() {
         revenuesState.refresh()
+        getWalletStatus()
     }
 
 }

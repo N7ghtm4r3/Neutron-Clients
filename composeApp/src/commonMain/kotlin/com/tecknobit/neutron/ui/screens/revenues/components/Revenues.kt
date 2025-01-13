@@ -209,7 +209,9 @@ private fun RevenueInfo(
         Text(
             text = revenue.title,
             fontFamily = displayFontFamily,
-            fontSize = 20.sp
+            fontSize = 20.sp,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis
         )
         Text(
             text = stringResource(
