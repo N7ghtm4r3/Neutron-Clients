@@ -40,6 +40,7 @@ import com.tecknobit.equinoxcompose.utilities.toColor
 import com.tecknobit.neutron.bodyFontFamily
 import com.tecknobit.neutron.displayFontFamily
 import com.tecknobit.neutron.localUser
+import com.tecknobit.neutron.ui.components.DeleteRevenue
 import com.tecknobit.neutron.ui.icons.ContractDelete
 import com.tecknobit.neutron.ui.screens.revenues.data.GeneralRevenue
 import com.tecknobit.neutron.ui.screens.revenues.data.ProjectRevenue
@@ -181,12 +182,9 @@ private fun RevenueCard(
         },
         trailingContent = {
             Column {
+                val delete = remember { mutableStateOf(false) }
                 IconButton(
-                    onClick = {
-                        viewModel.deleteRevenue(
-                            revenue = revenue
-                        )
-                    }
+                    onClick = { delete.value = true }
                 ) {
                     Icon(
                         imageVector = deleteIcon,
@@ -194,6 +192,11 @@ private fun RevenueCard(
                         tint = MaterialTheme.colorScheme.error
                     )
                 }
+                DeleteRevenue(
+                    show = delete,
+                    viewModel = viewModel,
+                    revenue = revenue
+                )
                 actionButton()
             }
         }

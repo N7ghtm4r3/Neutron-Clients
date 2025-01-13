@@ -99,8 +99,10 @@
     <string name="project">Projet</string>
     <string name="last_week_period">la semaine dernière</string>
     <string name="last_month_period">le mois dernier</string>
-    <string name="last_trois_mois">90 derniers jours</string>
+    <string name="last_three_months">90 derniers jours</string>
     <string name="last_six_months">6 derniers mois</string>
     <string name="last_year">l'année dernière</string>
-    
+    <string name="delete_revenue">Supprimer les recettes</string>
+    <string name="delete_revenue_text">Les recettes seront supprimées et ne seront pas récupérables, confirmez-vous \?</string>
+
 </resources>

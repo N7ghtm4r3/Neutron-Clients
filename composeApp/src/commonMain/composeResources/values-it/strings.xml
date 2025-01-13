@@ -102,5 +102,7 @@
     <string name="last_three_months">ultimi 90 giorni</string>
     <string name="last_six_months">ultimi 6 mesi</string>
     <string name="last_year">ultimo anno</string>
-    
+    <string name="delete_revenue">Elimina entrata</string>
+    <string name="delete_revenue_text">L'entrata sarà eliminata e non sarà più recuperabile, confermi?</string>
+
 </resources>

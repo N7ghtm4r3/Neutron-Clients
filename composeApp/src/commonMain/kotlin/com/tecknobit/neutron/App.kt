@@ -4,8 +4,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
+import coil3.ImageLoader
+import coil3.compose.LocalPlatformContext
+import coil3.network.ktor3.KtorNetworkFetcherFactory
+import coil3.request.CachePolicy
+import coil3.request.addLastModifiedToFileCacheKey
 import com.tecknobit.neutron.helpers.NeutronLocalUser
 import com.tecknobit.neutron.helpers.NeutronRequester
+import com.tecknobit.neutron.helpers.customHttpClient
 import com.tecknobit.neutron.ui.screens.SplashScreen
 import com.tecknobit.neutron.ui.screens.auth.presenter.AuthScreen
 import com.tecknobit.neutron.ui.screens.revenues.presenter.RevenuesScreen
@@ -37,7 +43,7 @@ lateinit var navigator: Navigator
 /**
  *`imageLoader` the image loader used by coil library to load the image and by-passing the https self-signed certificates
  */
-/*lateinit var imageLoader: ImageLoader*/
+lateinit var imageLoader: ImageLoader
 
 /**
  *`requester` the instance to manage the requests with the backend
@@ -65,13 +71,26 @@ const val AUTH_SCREEN = "AuthScreen"
  */
 const val REVENUES_SCREEN = "RevenuesScreen"
 
-val MAX_CONTAINER_WIDTH = 1200.dp
+val MAX_CONTAINER_WIDTH = 1280.dp
 
 @Composable
 @Preview
 fun App() {
     bodyFontFamily = FontFamily(Font(Res.font.roboto))
     displayFontFamily = FontFamily(Font(Res.font.lilitaone))
+    imageLoader = ImageLoader.Builder(LocalPlatformContext.current)
+        .components {
+            add(
+                KtorNetworkFetcherFactory(
+                    httpClient = customHttpClient()
+                )
+            )
+        }
+        .addLastModifiedToFileCacheKey(true)
+        .diskCachePolicy(CachePolicy.ENABLED)
+        .networkCachePolicy(CachePolicy.ENABLED)
+        .memoryCachePolicy(CachePolicy.ENABLED)
+        .build()
     PreComposeApp {
         navigator = rememberNavigator()
         NavHost(

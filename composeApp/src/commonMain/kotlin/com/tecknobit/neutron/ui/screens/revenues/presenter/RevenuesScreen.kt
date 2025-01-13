@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -28,6 +29,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
@@ -45,6 +50,7 @@ import com.tecknobit.neutron.displayFontFamily
 import com.tecknobit.neutron.localUser
 import com.tecknobit.neutron.ui.components.FirstPageProgressIndicator
 import com.tecknobit.neutron.ui.components.NewPageProgressIndicator
+import com.tecknobit.neutron.ui.components.ProfilePic
 import com.tecknobit.neutron.ui.icons.ReceiptLong
 import com.tecknobit.neutron.ui.screens.revenues.components.RevenueItem
 import com.tecknobit.neutron.ui.screens.revenues.presentation.RevenuesScreenViewModel
@@ -103,7 +109,7 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
                             }
                         }
                     ) {
-                        RevenuesSection()
+                        Container()
                     }
                 }
             )
@@ -112,32 +118,20 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
 
     @Composable
     @NonRestartableComposable
-    private fun RevenuesSection() {
+    private fun Container() {
         Column(
             modifier = Modifier
                 .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            ResponsiveContent(
-                onExpandedSizeClass = {
-                    WalletStatus()
-                    Revenues()
-                },
-                onMediumSizeClass = {
-                    WalletStatus()
-                    Revenues()
-                },
-                onCompactSizeClass = {
-                    WalletStatus()
-                    Revenues()
-                }
-            )
+            Header()
+            Revenues()
         }
     }
 
     @Composable
     @NonRestartableComposable
-    private fun WalletStatus() {
+    private fun Header() {
         Card (
             modifier = Modifier
                 .widthIn(
@@ -149,26 +143,38 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
                 bottomEnd = 15.dp
             )
         ) {
-            Column(
+            Row (
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(
                         all = 10.dp
                     ),
-                verticalArrangement = Arrangement.Center
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(
-                    text = stringResource(Res.string.earnings)
-                )
-                Text(
-                    text = "${walletStatus.value!!.totalEarnings}" + localUser.currency.symbol,
-                    fontFamily = displayFontFamily,
-                    fontSize = 22.sp,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
-                )
-                WalletTrend()
+                WalletStatus()
+                UserProfilePicture()
             }
+        }
+    }
+
+    @Composable
+    @NonRestartableComposable
+    private fun RowScope.WalletStatus() {
+        Column(
+            modifier = Modifier
+                .weight(1f)
+        ) {
+            Text(
+                text = stringResource(Res.string.earnings)
+            )
+            Text(
+                text = "${walletStatus.value!!.totalEarnings}" + localUser.currency.symbol,
+                fontFamily = displayFontFamily,
+                fontSize = 30.sp,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
+            )
+            WalletTrend()
         }
     }
 
@@ -217,6 +223,30 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
                     overflow = TextOverflow.Ellipsis
                 )
             }
+        }
+    }
+
+    @Composable
+    @NonRestartableComposable
+    private fun RowScope.UserProfilePicture() {
+        Column(
+            modifier = Modifier
+                .weight(1f),
+            horizontalAlignment = Alignment.End
+        ) {
+            var size by remember { mutableStateOf(75.dp) }
+            ResponsiveContent(
+                onExpandedSizeClass = { size = 105.dp },
+                onMediumSizeClass = { size = 95.dp },
+                onCompactSizeClass = { size = 75.dp}
+            )
+            ProfilePic(
+                profilePic = localUser.profilePic,
+                size = size,
+                onClick = {
+                    // TODO: NAV TO PROFILE
+                }
+            )
         }
     }
 

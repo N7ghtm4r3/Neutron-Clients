@@ -99,8 +99,10 @@
     <string name="project">Proyecto</string>
     <string name="last_week_period">semana pasada</string>
     <string name="last_month_period">último mes</string>
-    <string name="last_tres_months">últimos 90 días</string>
+    <string name="last_three_months">últimos 90 días</string>
     <string name="last_six_months">últimos 6 meses</string>
     <string name="last_year">el año pasado</string>
-    
+    <string name="delete_revenue">Borrar ingresos</string>
+    <string name="delete_revenue_text">L'entrée sera supprimée et ne sera plus récupérable, confirmez-vous ?</string>
+
 </resources>

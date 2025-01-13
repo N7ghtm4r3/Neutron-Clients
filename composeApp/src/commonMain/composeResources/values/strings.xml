@@ -102,5 +102,7 @@
     <string name="last_three_months">last 90 days</string>
     <string name="last_six_months">last 6 months</string>
     <string name="last_year">last year</string>
+    <string name="delete_revenue">Delete revenue</string>
+    <string name="delete_revenue_text">The revenue will be deleted and will not be recoverable, confirm?</string>
 
 </resources>
