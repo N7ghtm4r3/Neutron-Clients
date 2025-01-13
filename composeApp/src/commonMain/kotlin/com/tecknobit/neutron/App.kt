@@ -8,6 +8,7 @@ import com.tecknobit.neutron.helpers.NeutronRequester
 import com.tecknobit.neutron.ui.screens.SplashScreen
 import com.tecknobit.neutron.ui.screens.auth.presenter.AuthScreen
 import com.tecknobit.neutron.ui.screens.revenues.presenter.RevenuesScreen
+import com.tecknobit.neutroncore.enums.NeutronCurrency
 import moe.tlaster.precompose.PreComposeApp
 import moe.tlaster.precompose.navigation.NavHost
 import moe.tlaster.precompose.navigation.Navigator
@@ -67,6 +68,7 @@ const val REVENUES_SCREEN = "RevenuesScreen"
 @Composable
 @Preview
 fun App() {
+    localUser.currency = NeutronCurrency.EURO
     bodyFontFamily = FontFamily(Font(Res.font.roboto))
     displayFontFamily = FontFamily(Font(Res.font.lilitaone))
     PreComposeApp {

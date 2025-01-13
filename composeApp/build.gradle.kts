@@ -88,6 +88,8 @@ kotlin {
             implementation(libs.precompose)
             implementation(libs.neutroncore)
             implementation(libs.kotlinx.serialization.json)
+            implementation(libs.lazy.pagination.compose)
+            implementation(libs.material3.window.size)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)

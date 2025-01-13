@@ -6,8 +6,10 @@ import com.google.android.play.core.appupdate.AppUpdateOptions
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.UpdateAvailability.UPDATE_AVAILABLE
 import com.google.android.play.core.ktx.isImmediateUpdateAllowed
+import com.tecknobit.equinoxcore.helpers.InputsValidator.Companion.DEFAULT_LANGUAGE
 import com.tecknobit.neutron.MainActivity.Companion.appUpdateManager
 import com.tecknobit.neutron.MainActivity.Companion.launcher
+import java.util.Locale
 
 /**
  * Method to check whether are available any updates for each platform and then launch the application
@@ -39,6 +41,13 @@ actual fun CheckForUpdatesAndLaunch() {
  *
  */
 actual fun setUserLanguage() {
+    val tag = localUser.language ?: DEFAULT_LANGUAGE
+    val locale = Locale(tag)
+    Locale.setDefault(locale)
+    val context = com.tecknobit.equinoxcompose.utilities.context.AppContext.get()
+    val config = context.resources.configuration
+    config.setLocale(locale)
+    context.createConfigurationContext(config)
 }
 
 /**

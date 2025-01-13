@@ -9,6 +9,8 @@ compose-multiplatform = "1.7.3"
 equinox = "1.0.6"
 kotlin = "2.1.0"
 kotlinx-coroutines = "1.9.0"
+lazyPaginationCompose = "1.4.0"
+material3WindowSize = "1.7.3"
 neutroncore = "1.0.1"
 octocatkdu = "1.0.5"
 precompose = "1.7.0-alpha03"
@@ -23,6 +25,8 @@ androidx-lifecycle-runtime-compose = { group = "org.jetbrains.androidx.lifecycle
 equinox-compose = { module = "io.github.n7ghtm4r3:equinox-compose", version.ref = "equinox" }
 equinox-core = { module = "io.github.n7ghtm4r3:equinox-core", version.ref = "equinox" }
 kotlinx-coroutines-swing = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines" }
+lazy-pagination-compose = { module = "io.github.ahmad-hamwi:lazy-pagination-compose", version.ref = "lazyPaginationCompose" }
+material3-window-size = { module = "org.jetbrains.compose.material3:material3-window-size-class", version.ref = "material3WindowSize" }
 neutroncore = { module = "com.tecknobit.neutroncore:neutroncore", version.ref = "neutroncore" }
 octocatkdu = { module = "io.github.n7ghtm4r3:octocatkdu", version.ref = "octocatkdu" }
 precompose = { module = "moe.tlaster:precompose", version.ref = "precompose" }

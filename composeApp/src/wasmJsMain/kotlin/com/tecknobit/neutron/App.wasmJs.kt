@@ -3,6 +3,8 @@ package com.tecknobit.neutron
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.NonRestartableComposable
+import com.tecknobit.equinoxcore.helpers.InputsValidator.Companion.DEFAULT_LANGUAGE
+import kotlinx.browser.document
 import kotlinx.coroutines.delay
 
 /**
@@ -24,6 +26,8 @@ actual fun CheckForUpdatesAndLaunch() {
  *
  */
 actual fun setUserLanguage() {
+    // TODO: TO IMPLEMENT AFTER 
+    document.documentElement?.setAttribute("lang", localUser.language ?: DEFAULT_LANGUAGE)
 }
 
 /**

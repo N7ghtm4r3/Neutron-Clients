@@ -9,6 +9,7 @@ import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts.StartIntentSenderForResult
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
+import com.tecknobit.equinoxcompose.session.setUpSession
 
 class MainActivity : ComponentActivity() {
 
@@ -38,6 +39,9 @@ class MainActivity : ComponentActivity() {
         appUpdateManager = AppUpdateManagerFactory.create(applicationContext)
         setContent {
             enableEdgeToEdge()
+            setUpSession {
+                // TODO: TO SET
+            }
             App()
         }
     }
