@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalUuidApi::class)
+
 package com.tecknobit.neutron.ui.screens.revenues.components
 
 import androidx.compose.animation.AnimatedVisibility
@@ -9,6 +11,8 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.NavigateNext
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.filled.ExpandMore
 import androidx.compose.material3.Card
@@ -26,6 +30,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -41,11 +46,15 @@ import com.tecknobit.neutron.ui.screens.revenues.data.ProjectRevenue
 import com.tecknobit.neutron.ui.screens.revenues.data.Revenue
 import com.tecknobit.neutron.ui.screens.revenues.data.RevenueLabel
 import com.tecknobit.neutron.ui.screens.revenues.presentation.RevenuesScreenViewModel
+import com.tecknobit.neutroncore.PROJECT_LABEL_COLOR
 import neutron.composeapp.generated.resources.Res
 import neutron.composeapp.generated.resources.date
+import neutron.composeapp.generated.resources.project
 import neutron.composeapp.generated.resources.revenue
 import org.jetbrains.compose.resources.stringResource
 import kotlin.math.round
+import kotlin.uuid.ExperimentalUuidApi
+import kotlin.uuid.Uuid
 
 @Composable
 @NonRestartableComposable
@@ -78,32 +87,13 @@ private fun GeneralRevenue(
     revenue: GeneralRevenue,
 ) {
     var expanded by remember { mutableStateOf(false) }
-    ListItem(
-        headlineContent = {
-            RevenueInfo(
-                revenue = revenue
-            )
-        },
-        overlineContent = {
-            RevenueLabels(
-                labels = revenue.labels
-            )
-        },
-        trailingContent = {
-            Column {
-                IconButton(
-                    onClick = {
-                        viewModel.deleteRevenue(
-                            revenue = revenue
-                        )
-                    }
-                ) {
-                    Icon(
-                        imageVector = ContractDelete,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.error
-                    )
-                }
+    Column {
+        RevenueCard(
+            viewModel = viewModel,
+            revenue = revenue,
+            labels = revenue.labels,
+            deleteIcon = ContractDelete,
+            actionButton = {
                 IconButton(
                     onClick = { expanded = !expanded }
                 ) {
@@ -116,24 +106,24 @@ private fun GeneralRevenue(
                     )
                 }
             }
-        }
-    )
-    AnimatedVisibility(
-        visible = expanded
-    ) {
-        Text(
-            modifier = Modifier
-                .padding(
-                    horizontal = 16.dp
-                )
-                .padding(
-                    bottom = 16.dp
-                ),
-            text = revenue.description,
-            textAlign = TextAlign.Justify,
-            overflow = TextOverflow.Ellipsis,
-            fontFamily = bodyFontFamily
         )
+        AnimatedVisibility(
+            visible = expanded
+        ) {
+            Text(
+                modifier = Modifier
+                    .padding(
+                        horizontal = 16.dp
+                    )
+                    .padding(
+                        bottom = 16.dp
+                    ),
+                text = revenue.description,
+                textAlign = TextAlign.Justify,
+                overflow = TextOverflow.Ellipsis,
+                fontFamily = bodyFontFamily
+            )
+        }
     }
 }
 
@@ -143,7 +133,71 @@ private fun ProjectRevenue(
     viewModel: RevenuesScreenViewModel,
     revenue: ProjectRevenue,
 ) {
+    RevenueCard(
+        viewModel = viewModel,
+        revenue = revenue,
+        labels = listOf(
+            RevenueLabel(
+                id = Uuid.random().toHexString(),
+                text = stringResource(Res.string.project),
+                color = PROJECT_LABEL_COLOR
+            )
+        ),
+        deleteIcon = Icons.Default.Delete,
+        actionButton = {
+            IconButton(
+                onClick = {
+                    // TODO: NAV TO PROJECT
+                }
+            ) {
+                Icon(
+                    imageVector = Icons.AutoMirrored.Filled.NavigateNext,
+                    contentDescription = null
+                )
+            }
+        }
+    )
+}
 
+@Composable
+@NonRestartableComposable
+private fun RevenueCard(
+    viewModel: RevenuesScreenViewModel,
+    revenue: Revenue,
+    labels: List<RevenueLabel>,
+    deleteIcon: ImageVector,
+    actionButton: @Composable () -> Unit
+) {
+    ListItem(
+        headlineContent = {
+            RevenueInfo(
+                revenue = revenue
+            )
+        },
+        overlineContent = {
+            RevenueLabels(
+                labels = labels
+            )
+        },
+        trailingContent = {
+            Column {
+                IconButton(
+                    onClick = {
+                        viewModel.deleteRevenue(
+                            revenue = revenue
+                        )
+                    }
+                ) {
+                    Icon(
+                        imageVector = deleteIcon,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.error
+                    )
+                }
+                actionButton()
+            }
+        }
+    )
 }
 
 @Composable

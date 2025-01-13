@@ -6,6 +6,7 @@ import com.tecknobit.equinoxcompose.utilities.toHex
 import com.tecknobit.equinoxcompose.viewmodels.EquinoxViewModel
 import com.tecknobit.equinoxcore.pagination.PaginatedResponse
 import com.tecknobit.neutron.ui.screens.revenues.data.GeneralRevenue
+import com.tecknobit.neutron.ui.screens.revenues.data.ProjectRevenue
 import com.tecknobit.neutron.ui.screens.revenues.data.Revenue
 import com.tecknobit.neutron.ui.screens.revenues.data.RevenueLabel
 import io.github.ahmad_hamwi.compose.pagination.PaginationState
@@ -29,6 +30,18 @@ class RevenuesScreenViewModel : EquinoxViewModel(
     ) {
         // TODO: MAKE THE REQUEST THEN
         val revenues = listOf(
+            ProjectRevenue(
+                Random.nextLong().toString(),
+                "Title #${Random.nextInt(100)}",
+                Random.nextDouble(0.0, 1000.0),
+                revenueDate = 1736771172000,
+                initialRevenue = Revenue.RevenueImpl(
+                    Random.nextLong().toString(),
+                    "Title #${Random.nextInt(100)}",
+                    Random.nextDouble(0.0, 1000.0),
+                    revenueDate = 1736771172000
+                )
+            ),
             GeneralRevenue.GeneralImpl(
                 Random.nextLong().toString(),
                 "Title #${Random.nextInt(100)}",
@@ -68,6 +81,7 @@ class RevenuesScreenViewModel : EquinoxViewModel(
         revenue: Revenue
     ) {
         // TODO: MAKE THE REQUEST THEN
+        revenuesState.refresh()
     }
 
 }

@@ -10,5 +10,5 @@ data class ProjectRevenue(
     override val value: Double,
     override val revenueDate: Long,
     val initialRevenue: RevenueImpl,
-    val tickets: List<TicketRevenue>,
+    val tickets: List<TicketRevenue> = emptyList(),
 ) : Revenue

@@ -7,8 +7,13 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.runtime.Composable
@@ -46,7 +51,19 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
                 viewModel = viewModel!!,
                 content = {
                     Scaffold(
-                        snackbarHost = { SnackbarHost(viewModel!!.snackbarHostState!!) }
+                        snackbarHost = { SnackbarHost(viewModel!!.snackbarHostState!!) },
+                        floatingActionButton = {
+                            FloatingActionButton(
+                                onClick = {
+                                    // TODO: NAV TO CREATE
+                                }
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.Add,
+                                    contentDescription = null
+                                )
+                            }
+                        }
                     ) {
                         RevenuesSection()
                     }
@@ -85,7 +102,8 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
                 .fillMaxHeight()
                 .widthIn(
                     max = 1000.dp
-                ),
+                )
+                .navigationBarsPadding(),
             paginationState = viewModel!!.revenuesState,
             contentPadding = PaddingValues(
                 vertical = 16.dp
