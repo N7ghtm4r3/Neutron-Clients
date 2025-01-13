@@ -11,11 +11,11 @@ class NeutronLocalUser : EquinoxLocalUser(
     localStoragePath = "Neutron"
 ) {
 
-    var currency: NeutronCurrency? = null
+    var currency: NeutronCurrency = NeutronCurrency.DOLLAR
         set(value) {
             setPreference(
                 key = CURRENCY_KEY,
-                value = value?.name
+                value = value.name
             )
             field = value
         }

@@ -3,13 +3,17 @@
 package com.tecknobit.neutron.ui.screens.revenues.presenter
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.NonRestartableComposable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
@@ -54,17 +58,23 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
     @Composable
     @NonRestartableComposable
     private fun RevenuesSection() {
-        ResponsiveContent(
-            onExpandedSizeClass = {
-                Revenues()
-            },
-            onMediumSizeClass = {
-                Revenues()
-            },
-            onCompactSizeClass = {
-                Revenues()
-            }
-        )
+        Column(
+            modifier = Modifier
+                .fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            ResponsiveContent(
+                onExpandedSizeClass = {
+                    Revenues()
+                },
+                onMediumSizeClass = {
+                    Revenues()
+                },
+                onCompactSizeClass = {
+                    Revenues()
+                }
+            )
+        }
     }
 
     @Composable
@@ -72,10 +82,13 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
     private fun Revenues() {
         PaginatedLazyColumn(
             modifier = Modifier
-                .fillMaxHeight(),
+                .fillMaxHeight()
+                .widthIn(
+                    max = 1000.dp
+                ),
             paginationState = viewModel!!.revenuesState,
             contentPadding = PaddingValues(
-                all = 16.dp
+                vertical = 16.dp
             ),
             verticalArrangement = Arrangement.spacedBy(10.dp),
             firstPageProgressIndicator = { FirstPageProgressIndicator() },

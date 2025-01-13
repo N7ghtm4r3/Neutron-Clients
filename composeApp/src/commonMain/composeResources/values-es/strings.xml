@@ -3,8 +3,8 @@
     <string name="app_version">1.0.1</string>
     <string name="earnings">Ganancias</string>
     <string name="last_month">El mes pasado</string>
-    <string name="revenue">Ingresos:</string>
-    <string name="date">Date:</string>
+    <string name="revenue">Ingresos: %1$d%2$s</string>
+    <string name="date">Date: %1$s</string>
     <string name="project">Proyecto</string>
     <string name="total_revenues">Ingresos totales: %1$s%2$s</string>
     <string name="initial_revenue">Ingresos iniciales</string>
