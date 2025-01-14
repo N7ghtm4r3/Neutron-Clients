@@ -9,14 +9,11 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.NavigateNext
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.filled.ExpandMore
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -35,8 +32,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.tecknobit.equinoxcompose.components.ChameleonText
-import com.tecknobit.equinoxcompose.utilities.toColor
 import com.tecknobit.neutron.bodyFontFamily
 import com.tecknobit.neutron.displayFontFamily
 import com.tecknobit.neutron.localUser
@@ -255,36 +250,9 @@ private fun RevenueLabels(
             items = labels,
             key = { label -> label.id }
         ) { label ->
-            Label(
+            RevenueLabel(
                 label = label
             )
         }
-    }
-}
-
-@Composable
-@NonRestartableComposable
-private fun Label(
-    label: RevenueLabel
-) {
-    val color = label.color.toColor()
-    Card (
-        colors = CardDefaults.outlinedCardColors(
-            containerColor = color
-        ),
-        shape = RoundedCornerShape(
-            size = 5.dp
-        )
-    ) {
-        ChameleonText(
-            modifier = Modifier
-                .padding(
-                    all = 4.dp
-                ),
-            backgroundColor = color,
-            text = label.text,
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis
-        )
     }
 }

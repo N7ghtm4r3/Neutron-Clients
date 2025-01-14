@@ -18,7 +18,6 @@
     <string name="confirm">Confirmer</string>
     <string name="dismiss">Rejeter</string>
     <string name="add_project">Ajouter un projet</string>
-    <string name="labels">Étiquettes</string>
     <string name="label_text">Texte de l'étiquette</string>
     <string name="add_label">Ajouter un label</string>
     <string name="add_ticket">Ajouter un billet</string>
@@ -102,7 +101,9 @@
     <string name="last_three_months">90 derniers jours</string>
     <string name="last_six_months">6 derniers mois</string>
     <string name="last_year">l'année dernière</string>
+    <string name="all">Tous</string>
     <string name="delete_revenue">Supprimer les recettes</string>
     <string name="delete_revenue_text">Les recettes seront supprimées et ne seront pas récupérables, confirmez-vous \?</string>
-
+    <string name="labels">Étiquettes</string>
+    
 </resources>

@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
@@ -52,6 +53,7 @@ import com.tecknobit.neutron.ui.components.FirstPageProgressIndicator
 import com.tecknobit.neutron.ui.components.NewPageProgressIndicator
 import com.tecknobit.neutron.ui.components.ProfilePic
 import com.tecknobit.neutron.ui.icons.ReceiptLong
+import com.tecknobit.neutron.ui.screens.revenues.components.FiltersBar
 import com.tecknobit.neutron.ui.screens.revenues.components.RevenueItem
 import com.tecknobit.neutron.ui.screens.revenues.presentation.RevenuesScreenViewModel
 import com.tecknobit.neutron.ui.theme.NeutronTheme
@@ -137,7 +139,7 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
                 .widthIn(
                     max = MAX_CONTAINER_WIDTH
                 )
-                .height(150.dp),
+                .height(175.dp),
             shape = RoundedCornerShape(
                 bottomStart = 15.dp,
                 bottomEnd = 15.dp
@@ -145,7 +147,8 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
         ) {
             Row (
                 modifier = Modifier
-                    .fillMaxSize()
+                    .weight(1f)
+                    .fillMaxWidth()
                     .padding(
                         all = 10.dp
                     ),
@@ -154,6 +157,9 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
                 WalletStatus()
                 UserProfilePicture()
             }
+            FiltersBar(
+                viewModel = viewModel!!
+            )
         }
     }
 
@@ -236,8 +242,8 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
         ) {
             var size by remember { mutableStateOf(75.dp) }
             ResponsiveContent(
-                onExpandedSizeClass = { size = 105.dp },
-                onMediumSizeClass = { size = 95.dp },
+                onExpandedSizeClass = { size = 95.dp },
+                onMediumSizeClass = { size = 85.dp },
                 onCompactSizeClass = { size = 75.dp}
             )
             ProfilePic(

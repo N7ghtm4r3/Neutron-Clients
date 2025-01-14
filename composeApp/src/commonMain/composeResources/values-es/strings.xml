@@ -18,7 +18,6 @@
     <string name="confirm">Confirme</string>
     <string name="dismiss">Desestimar</string>
     <string name="add_project">Agregar proyecto</string>
-    <string name="labels">Etiquetas</string>
     <string name="label_text">Label text</string>
     <string name="add_label">Añadir etiqueta</string>
     <string name="add_ticket">Añadir billete</string>
@@ -102,7 +101,9 @@
     <string name="last_three_months">últimos 90 días</string>
     <string name="last_six_months">últimos 6 meses</string>
     <string name="last_year">el año pasado</string>
+    <string name="all">Todos</string>
     <string name="delete_revenue">Borrar ingresos</string>
     <string name="delete_revenue_text">L'entrée sera supprimée et ne sera plus récupérable, confirmez-vous ?</string>
-
+    <string name="labels">Etiquetas</string>
+    
 </resources>

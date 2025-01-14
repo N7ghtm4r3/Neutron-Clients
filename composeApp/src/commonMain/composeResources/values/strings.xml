@@ -18,7 +18,6 @@
     <string name="confirm">Confirm</string>
     <string name="dismiss">Dismiss</string>
     <string name="add_project">Add project</string>
-    <string name="labels">Labels</string>
     <string name="label_text">Label text</string>
     <string name="add_label">Add label</string>
     <string name="add_ticket">Add ticket</string>
@@ -102,7 +101,9 @@
     <string name="last_three_months">last 90 days</string>
     <string name="last_six_months">last 6 months</string>
     <string name="last_year">last year</string>
+    <string name="all">All</string>
     <string name="delete_revenue">Delete revenue</string>
     <string name="delete_revenue_text">The revenue will be deleted and will not be recoverable, confirm?</string>
+    <string name="labels">Labels</string>
 
 </resources>

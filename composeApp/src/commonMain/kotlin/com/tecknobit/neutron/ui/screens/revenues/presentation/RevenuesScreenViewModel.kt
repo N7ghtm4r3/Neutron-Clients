@@ -1,6 +1,7 @@
 package com.tecknobit.neutron.ui.screens.revenues.presentation
 
 import androidx.compose.material3.SnackbarHostState
+import androidx.compose.runtime.mutableStateListOf
 import com.tecknobit.equinoxcompose.utilities.generateRandomColor
 import com.tecknobit.equinoxcompose.utilities.toHex
 import com.tecknobit.equinoxcompose.viewmodels.EquinoxViewModel
@@ -31,6 +32,8 @@ class RevenuesScreenViewModel : EquinoxViewModel(
     )
     val revenuePeriod: StateFlow<RevenuePeriod> = _revenuePeriod
 
+    val labelsFilter = mutableStateListOf<RevenueLabel>()
+
     fun getWalletStatus() {
         // TODO: MAKE THE REQUEST THEN
         // APPLY THE FILTERS
@@ -41,6 +44,28 @@ class RevenuesScreenViewModel : EquinoxViewModel(
             else
                 10.12
         )
+    }
+
+    fun setRevenuePeriodFilter(
+        revenuePeriod: RevenuePeriod,
+        afterSet: () -> Unit
+    ) {
+        _revenuePeriod.value = revenuePeriod
+        afterSet()
+        refreshData()
+    }
+
+    fun retrieveUserLabels() {
+        // TODO: MAKE THE REQUEST THEN
+        for (j in 0 until Random.nextInt(10)) {
+            labelsFilter.add(
+                RevenueLabel(
+                    id = Random.nextLong().toString(),
+                    text = "RevenueLabel #$j",
+                    color = generateRandomColor().toHex()
+                )
+            )
+        }
     }
 
     val revenuesState = PaginationState<Int, Revenue>(
