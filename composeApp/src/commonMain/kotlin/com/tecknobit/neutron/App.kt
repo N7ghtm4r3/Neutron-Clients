@@ -14,6 +14,7 @@ import com.tecknobit.neutron.helpers.NeutronRequester
 import com.tecknobit.neutron.helpers.customHttpClient
 import com.tecknobit.neutron.ui.screens.SplashScreen
 import com.tecknobit.neutron.ui.screens.auth.presenter.AuthScreen
+import com.tecknobit.neutron.ui.screens.profile.presenter.ProfileScreen
 import com.tecknobit.neutron.ui.screens.revenues.presenter.RevenuesScreen
 import moe.tlaster.precompose.PreComposeApp
 import moe.tlaster.precompose.navigation.NavHost
@@ -71,6 +72,11 @@ const val AUTH_SCREEN = "AuthScreen"
  */
 const val REVENUES_SCREEN = "RevenuesScreen"
 
+/**
+ * `PROFILE_SCREEN` route to navigate to the [com.tecknobit.neutron.ui.screens.profile.presenter.ProfileScreen]
+ */
+const val PROFILE_SCREEN = "ProfileScreen"
+
 val MAX_CONTAINER_WIDTH = 1280.dp
 
 @Composable
@@ -111,6 +117,16 @@ fun App() {
                 route = REVENUES_SCREEN
             ) {
                 RevenuesScreen().ShowContent()
+            }
+            scene(
+                route = PROFILE_SCREEN
+            ) {
+                // TODO: TO REMOVE THIS 
+                requester = NeutronRequester(
+                    host = ""
+                )
+                // TODO: TO REMOVE ABOVE 
+                ProfileScreen().ShowContent()
             }
         }
     }

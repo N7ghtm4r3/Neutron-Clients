@@ -30,14 +30,6 @@
     <string name="theme">Thème</string>
     <string name="change">Changer</string>
     <string name="storage_data">Données de stockage</string>
-    <string name="logout">Déconnexion</string>
-    <string name="delete">Supprimer</string>
-    <string name="logout_message">Si vous confirmez, vous serez déconnecté de ce dispositif.</string>
-    <string name="delete_message">Si vous confirmez, votre compte sera définitivement supprimé et vos données ne seront plus récupérables.</string>
-    <string name="change_email">Changer l'email</string>
-    <string name="new_email">Nouveau courriel</string>
-    <string name="new_password">Nouveau mot de passe</string>
-    <string name="change_password">Changer le mot de passe</string>
     <string name="change_storage_location">Modifier l'emplacement de stockage</string>
     <string name="aware_server_message">En exécutant ce changement, vos données seront stockées sur un serveur externe qui stockera toutes vos données et où vos futures données seront stockées, faites attention à l'endroit où vous stockez les données.</string>
     <string name="aware_local_message">En exécutant ce changement, vos données seront transférées d'un serveur externe vers le stockage local et votre compte et les données associées seront supprimés de ce serveur.</string>
@@ -105,5 +97,20 @@
     <string name="delete_revenue">Supprimer les recettes</string>
     <string name="delete_revenue_text">Les recettes seront supprimées et ne seront pas récupérables, confirmez-vous \?</string>
     <string name="labels">Étiquettes</string>
-    
+    <string name="generals">Généraux</string>
+    <string name="projects">Projets</string>
+    <string name="change_language">Changer de langue</string>
+    <string name="logout_warn_text">Si vous confirmez, vous serez déconnecté de la session en cours. Souhaitez-vous poursuivre \?</string>
+    <string name="delete_warn_text">Si vous confirmez, votre compte et toutes les données associées seront définitivement supprimés. Cette action ne peut être annulée. Souhaitez-vous continuer \?</string>
+    <string name="logout">Déconnexion</string>
+    <string name="delete">Supprimer</string>
+    <string name="delete_message">Si vous confirmez, votre compte sera définitivement supprimé et vos données ne seront plus récupérables.</string>
+    <string name="changelogs">Changelogs</string>
+    <string name="change_theme">Changer de thème</string>
+    <string name="change_email">Changer l'email</string>
+    <string name="new_email">Nouveau courriel</string>
+    <string name="new_password">Nouveau mot de passe</string>
+    <string name="change_password">Changer le mot de passe</string>
+    <string name="settings">Paramètres</string>
+
 </resources>

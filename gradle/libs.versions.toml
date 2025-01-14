@@ -7,6 +7,7 @@ androidx-activityCompose = "1.9.3"
 androidx-lifecycle = "2.8.4"
 compose-multiplatform = "1.7.3"
 coilCompose = "3.0.4"
+filekitCore = "0.8.8"
 ktor = "3.0.3"
 equinox = "1.0.6"
 kotlin = "2.1.0"
@@ -23,6 +24,8 @@ review = "2.0.2"
 [libraries]
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coilCompose" }
 coil-network-ktor3 = { module = "io.coil-kt.coil3:coil-network-ktor3", version.ref = "ktor" }
+filekit-compose = { module = "io.github.vinceglb:filekit-compose", version.ref = "filekitCore" }
+filekit-core = { module = "io.github.vinceglb:filekit-core", version.ref = "filekitCore" }
 ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
 ktor-client-js = { module = "io.ktor:ktor-client-js", version.ref = "ktor" }
 ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }

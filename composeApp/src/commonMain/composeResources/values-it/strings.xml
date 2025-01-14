@@ -30,14 +30,6 @@
     <string name="theme">Tema</string>
     <string name="change">Cambia</string>
     <string name="storage_data">Dati di archiviazione</string>
-    <string name="logout">Disconnettimi</string>
-    <string name="delete">Cancella</string>
-    <string name="logout_message">Se confermi, verrai disconness da questo dispositivo.</string>
-    <string name="delete_message">Se confermi, il tuo account sarà definitivamente cancellato e i tuoi dati non saranno più recuperabili.</string>
-    <string name="change_email">Modifica dell'email</string>
-    <string name="new_email">Nuova email</string>
-    <string name="new_password">Nuova password</string>
-    <string name="change_password">Modifica password</string>
     <string name="change_storage_location">Cambia la posizione di archiviazione</string>
     <string name="aware_server_message">Eseguendo questa modifica, i dati verranno memorizzati su un server esterno che memorizzerà tutti i dati e dove verranno memorizzati i dati futuri.</string>
     <string name="aware_local_message">Eseguendo questa modifica, i vostri dati saranno trasferiti da un server esterno all'archivio locale e il vostro account e i relativi dati saranno cancellati da quel server.</string>
@@ -105,5 +97,20 @@
     <string name="delete_revenue">Elimina entrata</string>
     <string name="delete_revenue_text">L'entrata sarà eliminata e non sarà più recuperabile, confermi?</string>
     <string name="labels">Etichette</string>
-    
+    <string name="generals">Generali</string>
+    <string name="projects">Progetti</string>
+    <string name="change_language">Cambiare la lingua</string>
+    <string name="logout_warn_text">Se confermate, verrete disconnessi dalla sessione corrente. Desiderate procedere\?</string>
+    <string name="delete_warn_text">Se confermate, il vostro account e tutti i dati associati saranno eliminati in modo permanente. Questa azione non può essere annullata. Desiderate procedere\?</string>
+    <string name="logout">Disconnettimi</string>
+    <string name="delete">Cancella</string>
+    <string name="delete_message">Se confermi, il tuo account sarà definitivamente cancellato e i tuoi dati non saranno più recuperabili.</string>
+    <string name="changelogs">Changelog</string>
+    <string name="change_theme">Cambia tema</string>
+    <string name="change_email">Modifica dell'email</string>
+    <string name="new_email">Nuova email</string>
+    <string name="new_password">Nuova password</string>
+    <string name="change_password">Modifica password</string>
+    <string name="settings">Impostazioni</string>
+
 </resources>

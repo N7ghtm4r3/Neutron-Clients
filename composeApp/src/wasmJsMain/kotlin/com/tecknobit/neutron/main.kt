@@ -8,9 +8,12 @@ import kotlinx.browser.document
 @OptIn(ExperimentalComposeUiApi::class)
 fun main() {
     ComposeViewport(document.body!!) {
-        setUpSession {
-            // TODO: TO SET
-        }
+        setUpSession(
+            hasBeenDisconnectedAction = {
+                localUser.clear()
+                navigator.navigate(SPLASHSCREEN)
+            }
+        )
         App()
     }
 }

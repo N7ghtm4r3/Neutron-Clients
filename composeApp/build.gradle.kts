@@ -95,6 +95,8 @@ kotlin {
                 implementation(libs.material3.window.size)
                 implementation(libs.coil.compose)
                 implementation(libs.coil.network.ktor3)
+                implementation(libs.filekit.core)
+                implementation(libs.filekit.compose)
             }
         }
 
@@ -165,7 +167,8 @@ compose.desktop {
             targetFormats(Deb, Pkg, Exe)
             modules(
                 "java.compiler", "java.instrument", "java.management", "java.naming", "java.net.http", "java.prefs",
-                "java.rmi", "java.scripting", "java.security.jgss", "java.sql", "jdk.jfr", "jdk.unsupported"
+                "java.rmi", "java.scripting", "java.security.jgss", "java.sql", "jdk.jfr", "jdk.unsupported",
+                "jdk.security.auth"
             )
             packageName = "Neutron"
             packageVersion = "1.0.1"

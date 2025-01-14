@@ -30,14 +30,6 @@
     <string name="theme">Tema</string>
     <string name="change">Cambia</string>
     <string name="storage_data">Datos de almacenamiento</string>
-    <string name="logout">Cierre de sesión</string>
-    <string name="delete">Borrar</string>
-    <string name="logout_message">Si confirma, se le desconectará de este dispositivo.</string>
-    <string name="delete_message">Si confirma, su cuenta se eliminará de forma permanente y sus datos no podrán recuperarse.</string>
-    <string name="change_email">Cambiar correo electrónico</string>
-    <string name="new_email">Nuevo correo electrónico</string>
-    <string name="new_password">Nueva contraseña</string>
-    <string name="change_password">Cambiar contraseña</string>
     <string name="change_storage_location">Cambiar la ubicación de almacenamiento</string>
     <string name="aware_server_message">Ejecutando este cambio sus datos serán almacenados en un servidor externo que almacenará todos sus datos y donde sus datos futuros serán almacenados, preste atención donde está almacenando los datos.</string>
     <string name="aware_local_message">Al ejecutar este cambio, sus datos se transferirán de un servidor externo a un almacenamiento local y se eliminará su cuenta y los datos relacionados de ese servidor.</string>
@@ -105,5 +97,20 @@
     <string name="delete_revenue">Borrar ingresos</string>
     <string name="delete_revenue_text">L'entrée sera supprimée et ne sera plus récupérable, confirmez-vous ?</string>
     <string name="labels">Etiquetas</string>
-    
+    <string name="generals">Generales</string>
+    <string name="projects">Proyectos</string>
+    <string name="change_language">Cambiar de idioma</string>
+    <string name="logout_warn_text">Si confirma, saldrá de la sesión actual. ¿Desea continuar\?</string>
+    <string name="delete_warn_text">Si confirma, su cuenta y todos los datos asociados se eliminarán de forma permanente. Esta acción no se puede deshacer. ¿Desea continuar\?</string>
+    <string name="logout">Cierre de sesión</string>
+    <string name="delete">Borrar</string>
+    <string name="delete_message">Si confirma, su cuenta se eliminará de forma permanente y sus datos no podrán recuperarse.</string>
+    <string name="changelogs">Cambios</string>
+    <string name="change_theme">Cambiar de tema</string>
+    <string name="change_email">Cambiar correo electrónico</string>
+    <string name="new_email">Nuevo correo electrónico</string>
+    <string name="new_password">Nueva contraseña</string>
+    <string name="change_password">Cambiar contraseña</string>
+    <string name="settings">Ajustes</string>
+
 </resources>

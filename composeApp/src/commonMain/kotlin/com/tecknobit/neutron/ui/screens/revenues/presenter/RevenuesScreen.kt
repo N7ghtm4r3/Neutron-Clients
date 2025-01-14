@@ -46,9 +46,11 @@ import com.tecknobit.equinoxcompose.session.ManagedContent
 import com.tecknobit.equinoxcompose.utilities.ResponsiveContent
 import com.tecknobit.neutron.CloseApplicationOnNavBack
 import com.tecknobit.neutron.MAX_CONTAINER_WIDTH
+import com.tecknobit.neutron.PROFILE_SCREEN
 import com.tecknobit.neutron.bodyFontFamily
 import com.tecknobit.neutron.displayFontFamily
 import com.tecknobit.neutron.localUser
+import com.tecknobit.neutron.navigator
 import com.tecknobit.neutron.ui.components.FirstPageProgressIndicator
 import com.tecknobit.neutron.ui.components.NewPageProgressIndicator
 import com.tecknobit.neutron.ui.components.ProfilePic
@@ -249,9 +251,7 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
             ProfilePic(
                 profilePic = localUser.profilePic,
                 size = size,
-                onClick = {
-                    // TODO: NAV TO PROFILE
-                }
+                onClick = { navigator.navigate(PROFILE_SCREEN) }
             )
         }
     }

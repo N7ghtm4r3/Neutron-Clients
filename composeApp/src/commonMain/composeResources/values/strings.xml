@@ -30,14 +30,6 @@
     <string name="theme">Theme</string>
     <string name="change">Change</string>
     <string name="storage_data">Storage data</string>
-    <string name="logout">Logout</string>
-    <string name="delete">Delete</string>
-    <string name="logout_message">If you confirm you will be disconnected from this device</string>
-    <string name="delete_message">If you confirm your account will be permanently deleted and your data will not be more recoverable</string>
-    <string name="change_email">Change email</string>
-    <string name="new_email">New email</string>
-    <string name="new_password">New password</string>
-    <string name="change_password">Change password</string>
     <string name="change_storage_location">Change storage location</string>
     <string name="aware_server_message">Executing this change your data will be store on an external backend server which will be store all your data and where your future data will be store, pay attention where are you storing the data</string>
     <string name="aware_local_message">Executing this change your data will be transfer from an external server to local storage and will be deleted your account and the related data from that server</string>
@@ -107,5 +99,18 @@
     <string name="labels">Labels</string>
     <string name="generals">Generals</string>
     <string name="projects">Projects</string>
+    <string name="change_language">Change language</string>
+    <string name="logout_warn_text">If you confirm, you will be logged out of the current session. Do you wish to proceed?</string>
+    <string name="delete_warn_text">If you confirm, your account and all associated data will be permanently deleted. This action cannot be undone. Do you wish to proceed?</string>
+    <string name="logout">Logout</string>
+    <string name="delete">Delete</string>
+    <string name="delete_message">If you confirm your account will be permanently deleted and your data will not be more recoverable</string>
+    <string name="changelogs">Changelogs</string>
+    <string name="change_theme">Change theme</string>
+    <string name="change_email">Change email</string>
+    <string name="new_email">New email</string>
+    <string name="new_password">New password</string>
+    <string name="change_password">Change password</string>
+    <string name="settings">Settings</string>
 
 </resources>

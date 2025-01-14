@@ -39,9 +39,12 @@ class MainActivity : ComponentActivity() {
         appUpdateManager = AppUpdateManagerFactory.create(applicationContext)
         setContent {
             enableEdgeToEdge()
-            setUpSession {
-                // TODO: TO SET
-            }
+            setUpSession(
+                hasBeenDisconnectedAction = {
+                    localUser.clear()
+                    navigator.navigate(SPLASHSCREEN)
+                }
+            )
             App()
         }
     }

@@ -24,9 +24,12 @@ fun main() = application {
         ),
         icon = painterResource(Res.drawable.logo)
     ) {
-        setUpSession {
-            // TODO: TO SET
-        }
+        setUpSession(
+            hasBeenDisconnectedAction = {
+                localUser.clear()
+                navigator.navigate(SPLASHSCREEN)
+            }
+        )
         App()
     }
 }
