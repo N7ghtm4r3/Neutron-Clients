@@ -18,9 +18,24 @@ class ProfileScreenViewModel : EquinoxProfileViewModel(
      */
     lateinit var currency: MutableState<NeutronCurrency>
 
-    /**
-     * `newEmailError` -> whether the [currency] field is not valid
-     */
-    lateinit var currencyError: MutableState<Boolean>
+    fun changeCurrency(
+        onSuccess: () -> Unit,
+    ) {
+        // TODO: MAKE THE REQUEST THEN
+        /*viewModelScope.launch {
+            requester.sendRequest(
+                request = {
+                },
+                onSuccess = {
+                    localUser.currency = newCurrency
+                    currency.value = newCurrency
+                    onSuccess.invoke()
+                },
+                onFailure = { showSnackbarMessage(it) }
+            )
+        }*/
+        localUser.currency = currency.value
+        onSuccess.invoke()
+    }
 
 }

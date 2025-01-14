@@ -18,11 +18,14 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBackIos
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.AlternateEmail
 import androidx.compose.material.icons.filled.Cancel
 import androidx.compose.material.icons.filled.CheckCircle
+import androidx.compose.material.icons.filled.CurrencyPound
+import androidx.compose.material.icons.filled.CurrencyYen
+import androidx.compose.material.icons.filled.EuroSymbol
 import androidx.compose.material.icons.filled.Language
 import androidx.compose.material.icons.filled.Palette
 import androidx.compose.material.icons.filled.Password
@@ -82,16 +85,19 @@ import com.tecknobit.neutron.bodyFontFamily
 import com.tecknobit.neutron.displayFontFamily
 import com.tecknobit.neutron.localUser
 import com.tecknobit.neutron.navigator
+import com.tecknobit.neutron.ui.components.CurrencyDollar
 import com.tecknobit.neutron.ui.components.DeleteAccount
 import com.tecknobit.neutron.ui.components.Logout
 import com.tecknobit.neutron.ui.components.ProfilePic
 import com.tecknobit.neutron.ui.screens.profile.presentation.ProfileScreenViewModel
 import com.tecknobit.neutron.ui.theme.NeutronTheme
+import com.tecknobit.neutroncore.enums.NeutronCurrency
 import io.github.vinceglb.filekit.compose.rememberFilePickerLauncher
 import io.github.vinceglb.filekit.core.PickerMode
 import io.github.vinceglb.filekit.core.PickerType
 import kotlinx.coroutines.launch
 import neutron.composeapp.generated.resources.Res
+import neutron.composeapp.generated.resources.change_currency
 import neutron.composeapp.generated.resources.change_email
 import neutron.composeapp.generated.resources.change_language
 import neutron.composeapp.generated.resources.change_password
@@ -102,6 +108,7 @@ import neutron.composeapp.generated.resources.logout
 import neutron.composeapp.generated.resources.new_email
 import neutron.composeapp.generated.resources.new_password
 import neutron.composeapp.generated.resources.password_not_valid
+import neutron.composeapp.generated.resources.profile
 import neutron.composeapp.generated.resources.settings
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
@@ -160,12 +167,12 @@ class ProfileScreen : EquinoxScreen<ProfileScreenViewModel>(
                     onClick = { navigator.goBack() }
                 ) {
                     Icon(
-                        imageVector = Icons.AutoMirrored.Filled.ArrowBackIos,
+                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                         contentDescription = null
                     )
                 }
                 Text(
-                    text = "Profile",
+                    text = stringResource(Res.string.profile),
                     fontSize = 35.sp,
                     fontFamily = displayFontFamily
                 )
@@ -185,7 +192,7 @@ class ProfileScreen : EquinoxScreen<ProfileScreenViewModel>(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(
-                    top = 10.dp
+                    top = 5.dp
                 )
                 .padding(
                     horizontal = 16.dp
@@ -297,6 +304,8 @@ class ProfileScreen : EquinoxScreen<ProfileScreenViewModel>(
      */
     @Composable
     @NonRestartableComposable
+    @Deprecated("USE THE BUILT-ONE FROM EQUINOX")
+    // TODO: MORE CUSTOMIZATION IN THE OFFICIAL COMPONENT
     private fun Settings() {
         Column (
             verticalArrangement = Arrangement.spacedBy(10.dp)
@@ -354,6 +363,26 @@ class ProfileScreen : EquinoxScreen<ProfileScreenViewModel>(
                             onSuccess = {
                                 visible.value = false
                                 navigator.navigate(SPLASHSCREEN)
+                            }
+                        )
+                    }
+                )
+                ProfileAction(
+                    leadingIcon = when(viewModel!!.currency.value) {
+                        NeutronCurrency.EURO -> Icons.Default.EuroSymbol
+                        NeutronCurrency.DOLLAR -> CurrencyDollar
+                        NeutronCurrency.POUND_STERLING -> Icons.Default.CurrencyPound
+                        else -> Icons.Default.CurrencyYen
+                    },
+                    actionText = Res.string.change_currency,
+                    actionContent = {
+                        ChangeCurrency()
+                    },
+                    dismissAction = { viewModel!!.currency.value = localUser.currency },
+                    confirmAction = { visible ->
+                        changeCurrency(
+                            onSuccess = {
+                                visible.value = false
                             }
                         )
                     }
@@ -514,6 +543,32 @@ class ProfileScreen : EquinoxScreen<ProfileScreenViewModel>(
     }
 
     /**
+     * Section to change the [localUser]'s currency
+     */
+    @Composable
+    @NonRestartableComposable
+    private fun ChangeCurrency() {
+        Column (
+            modifier = Modifier
+                .selectableGroup()
+        ) {
+            NeutronCurrency.entries.forEach { currency ->
+                Row (
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    RadioButton(
+                        selected = viewModel!!.currency.value == currency,
+                        onClick = { viewModel!!.currency.value = currency }
+                    )
+                    Text(
+                        text = currency.name.lowercase().capitalize().replace("_", " ")
+                    )
+                }
+            }
+        }
+    }
+
+    /**
      * Section to change the [localUser]'s theme
      */
     @Composable
@@ -552,6 +607,8 @@ class ProfileScreen : EquinoxScreen<ProfileScreenViewModel>(
      */
     @Composable
     @NonRestartableComposable
+    @Deprecated("USE THE BUILT-ONE FROM EQUINOX")
+    // TODO: MORE CUSTOMIZATION IN THE OFFICIAL COMPONENT
     private fun ProfileAction(
         shape: Shape = RoundedCornerShape(
             size = 0.dp
@@ -588,6 +645,8 @@ class ProfileScreen : EquinoxScreen<ProfileScreenViewModel>(
      */
     @Composable
     @NonRestartableComposable
+    @Deprecated("USE THE BUILT-ONE FROM EQUINOX")
+    // TODO: MORE CUSTOMIZATION IN THE OFFICIAL COMPONENT
     private fun ActionControls(
         expanded: MutableState<Boolean>,
         dismissAction: (() -> Unit)?,
@@ -656,6 +715,8 @@ class ProfileScreen : EquinoxScreen<ProfileScreenViewModel>(
      */
     @Composable
     @NonRestartableComposable
+    @Deprecated("USE THE BUILT-ONE FROM EQUINOX")
+    // TODO: MORE CUSTOMIZATION IN THE OFFICIAL COMPONENT
     private fun ProfileAction(
         shape: Shape = RoundedCornerShape(
             size = 0.dp
@@ -715,6 +776,7 @@ class ProfileScreen : EquinoxScreen<ProfileScreenViewModel>(
         viewModel!!.profilePic = remember { mutableStateOf(localUser.profilePic ?: "") } // TODO: REMOVE THE ELVIS OPERATION AND USE !!
         viewModel!!.email = remember { mutableStateOf(localUser.email ?: "") } // TODO: REMOVE THE ELVIS OPERATION AND USE !!
         viewModel!!.language = remember { mutableStateOf(localUser.language ?: "") } // TODO: REMOVE THE ELVIS OPERATION AND USE !!
+        viewModel!!.currency = remember { mutableStateOf(localUser.currency) } // TODO: REMOVE THE ELVIS OPERATION AND USE !!
         viewModel!!.theme = remember { mutableStateOf(localUser.theme ?: Auto) } // TODO: REMOVE THE ELVIS OPERATION AND USE !!
     }
 

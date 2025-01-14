@@ -95,22 +95,23 @@
     <string name="last_year">l'année dernière</string>
     <string name="all">Tous</string>
     <string name="delete_revenue">Supprimer les recettes</string>
-    <string name="delete_revenue_text">Les recettes seront supprimées et ne seront pas récupérables, confirmez-vous \?</string>
+    <string name="delete_revenue_text">Les recettes seront supprimées et ne seront pas récupérables, confirmez-vous ?</string>
     <string name="labels">Étiquettes</string>
     <string name="generals">Généraux</string>
     <string name="projects">Projets</string>
     <string name="change_language">Changer de langue</string>
-    <string name="logout_warn_text">Si vous confirmez, vous serez déconnecté de la session en cours. Souhaitez-vous poursuivre \?</string>
-    <string name="delete_warn_text">Si vous confirmez, votre compte et toutes les données associées seront définitivement supprimés. Cette action ne peut être annulée. Souhaitez-vous continuer \?</string>
+    <string name="logout_warn_text">Si vous confirmez, vous serez déconnecté de la session en cours. Souhaitez-vous poursuivre ?</string>
+    <string name="delete_warn_text">Si vous confirmez, votre compte et toutes les données associées seront définitivement supprimés. Cette action ne peut être annulée. Souhaitez-vous continuer ?</string>
     <string name="logout">Déconnexion</string>
     <string name="delete">Supprimer</string>
     <string name="delete_message">Si vous confirmez, votre compte sera définitivement supprimé et vos données ne seront plus récupérables.</string>
-    <string name="changelogs">Changelogs</string>
     <string name="change_theme">Changer de thème</string>
     <string name="change_email">Changer l'email</string>
     <string name="new_email">Nouveau courriel</string>
     <string name="new_password">Nouveau mot de passe</string>
     <string name="change_password">Changer le mot de passe</string>
     <string name="settings">Paramètres</string>
+    <string name="profile">Profil</string>
+    <string name="change_currency">Changement de devise</string>
 
 </resources>

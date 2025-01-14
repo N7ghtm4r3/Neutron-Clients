@@ -100,17 +100,18 @@
     <string name="generals">Generales</string>
     <string name="projects">Proyectos</string>
     <string name="change_language">Cambiar de idioma</string>
-    <string name="logout_warn_text">Si confirma, saldrá de la sesión actual. ¿Desea continuar\?</string>
-    <string name="delete_warn_text">Si confirma, su cuenta y todos los datos asociados se eliminarán de forma permanente. Esta acción no se puede deshacer. ¿Desea continuar\?</string>
+    <string name="logout_warn_text">Si confirma, saldrá de la sesión actual. ¿Desea continuar?</string>
+    <string name="delete_warn_text">Si confirma, su cuenta y todos los datos asociados se eliminarán de forma permanente. Esta acción no se puede deshacer. ¿Desea continuar?</string>
     <string name="logout">Cierre de sesión</string>
     <string name="delete">Borrar</string>
     <string name="delete_message">Si confirma, su cuenta se eliminará de forma permanente y sus datos no podrán recuperarse.</string>
-    <string name="changelogs">Cambios</string>
     <string name="change_theme">Cambiar de tema</string>
     <string name="change_email">Cambiar correo electrónico</string>
     <string name="new_email">Nuevo correo electrónico</string>
     <string name="new_password">Nueva contraseña</string>
     <string name="change_password">Cambiar contraseña</string>
     <string name="settings">Ajustes</string>
+    <string name="profile">Perfil</string>
+    <string name="change_currency">Cambiar moneda</string>
 
 </resources>

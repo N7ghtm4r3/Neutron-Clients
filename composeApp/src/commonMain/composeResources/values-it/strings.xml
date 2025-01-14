@@ -99,18 +99,19 @@
     <string name="labels">Etichette</string>
     <string name="generals">Generali</string>
     <string name="projects">Progetti</string>
-    <string name="change_language">Cambiare la lingua</string>
-    <string name="logout_warn_text">Se confermate, verrete disconnessi dalla sessione corrente. Desiderate procedere\?</string>
-    <string name="delete_warn_text">Se confermate, il vostro account e tutti i dati associati saranno eliminati in modo permanente. Questa azione non può essere annullata. Desiderate procedere\?</string>
+    <string name="change_language">Modifica lingua</string>
+    <string name="logout_warn_text">Se confermate, verrete disconnessi dalla sessione corrente. Desiderate procedere?</string>
+    <string name="delete_warn_text">Se confermate, il vostro account e tutti i dati associati saranno eliminati in modo permanente. Questa azione non può essere annullata. Desiderate procedere?</string>
     <string name="logout">Disconnettimi</string>
     <string name="delete">Cancella</string>
     <string name="delete_message">Se confermi, il tuo account sarà definitivamente cancellato e i tuoi dati non saranno più recuperabili.</string>
-    <string name="changelogs">Changelog</string>
     <string name="change_theme">Cambia tema</string>
-    <string name="change_email">Modifica dell'email</string>
+    <string name="change_email">Modifica email</string>
     <string name="new_email">Nuova email</string>
     <string name="new_password">Nuova password</string>
     <string name="change_password">Modifica password</string>
     <string name="settings">Impostazioni</string>
+    <string name="profile">Profilo</string>
+    <string name="change_currency">Modifica valuta</string>
 
 </resources>
