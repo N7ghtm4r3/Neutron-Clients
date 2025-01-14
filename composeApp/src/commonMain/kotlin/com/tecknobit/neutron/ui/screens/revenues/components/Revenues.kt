@@ -6,12 +6,14 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.NavigateNext
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.filled.ExpandMore
 import androidx.compose.material3.HorizontalDivider
@@ -26,6 +28,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.style.TextAlign
@@ -84,7 +87,7 @@ private fun GeneralRevenue(
 ) {
     var expanded by remember { mutableStateOf(false) }
     Column {
-        RevenueCard(
+        RevenueItem(
             viewModel = viewModel,
             revenue = revenue,
             labels = revenue.labels,
@@ -129,7 +132,7 @@ private fun ProjectRevenue(
     viewModel: RevenuesScreenViewModel,
     revenue: ProjectRevenue,
 ) {
-    RevenueCard(
+    RevenueItem(
         viewModel = viewModel,
         revenue = revenue,
         labels = listOf(
@@ -157,7 +160,7 @@ private fun ProjectRevenue(
 
 @Composable
 @NonRestartableComposable
-private fun RevenueCard(
+private fun RevenueItem(
     viewModel: RevenuesScreenViewModel,
     revenue: Revenue,
     labels: List<RevenueLabel>,
@@ -176,22 +179,34 @@ private fun RevenueCard(
             )
         },
         trailingContent = {
-            Column {
-                val delete = remember { mutableStateOf(false) }
-                IconButton(
-                    onClick = { delete.value = true }
-                ) {
-                    Icon(
-                        imageVector = deleteIcon,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.error
+            Column (
+                horizontalAlignment = Alignment.End
+            ) {
+                Row {
+                    IconButton(
+                        onClick = { /* TODO: NAV TO EDIT */ }
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Edit,
+                            contentDescription = null
+                        )
+                    }
+                    val delete = remember { mutableStateOf(false) }
+                    IconButton(
+                        onClick = { delete.value = true }
+                    ) {
+                        Icon(
+                            imageVector = deleteIcon,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.error
+                        )
+                    }
+                    DeleteRevenue(
+                        show = delete,
+                        viewModel = viewModel,
+                        revenue = revenue
                     )
                 }
-                DeleteRevenue(
-                    show = delete,
-                    viewModel = viewModel,
-                    revenue = revenue
-                )
                 actionButton()
             }
         }

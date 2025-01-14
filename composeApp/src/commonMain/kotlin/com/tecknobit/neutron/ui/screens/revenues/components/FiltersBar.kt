@@ -5,17 +5,20 @@ package com.tecknobit.neutron.ui.screens.revenues.components
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.filled.ExpandMore
 import androidx.compose.material3.CardDefaults
@@ -48,6 +51,7 @@ import com.tecknobit.equinoxcompose.utilities.toColor
 import com.tecknobit.neutron.bodyFontFamily
 import com.tecknobit.neutron.displayFontFamily
 import com.tecknobit.neutron.helpers.retainAndAdd
+import com.tecknobit.neutron.ui.icons.Target
 import com.tecknobit.neutron.ui.screens.revenues.data.RevenueLabel
 import com.tecknobit.neutron.ui.screens.revenues.presentation.RevenuesScreenViewModel
 import com.tecknobit.neutroncore.enums.RevenuePeriod
@@ -59,12 +63,14 @@ import com.tecknobit.neutroncore.enums.RevenuePeriod.LAST_WEEK
 import com.tecknobit.neutroncore.enums.RevenuePeriod.LAST_YEAR
 import neutron.composeapp.generated.resources.Res
 import neutron.composeapp.generated.resources.all
+import neutron.composeapp.generated.resources.generals
 import neutron.composeapp.generated.resources.labels
 import neutron.composeapp.generated.resources.last_month_period
 import neutron.composeapp.generated.resources.last_six_months
 import neutron.composeapp.generated.resources.last_three_months
 import neutron.composeapp.generated.resources.last_week_period
 import neutron.composeapp.generated.resources.last_year
+import neutron.composeapp.generated.resources.projects
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -89,26 +95,20 @@ fun FiltersBar(
         LabelsChip(
             viewModel = viewModel
         )
-        FilterChip(
-            selected = false,
-            label = {
-                Text(
-                    text = "General"
+        RevenueTypeChip(
+            type = Res.string.generals,
+            onClick = { selected ->
+                viewModel.applySelectGeneralRevenuesFilter(
+                    select = selected
                 )
-            },
-            onClick = {
-
             }
         )
-        FilterChip(
-            selected = false,
-            label = {
-                Text(
-                    text = "Projects"
+        RevenueTypeChip(
+            type = Res.string.projects,
+            onClick = { selected ->
+                viewModel.applySelectProjectsFilter(
+                    select = selected
                 )
-            },
-            onClick = {
-
             }
         )
     }
@@ -119,30 +119,32 @@ fun FiltersBar(
 private fun PeriodFilterChip(
     viewModel: RevenuesScreenViewModel
 ) {
-    val filter = remember { mutableStateOf(false) }
-    FilterChip(
-        selected = filter.value,
-        onClick = { filter.value = !filter.value },
-        label = {
-            Text(
-                text = viewModel.revenuePeriod.value.asText(),
-                fontFamily = bodyFontFamily
-            )
-        },
-        trailingIcon = {
-            Icon(
-                imageVector = if(filter.value)
-                    Icons.Default.ExpandLess
-                else
-                    Icons.Default.ExpandMore,
-                contentDescription = null
-            )
-        }
-    )
-    PeriodsMenu(
-        viewModel = viewModel,
-        expanded = filter
-    )
+    Column {
+        val filter = remember { mutableStateOf(false) }
+        FilterChip(
+            selected = filter.value,
+            onClick = { filter.value = !filter.value },
+            label = {
+                Text(
+                    text = viewModel.revenuePeriod.value.asText(),
+                    fontFamily = bodyFontFamily
+                )
+            },
+            trailingIcon = {
+                Icon(
+                    imageVector = if(filter.value)
+                        Icons.Default.ExpandLess
+                    else
+                        Icons.Default.ExpandMore,
+                    contentDescription = null
+                )
+            }
+        )
+        PeriodsMenu(
+            viewModel = viewModel,
+            expanded = filter
+        )
+    }
 }
 
 @Composable
@@ -311,6 +313,38 @@ private fun LabelsDialog(
                 supportCollection = supportLabelsList
             )
             filtering.value = false
+        }
+    )
+}
+
+@Composable
+@NonRestartableComposable
+private fun RevenueTypeChip(
+    type: StringResource,
+    onClick: (Boolean) -> Unit
+) {
+    var selected by remember { mutableStateOf(true) }
+    FilterChip(
+        selected = selected,
+        label = {
+            Text(
+                text = stringResource(type)
+            )
+        },
+        onClick = {
+            selected = !selected
+            onClick(selected)
+        },
+        trailingIcon = {
+            Icon(
+                modifier = Modifier
+                    .size(20.dp),
+                imageVector = if(selected)
+                    Icons.Default.CheckCircle
+                else
+                    Target,
+                contentDescription = null
+            )
         }
     )
 }

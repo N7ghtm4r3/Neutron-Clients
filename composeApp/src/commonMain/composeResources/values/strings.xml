@@ -105,5 +105,7 @@
     <string name="delete_revenue">Delete revenue</string>
     <string name="delete_revenue_text">The revenue will be deleted and will not be recoverable, confirm?</string>
     <string name="labels">Labels</string>
+    <string name="generals">Generals</string>
+    <string name="projects">Projects</string>
 
 </resources>

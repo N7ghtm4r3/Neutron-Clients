@@ -35,6 +35,10 @@ class RevenuesScreenViewModel : EquinoxViewModel(
 
     var labelsFilter = mutableStateListOf<RevenueLabel>()
 
+    private var selectGeneralRevenues: Boolean = true
+
+    private var selectProjectsRevenues: Boolean = true
+
     fun getWalletStatus() {
         // TODO: MAKE THE REQUEST THEN
         // APPLY THE FILTERS
@@ -76,6 +80,20 @@ class RevenuesScreenViewModel : EquinoxViewModel(
     ) {
         refreshData()
         onApply()
+    }
+
+    fun applySelectGeneralRevenuesFilter(
+        select: Boolean
+    ) {
+        selectGeneralRevenues = select
+        refreshData()
+    }
+
+    fun applySelectProjectsFilter(
+        select: Boolean
+    ) {
+        selectProjectsRevenues = select
+        refreshData()
     }
 
     val revenuesState = PaginationState<Int, Revenue>(
