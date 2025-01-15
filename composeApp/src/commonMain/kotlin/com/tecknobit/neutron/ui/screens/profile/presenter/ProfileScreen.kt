@@ -355,6 +355,7 @@ class ProfileScreen : NeutronScreen<ProfileScreenViewModel>(
      */
     @Composable
     @NonRestartableComposable
+    // TODO: ANNOTATE AS SPECIAL STEP WITH THE RELATED EQUINOX-ANNOTATION
     private fun ChangeEmail() {
         val focusRequester = remember { FocusRequester() }
         LaunchedEffect(Unit) {
@@ -398,6 +399,7 @@ class ProfileScreen : NeutronScreen<ProfileScreenViewModel>(
      */
     @Composable
     @NonRestartableComposable
+    // TODO: ANNOTATE AS SPECIAL STEP WITH THE RELATED EQUINOX-ANNOTATION
     private fun ChangePassword() {
         val focusRequester = remember { FocusRequester() }
         LaunchedEffect(Unit) {
@@ -458,6 +460,7 @@ class ProfileScreen : NeutronScreen<ProfileScreenViewModel>(
      */
     @Composable
     @NonRestartableComposable
+    // TODO: ANNOTATE AS SPECIAL STEP WITH THE RELATED EQUINOX-ANNOTATION
     private fun ChangeLanguage() {
         Column (
             modifier = Modifier
@@ -484,6 +487,7 @@ class ProfileScreen : NeutronScreen<ProfileScreenViewModel>(
      */
     @Composable
     @NonRestartableComposable
+    // TODO: ANNOTATE AS SPECIAL STEP WITH THE RELATED EQUINOX-ANNOTATION
     private fun ChangeCurrency() {
         Column (
             modifier = Modifier
@@ -510,6 +514,7 @@ class ProfileScreen : NeutronScreen<ProfileScreenViewModel>(
      */
     @Composable
     @NonRestartableComposable
+    // TODO: ANNOTATE AS SPECIAL STEP WITH THE RELATED EQUINOX-ANNOTATION
     private fun ChangeTheme() {
         Column (
             modifier = Modifier

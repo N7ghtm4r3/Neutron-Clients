@@ -114,5 +114,6 @@
     <string name="settings">Ajustes</string>
     <string name="profile">Perfil</string>
     <string name="change_currency">Cambiar moneda</string>
+    <string name="revenue_type">Tipo de ingresos</string>
 
 </resources>

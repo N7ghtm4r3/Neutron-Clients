@@ -114,5 +114,6 @@
     <string name="settings">Paramètres</string>
     <string name="profile">Profil</string>
     <string name="change_currency">Changement de devise</string>
+    <string name="revenue_type">Type de recettes</string>
 
 </resources>
