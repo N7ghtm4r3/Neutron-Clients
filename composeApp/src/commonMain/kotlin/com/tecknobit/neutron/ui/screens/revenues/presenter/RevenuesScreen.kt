@@ -15,11 +15,12 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Card
+import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -64,6 +65,7 @@ import com.tecknobit.neutroncore.enums.RevenuePeriod
 import com.tecknobit.neutroncore.enums.RevenuePeriod.ALL
 import io.github.ahmad_hamwi.compose.pagination.PaginatedLazyColumn
 import neutron.composeapp.generated.resources.Res
+import neutron.composeapp.generated.resources.add_revenue
 import neutron.composeapp.generated.resources.earnings
 import neutron.composeapp.generated.resources.last_month_period
 import neutron.composeapp.generated.resources.last_six_months
@@ -101,16 +103,7 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
                     Scaffold(
                         snackbarHost = { SnackbarHost(viewModel!!.snackbarHostState!!) },
                         floatingActionButton = {
-                            FloatingActionButton(
-                                onClick = {
-                                    // TODO: NAV TO CREATE
-                                }
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Default.Add,
-                                    contentDescription = null
-                                )
-                            }
+                            FabButton()
                         }
                     ) {
                         Container()
@@ -118,6 +111,50 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
                 }
             )
         }
+    }
+
+    @Composable
+    @NonRestartableComposable
+    private fun FabButton() {
+        ResponsiveContent(
+            onExpandedSizeClass = {
+                ExtendedFloatingActionButton(
+                    onClick = { navToCreate() }
+                ) {
+                    Row (
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(5.dp)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Add,
+                            contentDescription = null
+                        )
+                        Text(
+                            text = stringResource(Res.string.add_revenue)
+                        )
+                    }
+                }
+            },
+            onMediumSizeClass = { CompactFabButton() },
+            onCompactSizeClass = { CompactFabButton() }
+        )
+    }
+
+    @Composable
+    @NonRestartableComposable
+    private fun CompactFabButton() {
+        FloatingActionButton(
+            onClick = { navToCreate() }
+        ) {
+            Icon(
+                imageVector = Icons.Default.Add,
+                contentDescription = null
+            )
+        }
+    }
+
+    private fun navToCreate() {
+        // TODO: NAV TO CREATE
     }
 
     @Composable
@@ -283,13 +320,14 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
             },
             newPageProgressIndicator = { NewPageProgressIndicator() }
         ) {
-            items(
+            itemsIndexed(
                 items = viewModel!!.revenuesState.allItems!!,
-                key = { revenue -> revenue.id }
-            ) { revenue ->
+                key = { _, revenue -> revenue.id }
+            ) { index, revenue ->
                 RevenueItem(
                     viewModel = viewModel!!,
-                    revenue = revenue
+                    revenue = revenue,
+                    position = index
                 )
             }
         }

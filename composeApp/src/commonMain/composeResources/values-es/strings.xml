@@ -101,6 +101,7 @@
     <string name="projects">Proyectos</string>
     <string name="change_language">Cambiar de idioma</string>
     <string name="logout_warn_text">Si confirma, saldrá de la sesión actual. ¿Desea continuar?</string>
+    <string name="delete_account">Eliminar cuenta</string>
     <string name="delete_warn_text">Si confirma, su cuenta y todos los datos asociados se eliminarán de forma permanente. Esta acción no se puede deshacer. ¿Desea continuar?</string>
     <string name="logout">Cierre de sesión</string>
     <string name="delete">Borrar</string>

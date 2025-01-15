@@ -7,7 +7,7 @@ import com.tecknobit.equinoxcompose.utilities.generateRandomColor
 import com.tecknobit.equinoxcompose.utilities.toHex
 import com.tecknobit.equinoxcompose.viewmodels.EquinoxViewModel
 import com.tecknobit.equinoxcore.pagination.PaginatedResponse
-import com.tecknobit.neutron.ui.screens.revenues.data.GeneralRevenue
+import com.tecknobit.neutron.ui.screens.revenues.data.GeneralRevenue.GeneralImpl
 import com.tecknobit.neutron.ui.screens.revenues.data.ProjectRevenue
 import com.tecknobit.neutron.ui.screens.revenues.data.Revenue
 import com.tecknobit.neutron.ui.screens.revenues.data.RevenueLabel
@@ -111,19 +111,7 @@ class RevenuesScreenViewModel : EquinoxViewModel(
         // TODO: MAKE THE REQUEST THEN
         // APPLY THE FILTERS
         val revenues = listOf(
-            ProjectRevenue(
-                Random.nextLong().toString(),
-                "Title #${Random.nextInt(100)}",
-                Random.nextDouble(0.0, 1000.0),
-                revenueDate = 1736771172000,
-                initialRevenue = Revenue.RevenueImpl(
-                    Random.nextLong().toString(),
-                    "Title #${Random.nextInt(100)}",
-                    Random.nextDouble(0.0, 1000.0),
-                    revenueDate = 1736771172000
-                )
-            ),
-            GeneralRevenue.GeneralImpl(
+            GeneralImpl(
                 Random.nextLong().toString(),
                 "Title #${Random.nextInt(100)}",
                 Random.nextDouble(0.0, 1000.0),
@@ -149,6 +137,18 @@ class RevenuesScreenViewModel : EquinoxViewModel(
                         "Nulla in bibendum mauris. Proin mattis justo felis, nec efficitur erat ornare ut. Sed vel diam nec orci finibus venenatis. Vestibulum vel neque libero. Aliquam erat volutpat. Morbi eget faucibus ligula, sit amet convallis mi. Nulla et aliquet ex. Aenean rhoncus lorem nec justo lobortis viverra. Suspendisse quis mi nec leo maximus congue vitae at libero. Fusce vel malesuada lorem. Donec semper maximus ullamcorper. Suspendisse condimentum congue velit non vestibulum. Etiam tempor ante ullamcorper ligula lobortis imperdiet.\n" +
                         "\n" +
                         "Nulla scelerisque facilisis lorem rutrum mollis. Pellentesque maximus nunc eu ipsum gravida interdum. Suspendisse sodales hendrerit velit, ac facilisis orci feugiat at. Sed iaculis vehicula nisl et iaculis. Nulla auctor mauris libero, convallis auctor felis dignissim non. Ut velit tortor, volutpat in egestas et, accumsan accumsan lorem. Sed nec lorem placerat, maximus lorem nec, fermentum orci. Donec ac laoreet lorem."
+            ),
+            ProjectRevenue(
+                Random.nextLong().toString(),
+                "Title #${Random.nextInt(100)}",
+                Random.nextDouble(0.0, 1000.0),
+                revenueDate = 1736771172000,
+                initialRevenue = Revenue.RevenueImpl(
+                    Random.nextLong().toString(),
+                    "Title #${Random.nextInt(100)}",
+                    Random.nextDouble(0.0, 1000.0),
+                    revenueDate = 1736771172000
+                )
             )
         ) // TODO: USE THE REAL VALUES
         revenuesState.appendPage(

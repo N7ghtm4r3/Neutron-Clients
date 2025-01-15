@@ -19,7 +19,7 @@ import com.tecknobit.neutron.ui.screens.profile.presentation.ProfileScreenViewMo
 import com.tecknobit.neutron.ui.screens.revenues.data.Revenue
 import com.tecknobit.neutron.ui.screens.revenues.presentation.RevenuesScreenViewModel
 import neutron.composeapp.generated.resources.Res
-import neutron.composeapp.generated.resources.delete
+import neutron.composeapp.generated.resources.delete_account
 import neutron.composeapp.generated.resources.delete_revenue
 import neutron.composeapp.generated.resources.delete_revenue_text
 import neutron.composeapp.generated.resources.delete_warn_text
@@ -110,7 +110,7 @@ fun DeleteAccount(
             ),
         viewModel = viewModel,
         show = show,
-        title = Res.string.delete,
+        title = Res.string.delete_account,
         titleStyle = titleStyle,
         text = Res.string.delete_warn_text,
         confirmAction = {

@@ -1,4 +1,4 @@
-@file:OptIn(ExperimentalUuidApi::class)
+@file:OptIn(ExperimentalUuidApi::class, ExperimentalMultiplatform::class)
 
 package com.tecknobit.neutron.ui.screens.revenues.components
 
@@ -16,10 +16,12 @@ import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.filled.ExpandMore
+import androidx.compose.material3.Card
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.ListItem
+import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -30,11 +32,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.tecknobit.equinoxcompose.utilities.ResponsiveContent
 import com.tecknobit.neutron.bodyFontFamily
 import com.tecknobit.neutron.displayFontFamily
 import com.tecknobit.neutron.localUser
@@ -60,23 +64,34 @@ import kotlin.uuid.Uuid
 fun RevenueItem(
     viewModel: RevenuesScreenViewModel,
     revenue: Revenue,
+    position: Int
 ) {
     when (revenue) {
         is GeneralRevenue -> {
             GeneralRevenue(
                 viewModel = viewModel,
-                revenue = revenue
+                revenue = revenue,
+                position = position
             )
         }
 
         else -> {
             ProjectRevenue(
                 viewModel = viewModel,
-                revenue = revenue as ProjectRevenue
+                revenue = revenue as ProjectRevenue,
+                position = position
             )
         }
     }
-    HorizontalDivider()
+    ResponsiveContent(
+        onExpandedSizeClass = {},
+        onMediumSizeClass = {
+            HorizontalDivider()
+        },
+        onCompactSizeClass = {
+            HorizontalDivider()
+        }
+    )
 }
 
 @Composable
@@ -84,12 +99,54 @@ fun RevenueItem(
 private fun GeneralRevenue(
     viewModel: RevenuesScreenViewModel,
     revenue: GeneralRevenue,
+    position: Int
 ) {
-    var expanded by remember { mutableStateOf(false) }
+    ResponsiveContent(
+        onExpandedSizeClass = {
+            if(position %2 == 1) {
+                Card {
+                    GeneralRevenueContent(
+                        viewModel = viewModel,
+                        revenue = revenue,
+                        containerColor = Color.Transparent
+                    )
+                }
+            } else {
+                GeneralRevenueContent(
+                    viewModel = viewModel,
+                    revenue = revenue,
+                    containerColor = Color.Transparent
+                )
+            }
+        },
+        onMediumSizeClass = {
+            GeneralRevenueContent(
+                viewModel = viewModel,
+                revenue = revenue
+            )
+        },
+        onCompactSizeClass = {
+            GeneralRevenueContent(
+                viewModel = viewModel,
+                revenue = revenue
+            )
+        }
+    )
+}
+
+@Composable
+@NonRestartableComposable
+private fun GeneralRevenueContent(
+    viewModel: RevenuesScreenViewModel,
+    revenue: GeneralRevenue,
+    containerColor: Color = ListItemDefaults.containerColor
+) {
     Column {
+        var expanded by remember { mutableStateOf(false) }
         RevenueItem(
             viewModel = viewModel,
             revenue = revenue,
+            containerColor = containerColor,
             labels = revenue.labels,
             deleteIcon = ContractDelete,
             actionButton = {
@@ -131,10 +188,52 @@ private fun GeneralRevenue(
 private fun ProjectRevenue(
     viewModel: RevenuesScreenViewModel,
     revenue: ProjectRevenue,
+    position: Int
+) {
+    ResponsiveContent(
+        onExpandedSizeClass = {
+            if(position %2 == 1) {
+                Card {
+                    ProjectRevenueContent(
+                        viewModel = viewModel,
+                        revenue = revenue,
+                        containerColor = Color.Transparent
+                    )
+                }
+            } else {
+                ProjectRevenueContent(
+                    viewModel = viewModel,
+                    revenue = revenue,
+                    containerColor = Color.Transparent
+                )
+            }
+        },
+        onMediumSizeClass = {
+            ProjectRevenueContent(
+                viewModel = viewModel,
+                revenue = revenue
+            )
+        },
+        onCompactSizeClass = {
+            ProjectRevenueContent(
+                viewModel = viewModel,
+                revenue = revenue
+            )
+        }
+    )
+}
+
+@Composable
+@NonRestartableComposable
+private fun ProjectRevenueContent(
+    viewModel: RevenuesScreenViewModel,
+    revenue: ProjectRevenue,
+    containerColor: Color = ListItemDefaults.containerColor
 ) {
     RevenueItem(
         viewModel = viewModel,
         revenue = revenue,
+        containerColor = containerColor,
         labels = listOf(
             RevenueLabel(
                 id = Uuid.random().toHexString(),
@@ -164,10 +263,14 @@ private fun RevenueItem(
     viewModel: RevenuesScreenViewModel,
     revenue: Revenue,
     labels: List<RevenueLabel>,
+    containerColor: Color,
     deleteIcon: ImageVector,
     actionButton: @Composable () -> Unit
 ) {
     ListItem(
+        colors = ListItemDefaults.colors(
+            containerColor = containerColor
+        ),
         headlineContent = {
             RevenueInfo(
                 revenue = revenue

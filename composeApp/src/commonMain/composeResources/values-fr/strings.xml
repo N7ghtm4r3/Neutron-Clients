@@ -101,6 +101,7 @@
     <string name="projects">Projets</string>
     <string name="change_language">Changer de langue</string>
     <string name="logout_warn_text">Si vous confirmez, vous serez déconnecté de la session en cours. Souhaitez-vous poursuivre ?</string>
+    <string name="delete_account">Supprimer le compte</string>
     <string name="delete_warn_text">Si vous confirmez, votre compte et toutes les données associées seront définitivement supprimés. Cette action ne peut être annulée. Souhaitez-vous continuer ?</string>
     <string name="logout">Déconnexion</string>
     <string name="delete">Supprimer</string>
