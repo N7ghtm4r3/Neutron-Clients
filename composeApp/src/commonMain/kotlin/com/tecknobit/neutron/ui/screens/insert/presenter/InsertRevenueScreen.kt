@@ -2,15 +2,21 @@
 
 package com.tecknobit.neutron.ui.screens.insert.presenter
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.NonRestartableComposable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -27,6 +33,9 @@ import com.tecknobit.neutron.ui.screens.NeutronScreen
 import com.tecknobit.neutron.ui.screens.insert.presentation.InsertRevenueScreenViewModel
 import neutron.composeapp.generated.resources.Res
 import neutron.composeapp.generated.resources.add_revenue
+import neutron.composeapp.generated.resources.go_back
+import neutron.composeapp.generated.resources.next
+import org.jetbrains.compose.resources.stringResource
 
 class InsertRevenueScreen : NeutronScreen<InsertRevenueScreenViewModel>(
     viewModel = InsertRevenueScreenViewModel(),
@@ -34,6 +43,8 @@ class InsertRevenueScreen : NeutronScreen<InsertRevenueScreenViewModel>(
 ) {
 
     private lateinit var keyboardState: ScreenKeyboardState
+
+    private lateinit var displayKeyboard: MutableState<Boolean>
 
     @Composable
     override fun ScreenContent() {
@@ -43,15 +54,15 @@ class InsertRevenueScreen : NeutronScreen<InsertRevenueScreenViewModel>(
                     keyboardModifier = Modifier
                         .clip(
                             RoundedCornerShape(
-                                topStart = 15.dp,
-                                topEnd = 15.dp
+                                topStart = 21.dp,
+                                topEnd = 21.dp
                             )
                         )
                 )
             },
             onMediumSizeClass = {
                 AmountSection(
-                    keyboardWeight = 4f
+                    keyboardWeight = 1.5f
                 )
             },
             onCompactSizeClass = {
@@ -74,16 +85,43 @@ class InsertRevenueScreen : NeutronScreen<InsertRevenueScreenViewModel>(
         ) {
             Column (
                 modifier = Modifier
+                    .fillMaxWidth()
                     .weight(1f),
+                horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
                 Amount()
+                AnimatedVisibility(
+                    visible = keyboardState.parseAmount() > 0.0
+                ) {
+                    TextButton(
+                        onClick = { displayKeyboard.value = !displayKeyboard.value }
+                    ) {
+                        Text(
+                            text = stringResource(
+                                if(displayKeyboard.value)
+                                    Res.string.next
+                                else
+                                    Res.string.go_back
+                            )
+                        )
+                    }
+                }
             }
-            ScreenKeyboard(
-                modifier = keyboardModifier
-                    .weight(keyboardWeight),
-                state = keyboardState
-            )
+            Column(
+                modifier = Modifier
+                    .weight(keyboardWeight)
+            ) {
+                AnimatedVisibility(
+                    visible = displayKeyboard.value
+                ) {
+                    ScreenKeyboard(
+                        modifier = keyboardModifier
+                            .fillMaxSize(),
+                        state = keyboardState
+                    )
+                }
+            }
         }
     }
 
@@ -120,6 +158,7 @@ class InsertRevenueScreen : NeutronScreen<InsertRevenueScreenViewModel>(
     @Composable
     override fun CollectStates() {
         keyboardState = rememberKeyboardState()
+        displayKeyboard = remember { mutableStateOf(true) }
     }
 
 }
