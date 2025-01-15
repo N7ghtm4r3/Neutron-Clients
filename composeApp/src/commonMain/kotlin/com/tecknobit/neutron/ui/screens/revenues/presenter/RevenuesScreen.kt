@@ -18,7 +18,7 @@ import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.automirrored.filled.StickyNote2
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.FloatingActionButton
@@ -46,6 +46,7 @@ import com.tecknobit.equinoxcompose.session.EquinoxScreen
 import com.tecknobit.equinoxcompose.session.ManagedContent
 import com.tecknobit.equinoxcompose.utilities.ResponsiveContent
 import com.tecknobit.neutron.CloseApplicationOnNavBack
+import com.tecknobit.neutron.INSERT_REVENUE_SCREEN
 import com.tecknobit.neutron.MAX_CONTAINER_WIDTH
 import com.tecknobit.neutron.PROFILE_SCREEN
 import com.tecknobit.neutron.bodyFontFamily
@@ -126,7 +127,7 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
                         horizontalArrangement = Arrangement.spacedBy(5.dp)
                     ) {
                         Icon(
-                            imageVector = Icons.Default.Add,
+                            imageVector = Icons.AutoMirrored.Filled.StickyNote2,
                             contentDescription = null
                         )
                         Text(
@@ -147,14 +148,14 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
             onClick = { navToCreate() }
         ) {
             Icon(
-                imageVector = Icons.Default.Add,
+                imageVector = Icons.AutoMirrored.Filled.StickyNote2,
                 contentDescription = null
             )
         }
     }
 
     private fun navToCreate() {
-        // TODO: NAV TO CREATE
+        navigator.navigate(INSERT_REVENUE_SCREEN)
     }
 
     @Composable

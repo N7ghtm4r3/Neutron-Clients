@@ -7,18 +7,14 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.AlternateEmail
 import androidx.compose.material.icons.filled.Cancel
@@ -40,8 +36,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
@@ -75,11 +69,9 @@ import com.tecknobit.equinoxcompose.components.EquinoxOutlinedTextField
 import com.tecknobit.equinoxcompose.components.EquinoxTextField
 import com.tecknobit.equinoxcompose.session.EquinoxLocalUser.ApplicationTheme
 import com.tecknobit.equinoxcompose.session.EquinoxLocalUser.ApplicationTheme.Auto
-import com.tecknobit.equinoxcompose.session.EquinoxScreen
 import com.tecknobit.equinoxcore.helpers.InputsValidator.Companion.LANGUAGES_SUPPORTED
 import com.tecknobit.equinoxcore.helpers.InputsValidator.Companion.isEmailValid
 import com.tecknobit.equinoxcore.helpers.InputsValidator.Companion.isPasswordValid
-import com.tecknobit.neutron.MAX_CONTAINER_WIDTH
 import com.tecknobit.neutron.SPLASHSCREEN
 import com.tecknobit.neutron.bodyFontFamily
 import com.tecknobit.neutron.displayFontFamily
@@ -89,8 +81,8 @@ import com.tecknobit.neutron.ui.components.CurrencyDollar
 import com.tecknobit.neutron.ui.components.DeleteAccount
 import com.tecknobit.neutron.ui.components.Logout
 import com.tecknobit.neutron.ui.components.ProfilePic
+import com.tecknobit.neutron.ui.screens.NeutronScreen
 import com.tecknobit.neutron.ui.screens.profile.presentation.ProfileScreenViewModel
-import com.tecknobit.neutron.ui.theme.NeutronTheme
 import com.tecknobit.neutroncore.enums.NeutronCurrency
 import io.github.vinceglb.filekit.compose.rememberFilePickerLauncher
 import io.github.vinceglb.filekit.core.PickerMode
@@ -113,73 +105,15 @@ import neutron.composeapp.generated.resources.settings
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 
-class ProfileScreen : EquinoxScreen<ProfileScreenViewModel>(
-    viewModel = ProfileScreenViewModel()
+class ProfileScreen : NeutronScreen<ProfileScreenViewModel>(
+    viewModel = ProfileScreenViewModel(),
+    title = Res.string.profile
 ) {
 
-    /**
-     * Method to arrange the content of the screen to display
-     */
     @Composable
-    override fun ArrangeScreenContent() {
-        NeutronTheme {
-            Scaffold (
-                snackbarHost = { SnackbarHost(viewModel!!.snackbarHostState!!) }
-            ) {
-                Column (
-                    modifier = Modifier
-                        .fillMaxSize(),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    ProfileContent()
-                }
-            }
-        }
-    }
-
-    /**
-     * The profile details of the user
-     *
-     * @param modifier The modifier to apply to the component
-     */
-    @Composable
-    @NonRestartableComposable
-    private fun ProfileContent(
-        modifier: Modifier = Modifier
-    ) {
-        Column(
-            modifier = modifier
-                .fillMaxHeight()
-                .widthIn(
-                    max = MAX_CONTAINER_WIDTH
-                )
-                .verticalScroll(rememberScrollState()),
-            verticalArrangement = Arrangement.spacedBy(10.dp)
-        ) {
-            Row (
-                modifier = Modifier
-                    .padding(
-                        top = 35.dp
-                    ),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                IconButton(
-                    onClick = { navigator.goBack() }
-                ) {
-                    Icon(
-                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = null
-                    )
-                }
-                Text(
-                    text = stringResource(Res.string.profile),
-                    fontSize = 35.sp,
-                    fontFamily = displayFontFamily
-                )
-            }
-            UserDetails()
-            Settings()
-        }
+    override fun ScreenContent() {
+        UserDetails()
+        Settings()
     }
 
     /**
@@ -324,7 +258,10 @@ class ProfileScreen : EquinoxScreen<ProfileScreenViewModel>(
                     fontSize = 22.sp
                 )
             }
-            Column {
+            Column (
+                modifier = Modifier
+                    .verticalScroll(rememberScrollState())
+            ) {
                 ProfileAction(
                     shape = RoundedCornerShape(
                         topStart = 12.dp,
