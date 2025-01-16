@@ -2,11 +2,11 @@ package com.tecknobit.neutron.ui.screens.revenues.presentation
 
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.snapshots.SnapshotStateList
 import com.tecknobit.equinoxcompose.utilities.generateRandomColor
 import com.tecknobit.equinoxcompose.utilities.toHex
 import com.tecknobit.equinoxcompose.viewmodels.EquinoxViewModel
 import com.tecknobit.equinoxcore.pagination.PaginatedResponse
+import com.tecknobit.neutron.helpers.RevenueLabelsRetriever
 import com.tecknobit.neutron.ui.screens.revenues.data.GeneralRevenue.GeneralImpl
 import com.tecknobit.neutron.ui.screens.revenues.data.ProjectRevenue
 import com.tecknobit.neutron.ui.screens.revenues.data.Revenue
@@ -21,7 +21,7 @@ import kotlin.random.Random
 
 class RevenuesScreenViewModel : EquinoxViewModel(
     snackbarHostState = SnackbarHostState()
-) {
+) , RevenueLabelsRetriever {
 
     private val _walletStatus = MutableStateFlow<WalletStatus?>(
         value = null
@@ -58,21 +58,6 @@ class RevenuesScreenViewModel : EquinoxViewModel(
         _revenuePeriod.value = revenuePeriod
         afterSet()
         refreshData()
-    }
-
-    fun retrieveUserLabels() : SnapshotStateList<RevenueLabel> {
-        // TODO: MAKE THE REQUEST THEN
-        val currentUserLabels = mutableStateListOf<RevenueLabel>()
-        for (j in 0 until Random.nextInt(10)) {
-            currentUserLabels.add(
-                RevenueLabel(
-                    id = Random.nextLong().toString(),
-                    text = "RevenueLabel #$j",
-                    color = generateRandomColor().toHex()
-                )
-            )
-        }
-        return currentUserLabels
     }
 
     fun applyLabelsFilters(

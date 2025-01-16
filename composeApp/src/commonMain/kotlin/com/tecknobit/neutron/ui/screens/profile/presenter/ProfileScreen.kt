@@ -242,6 +242,10 @@ class ProfileScreen : NeutronScreen<ProfileScreenViewModel>(
     // TODO: MORE CUSTOMIZATION IN THE OFFICIAL COMPONENT
     private fun Settings() {
         Column (
+            modifier = Modifier
+                .padding(
+                    horizontal = 16.dp
+                ),
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             Row (

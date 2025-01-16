@@ -48,7 +48,7 @@ fun RevenueLabels(
             items = labels,
             key = { label -> label.id }
         ) { label ->
-            RevenueLabel(
+            RevenueLabelBadge(
                 label = label,
                 trailingIcon = trailingIcon
             )
@@ -58,10 +58,10 @@ fun RevenueLabels(
 
 @Composable
 @NonRestartableComposable
-private fun RevenueLabel(
+private fun RevenueLabelBadge(
     modifier: Modifier = Modifier,
     fontSize: TextUnit = TextUnit.Unspecified,
-    trailingIcon: @Composable ((RevenueLabel) -> Unit)?,
+    trailingIcon: @Composable ((RevenueLabel) -> Unit)? = null,
     label: RevenueLabel
 ) {
     val color = label.color.toColor()

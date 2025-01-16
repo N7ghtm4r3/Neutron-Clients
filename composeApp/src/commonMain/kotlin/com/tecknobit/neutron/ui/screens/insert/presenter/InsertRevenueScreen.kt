@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.selection.selectableGroup
@@ -54,9 +53,7 @@ import androidx.compose.ui.unit.sp
 import com.tecknobit.equinoxcompose.components.EquinoxTextField
 import com.tecknobit.equinoxcompose.components.getContrastColor
 import com.tecknobit.equinoxcompose.utilities.ResponsiveContent
-import com.tecknobit.equinoxcompose.utilities.generateRandomColor
 import com.tecknobit.equinoxcompose.utilities.toColor
-import com.tecknobit.equinoxcompose.utilities.toHex
 import com.tecknobit.neutron.bodyFontFamily
 import com.tecknobit.neutron.displayFontFamily
 import com.tecknobit.neutron.localUser
@@ -65,9 +62,9 @@ import com.tecknobit.neutron.ui.components.Stepper
 import com.tecknobit.neutron.ui.components.screenkeyboard.ScreenKeyboard
 import com.tecknobit.neutron.ui.components.screenkeyboard.rememberKeyboardState
 import com.tecknobit.neutron.ui.screens.NeutronScreen
+import com.tecknobit.neutron.ui.screens.insert.components.LabelsPicker
 import com.tecknobit.neutron.ui.screens.insert.presentation.InsertRevenueScreenViewModel
 import com.tecknobit.neutron.ui.screens.revenues.components.RevenueLabels
-import com.tecknobit.neutron.ui.screens.revenues.data.RevenueLabel
 import com.tecknobit.neutroncore.helpers.NeutronInputsValidator.isRevenueDescriptionValid
 import com.tecknobit.neutroncore.helpers.NeutronInputsValidator.isRevenueTitleValid
 import dev.darkokoa.datetimewheelpicker.WheelDateTimePicker
@@ -246,8 +243,7 @@ class InsertRevenueScreen : NeutronScreen<InsertRevenueScreenViewModel>(
                     )
                     .padding(
                         bottom = 10.dp
-                    )
-                    .imePadding(),
+                    ),
                 steps = arrayOf(
                     Step(
                         initiallyExpanded = true,
@@ -415,6 +411,7 @@ class InsertRevenueScreen : NeutronScreen<InsertRevenueScreenViewModel>(
     @NonRestartableComposable
     // TODO: ANNOTATE AS SPECIAL STEP WITH THE RELATED EQUINOX-ANNOTATION
     private fun RevenueLabelsForm() {
+        val pickLabels = remember { mutableStateOf(false) }
         RevenueLabels(
             contentPadding = PaddingValues(
                 all = 16.dp
@@ -422,9 +419,7 @@ class InsertRevenueScreen : NeutronScreen<InsertRevenueScreenViewModel>(
             labels = viewModel!!.labels,
             stickyHeaderContent = {
                 SmallFloatingActionButton(
-                    onClick = {
-                        viewModel!!.labels.add(RevenueLabel(text = "fwe", color = generateRandomColor().toHex()))
-                    }
+                    onClick = { pickLabels.value = true }
                 ) {
                     Icon(
                         imageVector = Icons.Default.Add,
@@ -447,6 +442,10 @@ class InsertRevenueScreen : NeutronScreen<InsertRevenueScreenViewModel>(
                     )
                 }
             }
+        )
+        LabelsPicker(
+            show = pickLabels,
+            viewModel = viewModel!!
         )
     }
 

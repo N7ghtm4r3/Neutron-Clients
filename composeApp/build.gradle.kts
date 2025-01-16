@@ -99,6 +99,7 @@ kotlin {
                 implementation(libs.filekit.compose)
                 implementation(libs.datetime.wheel.picker)
                 implementation(libs.kotlinx.datetime)
+                implementation(libs.colorpicker.compose)
             }
         }
 

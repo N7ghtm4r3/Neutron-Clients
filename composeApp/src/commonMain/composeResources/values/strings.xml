@@ -13,7 +13,6 @@
     <string name="confirm">Confirm</string>
     <string name="dismiss">Dismiss</string>
     <string name="add_project">Add project</string>
-    <string name="label_text">Label text</string>
     <string name="add_label">Add label</string>
     <string name="add_ticket">Add ticket</string>
     <string name="opening_time">Opening time</string>
@@ -113,5 +112,9 @@
     <string name="theme">Theme</string>
     <string name="change">Change</string>
     <string name="insert">Insert</string>
+    <string name="label_text">Label text</string>
+    <string name="create">Create</string>
+    <string name="select">Select</string>
+    <string name="add">Add</string>
 
 </resources>

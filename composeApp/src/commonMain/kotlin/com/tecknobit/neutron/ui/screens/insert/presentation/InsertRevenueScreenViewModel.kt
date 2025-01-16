@@ -4,6 +4,7 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateListOf
 import com.tecknobit.equinoxcompose.viewmodels.EquinoxViewModel
+import com.tecknobit.neutron.helpers.RevenueLabelsRetriever
 import com.tecknobit.neutron.navigator
 import com.tecknobit.neutron.ui.components.screenkeyboard.ScreenKeyboardState
 import com.tecknobit.neutron.ui.screens.revenues.data.RevenueLabel
@@ -13,7 +14,7 @@ import kotlinx.datetime.LocalDateTime
 
 class InsertRevenueScreenViewModel : EquinoxViewModel(
     snackbarHostState = SnackbarHostState()
-) {
+), RevenueLabelsRetriever {
 
     lateinit var keyboardState: ScreenKeyboardState
 

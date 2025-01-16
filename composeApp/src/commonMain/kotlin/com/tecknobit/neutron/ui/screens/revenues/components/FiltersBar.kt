@@ -49,6 +49,7 @@ import com.tecknobit.equinoxcompose.components.getContrastColor
 import com.tecknobit.equinoxcompose.utilities.toColor
 import com.tecknobit.neutron.bodyFontFamily
 import com.tecknobit.neutron.displayFontFamily
+import com.tecknobit.neutron.helpers.RevenueLabelsRetriever
 import com.tecknobit.neutron.helpers.retainAndAdd
 import com.tecknobit.neutron.ui.icons.Target
 import com.tecknobit.neutron.ui.screens.revenues.data.RevenueLabel
@@ -232,7 +233,7 @@ private fun LabelsDialog(
     LaunchedEffect(filtering.value) {
         supportLabelsList.clear()
         supportLabelsList.addAll(viewModel.labelsFilter)
-        currentLabels.addAll(viewModel.retrieveUserLabels())
+        currentLabels.addAll((viewModel as RevenueLabelsRetriever).retrieveUserLabels())
     }
     EquinoxAlertDialog(
         modifier = Modifier

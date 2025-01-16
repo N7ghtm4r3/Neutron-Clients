@@ -360,7 +360,7 @@ open class NeutronRequester(
 //        description: String,
 //        value: Double,
 //        revenueDate: Long,
-//        labels: List<RevenueLabel> = emptyList()
+//        labels: List<RevenueLabelBadge> = emptyList()
 //    ): JSONObject {
 //        val payload = Params()
 //        payload.addParam(REVENUE_DESCRIPTION_KEY, description)
