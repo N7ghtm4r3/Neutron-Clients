@@ -24,6 +24,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -35,12 +36,13 @@ import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 
 data class Step(
-    val enabled: MutableState<Boolean> = mutableStateOf(true),
+    val enabled: MutableState<Boolean>? = null,
+    val startAsExpanded: Boolean = false,
     val stepIcon: ImageVector,
     val title: StringResource,
     val content: @Composable ColumnScope.() -> Unit,
     val dismissAction: (() -> Unit)? = null,
-    val confirmAction: (MutableState<Boolean>) -> Unit
+    val confirmAction: (MutableState<Boolean>) -> Unit = { it.value = false }
 )
 
 @Composable
@@ -48,6 +50,8 @@ data class Step(
 @Deprecated("USE THE BUILT-ONE FROM EQUINOX")
 // TODO: MORE CUSTOMIZATION IN THE OFFICIAL COMPONENT
 fun Stepper(
+    modifier: Modifier = Modifier,
+    headerSection: @Composable (() -> Unit)? = null,
     startStepShape: Shape = RoundedCornerShape(
         topStart = 12.dp,
         topEnd = 12.dp
@@ -57,10 +61,14 @@ fun Stepper(
         bottomStart = 12.dp,
         bottomEnd = 12.dp
     ),
-    headerSection: @Composable (() -> Unit)? = null,
     vararg steps: Step
 ) {
+    val specialIndexes = remember { steps.mapSpecialIndexes() }
+    val firstIndex = remember { specialIndexes.first }
+    val lastIndex = remember { specialIndexes.second }
+    val lastStep = remember { steps.last() }
     Column (
+        modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
         headerSection?.invoke()
@@ -68,24 +76,34 @@ fun Stepper(
             modifier = Modifier
                 .verticalScroll(rememberScrollState())
         ) {
-            val lastIndex = steps.lastIndex
             steps.forEachIndexed { index, step ->
                 AnimatedVisibility(
-                    visible = step.enabled.value
+                    visible = step.isEnabled()
                 ) {
                     val shape = when(index) {
                         0 -> startStepShape
-                        lastIndex -> finalStepShape
+                        firstIndex -> {
+                            if(steps[0].isEnabled())
+                                middleStepShape
+                            else
+                                startStepShape
+                        }
+                        lastIndex -> {
+                            if(lastIndex != steps.lastIndex && lastStep.isEnabled())
+                                middleStepShape
+                            else
+                                finalStepShape
+                        }
+                        steps.lastIndex -> finalStepShape
                         else -> middleStepShape
                     }
                     StepAction(
                         shape = shape,
-                        stepIcon = step.stepIcon,
-                        stepTitle = step.title,
-                        stepContent = step.content,
-                        dismissAction = step.dismissAction,
-                        confirmAction = step.confirmAction,
-                        bottomDivider = index != lastIndex
+                        step = step,
+                        bottomDivider = if(lastStep.isEnabled())
+                            index != steps.lastIndex
+                        else
+                            index != lastIndex
                     )
                 }
             }
@@ -93,15 +111,49 @@ fun Stepper(
     }
 }
 
+private fun Array<out Step>.mapSpecialIndexes(): Pair<Int, Int> {
+    val startIndex = this.findSpecialIndex(
+        elementToCheck = this.first(),
+        defaultIndexValue = 0
+    )
+    val tmpArray = this.reversedArray()
+    val offset = this.size
+    val lastIndex = tmpArray.findSpecialIndex(
+        elementToCheck = this.last(),
+        defaultIndexValue = this.lastIndex,
+        onAssign = { index -> offset - index }
+    )
+    return Pair(
+        first = startIndex,
+        second = lastIndex
+    )
+}
+
+private fun Array<out Step>.findSpecialIndex(
+    elementToCheck: Step,
+    defaultIndexValue: Int,
+    onAssign: (Int) -> Int = { it }
+) : Int {
+    var specialIndex = defaultIndexValue
+    if(elementToCheck.enabled != null) {
+        forEachIndexed { index, step ->
+            if(index != 0 && step.enabled == null) {
+                specialIndex = onAssign.invoke(index)
+                return@forEachIndexed
+            }
+        }
+    }
+    return specialIndex
+}
+
+private fun Step.isEnabled() : Boolean {
+    return this.enabled?.value ?: true
+}
+
 /**
  * Section to execute a profile action
  *
  * @param shape The shape for the container
- * @param stepIcon The representative leading icon
- * @param stepTitle The representative action text
- * @param stepContent The content to display to execute the action
- * @param dismissAction The action to execute when the action dismissed
- * @param confirmAction The action to execute when the action confirmed
  * @param bottomDivider Whether create the bottom divider
  */
 @Composable
@@ -109,26 +161,18 @@ fun Stepper(
 @Deprecated("USE THE BUILT-ONE FROM EQUINOX")
 // TODO: MORE CUSTOMIZATION IN THE OFFICIAL COMPONENT
 private fun StepAction(
-    shape: Shape = RoundedCornerShape(
-        size = 0.dp
-    ),
-    stepIcon: ImageVector,
-    stepTitle: StringResource,
-    stepContent: @Composable ColumnScope.() -> Unit,
-    dismissAction: (() -> Unit)? = null,
-    confirmAction: (MutableState<Boolean>) -> Unit,
+    shape: Shape,
+    step: Step,
     bottomDivider: Boolean = true
 ) {
     StepAction(
         shape = shape,
-        stepIcon = stepIcon,
-        actionText = stepTitle,
-        actionContent = stepContent,
+        step = step,
         controls = { expanded ->
             ActionControls(
                 expanded = expanded,
-                dismissAction = dismissAction,
-                confirmAction = confirmAction
+                dismissAction = step.dismissAction,
+                confirmAction = step.confirmAction
             )
         },
         bottomDivider = bottomDivider,
@@ -159,18 +203,17 @@ private fun ActionControls(
         AnimatedVisibility(
             visible = expanded.value
         ) {
-            Row{
-                IconButton(
-                    onClick = {
-                        dismissAction?.invoke()
-                        expanded.value = !expanded.value
+            Row {
+                dismissAction?.let { action ->
+                    IconButton(
+                        onClick = action
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Cancel,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.error
+                        )
                     }
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Cancel,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.error
-                    )
                 }
                 IconButton(
                     onClick = {
@@ -219,49 +262,49 @@ private fun StepAction(
     shape: Shape = RoundedCornerShape(
         size = 0.dp
     ),
-    stepIcon: ImageVector,
-    actionText: StringResource,
-    actionContent: @Composable ColumnScope.() -> Unit,
+    step: Step,
     controls: @Composable (MutableState<Boolean>) -> Unit,
     bottomDivider: Boolean = true
 ) {
-    Card (
-        shape = shape
-    ) {
-        val expanded = rememberSaveable { mutableStateOf(false) }
-        Row (
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(
-                    start = 16.dp
-                ),
-            verticalAlignment = Alignment.CenterVertically
+    Column {
+        Card (
+            shape = shape
         ) {
-            Icon(
-                imageVector = stepIcon,
-                contentDescription = null
-            )
-            Text(
-                modifier = Modifier
-                    .padding(
-                        start = 10.dp
-                    ),
-                text = stringResource(actionText)
-            )
-            controls.invoke(expanded)
-        }
-        AnimatedVisibility(
-            visible = expanded.value
-        ) {
-            Column(
+            val expanded = rememberSaveable { mutableStateOf(false) }
+            Row (
                 modifier = Modifier
                     .fillMaxWidth()
+                    .padding(
+                        start = 16.dp
+                    ),
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                HorizontalDivider()
-                actionContent.invoke(this)
+                Icon(
+                    imageVector = step.stepIcon,
+                    contentDescription = null
+                )
+                Text(
+                    modifier = Modifier
+                        .padding(
+                            start = 10.dp
+                        ),
+                    text = stringResource(step.title)
+                )
+                controls.invoke(expanded)
+            }
+            AnimatedVisibility(
+                visible = expanded.value
+            ) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                ) {
+                    HorizontalDivider()
+                    step.content.invoke(this)
+                }
             }
         }
+        if(bottomDivider)
+            HorizontalDivider()
     }
-    if(bottomDivider)
-        HorizontalDivider()
 }

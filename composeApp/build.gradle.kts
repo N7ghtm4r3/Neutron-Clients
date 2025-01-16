@@ -97,6 +97,8 @@ kotlin {
                 implementation(libs.coil.network.ktor3)
                 implementation(libs.filekit.core)
                 implementation(libs.filekit.compose)
+                implementation(libs.datetime.wheel.picker)
+                implementation(libs.kotlinx.datetime)
             }
         }
 

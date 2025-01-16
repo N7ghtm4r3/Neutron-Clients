@@ -5,16 +5,20 @@ package com.tecknobit.neutron.ui.screens.insert.presenter
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.Label
 import androidx.compose.material.icons.filled.Description
-import androidx.compose.material.icons.filled.SelectAll
+import androidx.compose.material.icons.filled.EditCalendar
+import androidx.compose.material.icons.filled.Savings
 import androidx.compose.material.icons.filled.Title
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
@@ -52,12 +56,18 @@ import com.tecknobit.neutron.ui.screens.NeutronScreen
 import com.tecknobit.neutron.ui.screens.insert.presentation.InsertRevenueScreenViewModel
 import com.tecknobit.neutroncore.helpers.NeutronInputsValidator.isRevenueDescriptionValid
 import com.tecknobit.neutroncore.helpers.NeutronInputsValidator.isRevenueTitleValid
+import dev.darkokoa.datetimewheelpicker.WheelDateTimePicker
+import kotlinx.datetime.Clock
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
 import neutron.composeapp.generated.resources.Res
 import neutron.composeapp.generated.resources.add_revenue
 import neutron.composeapp.generated.resources.description
 import neutron.composeapp.generated.resources.description_not_valid
 import neutron.composeapp.generated.resources.generals
 import neutron.composeapp.generated.resources.go_back
+import neutron.composeapp.generated.resources.insertion_date
+import neutron.composeapp.generated.resources.labels
 import neutron.composeapp.generated.resources.next
 import neutron.composeapp.generated.resources.project
 import neutron.composeapp.generated.resources.revenue_type
@@ -198,28 +208,42 @@ class InsertRevenueScreen : NeutronScreen<InsertRevenueScreenViewModel>(
             visible = !displayKeyboard.value
         ) {
             Stepper(
+                modifier = Modifier
+                    .padding(
+                        horizontal = 16.dp
+                    )
+                    .padding(
+                        bottom = 16.dp
+                    )
+                    .imePadding(),
                 steps = arrayOf(
                     Step(
-                        stepIcon = Icons.Default.SelectAll,
+                        stepIcon = Icons.Default.Savings,
                         title = Res.string.revenue_type,
-                        content = { RevenueType() },
-                        confirmAction = {
-                        }
+                        content = { RevenueType() }
                     ),
                     Step(
                         stepIcon = Icons.Default.Title,
                         title = Res.string.title,
                         content = { RevenueTitle() },
-                        confirmAction = {
-                        }
+                        dismissAction = { viewModel!!.title.value = "" }
                     ),
                     Step(
                         enabled = viewModel!!.addingGeneralRevenue,
                         stepIcon = Icons.Default.Description,
                         title = Res.string.description,
-                        content = { RevenueDescription() },
-                        confirmAction = {
-                        }
+                        content = { RevenueDescription() }
+                    ),
+                    Step(
+                        enabled = viewModel!!.addingGeneralRevenue,
+                        stepIcon = Icons.AutoMirrored.Filled.Label,
+                        title = Res.string.labels,
+                        content = { RevenueLabels() }
+                    ),
+                    Step(
+                        stepIcon = Icons.Default.EditCalendar,
+                        title = Res.string.insertion_date,
+                        content = { InsertionDate() }
                     )
                 )
             )
@@ -278,8 +302,6 @@ class InsertRevenueScreen : NeutronScreen<InsertRevenueScreenViewModel>(
         LaunchedEffect(Unit) {
             focusRequester.requestFocus()
         }
-        viewModel!!.title = remember { mutableStateOf("") }
-        viewModel!!.titleError = remember { mutableStateOf(false) }
         EquinoxTextField(
             modifier = Modifier
                 .focusRequester(focusRequester),
@@ -316,6 +338,42 @@ class InsertRevenueScreen : NeutronScreen<InsertRevenueScreenViewModel>(
         LaunchedEffect(Unit) {
             focusRequester.requestFocus()
         }
+        EquinoxTextField(
+            modifier = Modifier
+                .focusRequester(focusRequester),
+            textFieldColors = TextFieldDefaults.colors(
+                unfocusedIndicatorColor = Color.Transparent,
+                focusedIndicatorColor = Color.Transparent,
+                errorIndicatorColor = Color.Transparent
+            ),
+            value = viewModel!!.description,
+            textFieldStyle = TextStyle(
+                fontSize = 14.sp,
+                fontWeight = FontWeight.SemiBold,
+                fontFamily = bodyFontFamily
+            ),
+            isError = viewModel!!.descriptionError,
+            validator = { isRevenueDescriptionValid(it) },
+            errorText = Res.string.description_not_valid,
+            errorTextStyle = TextStyle(
+                fontSize = 14.sp,
+                fontFamily = bodyFontFamily
+            ),
+            placeholder = Res.string.description,
+            keyboardOptions = KeyboardOptions(
+                imeAction = ImeAction.Next
+            )
+        )
+    }
+
+    @Composable
+    @NonRestartableComposable
+    // TODO: ANNOTATE AS SPECIAL STEP WITH THE RELATED EQUINOX-ANNOTATION
+    private fun RevenueLabels() {
+        val focusRequester = remember { FocusRequester() }
+        LaunchedEffect(Unit) {
+            focusRequester.requestFocus()
+        }
         viewModel!!.description = remember { mutableStateOf("") }
         viewModel!!.descriptionError = remember { mutableStateOf(false) }
         EquinoxTextField(
@@ -346,6 +404,21 @@ class InsertRevenueScreen : NeutronScreen<InsertRevenueScreenViewModel>(
         )
     }
 
+    @Composable
+    @NonRestartableComposable
+    // TODO: ANNOTATE AS SPECIAL STEP WITH THE RELATED EQUINOX-ANNOTATION
+    private fun ColumnScope.InsertionDate() {
+        WheelDateTimePicker(
+            modifier = Modifier
+                .padding(
+                    vertical = 16.dp
+                )
+                .align(Alignment.CenterHorizontally),
+            startDateTime = viewModel!!.insertionDate.value,
+            rowCount = 5
+        ) { snappedDateTime -> viewModel!!.insertionDate.value = snappedDateTime }
+    }
+
     /**
      * Method to collect or instantiate the states of the screen
      */
@@ -354,6 +427,13 @@ class InsertRevenueScreen : NeutronScreen<InsertRevenueScreenViewModel>(
         keyboardState = rememberKeyboardState()
         displayKeyboard = remember { mutableStateOf(true) }
         viewModel!!.addingGeneralRevenue = remember { mutableStateOf(true) }
+        viewModel!!.title = remember { mutableStateOf("") }
+        viewModel!!.titleError = remember { mutableStateOf(false) }
+        viewModel!!.description = remember { mutableStateOf("") }
+        viewModel!!.descriptionError = remember { mutableStateOf(false) }
+        viewModel!!.insertionDate = remember {
+            mutableStateOf(Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()))
+        }
     }
 
 }
