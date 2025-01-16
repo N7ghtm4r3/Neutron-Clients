@@ -45,7 +45,29 @@ data class Step(
     val isError: (MutableState<Boolean>)? = null,
     val dismissAction: (() -> Unit)? = null,
     val confirmAction: (MutableState<Boolean>) -> Unit = { it.value = false }
-)
+) {
+
+    constructor(
+        initiallyExpanded: Boolean = false,
+        staticallyEnabled: Boolean,
+        stepIcon: ImageVector,
+        title: StringResource,
+        content: @Composable ColumnScope.() -> Unit,
+        isError: (MutableState<Boolean>)? = null,
+        dismissAction: (() -> Unit)? = null,
+        confirmAction: (MutableState<Boolean>) -> Unit = { it.value = false }
+    ) : this(
+        initiallyExpanded = initiallyExpanded,
+        enabled = mutableStateOf(staticallyEnabled),
+        stepIcon = stepIcon,
+        title = title,
+        content = content,
+        isError = isError,
+        dismissAction = dismissAction,
+        confirmAction = confirmAction
+    )
+
+}
 
 @Composable
 @NonRestartableComposable

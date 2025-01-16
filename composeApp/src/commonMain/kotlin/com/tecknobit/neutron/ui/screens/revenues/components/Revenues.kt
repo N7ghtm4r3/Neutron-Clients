@@ -35,9 +35,11 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.tecknobit.equinoxcompose.utilities.ResponsiveContent
+import com.tecknobit.neutron.INSERT_REVENUE_SCREEN
 import com.tecknobit.neutron.bodyFontFamily
 import com.tecknobit.neutron.displayFontFamily
 import com.tecknobit.neutron.localUser
+import com.tecknobit.neutron.navigator
 import com.tecknobit.neutron.ui.components.DeleteRevenue
 import com.tecknobit.neutron.ui.icons.ContractDelete
 import com.tecknobit.neutron.ui.screens.revenues.data.GeneralRevenue
@@ -283,7 +285,7 @@ private fun RevenueItem(
             ) {
                 Row {
                     IconButton(
-                        onClick = { /* TODO: NAV TO EDIT */ }
+                        onClick = { navigator.navigate("$INSERT_REVENUE_SCREEN/${revenue.id}") }
                     ) {
                         Icon(
                             imageVector = Icons.Default.Edit,

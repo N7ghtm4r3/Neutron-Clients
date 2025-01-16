@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -71,7 +72,10 @@ private fun RevenueLabelBadge(
             containerColor = color
         ),
         shape = RoundedCornerShape(
-            size = 5.dp
+            size = 10.dp
+        ),
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 2.dp
         )
     ) {
         Row (
@@ -83,6 +87,9 @@ private fun RevenueLabelBadge(
                 modifier = Modifier
                     .padding(
                         all = 4.dp
+                    )
+                    .widthIn(
+                        max = 100.dp
                     ),
                 backgroundColor = color,
                 fontSize = fontSize,

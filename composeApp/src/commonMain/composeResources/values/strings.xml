@@ -7,7 +7,6 @@
     <string name="closing_date_title">Closing date</string>
     <string name="duration">Duration:</string>
     <string name="days">days</string>
-    <string name="add_revenue">Add revenue</string>
     <string name="insertion_time">Insertion time</string>
     <string name="edit">Edit</string>
     <string name="confirm">Confirm</string>
@@ -116,5 +115,7 @@
     <string name="create">Create</string>
     <string name="select">Select</string>
     <string name="add">Add</string>
+    <string name="add_revenue">Add revenue</string>
+    <string name="edit_revenue">Edit revenue</string>
 
 </resources>

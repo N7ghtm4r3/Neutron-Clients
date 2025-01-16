@@ -19,7 +19,7 @@ sealed interface GeneralRevenue : Revenue {
     val description: String
 
     @Serializable
-    data class GeneralImpl(
+    data class GeneralRevenueImpl(
         override val id: String,
         override val title: String,
         override val value: Double,

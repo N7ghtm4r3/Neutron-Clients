@@ -7,7 +7,7 @@ import com.tecknobit.equinoxcompose.utilities.toHex
 import com.tecknobit.equinoxcompose.viewmodels.EquinoxViewModel
 import com.tecknobit.equinoxcore.pagination.PaginatedResponse
 import com.tecknobit.neutron.helpers.RevenueLabelsRetriever
-import com.tecknobit.neutron.ui.screens.revenues.data.GeneralRevenue.GeneralImpl
+import com.tecknobit.neutron.ui.screens.revenues.data.GeneralRevenue.GeneralRevenueImpl
 import com.tecknobit.neutron.ui.screens.revenues.data.ProjectRevenue
 import com.tecknobit.neutron.ui.screens.revenues.data.Revenue
 import com.tecknobit.neutron.ui.screens.revenues.data.RevenueLabel
@@ -96,7 +96,7 @@ class RevenuesScreenViewModel : EquinoxViewModel(
         // TODO: MAKE THE REQUEST THEN
         // APPLY THE FILTERS
         val revenues = listOf(
-            GeneralImpl(
+            GeneralRevenueImpl(
                 Random.nextLong().toString(),
                 "Title #${Random.nextInt(100)}",
                 Random.nextDouble(0.0, 1000.0),

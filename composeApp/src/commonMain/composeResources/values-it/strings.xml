@@ -7,7 +7,6 @@
     <string name="closing_date_title">Data di chiusura</string>
     <string name="duration">Durata:</string>
     <string name="days">giorni</string>
-    <string name="add_revenue">Aggiungi entrata</string>
     <string name="insertion_time">Tempo di inserimento</string>
     <string name="edit">Modifica</string>
     <string name="confirm">Conferma</string>
@@ -116,5 +115,7 @@
     <string name="create">Crea</string>
     <string name="select">Seleziona</string>
     <string name="add">Aggiungi</string>
+    <string name="add_revenue">Aggiungi entrata</string>
+    <string name="edit_revenue">Modifica entrata</string>
 
 </resources>

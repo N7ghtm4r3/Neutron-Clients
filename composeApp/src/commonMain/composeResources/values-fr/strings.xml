@@ -7,7 +7,6 @@
     <string name="closing_date_title">Date de clôture</string>
     <string name="duration">Durée de l'enquête :</string>
     <string name="days">jours</string>
-    <string name="add_revenue">Ajouter des recettes</string>
     <string name="insertion_time">Temps d'insertion</string>
     <string name="edit">Modifier</string>
     <string name="confirm">Confirmer</string>
@@ -116,5 +115,7 @@
     <string name="create">Créer</string>
     <string name="select">Sélectionner</string>
     <string name="add">Ajouter</string>
+    <string name="add_revenue">Ajouter des recettes</string>
+    <string name="edit_revenue">Edit revenue</string>
 
 </resources>

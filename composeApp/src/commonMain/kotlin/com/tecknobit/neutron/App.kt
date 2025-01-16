@@ -17,9 +17,11 @@ import com.tecknobit.neutron.ui.screens.auth.presenter.AuthScreen
 import com.tecknobit.neutron.ui.screens.insert.presenter.InsertRevenueScreen
 import com.tecknobit.neutron.ui.screens.profile.presenter.ProfileScreen
 import com.tecknobit.neutron.ui.screens.revenues.presenter.RevenuesScreen
+import com.tecknobit.neutroncore.REVENUE_IDENTIFIER_KEY
 import moe.tlaster.precompose.PreComposeApp
 import moe.tlaster.precompose.navigation.NavHost
 import moe.tlaster.precompose.navigation.Navigator
+import moe.tlaster.precompose.navigation.path
 import moe.tlaster.precompose.navigation.rememberNavigator
 import neutron.composeapp.generated.resources.Res
 import neutron.composeapp.generated.resources.lilitaone
@@ -135,9 +137,12 @@ fun App() {
                 ProfileScreen().ShowContent()
             }
             scene(
-                route = INSERT_REVENUE_SCREEN
-            ) {
-                InsertRevenueScreen().ShowContent()
+                route = "$INSERT_REVENUE_SCREEN/{$REVENUE_IDENTIFIER_KEY}?"
+            ) { backstackEntry ->
+                val revenueId : String? = backstackEntry.path(REVENUE_IDENTIFIER_KEY)
+                InsertRevenueScreen(
+                    revenueId = revenueId
+                ).ShowContent()
             }
         }
     }

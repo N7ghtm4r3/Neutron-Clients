@@ -36,6 +36,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.NonRestartableComposable
+import androidx.compose.runtime.State
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -52,6 +54,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.tecknobit.equinoxcompose.components.EquinoxTextField
 import com.tecknobit.equinoxcompose.components.getContrastColor
+import com.tecknobit.equinoxcompose.session.ManagedContent
 import com.tecknobit.equinoxcompose.utilities.ResponsiveContent
 import com.tecknobit.equinoxcompose.utilities.toColor
 import com.tecknobit.neutron.bodyFontFamily
@@ -60,11 +63,14 @@ import com.tecknobit.neutron.localUser
 import com.tecknobit.neutron.ui.components.Step
 import com.tecknobit.neutron.ui.components.Stepper
 import com.tecknobit.neutron.ui.components.screenkeyboard.ScreenKeyboard
+import com.tecknobit.neutron.ui.components.screenkeyboard.ScreenKeyboardState.Companion.ZERO
 import com.tecknobit.neutron.ui.components.screenkeyboard.rememberKeyboardState
 import com.tecknobit.neutron.ui.screens.NeutronScreen
 import com.tecknobit.neutron.ui.screens.insert.components.LabelsPicker
 import com.tecknobit.neutron.ui.screens.insert.presentation.InsertRevenueScreenViewModel
 import com.tecknobit.neutron.ui.screens.revenues.components.RevenueLabels
+import com.tecknobit.neutron.ui.screens.revenues.data.GeneralRevenue
+import com.tecknobit.neutron.ui.screens.revenues.data.Revenue
 import com.tecknobit.neutroncore.helpers.NeutronInputsValidator.isRevenueDescriptionValid
 import com.tecknobit.neutroncore.helpers.NeutronInputsValidator.isRevenueTitleValid
 import dev.darkokoa.datetimewheelpicker.WheelDateTimePicker
@@ -75,6 +81,7 @@ import neutron.composeapp.generated.resources.Res
 import neutron.composeapp.generated.resources.add_revenue
 import neutron.composeapp.generated.resources.description
 import neutron.composeapp.generated.resources.description_not_valid
+import neutron.composeapp.generated.resources.edit_revenue
 import neutron.composeapp.generated.resources.generals
 import neutron.composeapp.generated.resources.go_back
 import neutron.composeapp.generated.resources.insert
@@ -87,34 +94,57 @@ import neutron.composeapp.generated.resources.title
 import neutron.composeapp.generated.resources.title_not_valid
 import org.jetbrains.compose.resources.stringResource
 
-class InsertRevenueScreen : NeutronScreen<InsertRevenueScreenViewModel>(
-    viewModel = InsertRevenueScreenViewModel(),
-    title = Res.string.add_revenue
+class InsertRevenueScreen(
+    private val revenueId: String?
+) : NeutronScreen<InsertRevenueScreenViewModel>(
+    viewModel = InsertRevenueScreenViewModel(
+        revenueId = revenueId
+    ),
+    title = if(revenueId != null)
+            Res.string.edit_revenue
+        else
+            Res.string.add_revenue,
 ) {
 
     private lateinit var displayKeyboard: MutableState<Boolean>
 
+    private lateinit var revenue: State<Revenue?>
+
+    private lateinit var isEditing: MutableState<Boolean>
+
     @Composable
     override fun ScreenContent() {
-        ResponsiveContent(
-            onExpandedSizeClass = {
-                AmountSection(
-                    keyboardModifier = Modifier
-                        .clip(
-                            RoundedCornerShape(
-                                topStart = 21.dp,
-                                topEnd = 21.dp
-                            )
+        ManagedContent(
+            viewModel = viewModel!!,
+            content = {
+                CollectStatesAfterLoading()
+                ResponsiveContent(
+                    onExpandedSizeClass = {
+                        AmountSection(
+                            keyboardModifier = Modifier
+                                .clip(
+                                    RoundedCornerShape(
+                                        topStart = 21.dp,
+                                        topEnd = 21.dp
+                                    )
+                                )
                         )
+                    },
+                    onMediumSizeClass = {
+                        AmountSection(
+                            keyboardWeight = 2f
+                        )
+                    },
+                    onCompactSizeClass = {
+                        AmountSection()
+                    }
                 )
             },
-            onMediumSizeClass = {
-                AmountSection(
-                    keyboardWeight = 2f
-                )
-            },
-            onCompactSizeClass = {
-                AmountSection()
+            loadingRoutine = {
+                if(isEditing.value)
+                    revenue.value != null
+                else
+                    true
             }
         )
     }
@@ -246,7 +276,7 @@ class InsertRevenueScreen : NeutronScreen<InsertRevenueScreenViewModel>(
                     ),
                 steps = arrayOf(
                     Step(
-                        initiallyExpanded = true,
+                        staticallyEnabled = !isEditing.value,
                         stepIcon = Icons.Default.Savings,
                         title = Res.string.revenue_type,
                         content = { RevenueType() }
@@ -464,20 +494,51 @@ class InsertRevenueScreen : NeutronScreen<InsertRevenueScreenViewModel>(
         ) { snappedDateTime -> viewModel!!.insertionDate.value = snappedDateTime }
     }
 
+    override fun onStart() {
+        super.onStart()
+        viewModel!!.retrieveRevenue()
+    }
+
     /**
      * Method to collect or instantiate the states of the screen
      */
     @Composable
     override fun CollectStates() {
         displayKeyboard = remember { mutableStateOf(true) }
-        viewModel!!.keyboardState = rememberKeyboardState()
+        isEditing = remember { mutableStateOf(revenueId != null) }
+        revenue = viewModel!!.revenue.collectAsState()
         viewModel!!.addingGeneralRevenue = remember { mutableStateOf(true) }
-        viewModel!!.title = remember { mutableStateOf("") }
         viewModel!!.titleError = remember { mutableStateOf(false) }
-        viewModel!!.description = remember { mutableStateOf("") }
         viewModel!!.descriptionError = remember { mutableStateOf(false) }
+    }
+
+    @Composable
+    @NonRestartableComposable
+    private fun CollectStatesAfterLoading() {
+        viewModel!!.keyboardState = rememberKeyboardState(
+            amount = if(isEditing.value)
+                revenue.value!!.value.toString()
+            else
+                ZERO
+        )
+        viewModel!!.title = remember {
+            mutableStateOf(
+                if(isEditing.value)
+                    revenue.value!!.title
+                else
+                    ""
+            )
+        }
+        viewModel!!.description = remember {
+            mutableStateOf(
+                if(revenue.value != null && revenue.value is GeneralRevenue)
+                    (revenue.value as GeneralRevenue).description
+                else
+                    ""
+            )
+        }
         viewModel!!.insertionDate = remember {
-            mutableStateOf(Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()))
+            mutableStateOf(Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())) // TODO: SET AND INIT CORRECTLY
         }
     }
 

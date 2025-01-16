@@ -10,10 +10,12 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Create
 import androidx.compose.material3.Button
@@ -26,14 +28,17 @@ import androidx.compose.material3.SingleChoiceSegmentedButtonRow
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.NonRestartableComposable
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import com.github.skydoves.colorpicker.compose.HsvColorPicker
@@ -42,8 +47,8 @@ import com.tecknobit.equinoxcompose.components.EquinoxDialog
 import com.tecknobit.equinoxcompose.components.EquinoxTextField
 import com.tecknobit.equinoxcompose.components.getContrastColor
 import com.tecknobit.equinoxcompose.utilities.toHex
-import com.tecknobit.neutron.displayFontFamily
 import com.tecknobit.neutron.helpers.RevenueLabelsRetriever
+import com.tecknobit.neutron.ui.components.LabelsGrid
 import com.tecknobit.neutron.ui.icons.ArrowSelectorTool
 import com.tecknobit.neutron.ui.screens.insert.presentation.InsertRevenueScreenViewModel
 import com.tecknobit.neutron.ui.screens.revenues.data.RevenueLabel
@@ -65,9 +70,12 @@ fun LabelsPicker(
     ) {
         Card(
             modifier = Modifier
-                .width(400.dp),
+                .size(
+                    width = 400.dp,
+                    height = 375.dp
+                ),
             colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.surfaceVariant
+                containerColor = MaterialTheme.colorScheme.surfaceContainerHigh
             )
         ) {
             val creatingNewLabel = remember { mutableStateOf(true) }
@@ -80,7 +88,8 @@ fun LabelsPicker(
                     )
                 },
                 onSelecting = {
-                    SelectLabel(
+                    SelectLabels(
+                        show = show,
                         viewModel = viewModel
                     )
                 }
@@ -108,8 +117,8 @@ private fun ColumnScope.SectionSelector(
         SegmentedButton(
             selected = creatingNewLabel.value,
             shape = RoundedCornerShape(
-                topStart = 5.dp,
-                bottomStart = 5.dp
+                topStart = 7.dp,
+                bottomStart = 7.dp
             ),
             icon = {
                 Icon(
@@ -130,8 +139,8 @@ private fun ColumnScope.SectionSelector(
         SegmentedButton(
             selected = !creatingNewLabel.value,
             shape = RoundedCornerShape(
-                topEnd = 5.dp,
-                bottomEnd = 5.dp
+                topEnd = 7.dp,
+                bottomEnd = 7.dp
             ),
             icon = {
                 Icon(
@@ -171,6 +180,8 @@ private fun CreateLabel(
     val labelText = remember { mutableStateOf("") }
     val controller = rememberColorPickerController()
     Column (
+        modifier = Modifier
+            .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
@@ -185,42 +196,21 @@ private fun CreateLabel(
         HsvColorPicker(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(200.dp)
-                .padding(
-                    bottom = 16.dp
-                ),
+                .height(165.dp),
             controller = controller
         )
-        AnimatedVisibility(
-            visible = labelText.value.isNotEmpty()
-        ) {
-            Row (
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(
-                        end = 10.dp,
-                        bottom = 10.dp
+        ConfirmOperationButton(
+            visible = labelText.value.isNotEmpty(),
+            action = {
+                viewModel.labels.add(
+                    RevenueLabel(
+                        text = labelText.value,
+                        color = controller.selectedColor.value.toHex()
                     )
-                    .align(Alignment.End),
-                horizontalArrangement = Arrangement.End
-            ) {
-                Button(
-                    onClick = {
-                        viewModel.labels.add(
-                            RevenueLabel(
-                                text = labelText.value,
-                                color = controller.selectedColor.value.toHex()
-                            )
-                        )
-                        show.value = false
-                    }
-                ) {
-                    Text(
-                        text = stringResource(Res.string.add)
-                    )
-                }
+                )
+                show.value = false
             }
-        }
+        )
     }
 }
 
@@ -243,10 +233,16 @@ private fun DummyRevenueLabelBadge(
             defaultElevation = 3.dp
         )
     ) {
+        val focusRequester = remember { FocusRequester() }
+        LaunchedEffect(Unit) {
+            focusRequester.requestFocus()
+        }
         val onLabelColor = getContrastColor(
             backgroundColor = color
         )
         EquinoxTextField(
+            modifier = Modifier
+                .focusRequester(focusRequester),
             textFieldColors = TextFieldDefaults.colors(
                 focusedIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent,
@@ -258,9 +254,6 @@ private fun DummyRevenueLabelBadge(
                 unfocusedTextColor = onLabelColor
             ),
             value = labelText,
-            textFieldStyle = TextStyle(
-                fontFamily = displayFontFamily
-            ),
             maxLines = 1,
             placeholder = stringResource(Res.string.label_text),
             keyboardOptions = KeyboardOptions(
@@ -272,8 +265,59 @@ private fun DummyRevenueLabelBadge(
 
 @Composable
 @NonRestartableComposable
-private fun SelectLabel(
+private fun SelectLabels(
+    show: MutableState<Boolean>,
     viewModel: InsertRevenueScreenViewModel
 ) {
-    val currentLabels = remember { (viewModel as RevenueLabelsRetriever).retrieveUserLabels() }
+    Column {
+        val currentLabels = remember { (viewModel as RevenueLabelsRetriever).retrieveUserLabels() }
+        val tmpLabels = remember { mutableStateListOf<RevenueLabel>() }
+        LabelsGrid(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f)
+                .padding(
+                    horizontal = 16.dp
+                ),
+            currentLabels = currentLabels,
+            labels = tmpLabels
+        )
+        ConfirmOperationButton(
+            visible = tmpLabels.isNotEmpty(),
+            action = {
+                viewModel.labels.addAll(tmpLabels)
+                show.value = false
+            }
+        )
+    }
+}
+
+@Composable
+@NonRestartableComposable
+private fun ColumnScope.ConfirmOperationButton(
+    visible: Boolean,
+    action: () -> Unit
+) {
+    AnimatedVisibility(
+        visible = visible
+    ) {
+        Row (
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(
+                    end = 10.dp,
+                    bottom = 10.dp
+                )
+                .align(Alignment.End),
+            horizontalArrangement = Arrangement.End
+        ) {
+            Button(
+                onClick = action
+            ) {
+                Text(
+                    text = stringResource(Res.string.add)
+                )
+            }
+        }
+    }
 }
