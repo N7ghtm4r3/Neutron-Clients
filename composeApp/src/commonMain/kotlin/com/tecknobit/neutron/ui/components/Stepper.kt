@@ -15,6 +15,7 @@ import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.Cancel
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -36,11 +37,12 @@ import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 
 data class Step(
+    val initiallyExpanded: Boolean = false,
     val enabled: MutableState<Boolean>? = null,
-    val startAsExpanded: Boolean = false,
     val stepIcon: ImageVector,
     val title: StringResource,
     val content: @Composable ColumnScope.() -> Unit,
+    val isError: (MutableState<Boolean>)? = null,
     val dismissAction: (() -> Unit)? = null,
     val confirmAction: (MutableState<Boolean>) -> Unit = { it.value = false }
 )
@@ -209,9 +211,9 @@ private fun ActionControls(
                         onClick = action
                     ) {
                         Icon(
-                            imageVector = Icons.Default.Cancel,
+                            imageVector = Icons.Default.Cancel, // TODO: ALLOW CUSTOM ICON
                             contentDescription = null,
-                            tint = MaterialTheme.colorScheme.error
+                            tint = MaterialTheme.colorScheme.error // TODO: ALLOW CUSTOM COLOR
                         )
                     }
                 }
@@ -223,9 +225,9 @@ private fun ActionControls(
                     }
                 ) {
                     Icon(
-                        imageVector = Icons.Default.CheckCircle,
+                        imageVector = Icons.Default.CheckCircle, // TODO: ALLOW CUSTOM ICON
                         contentDescription = null,
-                        tint = MaterialTheme.colorScheme.primary
+                        tint = MaterialTheme.colorScheme.primary // TODO: ALLOW CUSTOM COLOR
                     )
                 }
             }
@@ -237,7 +239,7 @@ private fun ActionControls(
                 onClick = { expanded.value = true }
             ) {
                 Icon(
-                    imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                    imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight, // TODO: ALLOW CUSTOM ICON
                     contentDescription = null
                 )
             }
@@ -249,9 +251,6 @@ private fun ActionControls(
  * Section to execute a profile action
  *
  * @param shape The shape for the container
- * @param stepIcon The representative leading icon
- * @param actionText The representative action text
- * @param actionContent The content to display to execute the action
  * @param bottomDivider Whether create the bottom divider
  */
 @Composable
@@ -268,9 +267,17 @@ private fun StepAction(
 ) {
     Column {
         Card (
+            colors = CardDefaults.cardColors(
+                containerColor = if(step.isError?.value == true)
+                    MaterialTheme.colorScheme.error // TODO: ALLOW CUSTOM COLOR
+                else
+                    MaterialTheme.colorScheme.surfaceContainerHighest // TODO: ALLOW CUSTOM COLOR
+            ),
             shape = shape
         ) {
-            val expanded = rememberSaveable { mutableStateOf(false) }
+            val expanded = rememberSaveable {
+                mutableStateOf(step.initiallyExpanded)
+            }
             Row (
                 modifier = Modifier
                     .fillMaxWidth()
@@ -295,6 +302,7 @@ private fun StepAction(
             AnimatedVisibility(
                 visible = expanded.value
             ) {
+                step.isError?.value = false
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()

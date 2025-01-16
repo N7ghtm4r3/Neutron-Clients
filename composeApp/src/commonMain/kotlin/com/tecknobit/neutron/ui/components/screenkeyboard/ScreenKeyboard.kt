@@ -87,7 +87,6 @@ private inline fun Modifier.attachHardwareKeyboardEvents(
     state: ScreenKeyboardState
 ) : Modifier {
     return onKeyEvent { event ->
-        println(event.key)
         return@onKeyEvent if(event.type == KeyEventType.KeyDown) {
             when(event.key) {
                 Key.Zero, Key.NumPad0 -> {

@@ -6,21 +6,30 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Label
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Description
 import androidx.compose.material.icons.filled.EditCalendar
+import androidx.compose.material.icons.filled.Remove
 import androidx.compose.material.icons.filled.Savings
 import androidx.compose.material.icons.filled.Title
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
+import androidx.compose.material3.SmallFloatingActionButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextFieldDefaults
@@ -43,17 +52,22 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.tecknobit.equinoxcompose.components.EquinoxTextField
+import com.tecknobit.equinoxcompose.components.getContrastColor
 import com.tecknobit.equinoxcompose.utilities.ResponsiveContent
+import com.tecknobit.equinoxcompose.utilities.generateRandomColor
+import com.tecknobit.equinoxcompose.utilities.toColor
+import com.tecknobit.equinoxcompose.utilities.toHex
 import com.tecknobit.neutron.bodyFontFamily
 import com.tecknobit.neutron.displayFontFamily
 import com.tecknobit.neutron.localUser
 import com.tecknobit.neutron.ui.components.Step
 import com.tecknobit.neutron.ui.components.Stepper
 import com.tecknobit.neutron.ui.components.screenkeyboard.ScreenKeyboard
-import com.tecknobit.neutron.ui.components.screenkeyboard.ScreenKeyboardState
 import com.tecknobit.neutron.ui.components.screenkeyboard.rememberKeyboardState
 import com.tecknobit.neutron.ui.screens.NeutronScreen
 import com.tecknobit.neutron.ui.screens.insert.presentation.InsertRevenueScreenViewModel
+import com.tecknobit.neutron.ui.screens.revenues.components.RevenueLabels
+import com.tecknobit.neutron.ui.screens.revenues.data.RevenueLabel
 import com.tecknobit.neutroncore.helpers.NeutronInputsValidator.isRevenueDescriptionValid
 import com.tecknobit.neutroncore.helpers.NeutronInputsValidator.isRevenueTitleValid
 import dev.darkokoa.datetimewheelpicker.WheelDateTimePicker
@@ -66,6 +80,7 @@ import neutron.composeapp.generated.resources.description
 import neutron.composeapp.generated.resources.description_not_valid
 import neutron.composeapp.generated.resources.generals
 import neutron.composeapp.generated.resources.go_back
+import neutron.composeapp.generated.resources.insert
 import neutron.composeapp.generated.resources.insertion_date
 import neutron.composeapp.generated.resources.labels
 import neutron.composeapp.generated.resources.next
@@ -79,8 +94,6 @@ class InsertRevenueScreen : NeutronScreen<InsertRevenueScreenViewModel>(
     viewModel = InsertRevenueScreenViewModel(),
     title = Res.string.add_revenue
 ) {
-
-    private lateinit var keyboardState: ScreenKeyboardState
 
     private lateinit var displayKeyboard: MutableState<Boolean>
 
@@ -130,19 +143,38 @@ class InsertRevenueScreen : NeutronScreen<InsertRevenueScreenViewModel>(
             ) {
                 Amount()
                 AnimatedVisibility(
-                    visible = keyboardState.parseAmount() > 0.0
+                    visible = viewModel!!.keyboardState.parseAmount() > 0.0
                 ) {
-                    TextButton(
-                        onClick = { displayKeyboard.value = !displayKeyboard.value }
+                    Row (
+                        horizontalArrangement = Arrangement.spacedBy(10.dp)
                     ) {
-                        Text(
-                            text = stringResource(
-                                if(displayKeyboard.value)
-                                    Res.string.next
-                                else
-                                    Res.string.go_back
+                        TextButton(
+                            onClick = { displayKeyboard.value = !displayKeyboard.value }
+                        ) {
+                            Text(
+                                text = stringResource(
+                                    if(displayKeyboard.value)
+                                        Res.string.next
+                                    else
+                                        Res.string.go_back
+                                )
                             )
-                        )
+                        }
+                        AnimatedVisibility(
+                            visible = !displayKeyboard.value
+                        ) {
+                            TextButton(
+                                colors = ButtonDefaults.textButtonColors(
+                                    containerColor = MaterialTheme.colorScheme.primary,
+                                    contentColor = MaterialTheme.colorScheme.onPrimary
+                                ),
+                                onClick = { viewModel!!.insertRevenue() }
+                            ) {
+                                Text(
+                                    text = stringResource(Res.string.insert)
+                                )
+                            }
+                        }
                     }
                 }
             }
@@ -171,7 +203,7 @@ class InsertRevenueScreen : NeutronScreen<InsertRevenueScreenViewModel>(
             horizontalArrangement = Arrangement.spacedBy(5.dp)
         ) {
             Text(
-                text = keyboardState.currentAmount(),
+                text = viewModel!!.keyboardState.currentAmount(),
                 fontFamily = displayFontFamily,
                 fontSize = 60.sp,
                 maxLines = 1,
@@ -196,7 +228,7 @@ class InsertRevenueScreen : NeutronScreen<InsertRevenueScreenViewModel>(
             ScreenKeyboard(
                 modifier = keyboardModifier
                     .fillMaxSize(),
-                state = keyboardState
+                state = viewModel!!.keyboardState
             )
         }
     }
@@ -213,11 +245,12 @@ class InsertRevenueScreen : NeutronScreen<InsertRevenueScreenViewModel>(
                         horizontal = 16.dp
                     )
                     .padding(
-                        bottom = 16.dp
+                        bottom = 10.dp
                     )
                     .imePadding(),
                 steps = arrayOf(
                     Step(
+                        initiallyExpanded = true,
                         stepIcon = Icons.Default.Savings,
                         title = Res.string.revenue_type,
                         content = { RevenueType() }
@@ -226,19 +259,22 @@ class InsertRevenueScreen : NeutronScreen<InsertRevenueScreenViewModel>(
                         stepIcon = Icons.Default.Title,
                         title = Res.string.title,
                         content = { RevenueTitle() },
+                        isError = viewModel!!.titleError,
                         dismissAction = { viewModel!!.title.value = "" }
                     ),
                     Step(
                         enabled = viewModel!!.addingGeneralRevenue,
                         stepIcon = Icons.Default.Description,
                         title = Res.string.description,
-                        content = { RevenueDescription() }
+                        content = { RevenueDescription() },
+                        isError = viewModel!!.descriptionError,
+                        dismissAction = { viewModel!!.description.value = "" }
                     ),
                     Step(
                         enabled = viewModel!!.addingGeneralRevenue,
                         stepIcon = Icons.AutoMirrored.Filled.Label,
                         title = Res.string.labels,
-                        content = { RevenueLabels() }
+                        content = { RevenueLabelsForm() }
                     ),
                     Step(
                         stepIcon = Icons.Default.EditCalendar,
@@ -304,6 +340,9 @@ class InsertRevenueScreen : NeutronScreen<InsertRevenueScreenViewModel>(
         }
         EquinoxTextField(
             modifier = Modifier
+                .padding(
+                    bottom = 10.dp
+                )
                 .focusRequester(focusRequester),
             textFieldColors = TextFieldDefaults.colors(
                 unfocusedIndicatorColor = Color.Transparent,
@@ -323,9 +362,10 @@ class InsertRevenueScreen : NeutronScreen<InsertRevenueScreenViewModel>(
                 fontSize = 14.sp,
                 fontFamily = bodyFontFamily
             ),
+            maxLines = 1,
             placeholder = Res.string.title,
             keyboardOptions = KeyboardOptions(
-                imeAction = ImeAction.Next
+                imeAction = ImeAction.Done
             )
         )
     }
@@ -340,12 +380,17 @@ class InsertRevenueScreen : NeutronScreen<InsertRevenueScreenViewModel>(
         }
         EquinoxTextField(
             modifier = Modifier
+                .fillMaxWidth()
+                .padding(
+                    bottom = 10.dp
+                )
                 .focusRequester(focusRequester),
             textFieldColors = TextFieldDefaults.colors(
                 unfocusedIndicatorColor = Color.Transparent,
                 focusedIndicatorColor = Color.Transparent,
                 errorIndicatorColor = Color.Transparent
             ),
+            maxLines = 10,
             value = viewModel!!.description,
             textFieldStyle = TextStyle(
                 fontSize = 14.sp,
@@ -361,7 +406,7 @@ class InsertRevenueScreen : NeutronScreen<InsertRevenueScreenViewModel>(
             ),
             placeholder = Res.string.description,
             keyboardOptions = KeyboardOptions(
-                imeAction = ImeAction.Next
+                imeAction = ImeAction.Done
             )
         )
     }
@@ -369,38 +414,39 @@ class InsertRevenueScreen : NeutronScreen<InsertRevenueScreenViewModel>(
     @Composable
     @NonRestartableComposable
     // TODO: ANNOTATE AS SPECIAL STEP WITH THE RELATED EQUINOX-ANNOTATION
-    private fun RevenueLabels() {
-        val focusRequester = remember { FocusRequester() }
-        LaunchedEffect(Unit) {
-            focusRequester.requestFocus()
-        }
-        viewModel!!.description = remember { mutableStateOf("") }
-        viewModel!!.descriptionError = remember { mutableStateOf(false) }
-        EquinoxTextField(
-            modifier = Modifier
-                .focusRequester(focusRequester),
-            textFieldColors = TextFieldDefaults.colors(
-                unfocusedIndicatorColor = Color.Transparent,
-                focusedIndicatorColor = Color.Transparent,
-                errorIndicatorColor = Color.Transparent
+    private fun RevenueLabelsForm() {
+        RevenueLabels(
+            contentPadding = PaddingValues(
+                all = 16.dp
             ),
-            value = viewModel!!.description,
-            textFieldStyle = TextStyle(
-                fontSize = 14.sp,
-                fontWeight = FontWeight.SemiBold,
-                fontFamily = bodyFontFamily
-            ),
-            isError = viewModel!!.descriptionError,
-            validator = { isRevenueDescriptionValid(it) },
-            errorText = Res.string.description_not_valid,
-            errorTextStyle = TextStyle(
-                fontSize = 14.sp,
-                fontFamily = bodyFontFamily
-            ),
-            placeholder = Res.string.description,
-            keyboardOptions = KeyboardOptions(
-                imeAction = ImeAction.Next
-            )
+            labels = viewModel!!.labels,
+            stickyHeaderContent = {
+                SmallFloatingActionButton(
+                    onClick = {
+                        viewModel!!.labels.add(RevenueLabel(text = "fwe", color = generateRandomColor().toHex()))
+                    }
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Add,
+                        contentDescription = null
+                    )
+                }
+            },
+            trailingIcon = { label ->
+                IconButton(
+                    modifier = Modifier
+                        .size(24.dp),
+                    onClick = { viewModel!!.labels.remove(label) }
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Remove,
+                        contentDescription = null,
+                        tint = getContrastColor(
+                            backgroundColor = label.color.toColor()
+                        )
+                    )
+                }
+            }
         )
     }
 
@@ -424,8 +470,8 @@ class InsertRevenueScreen : NeutronScreen<InsertRevenueScreenViewModel>(
      */
     @Composable
     override fun CollectStates() {
-        keyboardState = rememberKeyboardState()
         displayKeyboard = remember { mutableStateOf(true) }
+        viewModel!!.keyboardState = rememberKeyboardState()
         viewModel!!.addingGeneralRevenue = remember { mutableStateOf(true) }
         viewModel!!.title = remember { mutableStateOf("") }
         viewModel!!.titleError = remember { mutableStateOf(false) }

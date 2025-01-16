@@ -3,13 +3,9 @@
 package com.tecknobit.neutron.ui.screens.revenues.components
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.NavigateNext
 import androidx.compose.material.icons.filled.Delete
@@ -350,27 +346,5 @@ private fun RevenueInfo(
             fontSize = 14.sp,
             fontFamily = bodyFontFamily
         )
-    }
-}
-
-@Composable
-@NonRestartableComposable
-private fun RevenueLabels(
-    labels: List<RevenueLabel>
-) {
-    LazyRow (
-        contentPadding = PaddingValues(
-            vertical = 5.dp
-        ),
-        horizontalArrangement = Arrangement.spacedBy(5.dp)
-    ) {
-        items(
-            items = labels,
-            key = { label -> label.id }
-        ) { label ->
-            RevenueLabel(
-                label = label
-            )
-        }
     }
 }
