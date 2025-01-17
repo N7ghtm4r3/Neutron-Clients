@@ -8,7 +8,6 @@
     <string name="duration">Durata:</string>
     <string name="days">giorni</string>
     <string name="insertion_time">Tempo di inserimento</string>
-    <string name="edit">Modifica</string>
     <string name="confirm">Conferma</string>
     <string name="dismiss">Annulla</string>
     <string name="add_project">Aggiungi progetto</string>
@@ -111,6 +110,7 @@
     <string name="theme">Tema</string>
     <string name="change">Cambia</string>
     <string name="insert">Inserisci</string>
+    <string name="edit">Modifica</string>
     <string name="label_text">Testo etichetta</string>
     <string name="create">Crea</string>
     <string name="select">Seleziona</string>

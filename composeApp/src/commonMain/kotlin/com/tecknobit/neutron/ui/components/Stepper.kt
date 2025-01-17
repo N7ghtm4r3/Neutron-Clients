@@ -36,6 +36,7 @@ import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 
+//TODO: MOVE THE CLASS AS STANDALONE FILE
 data class Step(
     val initiallyExpanded: Boolean = false,
     val enabled: MutableState<Boolean>? = null,
@@ -49,7 +50,7 @@ data class Step(
 
     constructor(
         initiallyExpanded: Boolean = false,
-        staticallyEnabled: Boolean,
+        enabledIf: () -> MutableState<Boolean>?,
         stepIcon: ImageVector,
         title: StringResource,
         content: @Composable ColumnScope.() -> Unit,
@@ -58,7 +59,7 @@ data class Step(
         confirmAction: (MutableState<Boolean>) -> Unit = { it.value = false }
     ) : this(
         initiallyExpanded = initiallyExpanded,
-        enabled = mutableStateOf(staticallyEnabled),
+        enabled = enabledIf.invoke(),
         stepIcon = stepIcon,
         title = title,
         content = content,
@@ -73,6 +74,7 @@ data class Step(
 @NonRestartableComposable
 @Deprecated("USE THE BUILT-ONE FROM EQUINOX")
 // TODO: MORE CUSTOMIZATION IN THE OFFICIAL COMPONENT
+// TODO: WARN ABOUT TO USE THE REMEMBER TO WRAP THE steps ARRAY TO AVOID THE RECREATION DURING THE RECOMPOSITION
 fun Stepper(
     modifier: Modifier = Modifier,
     headerSection: @Composable (() -> Unit)? = null,
@@ -135,6 +137,7 @@ fun Stepper(
     }
 }
 
+// TODO: CHECK FIRST ITEM STEPPER BEHAVIOR WHEN ENABLED CONDITION IS NOT NULLE
 private fun Array<out Step>.mapSpecialIndexes(): Pair<Int, Int> {
     val startIndex = this.findSpecialIndex(
         elementToCheck = this.first(),

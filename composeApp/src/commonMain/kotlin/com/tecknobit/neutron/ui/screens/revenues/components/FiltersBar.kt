@@ -39,6 +39,7 @@ import com.tecknobit.equinoxcompose.components.EquinoxAlertDialog
 import com.tecknobit.neutron.bodyFontFamily
 import com.tecknobit.neutron.displayFontFamily
 import com.tecknobit.neutron.helpers.RevenueLabelsRetriever
+import com.tecknobit.neutron.helpers.mergeIfNotContained
 import com.tecknobit.neutron.helpers.retainAndAdd
 import com.tecknobit.neutron.ui.components.LabelsGrid
 import com.tecknobit.neutron.ui.icons.Target
@@ -213,6 +214,7 @@ private fun LabelsChip(
     )
 }
 
+// TODO: CHECK THE REAL BEHAVIOR
 @Composable
 private fun LabelsDialog(
     filtering: MutableState<Boolean>,
@@ -221,8 +223,11 @@ private fun LabelsDialog(
     val currentLabels = remember { mutableStateListOf<RevenueLabel>() }
     val supportLabelsList = remember { mutableListOf<RevenueLabel>() }
     LaunchedEffect(filtering.value) {
-        supportLabelsList.clear()
-        supportLabelsList.addAll(viewModel.labelsFilter)
+        supportLabelsList.mergeIfNotContained(
+            mergeCollection = viewModel.labelsFilter
+        )
+    }
+    LaunchedEffect(Unit) {
         currentLabels.addAll((viewModel as RevenueLabelsRetriever).retrieveUserLabels())
     }
     EquinoxAlertDialog(

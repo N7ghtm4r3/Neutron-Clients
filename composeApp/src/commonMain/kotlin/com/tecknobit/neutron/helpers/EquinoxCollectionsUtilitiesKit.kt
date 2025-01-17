@@ -2,7 +2,7 @@ package com.tecknobit.neutron.helpers
 
 @Deprecated("TO USE THE BUILT-IN IN EQUINOX ONE")
 fun <T> MutableCollection<T>.retainAndAdd(
-    supportCollection: MutableCollection<T>
+    supportCollection: Collection<T>
 ) {
     val supportCollectionSet = supportCollection.toHashSet()
     this.run {
@@ -12,5 +12,16 @@ fun <T> MutableCollection<T>.retainAndAdd(
                 supportItem -> supportItem !in this
             }
         )
+    }
+}
+
+@Deprecated("TO USE THE BUILT-IN IN EQUINOX ONE")
+fun <T> MutableCollection<T>.mergeIfNotContained(
+    mergeCollection: Collection<T>
+) {
+    val supportSet = this.toHashSet()
+    mergeCollection.forEach { element ->
+        if(!supportSet.contains(element))
+            this.add(element)
     }
 }

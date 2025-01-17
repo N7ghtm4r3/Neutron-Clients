@@ -75,12 +75,14 @@ import com.tecknobit.neutroncore.helpers.NeutronInputsValidator.isRevenueDescrip
 import com.tecknobit.neutroncore.helpers.NeutronInputsValidator.isRevenueTitleValid
 import dev.darkokoa.datetimewheelpicker.WheelDateTimePicker
 import kotlinx.datetime.Clock
+import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 import neutron.composeapp.generated.resources.Res
 import neutron.composeapp.generated.resources.add_revenue
 import neutron.composeapp.generated.resources.description
 import neutron.composeapp.generated.resources.description_not_valid
+import neutron.composeapp.generated.resources.edit
 import neutron.composeapp.generated.resources.edit_revenue
 import neutron.composeapp.generated.resources.generals
 import neutron.composeapp.generated.resources.go_back
@@ -95,7 +97,7 @@ import neutron.composeapp.generated.resources.title_not_valid
 import org.jetbrains.compose.resources.stringResource
 
 class InsertRevenueScreen(
-    private val revenueId: String?
+    revenueId: String?
 ) : NeutronScreen<InsertRevenueScreenViewModel>(
     viewModel = InsertRevenueScreenViewModel(
         revenueId = revenueId
@@ -110,7 +112,7 @@ class InsertRevenueScreen(
 
     private lateinit var revenue: State<Revenue?>
 
-    private lateinit var isEditing: MutableState<Boolean>
+    private val isEditing: Boolean = revenueId != null
 
     @Composable
     override fun ScreenContent() {
@@ -141,7 +143,7 @@ class InsertRevenueScreen(
                 )
             },
             loadingRoutine = {
-                if(isEditing.value)
+                if(isEditing)
                     revenue.value != null
                 else
                     true
@@ -198,7 +200,12 @@ class InsertRevenueScreen(
                                 onClick = { viewModel!!.insertRevenue() }
                             ) {
                                 Text(
-                                    text = stringResource(Res.string.insert)
+                                    text = stringResource(
+                                        if(isEditing)
+                                            Res.string.edit
+                                        else
+                                            Res.string.insert
+                                    )
                                 )
                             }
                         }
@@ -266,17 +273,10 @@ class InsertRevenueScreen(
         AnimatedVisibility(
             visible = !displayKeyboard.value
         ) {
-            Stepper(
-                modifier = Modifier
-                    .padding(
-                        horizontal = 16.dp
-                    )
-                    .padding(
-                        bottom = 10.dp
-                    ),
-                steps = arrayOf(
+            val steps = remember {
+                mutableListOf(
                     Step(
-                        staticallyEnabled = !isEditing.value,
+                        initiallyExpanded = !isEditing,
                         stepIcon = Icons.Default.Savings,
                         title = Res.string.revenue_type,
                         content = { RevenueType() }
@@ -308,6 +308,20 @@ class InsertRevenueScreen(
                         content = { InsertionDate() }
                     )
                 )
+            }
+            LaunchedEffect(Unit) {
+                if(isEditing)
+                    steps.removeAt(0)
+            }
+            Stepper(
+                modifier = Modifier
+                    .padding(
+                        horizontal = 16.dp
+                    )
+                    .padding(
+                        bottom = 10.dp
+                    ),
+                steps = steps.toTypedArray()
             )
         }
     }
@@ -505,9 +519,7 @@ class InsertRevenueScreen(
     @Composable
     override fun CollectStates() {
         displayKeyboard = remember { mutableStateOf(true) }
-        isEditing = remember { mutableStateOf(revenueId != null) }
         revenue = viewModel!!.revenue.collectAsState()
-        viewModel!!.addingGeneralRevenue = remember { mutableStateOf(true) }
         viewModel!!.titleError = remember { mutableStateOf(false) }
         viewModel!!.descriptionError = remember { mutableStateOf(false) }
     }
@@ -516,14 +528,17 @@ class InsertRevenueScreen(
     @NonRestartableComposable
     private fun CollectStatesAfterLoading() {
         viewModel!!.keyboardState = rememberKeyboardState(
-            amount = if(isEditing.value)
+            amount = if(isEditing)
                 revenue.value!!.value.toString()
             else
                 ZERO
         )
+        viewModel!!.addingGeneralRevenue = remember {
+            mutableStateOf(!isEditing || revenue.value!! is GeneralRevenue)
+        }
         viewModel!!.title = remember {
             mutableStateOf(
-                if(isEditing.value)
+                if(isEditing)
                     revenue.value!!.title
                 else
                     ""
@@ -538,7 +553,13 @@ class InsertRevenueScreen(
             )
         }
         viewModel!!.insertionDate = remember {
-            mutableStateOf(Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())) // TODO: SET AND INIT CORRECTLY
+            mutableStateOf(
+                if(isEditing) {
+                    Instant.fromEpochMilliseconds(revenue.value!!.revenueDate)
+                        .toLocalDateTime(TimeZone.currentSystemDefault())
+                } else
+                    Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
+            )
         }
     }
 

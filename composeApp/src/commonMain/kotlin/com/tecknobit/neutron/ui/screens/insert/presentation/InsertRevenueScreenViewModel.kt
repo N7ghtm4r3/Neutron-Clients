@@ -52,7 +52,14 @@ class InsertRevenueScreenViewModel(
             title = "prova",
             value = 100.0,
             revenueDate = 1737055320000L,
-            description = "gagagaga"
+            description = "gagagaga",
+            labels = listOf(
+                RevenueLabel(
+                    id = "ga",
+                    color = "#594DB6",
+                    text = "ga"
+                )
+            )
         )
         if(_revenue.value!! is GeneralRevenue)
             labels.addAll((_revenue.value!! as GeneralRevenue).labels)

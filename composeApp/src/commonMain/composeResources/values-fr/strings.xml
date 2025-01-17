@@ -8,7 +8,6 @@
     <string name="duration">Durée de l'enquête :</string>
     <string name="days">jours</string>
     <string name="insertion_time">Temps d'insertion</string>
-    <string name="edit">Modifier</string>
     <string name="confirm">Confirmer</string>
     <string name="dismiss">Rejeter</string>
     <string name="add_project">Ajouter un projet</string>
@@ -111,6 +110,7 @@
     <string name="theme">Thème</string>
     <string name="change">Changer</string>
     <string name="insert">Insert</string>
+    <string name="edit">Modifier</string>
     <string name="label_text">Texte de l'étiquette</string>
     <string name="create">Créer</string>
     <string name="select">Sélectionner</string>

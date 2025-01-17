@@ -35,7 +35,7 @@ fun LabelsGrid(
 ) {
     LazyVerticalGrid(
         modifier = modifier,
-        columns = GridCells.Fixed(3),
+        columns = GridCells.Fixed(4),
         contentPadding = PaddingValues(
             all = 5.dp
         ),
@@ -46,7 +46,7 @@ fun LabelsGrid(
             items = currentLabels,
             key = { label -> label.id }
         ) { label ->
-            var selected by remember { mutableStateOf(labels.contains(label)) }
+            var selected by remember { mutableStateOf(labels.any { it.id == label.id }) }
             val color = label.color.toColor()
             val containerColor = if(selected)
                 color

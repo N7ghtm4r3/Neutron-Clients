@@ -36,8 +36,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.FocusRequester
-import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
@@ -48,6 +46,7 @@ import com.tecknobit.equinoxcompose.components.EquinoxTextField
 import com.tecknobit.equinoxcompose.components.getContrastColor
 import com.tecknobit.equinoxcompose.utilities.toHex
 import com.tecknobit.neutron.helpers.RevenueLabelsRetriever
+import com.tecknobit.neutron.helpers.mergeIfNotContained
 import com.tecknobit.neutron.ui.components.LabelsGrid
 import com.tecknobit.neutron.ui.icons.ArrowSelectorTool
 import com.tecknobit.neutron.ui.screens.insert.presentation.InsertRevenueScreenViewModel
@@ -233,16 +232,10 @@ private fun DummyRevenueLabelBadge(
             defaultElevation = 3.dp
         )
     ) {
-        val focusRequester = remember { FocusRequester() }
-        LaunchedEffect(Unit) {
-            focusRequester.requestFocus()
-        }
         val onLabelColor = getContrastColor(
             backgroundColor = color
         )
         EquinoxTextField(
-            modifier = Modifier
-                .focusRequester(focusRequester),
             textFieldColors = TextFieldDefaults.colors(
                 focusedIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent,
@@ -263,6 +256,7 @@ private fun DummyRevenueLabelBadge(
     }
 }
 
+// TODO: CHECK THE REAL BEHAVIOR
 @Composable
 @NonRestartableComposable
 private fun SelectLabels(
@@ -272,6 +266,9 @@ private fun SelectLabels(
     Column {
         val currentLabels = remember { (viewModel as RevenueLabelsRetriever).retrieveUserLabels() }
         val tmpLabels = remember { mutableStateListOf<RevenueLabel>() }
+        LaunchedEffect(viewModel.labels) {
+            tmpLabels.addAll(viewModel.labels)
+        }
         LabelsGrid(
             modifier = Modifier
                 .fillMaxWidth()
@@ -285,7 +282,9 @@ private fun SelectLabels(
         ConfirmOperationButton(
             visible = tmpLabels.isNotEmpty(),
             action = {
-                viewModel.labels.addAll(tmpLabels)
+                viewModel.labels.mergeIfNotContained(
+                    mergeCollection = tmpLabels
+                )
                 show.value = false
             }
         )

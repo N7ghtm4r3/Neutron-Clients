@@ -21,6 +21,13 @@ interface RevenueLabelsRetriever {
                 )
             )
         }
+        currentUserLabels.add(
+            RevenueLabel(
+                id = "ga",
+                color = "#594DB6",
+                text = "ga"
+            )
+        )
         return currentUserLabels
     }
 
