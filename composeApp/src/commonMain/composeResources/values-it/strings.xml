@@ -1,5 +1,4 @@
 <resources>
-    <string name="initial_revenue">Ricavi iniziali</string>
     <string name="opening_date">Data di apertura:</string>
     <string name="opening_date_title">Data di apertura</string>
     <string name="closing_date">Data di chiusura:</string>
@@ -118,5 +117,11 @@
     <string name="total_revenues">Ricavi totali: %1$s%2$s</string>
     <string name="closed">Chiusi</string>
     <string name="pending">Aperti</string>
+    <string name="initial_revenue">Ricavi iniziali</string>
+    <string name="closed_status">Chiuso</string>
+    <string name="pending_status">In attesa</string>
+    <string name="first_income">Prima entrata</string>
+    <string name="delete_ticket">Elimina ticket</string>
+    <string name="delete_ticket_text">Il ticket verrà eliminato e non sarà recuperabile, confermi?</string>
 
 </resources>

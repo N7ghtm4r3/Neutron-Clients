@@ -1,5 +1,4 @@
 <resources>
-    <string name="initial_revenue">Ingresos iniciales</string>
     <string name="opening_date">Fecha de apertura:</string>
     <string name="opening_date_title">Fecha de apertura</string>
     <string name="closing_date">Fecha límite:</string>
@@ -118,5 +117,11 @@
     <string name="total_revenues">Ingresos totales: %1$s%2$s</string>
     <string name="closed">Cerrado</string>
     <string name="pending">Pendiente</string>
+    <string name="initial_revenue">Ingresos iniciales</string>
+    <string name="closed_status">Cerrado</string>
+    <string name="pending_status">Pendiente</string>
+    <string name="first_income">Primer ingreso</string>
+    <string name="delete_ticket">Borrar billete</string>
+    <string name="delete_ticket_text">El billete se borrará y no se podrá recuperar, ¿confirmas\?</string>
 
 </resources>

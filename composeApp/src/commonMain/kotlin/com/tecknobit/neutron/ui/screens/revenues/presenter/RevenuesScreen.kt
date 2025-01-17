@@ -42,7 +42,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.tecknobit.equinoxcompose.components.EmptyListUI
-import com.tecknobit.equinoxcompose.resources.no_internet_connection
+import com.tecknobit.equinoxcompose.resources.retry
 import com.tecknobit.equinoxcompose.session.EquinoxScreen
 import com.tecknobit.equinoxcompose.session.ManagedContent
 import com.tecknobit.equinoxcompose.utilities.ResponsiveContent
@@ -59,7 +59,7 @@ import com.tecknobit.neutron.ui.components.NewPageProgressIndicator
 import com.tecknobit.neutron.ui.components.ProfilePic
 import com.tecknobit.neutron.ui.icons.ReceiptLong
 import com.tecknobit.neutron.ui.screens.revenues.components.FiltersBar
-import com.tecknobit.neutron.ui.screens.revenues.components.RevenueItem
+import com.tecknobit.neutron.ui.screens.revenues.components.RevenueCard
 import com.tecknobit.neutron.ui.screens.revenues.presentation.RevenuesScreenViewModel
 import com.tecknobit.neutron.ui.theme.NeutronTheme
 import com.tecknobit.neutroncore.dtos.WalletStatus
@@ -111,7 +111,7 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
                         ScreenContent()
                     }
                 },
-                noInternetConnectionRetryText = com.tecknobit.equinoxcompose.resources.Res.string.no_internet_connection,
+                noInternetConnectionRetryText = com.tecknobit.equinoxcompose.resources.Res.string.retry,
                 noInternetConnectionRetryAction = { viewModel!!.revenuesState.retryLastFailedRequest() }
             )
         }
@@ -328,7 +328,7 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
                 items = viewModel!!.revenuesState.allItems!!,
                 key = { _, revenue -> revenue.id }
             ) { index, revenue ->
-                RevenueItem(
+                RevenueCard(
                     viewModel = viewModel!!,
                     revenue = revenue,
                     position = index

@@ -16,12 +16,16 @@ import com.tecknobit.neutron.SPLASHSCREEN
 import com.tecknobit.neutron.displayFontFamily
 import com.tecknobit.neutron.navigator
 import com.tecknobit.neutron.ui.screens.profile.presentation.ProfileScreenViewModel
+import com.tecknobit.neutron.ui.screens.project.presentation.ProjectScreenViewModel
 import com.tecknobit.neutron.ui.screens.revenues.data.Revenue
+import com.tecknobit.neutron.ui.screens.revenues.data.TicketRevenue
 import com.tecknobit.neutron.ui.screens.revenues.presentation.RevenuesScreenViewModel
 import neutron.composeapp.generated.resources.Res
 import neutron.composeapp.generated.resources.delete_account
 import neutron.composeapp.generated.resources.delete_revenue
 import neutron.composeapp.generated.resources.delete_revenue_text
+import neutron.composeapp.generated.resources.delete_ticket
+import neutron.composeapp.generated.resources.delete_ticket_text
 import neutron.composeapp.generated.resources.delete_warn_text
 import neutron.composeapp.generated.resources.logout
 import neutron.composeapp.generated.resources.logout_warn_text
@@ -54,6 +58,31 @@ fun DeleteRevenue(
         confirmAction = {
             viewModel.deleteRevenue(
                 revenue = revenue
+            )
+        }
+    )
+}
+
+@Composable
+@NonRestartableComposable
+fun DeleteTicket(
+    show: MutableState<Boolean>,
+    viewModel: ProjectScreenViewModel,
+    ticket: TicketRevenue
+) {
+    EquinoxAlertDialog(
+        modifier = Modifier
+            .widthIn(
+                max = 400.dp
+            ),
+        show = show,
+        viewModel = viewModel,
+        title = Res.string.delete_ticket,
+        titleStyle = titleStyle,
+        text = Res.string.delete_ticket_text,
+        confirmAction = {
+            viewModel.deleteTicket(
+                revenue = ticket
             )
         }
     )

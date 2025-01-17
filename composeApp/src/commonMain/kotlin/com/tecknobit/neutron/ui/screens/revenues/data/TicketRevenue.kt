@@ -13,5 +13,11 @@ data class TicketRevenue(
     override val labels: List<RevenueLabel> = emptyList(),
     override val description: String,
     @SerialName(CLOSING_DATE_KEY)
-    val closingDate: Long,
-) : GeneralRevenue
+    val closingDate: Long = -1,
+) : GeneralRevenue {
+
+    fun isPending() : Boolean {
+        return closingDate == -1L
+    }
+
+}

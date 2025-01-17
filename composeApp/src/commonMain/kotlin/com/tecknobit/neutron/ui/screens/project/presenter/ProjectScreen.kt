@@ -1,12 +1,17 @@
 package com.tecknobit.neutron.ui.screens.project.presenter
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -22,20 +27,31 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.tecknobit.equinoxcompose.resources.no_internet_connection
+import com.tecknobit.equinoxcompose.components.EmptyListUI
+import com.tecknobit.equinoxcompose.resources.retry
 import com.tecknobit.equinoxcompose.session.EquinoxScreen
 import com.tecknobit.equinoxcompose.session.ManagedContent
 import com.tecknobit.neutron.MAX_CONTAINER_WIDTH
+import com.tecknobit.neutron.bodyFontFamily
 import com.tecknobit.neutron.displayFontFamily
 import com.tecknobit.neutron.localUser
 import com.tecknobit.neutron.navigator
+import com.tecknobit.neutron.ui.components.FirstPageProgressIndicator
+import com.tecknobit.neutron.ui.components.NewPageProgressIndicator
+import com.tecknobit.neutron.ui.icons.ReceiptLong
+import com.tecknobit.neutron.ui.screens.project.components.InitialRevenueItem
 import com.tecknobit.neutron.ui.screens.project.components.TicketsFilterBar
 import com.tecknobit.neutron.ui.screens.project.presentation.ProjectScreenViewModel
+import com.tecknobit.neutron.ui.screens.revenues.components.TicketCard
 import com.tecknobit.neutron.ui.screens.revenues.data.ProjectRevenue
 import com.tecknobit.neutron.ui.theme.NeutronTheme
+import io.github.ahmad_hamwi.compose.pagination.PaginatedLazyColumn
+import neutron.composeapp.generated.resources.Res
+import neutron.composeapp.generated.resources.no_revenues_yet
 import neutron.composeapp.generated.resources.total_revenues
 import org.jetbrains.compose.resources.stringResource
 
@@ -68,7 +84,7 @@ class ProjectScreen(
                     }
                 },
                 loadingRoutine = { project.value != null },
-                noInternetConnectionRetryText = com.tecknobit.equinoxcompose.resources.Res.string.no_internet_connection,
+                noInternetConnectionRetryText = com.tecknobit.equinoxcompose.resources.Res.string.retry,
                 noInternetConnectionRetryAction = { viewModel!!.ticketsState.retryLastFailedRequest() }
             )
         }
@@ -83,6 +99,19 @@ class ProjectScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Header()
+            Column (
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .widthIn(
+                        max = MAX_CONTAINER_WIDTH
+                    )
+                    .navigationBarsPadding()
+            ) {
+                InitialRevenueItem(
+                    initialRevenue = project.value!!.initialRevenue
+                )
+                Tickets()
+            }
         }
     }
 
@@ -156,6 +185,43 @@ class ProjectScreen(
                 imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                 contentDescription = null
             )
+        }
+    }
+
+
+    @Composable
+    @NonRestartableComposable
+    private fun Tickets() {
+        PaginatedLazyColumn(
+            modifier = Modifier
+                .fillMaxSize(),
+            paginationState = viewModel!!.ticketsState,
+            contentPadding = PaddingValues(
+                bottom = 16.dp
+            ),
+            verticalArrangement = Arrangement.spacedBy(10.dp),
+            firstPageProgressIndicator = { FirstPageProgressIndicator() },
+            firstPageEmptyIndicator = {
+                EmptyListUI(
+                    icon = ReceiptLong,
+                    subText = Res.string.no_revenues_yet,
+                    textStyle = TextStyle(
+                        fontFamily = bodyFontFamily
+                    )
+                )
+            },
+            newPageProgressIndicator = { NewPageProgressIndicator() }
+        ) {
+            itemsIndexed(
+                items = viewModel!!.ticketsState.allItems!!,
+                key = { _, revenue -> revenue.id }
+            ) { index, ticket ->
+                TicketCard(
+                    viewModel = viewModel!!,
+                    ticket = ticket,
+                    position = index
+                )
+            }
         }
     }
 
