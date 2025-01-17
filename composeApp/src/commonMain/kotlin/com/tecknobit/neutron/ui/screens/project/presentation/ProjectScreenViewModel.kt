@@ -20,6 +20,11 @@ class ProjectScreenViewModel(
     )
     val project: StateFlow<ProjectRevenue?> = _project
 
+    private val _balance = MutableStateFlow(
+        value = 0.0
+    )
+    val balance: StateFlow<Double> = _balance
+
     private var retrievePendingTickets: Boolean = true
 
     private var retrieveClosedTickets: Boolean = true
@@ -38,6 +43,12 @@ class ProjectScreenViewModel(
                 value = 1000.0
             )
         )
+    }
+
+    fun getWalletBalance() {
+        // TODO: MAKE THE REQUEST THEN
+        // TODO: APPLY THE FILTERS
+        _balance.value = Random.nextDouble()
     }
 
     val ticketsState = PaginationState<Int, TicketRevenue>(
@@ -94,6 +105,7 @@ class ProjectScreenViewModel(
             nextPageKey = 1, // TODO: USE THE ONE FROM THE PaginationResponse
             isLastPage = Random.nextBoolean() // TODO: USE THE ONE FROM THE PaginationResponse
         )
+
     }
 
     fun applyRetrievePendingTickets(
@@ -119,6 +131,7 @@ class ProjectScreenViewModel(
 
     override fun refreshData() {
         ticketsState.refresh()
+        getWalletBalance()
     }
 
 }

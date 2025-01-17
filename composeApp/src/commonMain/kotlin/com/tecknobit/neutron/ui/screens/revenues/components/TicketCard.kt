@@ -22,6 +22,7 @@ import com.tecknobit.equinoxcompose.utilities.ResponsiveContent
 import com.tecknobit.neutron.ui.components.DeleteTicket
 import com.tecknobit.neutron.ui.components.RevenueDescription
 import com.tecknobit.neutron.ui.components.RevenueListItem
+import com.tecknobit.neutron.ui.components.TicketInfo
 import com.tecknobit.neutron.ui.icons.ContractDelete
 import com.tecknobit.neutron.ui.screens.project.presentation.ProjectScreenViewModel
 import com.tecknobit.neutron.ui.screens.revenues.data.RevenueLabel
@@ -89,6 +90,11 @@ private fun TicketRevenueContent(
             containerColor = containerColor,
             onEdit = {
                 // TODO: NAV TO EDIT
+            },
+            info = {
+                TicketInfo(
+                    ticket = ticket
+                )
             },
             deleteIcon = ContractDelete,
             actionButton = {

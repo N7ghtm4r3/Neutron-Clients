@@ -27,6 +27,11 @@ fun RevenueListItem(
     revenue: Revenue,
     labels: List<RevenueLabel>,
     containerColor: Color,
+    info: @Composable () -> Unit = {
+        RevenueInfo(
+            revenue = revenue
+        )
+    },
     onEdit: () -> Unit,
     deleteIcon: ImageVector,
     actionButton: @Composable () -> Unit,
@@ -36,11 +41,7 @@ fun RevenueListItem(
         colors = ListItemDefaults.colors(
             containerColor = containerColor
         ),
-        headlineContent = {
-            RevenueInfo(
-                revenue = revenue
-            )
-        },
+        headlineContent = info,
         overlineContent = {
             RevenueLabels(
                 labels = labels

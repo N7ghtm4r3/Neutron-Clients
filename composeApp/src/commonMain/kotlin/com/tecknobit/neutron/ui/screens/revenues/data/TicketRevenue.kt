@@ -1,5 +1,6 @@
 package com.tecknobit.neutron.ui.screens.revenues.data
 
+import com.tecknobit.equinoxcore.time.TimeFormatter.daysUntil
 import com.tecknobit.neutroncore.CLOSING_DATE_KEY
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -18,6 +19,12 @@ data class TicketRevenue(
 
     fun isPending() : Boolean {
         return closingDate == -1L
+    }
+
+    fun getTicketDuration() : Int {
+        return revenueDate.daysUntil(
+            closingDate
+        )
     }
 
 }

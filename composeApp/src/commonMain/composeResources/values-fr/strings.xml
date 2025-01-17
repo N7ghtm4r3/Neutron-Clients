@@ -1,9 +1,6 @@
 <resources>
-    <string name="opening_date">Date d'ouverture :</string>
     <string name="opening_date_title">Date d'ouverture</string>
-    <string name="closing_date">Date de clôture :</string>
     <string name="closing_date_title">Date de clôture</string>
-    <string name="duration">Durée de l'enquête :</string>
     <string name="days">jours</string>
     <string name="insertion_time">Temps d'insertion</string>
     <string name="confirm">Confirmer</string>
@@ -114,7 +111,7 @@
     <string name="add">Ajouter</string>
     <string name="add_revenue">Ajouter des recettes</string>
     <string name="edit_revenue">Edit revenue</string>
-    <string name="total_revenues">Recettes totales : %1$s%2$s</string>
+    <string name="total_revenues">Recettes totales: %1$s%2$s</string>
     <string name="closed">Fermé</string>
     <string name="pending">En attente</string>
     <string name="initial_revenue">Recettes initiales</string>
@@ -123,5 +120,10 @@
     <string name="first_income">Premier revenu</string>
     <string name="delete_ticket">Supprimer le billet</string>
     <string name="delete_ticket_text">Le ticket sera supprimé et ne pourra pas être récupéré, confirmez-vous \?</string>
-
+    <string name="opening_date">Date d'ouverture: %1$s</string>
+    <string name="closing_date">Date de clôture: %1$s</string>
+    <plurals name="duration">
+        <item formatted="false" quantity="one">Durée : %1$d jour</item>
+        <item formatted="false" quantity="other">Durée : %1$d jours</item>
+    </plurals>
 </resources>

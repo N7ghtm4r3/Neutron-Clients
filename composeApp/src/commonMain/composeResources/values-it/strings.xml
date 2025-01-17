@@ -1,9 +1,6 @@
 <resources>
-    <string name="opening_date">Data di apertura:</string>
     <string name="opening_date_title">Data di apertura</string>
-    <string name="closing_date">Data di chiusura:</string>
     <string name="closing_date_title">Data di chiusura</string>
-    <string name="duration">Durata:</string>
     <string name="days">giorni</string>
     <string name="insertion_time">Tempo di inserimento</string>
     <string name="confirm">Conferma</string>
@@ -123,5 +120,10 @@
     <string name="first_income">Prima entrata</string>
     <string name="delete_ticket">Elimina ticket</string>
     <string name="delete_ticket_text">Il ticket verrà eliminato e non sarà recuperabile, confermi?</string>
-
+    <string name="opening_date">Data di apertura: %1$s</string>
+    <string name="closing_date">Data di chiusura: %1$s</string>
+    <plurals name="duration">
+        <item formatted="false" quantity="one">Durata: %1$d giorno</item>
+        <item formatted="false" quantity="other">Durata: %1$d giorni</item>
+    </plurals>
 </resources>

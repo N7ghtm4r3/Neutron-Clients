@@ -65,6 +65,8 @@ class ProjectScreen(
 
     private lateinit var project: State<ProjectRevenue?>
 
+    private lateinit var balance: State<Double>
+
     /**
      * Method to arrange the content of the screen to display
      */
@@ -99,19 +101,7 @@ class ProjectScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Header()
-            Column (
-                modifier = Modifier
-                    .fillMaxHeight()
-                    .widthIn(
-                        max = MAX_CONTAINER_WIDTH
-                    )
-                    .navigationBarsPadding()
-            ) {
-                InitialRevenueItem(
-                    initialRevenue = project.value!!.initialRevenue
-                )
-                Tickets()
-            }
+            Tickets()
         }
     }
 
@@ -160,8 +150,8 @@ class ProjectScreen(
                                 start = 16.dp
                             ),
                         text = stringResource(
-                            resource = neutron.composeapp.generated.resources.Res.string.total_revenues,
-                            project.value!!.getBalance(), localUser.currency.symbol
+                            resource = Res.string.total_revenues,
+                            balance.value, localUser.currency.symbol
                         ),
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
@@ -188,13 +178,16 @@ class ProjectScreen(
         }
     }
 
-
     @Composable
     @NonRestartableComposable
     private fun Tickets() {
         PaginatedLazyColumn(
             modifier = Modifier
-                .fillMaxSize(),
+                .fillMaxHeight()
+                .widthIn(
+                    max = MAX_CONTAINER_WIDTH
+                )
+                .navigationBarsPadding(),
             paginationState = viewModel!!.ticketsState,
             contentPadding = PaddingValues(
                 bottom = 16.dp
@@ -212,6 +205,11 @@ class ProjectScreen(
             },
             newPageProgressIndicator = { NewPageProgressIndicator() }
         ) {
+            item {
+                InitialRevenueItem(
+                    initialRevenue = project.value!!.initialRevenue
+                )
+            }
             itemsIndexed(
                 items = viewModel!!.ticketsState.allItems!!,
                 key = { _, revenue -> revenue.id }
@@ -228,6 +226,7 @@ class ProjectScreen(
     override fun onStart() {
         super.onStart()
         viewModel!!.retrieveProject()
+        viewModel!!.getWalletBalance()
     }
 
     /**
@@ -236,6 +235,7 @@ class ProjectScreen(
     @Composable
     override fun CollectStates() {
         project = viewModel!!.project.collectAsState()
+        balance = viewModel!!.balance.collectAsState()
     }
 
 }

@@ -6,6 +6,7 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.ListItem
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.NonRestartableComposable
+import androidx.compose.runtime.Stable
 import com.tecknobit.equinoxcompose.utilities.ResponsiveContent
 import com.tecknobit.neutron.ui.components.RevenueInfo
 import com.tecknobit.neutron.ui.screens.revenues.components.RevenueLabels
@@ -16,7 +17,6 @@ import neutron.composeapp.generated.resources.Res
 import neutron.composeapp.generated.resources.first_income
 import neutron.composeapp.generated.resources.initial_revenue
 import org.jetbrains.compose.resources.stringResource
-
 
 @Composable
 @NonRestartableComposable
