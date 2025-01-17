@@ -16,6 +16,7 @@ import com.tecknobit.neutron.ui.screens.SplashScreen
 import com.tecknobit.neutron.ui.screens.auth.presenter.AuthScreen
 import com.tecknobit.neutron.ui.screens.insert.presenter.InsertRevenueScreen
 import com.tecknobit.neutron.ui.screens.profile.presenter.ProfileScreen
+import com.tecknobit.neutron.ui.screens.project.presenter.ProjectScreen
 import com.tecknobit.neutron.ui.screens.revenues.presenter.RevenuesScreen
 import com.tecknobit.neutroncore.REVENUE_IDENTIFIER_KEY
 import moe.tlaster.precompose.PreComposeApp
@@ -85,6 +86,11 @@ const val PROFILE_SCREEN = "ProfileScreen"
  */
 const val INSERT_REVENUE_SCREEN = "InsertRevenueScreen"
 
+/**
+ * `PROJECT_REVENUE_SCREEN` route to navigate to the [com.tecknobit.neutron.ui.screens.project.presenter.ProjectScreen]
+ */
+const val PROJECT_REVENUE_SCREEN = "ProjectRevenueScreen"
+
 val MAX_CONTAINER_WIDTH = 1280.dp
 
 @Composable
@@ -142,6 +148,14 @@ fun App() {
                 val revenueId : String? = backstackEntry.path(REVENUE_IDENTIFIER_KEY)
                 InsertRevenueScreen(
                     revenueId = revenueId
+                ).ShowContent()
+            }
+            scene(
+                route = "$PROJECT_REVENUE_SCREEN/{$REVENUE_IDENTIFIER_KEY}?"
+            ) { backstackEntry ->
+                val revenueId : String = backstackEntry.path(REVENUE_IDENTIFIER_KEY)!!
+                ProjectScreen(
+                    projectId = revenueId
                 ).ShowContent()
             }
         }

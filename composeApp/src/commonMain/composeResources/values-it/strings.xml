@@ -1,5 +1,4 @@
 <resources>
-    <string name="total_revenues">Ricavi totali: %1$s%2$s</string>
     <string name="initial_revenue">Ricavi iniziali</string>
     <string name="opening_date">Data di apertura:</string>
     <string name="opening_date_title">Data di apertura</string>
@@ -15,7 +14,6 @@
     <string name="add_ticket">Aggiungi ticket</string>
     <string name="opening_time">Orario di apertura</string>
     <string name="closing_time">Orario di chiusura</string>
-    <string name="closed">Chiuso</string>
     <string name="storage_data">Dati di archiviazione</string>
     <string name="change_storage_location">Cambia la posizione di archiviazione</string>
     <string name="aware_server_message">Eseguendo questa modifica, i dati verranno memorizzati su un server esterno che memorizzerà tutti i dati e dove verranno memorizzati i dati futuri.</string>
@@ -117,5 +115,8 @@
     <string name="add">Aggiungi</string>
     <string name="add_revenue">Aggiungi entrata</string>
     <string name="edit_revenue">Modifica entrata</string>
+    <string name="total_revenues">Ricavi totali: %1$s%2$s</string>
+    <string name="closed">Chiusi</string>
+    <string name="pending">Aperti</string>
 
 </resources>

@@ -36,6 +36,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.tecknobit.equinoxcompose.utilities.ResponsiveContent
 import com.tecknobit.neutron.INSERT_REVENUE_SCREEN
+import com.tecknobit.neutron.PROJECT_REVENUE_SCREEN
 import com.tecknobit.neutron.bodyFontFamily
 import com.tecknobit.neutron.displayFontFamily
 import com.tecknobit.neutron.localUser
@@ -242,9 +243,7 @@ private fun ProjectRevenueContent(
         deleteIcon = Icons.Default.Delete,
         actionButton = {
             IconButton(
-                onClick = {
-                    // TODO: NAV TO PROJECT
-                }
+                onClick = { navigator.navigate("$PROJECT_REVENUE_SCREEN/${revenue.id}") }
             ) {
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.NavigateNext,

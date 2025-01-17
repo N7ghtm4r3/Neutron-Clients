@@ -1,5 +1,4 @@
 <resources>
-    <string name="total_revenues">Total revenues: %1$s%2$s</string>
     <string name="initial_revenue">Initial revenue</string>
     <string name="opening_date">Opening date:</string>
     <string name="opening_date_title">Opening date</string>
@@ -15,7 +14,6 @@
     <string name="add_ticket">Add ticket</string>
     <string name="opening_time">Opening time</string>
     <string name="closing_time">Closing time</string>
-    <string name="closed">Closed</string>
     <string name="storage_data">Storage data</string>
     <string name="change_storage_location">Change storage location</string>
     <string name="aware_server_message">Executing this change your data will be store on an external backend server which will be store all your data and where your future data will be store, pay attention where are you storing the data</string>
@@ -117,5 +115,8 @@
     <string name="add">Add</string>
     <string name="add_revenue">Add revenue</string>
     <string name="edit_revenue">Edit revenue</string>
+    <string name="total_revenues">Total revenues: %1$s%2$s</string>
+    <string name="closed">Closed</string>
+    <string name="pending">Pending</string>
 
 </resources>

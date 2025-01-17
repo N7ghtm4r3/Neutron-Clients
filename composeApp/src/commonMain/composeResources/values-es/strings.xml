@@ -1,5 +1,4 @@
 <resources>
-    <string name="total_revenues">Ingresos totales: %1$s%2$s</string>
     <string name="initial_revenue">Ingresos iniciales</string>
     <string name="opening_date">Fecha de apertura:</string>
     <string name="opening_date_title">Fecha de apertura</string>
@@ -15,7 +14,6 @@
     <string name="add_ticket">Añadir billete</string>
     <string name="opening_time">Hora de apertura</string>
     <string name="closing_time">Hora de cierre</string>
-    <string name="closed">Cerrado</string>
     <string name="storage_data">Datos de almacenamiento</string>
     <string name="change_storage_location">Cambiar la ubicación de almacenamiento</string>
     <string name="aware_server_message">Ejecutando este cambio sus datos serán almacenados en un servidor externo que almacenará todos sus datos y donde sus datos futuros serán almacenados, preste atención donde está almacenando los datos.</string>
@@ -117,5 +115,8 @@
     <string name="add">Añadir</string>
     <string name="add_revenue">Añadir ingresos</string>
     <string name="edit_revenue">Editar ingresos</string>
+    <string name="total_revenues">Ingresos totales: %1$s%2$s</string>
+    <string name="closed">Cerrado</string>
+    <string name="pending">Pendiente</string>
 
 </resources>

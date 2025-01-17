@@ -1,43 +1,33 @@
 package com.tecknobit.neutron.ui.screens.revenues.presentation
 
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.mutableStateListOf
 import com.tecknobit.equinoxcompose.utilities.generateRandomColor
 import com.tecknobit.equinoxcompose.utilities.toHex
-import com.tecknobit.equinoxcompose.viewmodels.EquinoxViewModel
 import com.tecknobit.equinoxcore.pagination.PaginatedResponse
+import com.tecknobit.neutron.helpers.PeriodFiltererViewModel
 import com.tecknobit.neutron.helpers.RevenueLabelsRetriever
 import com.tecknobit.neutron.ui.screens.revenues.data.GeneralRevenue.GeneralRevenueImpl
 import com.tecknobit.neutron.ui.screens.revenues.data.ProjectRevenue
 import com.tecknobit.neutron.ui.screens.revenues.data.Revenue
 import com.tecknobit.neutron.ui.screens.revenues.data.RevenueLabel
 import com.tecknobit.neutroncore.dtos.WalletStatus
-import com.tecknobit.neutroncore.enums.RevenuePeriod
-import com.tecknobit.neutroncore.enums.RevenuePeriod.LAST_MONTH
 import io.github.ahmad_hamwi.compose.pagination.PaginationState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlin.random.Random
 
-class RevenuesScreenViewModel : EquinoxViewModel(
-    snackbarHostState = SnackbarHostState()
-) , RevenueLabelsRetriever {
+class RevenuesScreenViewModel : PeriodFiltererViewModel() , RevenueLabelsRetriever {
 
     private val _walletStatus = MutableStateFlow<WalletStatus?>(
         value = null
     )
     val walletStatus: StateFlow<WalletStatus?> = _walletStatus
 
-    private val _revenuePeriod = MutableStateFlow(
-        value = LAST_MONTH
-    )
-    val revenuePeriod: StateFlow<RevenuePeriod> = _revenuePeriod
-
     var labelsFilter = mutableStateListOf<RevenueLabel>()
 
-    private var selectGeneralRevenues: Boolean = true
+    private var retrieveGeneralRevenues: Boolean = true
 
-    private var selectProjectsRevenues: Boolean = true
+    private var retrieveProjectsRevenues: Boolean = true
 
     fun getWalletStatus() {
         // TODO: MAKE THE REQUEST THEN
@@ -51,15 +41,6 @@ class RevenuesScreenViewModel : EquinoxViewModel(
         )
     }
 
-    fun setRevenuePeriodFilter(
-        revenuePeriod: RevenuePeriod,
-        afterSet: () -> Unit
-    ) {
-        _revenuePeriod.value = revenuePeriod
-        afterSet()
-        refreshData()
-    }
-
     fun applyLabelsFilters(
         onApply: () -> Unit
     ) {
@@ -67,17 +48,17 @@ class RevenuesScreenViewModel : EquinoxViewModel(
         onApply()
     }
 
-    fun applySelectGeneralRevenuesFilter(
-        select: Boolean
+    fun applyRetrieveGeneralRevenuesFilter(
+        retrieve: Boolean
     ) {
-        selectGeneralRevenues = select
+        retrieveGeneralRevenues = retrieve
         refreshData()
     }
 
-    fun applySelectProjectsFilter(
-        select: Boolean
+    fun applyRetrieveProjectsFilter(
+        retrieve: Boolean
     ) {
-        selectProjectsRevenues = select
+        retrieveProjectsRevenues = retrieve
         refreshData()
     }
 
@@ -150,7 +131,7 @@ class RevenuesScreenViewModel : EquinoxViewModel(
         refreshData()
     }
 
-    private fun refreshData() {
+    override fun refreshData() {
         revenuesState.refresh()
         getWalletStatus()
     }

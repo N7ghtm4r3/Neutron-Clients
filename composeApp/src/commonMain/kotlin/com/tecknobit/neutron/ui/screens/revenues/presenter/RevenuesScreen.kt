@@ -42,6 +42,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.tecknobit.equinoxcompose.components.EmptyListUI
+import com.tecknobit.equinoxcompose.resources.no_internet_connection
 import com.tecknobit.equinoxcompose.session.EquinoxScreen
 import com.tecknobit.equinoxcompose.session.ManagedContent
 import com.tecknobit.equinoxcompose.utilities.ResponsiveContent
@@ -107,9 +108,11 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
                             FabButton()
                         }
                     ) {
-                        Container()
+                        ScreenContent()
                     }
-                }
+                },
+                noInternetConnectionRetryText = com.tecknobit.equinoxcompose.resources.Res.string.no_internet_connection,
+                noInternetConnectionRetryAction = { viewModel!!.revenuesState.retryLastFailedRequest() }
             )
         }
     }
@@ -160,7 +163,7 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
 
     @Composable
     @NonRestartableComposable
-    private fun Container() {
+    private fun ScreenContent() {
         Column(
             modifier = Modifier
                 .fillMaxSize(),

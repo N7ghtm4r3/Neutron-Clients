@@ -11,4 +11,14 @@ data class ProjectRevenue(
     override val revenueDate: Long,
     val initialRevenue: RevenueImpl,
     val tickets: List<TicketRevenue> = emptyList(),
-) : Revenue
+) : Revenue {
+
+    fun getBalance() : Double {
+        var balance = initialRevenue.value
+        tickets.forEach { ticket ->
+            balance += ticket.value
+        }
+        return balance
+    }
+
+}
