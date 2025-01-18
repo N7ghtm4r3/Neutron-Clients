@@ -1,4 +1,4 @@
-package com.tecknobit.neutron.ui.components
+package com.tecknobit.neutron.ui.icons
 
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.PathFillType

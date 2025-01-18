@@ -27,6 +27,11 @@ fun RevenueListItem(
     revenue: Revenue,
     labels: List<RevenueLabel>,
     containerColor: Color,
+    overline: @Composable (List<RevenueLabel>) -> Unit = { ticketLabel ->
+        RevenueLabels(
+            labels = ticketLabel
+        )
+    },
     info: @Composable () -> Unit = {
         RevenueInfo(
             revenue = revenue
@@ -41,12 +46,8 @@ fun RevenueListItem(
         colors = ListItemDefaults.colors(
             containerColor = containerColor
         ),
+        overlineContent = { overline.invoke(labels) },
         headlineContent = info,
-        overlineContent = {
-            RevenueLabels(
-                labels = labels
-            )
-        },
         trailingContent = {
             RevenueToolbar(
                 onEdit = onEdit,

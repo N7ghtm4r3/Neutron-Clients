@@ -77,7 +77,7 @@ import com.tecknobit.neutron.bodyFontFamily
 import com.tecknobit.neutron.displayFontFamily
 import com.tecknobit.neutron.localUser
 import com.tecknobit.neutron.navigator
-import com.tecknobit.neutron.ui.components.CurrencyDollar
+import com.tecknobit.neutron.ui.icons.CurrencyDollar
 import com.tecknobit.neutron.ui.components.DeleteAccount
 import com.tecknobit.neutron.ui.components.Logout
 import com.tecknobit.neutron.ui.components.ProfilePic

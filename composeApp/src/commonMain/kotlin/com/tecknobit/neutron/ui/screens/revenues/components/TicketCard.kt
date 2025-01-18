@@ -2,8 +2,12 @@
 
 package com.tecknobit.neutron.ui.screens.revenues.components
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.filled.ExpandMore
 import androidx.compose.material3.Card
@@ -17,8 +21,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 import com.tecknobit.equinoxcompose.utilities.ResponsiveContent
+import com.tecknobit.equinoxcompose.utilities.toColor
 import com.tecknobit.neutron.ui.components.DeleteTicket
 import com.tecknobit.neutron.ui.components.RevenueDescription
 import com.tecknobit.neutron.ui.components.RevenueListItem
@@ -90,6 +98,30 @@ private fun TicketRevenueContent(
             containerColor = containerColor,
             onEdit = {
                 // TODO: NAV TO EDIT
+            },
+            overline = { ticketLabel ->
+                AnimatedVisibility(
+                    visible = ticket.isPending()
+                ) {
+                    Row (
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        RevenueLabels(
+                            labels = ticketLabel
+                        )
+                        IconButton(
+                            modifier = Modifier
+                                .size(28.dp),
+                            onClick = { viewModel.closeTicket() }
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.CheckCircle,
+                                contentDescription = null,
+                                tint = CLOSED_TICKET_LABEL_COLOR.toColor()
+                            )
+                        }
+                    }
+                }
             },
             info = {
                 TicketInfo(

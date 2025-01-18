@@ -4,8 +4,11 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material3.FilterChip
+import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.runtime.getValue
@@ -25,7 +28,13 @@ fun CategoryChip(
     onClick: (Boolean) -> Unit
 ) {
     var retrieve by remember { mutableStateOf(true) }
+    val contentColor = contentColorFor(MaterialTheme.colorScheme.primary)
     FilterChip(
+        colors = FilterChipDefaults.filterChipColors(
+            selectedContainerColor = MaterialTheme.colorScheme.primary,
+            selectedLabelColor = contentColor,
+            selectedTrailingIconColor = contentColor
+        ),
         selected = retrieve,
         label = {
             Text(

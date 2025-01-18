@@ -122,6 +122,11 @@ class ProjectScreenViewModel(
         refreshData()
     }
 
+    fun closeTicket() {
+        // TODO: MAKE THE REQUEST THEN
+        refreshData()
+    }
+
     fun deleteTicket(
         revenue: TicketRevenue
     ) {
