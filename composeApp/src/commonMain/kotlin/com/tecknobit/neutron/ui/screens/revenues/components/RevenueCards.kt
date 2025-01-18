@@ -247,7 +247,8 @@ private fun RevenueItem(
             DeleteRevenue(
                 show = delete,
                 viewModel = viewModel,
-                revenue = revenue
+                revenue = revenue,
+                onDelete = { viewModel.refreshData() }
             )
         }
     )

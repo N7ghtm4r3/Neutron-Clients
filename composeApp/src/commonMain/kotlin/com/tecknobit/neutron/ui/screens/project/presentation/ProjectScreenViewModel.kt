@@ -1,7 +1,7 @@
 package com.tecknobit.neutron.ui.screens.project.presentation
 
 import com.tecknobit.equinoxcore.pagination.PaginatedResponse
-import com.tecknobit.neutron.helpers.PeriodFiltererViewModel
+import com.tecknobit.neutron.ui.screens.shared.presentations.RevenueRelatedScreenViewModel
 import com.tecknobit.neutron.ui.screens.revenues.data.ProjectRevenue
 import com.tecknobit.neutron.ui.screens.revenues.data.Revenue
 import com.tecknobit.neutron.ui.screens.revenues.data.TicketRevenue
@@ -13,7 +13,7 @@ import kotlin.random.Random
 
 class ProjectScreenViewModel(
     projectId: String
-) : PeriodFiltererViewModel() {
+) : RevenueRelatedScreenViewModel() {
 
     private val _project = MutableStateFlow<ProjectRevenue?>(
         value = null
@@ -33,7 +33,7 @@ class ProjectScreenViewModel(
         // TODO: MAKE THE REQUEST THEN
         _project.value = ProjectRevenue(
             id = "prova",
-            title = "Prova",
+            title = "Provaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
             value = 0.0,
             revenueDate = Clock.System.now().toEpochMilliseconds(),
             initialRevenue = Revenue.RevenueImpl(

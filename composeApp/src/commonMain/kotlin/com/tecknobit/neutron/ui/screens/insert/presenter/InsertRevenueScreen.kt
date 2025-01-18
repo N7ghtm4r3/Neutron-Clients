@@ -65,7 +65,7 @@ import com.tecknobit.neutron.ui.components.Stepper
 import com.tecknobit.neutron.ui.components.screenkeyboard.ScreenKeyboard
 import com.tecknobit.neutron.ui.components.screenkeyboard.ScreenKeyboardState.Companion.ZERO
 import com.tecknobit.neutron.ui.components.screenkeyboard.rememberKeyboardState
-import com.tecknobit.neutron.ui.screens.NeutronScreen
+import com.tecknobit.neutron.ui.screens.shared.presenters.NeutronScreen
 import com.tecknobit.neutron.ui.screens.insert.components.LabelsPicker
 import com.tecknobit.neutron.ui.screens.insert.presentation.InsertRevenueScreenViewModel
 import com.tecknobit.neutron.ui.screens.revenues.components.RevenueLabels

@@ -4,8 +4,8 @@ import androidx.compose.runtime.mutableStateListOf
 import com.tecknobit.equinoxcompose.utilities.generateRandomColor
 import com.tecknobit.equinoxcompose.utilities.toHex
 import com.tecknobit.equinoxcore.pagination.PaginatedResponse
-import com.tecknobit.neutron.helpers.PeriodFiltererViewModel
-import com.tecknobit.neutron.helpers.RevenueLabelsRetriever
+import com.tecknobit.neutron.ui.screens.shared.presentations.RevenueLabelsRetriever
+import com.tecknobit.neutron.ui.screens.shared.presentations.RevenueRelatedScreenViewModel
 import com.tecknobit.neutron.ui.screens.revenues.data.GeneralRevenue.GeneralRevenueImpl
 import com.tecknobit.neutron.ui.screens.revenues.data.ProjectRevenue
 import com.tecknobit.neutron.ui.screens.revenues.data.Revenue
@@ -16,7 +16,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlin.random.Random
 
-class RevenuesScreenViewModel : PeriodFiltererViewModel() , RevenueLabelsRetriever {
+class RevenuesScreenViewModel : RevenueRelatedScreenViewModel() , RevenueLabelsRetriever {
 
     private val _walletStatus = MutableStateFlow<WalletStatus?>(
         value = null
@@ -122,13 +122,6 @@ class RevenuesScreenViewModel : PeriodFiltererViewModel() , RevenueLabelsRetriev
             nextPageKey = 1, // TODO: USE THE ONE FROM THE PaginationResponse
             isLastPage = Random.nextBoolean() // TODO: USE THE ONE FROM THE PaginationResponse
         )
-    }
-
-    fun deleteRevenue(
-        revenue: Revenue
-    ) {
-        // TODO: MAKE THE REQUEST THEN
-        refreshData()
     }
 
     override fun refreshData() {

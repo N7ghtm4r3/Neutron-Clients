@@ -1,4 +1,4 @@
-package com.tecknobit.neutron.ui.screens
+package com.tecknobit.neutron.ui.screens.shared.presenters
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

@@ -38,7 +38,6 @@ fun TicketInfo(
             visible = !ticket.isPending()
         ) {
             Column {
-                println(ticket.closingDate)
                 Text(
                     text = stringResource(
                         resource = Res.string.closing_date,
@@ -77,7 +76,7 @@ fun RevenueInfo(
         Text(
             text = customTitle ?: revenue.title,
             fontFamily = displayFontFamily,
-            fontSize = 20.sp,
+            fontSize = 18.sp,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis
         )

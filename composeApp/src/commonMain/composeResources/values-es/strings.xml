@@ -7,7 +7,6 @@
     <string name="dismiss">Desestimar</string>
     <string name="add_project">Agregar proyecto</string>
     <string name="add_label">Añadir etiqueta</string>
-    <string name="add_ticket">Añadir billete</string>
     <string name="opening_time">Hora de apertura</string>
     <string name="closing_time">Hora de cierre</string>
     <string name="storage_data">Datos de almacenamiento</string>
@@ -126,4 +125,5 @@
         <item formatted="false" quantity="one">Duración: %1$d día</item>
         <item formatted="false" quantity="other">Duración: %1$d días</item>
     </plurals>
+    <string name="add_ticket">Añadir billete</string>
 </resources>

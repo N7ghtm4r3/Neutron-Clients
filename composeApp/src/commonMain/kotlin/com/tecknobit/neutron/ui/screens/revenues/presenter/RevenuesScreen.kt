@@ -17,12 +17,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.StickyNote2
 import androidx.compose.material3.Card
-import androidx.compose.material3.ExtendedFloatingActionButton
-import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
@@ -61,6 +56,7 @@ import com.tecknobit.neutron.ui.icons.ReceiptLong
 import com.tecknobit.neutron.ui.screens.revenues.components.FiltersBar
 import com.tecknobit.neutron.ui.screens.revenues.components.RevenueCard
 import com.tecknobit.neutron.ui.screens.revenues.presentation.RevenuesScreenViewModel
+import com.tecknobit.neutron.ui.screens.shared.presenters.RevenuesContainerScreen
 import com.tecknobit.neutron.ui.theme.NeutronTheme
 import com.tecknobit.neutroncore.dtos.WalletStatus
 import com.tecknobit.neutroncore.enums.RevenuePeriod
@@ -75,11 +71,12 @@ import neutron.composeapp.generated.resources.last_three_months
 import neutron.composeapp.generated.resources.last_week_period
 import neutron.composeapp.generated.resources.last_year
 import neutron.composeapp.generated.resources.no_revenues_yet
+import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 
 class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
     viewModel = RevenuesScreenViewModel()
-) {
+), RevenuesContainerScreen {
 
     private companion object {
 
@@ -117,47 +114,11 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
         }
     }
 
-    @Composable
-    @NonRestartableComposable
-    private fun FabButton() {
-        ResponsiveContent(
-            onExpandedSizeClass = {
-                ExtendedFloatingActionButton(
-                    onClick = { navToCreate() }
-                ) {
-                    Row (
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(5.dp)
-                    ) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.StickyNote2,
-                            contentDescription = null
-                        )
-                        Text(
-                            text = stringResource(Res.string.add_revenue)
-                        )
-                    }
-                }
-            },
-            onMediumSizeClass = { CompactFabButton() },
-            onCompactSizeClass = { CompactFabButton() }
-        )
+    override fun extendedFabText(): StringResource {
+        return Res.string.add_revenue
     }
 
-    @Composable
-    @NonRestartableComposable
-    private fun CompactFabButton() {
-        FloatingActionButton(
-            onClick = { navToCreate() }
-        ) {
-            Icon(
-                imageVector = Icons.AutoMirrored.Filled.StickyNote2,
-                contentDescription = null
-            )
-        }
-    }
-
-    private fun navToCreate() {
+    override fun navToInsert() {
         navigator.navigate(INSERT_REVENUE_SCREEN)
     }
 
@@ -176,7 +137,7 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
 
     @Composable
     @NonRestartableComposable
-    private fun Header() {
+    override fun Header() {
         Card (
             modifier = Modifier
                 .widthIn(

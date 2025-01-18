@@ -7,7 +7,6 @@
     <string name="dismiss">Dismiss</string>
     <string name="add_project">Add project</string>
     <string name="add_label">Add label</string>
-    <string name="add_ticket">Add ticket</string>
     <string name="opening_time">Opening time</string>
     <string name="closing_time">Closing time</string>
     <string name="storage_data">Storage data</string>
@@ -126,4 +125,5 @@
         <item formatted="false" quantity="one">Duration: %1$d day</item>
         <item formatted="false" quantity="other">Duration: %1$d days</item>
     </plurals>
+    <string name="add_ticket">Add ticket</string>
 </resources>

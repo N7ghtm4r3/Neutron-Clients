@@ -81,7 +81,7 @@ import com.tecknobit.neutron.ui.icons.CurrencyDollar
 import com.tecknobit.neutron.ui.components.DeleteAccount
 import com.tecknobit.neutron.ui.components.Logout
 import com.tecknobit.neutron.ui.components.ProfilePic
-import com.tecknobit.neutron.ui.screens.NeutronScreen
+import com.tecknobit.neutron.ui.screens.shared.presenters.NeutronScreen
 import com.tecknobit.neutron.ui.screens.profile.presentation.ProfileScreenViewModel
 import com.tecknobit.neutroncore.enums.NeutronCurrency
 import io.github.vinceglb.filekit.compose.rememberFilePickerLauncher

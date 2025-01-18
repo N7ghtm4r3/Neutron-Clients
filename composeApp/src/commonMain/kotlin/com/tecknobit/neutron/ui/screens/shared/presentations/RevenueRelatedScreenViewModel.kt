@@ -1,15 +1,16 @@
-package com.tecknobit.neutron.helpers
+package com.tecknobit.neutron.ui.screens.shared.presentations
 
 import androidx.compose.material3.SnackbarHostState
 import com.tecknobit.equinoxcompose.viewmodels.EquinoxViewModel
 import com.tecknobit.equinoxcore.annotations.Structure
+import com.tecknobit.neutron.ui.screens.revenues.data.Revenue
 import com.tecknobit.neutroncore.enums.RevenuePeriod
 import com.tecknobit.neutroncore.enums.RevenuePeriod.LAST_MONTH
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
 @Structure
-abstract class PeriodFiltererViewModel : EquinoxViewModel(
+abstract class RevenueRelatedScreenViewModel : EquinoxViewModel(
     snackbarHostState = SnackbarHostState()
 ) {
 
@@ -25,6 +26,14 @@ abstract class PeriodFiltererViewModel : EquinoxViewModel(
         _revenuePeriod.value = revenuePeriod
         afterSet()
         refreshData()
+    }
+
+    fun deleteRevenue(
+        revenue: Revenue,
+        onDelete: () -> Unit
+    ) {
+        // TODO: MAKE THE REQUEST THEN
+        onDelete.invoke()
     }
 
     abstract fun refreshData()

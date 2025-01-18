@@ -14,12 +14,12 @@ import androidx.compose.ui.unit.sp
 import com.tecknobit.equinoxcompose.components.EquinoxAlertDialog
 import com.tecknobit.neutron.SPLASHSCREEN
 import com.tecknobit.neutron.displayFontFamily
+import com.tecknobit.neutron.ui.screens.shared.presentations.RevenueRelatedScreenViewModel
 import com.tecknobit.neutron.navigator
 import com.tecknobit.neutron.ui.screens.profile.presentation.ProfileScreenViewModel
 import com.tecknobit.neutron.ui.screens.project.presentation.ProjectScreenViewModel
 import com.tecknobit.neutron.ui.screens.revenues.data.Revenue
 import com.tecknobit.neutron.ui.screens.revenues.data.TicketRevenue
-import com.tecknobit.neutron.ui.screens.revenues.presentation.RevenuesScreenViewModel
 import neutron.composeapp.generated.resources.Res
 import neutron.composeapp.generated.resources.delete_account
 import neutron.composeapp.generated.resources.delete_revenue
@@ -42,8 +42,9 @@ val titleStyle = TextStyle(
 @NonRestartableComposable
 fun DeleteRevenue(
     show: MutableState<Boolean>,
-    viewModel: RevenuesScreenViewModel,
-    revenue: Revenue
+    viewModel: RevenueRelatedScreenViewModel,
+    revenue: Revenue,
+    onDelete: () -> Unit
 ) {
     EquinoxAlertDialog(
         modifier = Modifier
@@ -56,8 +57,10 @@ fun DeleteRevenue(
         titleStyle = titleStyle,
         text = Res.string.delete_revenue_text,
         confirmAction = {
+            show.value = false
             viewModel.deleteRevenue(
-                revenue = revenue
+                revenue = revenue,
+                onDelete = onDelete
             )
         }
     )

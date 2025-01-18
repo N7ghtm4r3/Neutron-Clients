@@ -15,7 +15,7 @@ import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import com.tecknobit.neutron.bodyFontFamily
-import com.tecknobit.neutron.helpers.PeriodFiltererViewModel
+import com.tecknobit.neutron.ui.screens.shared.presentations.RevenueRelatedScreenViewModel
 import com.tecknobit.neutroncore.enums.RevenuePeriod
 import com.tecknobit.neutroncore.enums.RevenuePeriod.ALL
 import com.tecknobit.neutroncore.enums.RevenuePeriod.LAST_MONTH
@@ -36,7 +36,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 @NonRestartableComposable
 fun PeriodFilterChip(
-    viewModel: PeriodFiltererViewModel
+    viewModel: RevenueRelatedScreenViewModel
 ) {
     Column {
         val filter = remember { mutableStateOf(false) }
@@ -69,7 +69,7 @@ fun PeriodFilterChip(
 @Composable
 @NonRestartableComposable
 private fun PeriodsMenu(
-    viewModel: PeriodFiltererViewModel,
+    viewModel: RevenueRelatedScreenViewModel,
     expanded: MutableState<Boolean>
 ) {
     DropdownMenu(
