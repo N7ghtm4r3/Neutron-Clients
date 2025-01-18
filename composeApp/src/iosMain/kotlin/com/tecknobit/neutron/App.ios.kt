@@ -1,12 +1,17 @@
+@file:OptIn(ExperimentalForeignApi::class)
+
 package com.tecknobit.neutron
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.NonRestartableComposable
 import com.tecknobit.equinoxcore.helpers.InputsValidator.Companion.DEFAULT_LANGUAGE
-import kotlinx.coroutines.delay
+import kotlinx.cinterop.ExperimentalForeignApi
 import platform.Foundation.NSLocale
 import platform.Foundation.NSUserDefaults
+import platform.LocalAuthentication.LAContext
+import platform.LocalAuthentication.LAPolicyDeviceOwnerAuthenticationWithBiometrics
+
+private val context = LAContext()
 
 /**
  * Method to check whether are available any updates for each platform and then launch the application
@@ -16,10 +21,19 @@ import platform.Foundation.NSUserDefaults
 @Composable
 @NonRestartableComposable
 actual fun CheckForUpdatesAndLaunch() {
-    LaunchedEffect(Unit) {
-        delay(1000)
+    authenticateWithBiometrics()
+}
+
+private fun authenticateWithBiometrics() {
+    if (context.canEvaluatePolicy(LAPolicyDeviceOwnerAuthenticationWithBiometrics, null)) {
+        context.evaluatePolicy(LAPolicyDeviceOwnerAuthenticationWithBiometrics, "") { success, _ ->
+            if(success)
+                startSession()
+            else
+                authenticateWithBiometrics()
+        }
+    } else
         startSession()
-    }
 }
 
 /**
