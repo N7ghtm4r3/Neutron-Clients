@@ -19,6 +19,15 @@ abstract class RevenueRelatedScreenViewModel : EquinoxViewModel(
     )
     val revenuePeriod: StateFlow<RevenuePeriod> = _revenuePeriod
 
+    protected val _hideBalances = MutableStateFlow(
+        value = false
+    )
+    val hideBalances: StateFlow<Boolean> = _hideBalances
+
+    fun manageBalancesVisibility() {
+        _hideBalances.value = !_hideBalances.value
+    }
+
     fun applyRevenuePeriodFilter(
         revenuePeriod: RevenuePeriod,
         afterSet: () -> Unit

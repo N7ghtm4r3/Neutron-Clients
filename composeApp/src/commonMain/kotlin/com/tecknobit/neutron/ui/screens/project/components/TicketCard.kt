@@ -96,6 +96,7 @@ private fun TicketRevenueContent(
     Column {
         var expanded by remember { mutableStateOf(false) }
         RevenueListItem(
+            viewModel = viewModel,
             revenue = ticket,
             labels = ticket.getTicketStatusLabel(),
             containerColor = containerColor,
@@ -127,6 +128,7 @@ private fun TicketRevenueContent(
             },
             info = {
                 TicketInfo(
+                    viewModel = viewModel,
                     ticket = ticket
                 )
             },

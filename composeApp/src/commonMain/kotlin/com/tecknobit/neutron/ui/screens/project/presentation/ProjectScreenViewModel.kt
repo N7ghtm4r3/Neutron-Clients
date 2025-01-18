@@ -1,10 +1,10 @@
 package com.tecknobit.neutron.ui.screens.project.presentation
 
 import com.tecknobit.equinoxcore.pagination.PaginatedResponse
-import com.tecknobit.neutron.ui.screens.shared.presentations.RevenueRelatedScreenViewModel
 import com.tecknobit.neutron.ui.screens.revenues.data.ProjectRevenue
 import com.tecknobit.neutron.ui.screens.revenues.data.Revenue
 import com.tecknobit.neutron.ui.screens.revenues.data.TicketRevenue
+import com.tecknobit.neutron.ui.screens.shared.presentations.RevenueRelatedScreenViewModel
 import io.github.ahmad_hamwi.compose.pagination.PaginationState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -48,7 +48,7 @@ class ProjectScreenViewModel(
     fun getWalletBalance() {
         // TODO: MAKE THE REQUEST THEN
         // TODO: APPLY THE FILTERS
-        _balance.value = Random.nextDouble()
+        _balance.value = 100000.0
     }
 
     val ticketsState = PaginationState<Int, TicketRevenue>(

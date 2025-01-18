@@ -12,6 +12,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.NonRestartableComposable
+import androidx.compose.runtime.State
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.dp
 import com.tecknobit.equinoxcompose.utilities.ResponsiveContent
@@ -19,6 +20,14 @@ import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 
 interface RevenuesContainerScreen {
+
+    companion object {
+
+        const val HIDE_BALANCE = "****"
+
+    }
+
+    var hideBalances: State<Boolean>
 
     @Composable
     @NonRestartableComposable

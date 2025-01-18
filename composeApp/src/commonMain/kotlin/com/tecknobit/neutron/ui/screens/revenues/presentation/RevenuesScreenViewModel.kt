@@ -4,12 +4,12 @@ import androidx.compose.runtime.mutableStateListOf
 import com.tecknobit.equinoxcompose.utilities.generateRandomColor
 import com.tecknobit.equinoxcompose.utilities.toHex
 import com.tecknobit.equinoxcore.pagination.PaginatedResponse
-import com.tecknobit.neutron.ui.screens.shared.presentations.RevenueLabelsRetriever
-import com.tecknobit.neutron.ui.screens.shared.presentations.RevenueRelatedScreenViewModel
 import com.tecknobit.neutron.ui.screens.revenues.data.GeneralRevenue.GeneralRevenueImpl
 import com.tecknobit.neutron.ui.screens.revenues.data.ProjectRevenue
 import com.tecknobit.neutron.ui.screens.revenues.data.Revenue
 import com.tecknobit.neutron.ui.screens.revenues.data.RevenueLabel
+import com.tecknobit.neutron.ui.screens.shared.presentations.RevenueLabelsRetriever
+import com.tecknobit.neutron.ui.screens.shared.presentations.RevenueRelatedScreenViewModel
 import com.tecknobit.neutroncore.dtos.WalletStatus
 import io.github.ahmad_hamwi.compose.pagination.PaginationState
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -33,7 +33,7 @@ class RevenuesScreenViewModel : RevenueRelatedScreenViewModel() , RevenueLabelsR
         // TODO: MAKE THE REQUEST THEN
         // APPLY THE FILTERS
         _walletStatus.value = WalletStatus(
-            totalEarnings = 566.0,
+            totalEarnings = 1000.0,
             trend = if(Random.nextBoolean())
                 -10.12
             else

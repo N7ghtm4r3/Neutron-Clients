@@ -17,7 +17,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Card
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
@@ -57,6 +62,7 @@ import com.tecknobit.neutron.ui.screens.revenues.components.FiltersBar
 import com.tecknobit.neutron.ui.screens.revenues.components.RevenueCard
 import com.tecknobit.neutron.ui.screens.revenues.presentation.RevenuesScreenViewModel
 import com.tecknobit.neutron.ui.screens.shared.presenters.RevenuesContainerScreen
+import com.tecknobit.neutron.ui.screens.shared.presenters.RevenuesContainerScreen.Companion.HIDE_BALANCE
 import com.tecknobit.neutron.ui.theme.NeutronTheme
 import com.tecknobit.neutroncore.dtos.WalletStatus
 import com.tecknobit.neutroncore.enums.RevenuePeriod
@@ -87,6 +93,8 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
     private lateinit var walletStatus: State<WalletStatus?>
 
     private lateinit var revenuePeriod: State<RevenuePeriod>
+
+    override lateinit var hideBalances: State<Boolean>
 
     /**
      * Method to arrange the content of the screen to display
@@ -172,20 +180,42 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
     private fun RowScope.WalletStatus() {
         Column(
             modifier = Modifier
-                .weight(1f)
+                .weight(2f)
         ) {
             Text(
                 text = stringResource(Res.string.earnings)
             )
-            Text(
-                text = "${walletStatus.value!!.totalEarnings}" + localUser.currency.symbol,
-                fontFamily = displayFontFamily,
-                fontSize = 30.sp,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis
-            )
+            Row (
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = formatWalletBalance(),
+                    fontFamily = displayFontFamily,
+                    fontSize = 30.sp,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
+                )
+                IconButton(
+                    onClick = { viewModel!!.manageBalancesVisibility() }
+                ) {
+                    Icon(
+                        imageVector = if(hideBalances.value)
+                            Icons.Default.Visibility
+                        else
+                            Icons.Default.VisibilityOff,
+                        contentDescription = null
+                    )
+                }
+            }
             WalletTrend()
         }
+    }
+
+    private fun formatWalletBalance(): String{
+        return if(hideBalances.value)
+            "****"
+        else
+            "${walletStatus.value!!.totalEarnings}" + localUser.currency.symbol
     }
 
     @Composable
@@ -208,30 +238,44 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
                 RevenuePeriod.LAST_YEAR -> Res.string.last_year
                 else -> return@AnimatedVisibility
             }
-            Row (
-                verticalAlignment = Alignment.Bottom,
-                horizontalArrangement = Arrangement.spacedBy(5.dp)
+            AnimatedVisibility(
+                visible = hideBalances.value
             ) {
-                val color = if(isPositiveTrend)
-                    MaterialTheme.colorScheme.primary
-                else
-                    MaterialTheme.colorScheme.error
                 Text(
-                    text = "$symbol${trend}%",
-                    fontFamily = displayFontFamily,
+                    text = HIDE_BALANCE,
                     fontSize = 18.sp,
-                    color = color,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
-                Text(
-                    text = stringResource(periodText),
-                    fontFamily = displayFontFamily,
-                    fontSize = 14.sp,
-                    color = color,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
-                )
+            }
+            AnimatedVisibility(
+                visible = !hideBalances.value
+            ) {
+                Row (
+                    verticalAlignment = Alignment.Bottom,
+                    horizontalArrangement = Arrangement.spacedBy(5.dp)
+                ) {
+                    val color = if(isPositiveTrend)
+                        MaterialTheme.colorScheme.primary
+                    else
+                        MaterialTheme.colorScheme.error
+                    Text(
+                        text = "$symbol${trend}%",
+                        fontFamily = displayFontFamily,
+                        color = color,
+                        fontSize = 18.sp,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                    Text(
+                        text = stringResource(periodText),
+                        fontFamily = displayFontFamily,
+                        fontSize = 14.sp,
+                        color = color,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                }
             }
         }
     }
@@ -310,6 +354,7 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
     override fun CollectStates() {
         walletStatus = viewModel!!.walletStatus.collectAsState()
         revenuePeriod = viewModel!!.revenuePeriod.collectAsState()
+        hideBalances = viewModel!!.hideBalances.collectAsState()
     }
 
 }

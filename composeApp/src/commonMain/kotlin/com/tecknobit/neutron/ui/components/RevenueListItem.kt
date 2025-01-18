@@ -21,10 +21,12 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import com.tecknobit.neutron.ui.screens.revenues.components.RevenueLabels
 import com.tecknobit.neutron.ui.screens.revenues.data.Revenue
 import com.tecknobit.neutron.ui.screens.revenues.data.RevenueLabel
+import com.tecknobit.neutron.ui.screens.shared.presentations.RevenueRelatedScreenViewModel
 
 @Composable
 @NonRestartableComposable
 fun RevenueListItem(
+    viewModel: RevenueRelatedScreenViewModel,
     revenue: Revenue,
     labels: List<RevenueLabel>,
     containerColor: Color,
@@ -35,6 +37,7 @@ fun RevenueListItem(
     },
     info: @Composable () -> Unit = {
         RevenueInfo(
+            viewModel = viewModel,
             revenue = revenue
         )
     },

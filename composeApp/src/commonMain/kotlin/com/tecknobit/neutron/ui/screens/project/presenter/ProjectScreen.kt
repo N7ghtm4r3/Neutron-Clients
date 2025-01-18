@@ -1,7 +1,6 @@
-@file:OptIn(ExperimentalMultiplatform::class)
-
 package com.tecknobit.neutron.ui.screens.project.presenter
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -13,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -20,6 +20,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -55,11 +57,12 @@ import com.tecknobit.neutron.ui.components.FirstPageProgressIndicator
 import com.tecknobit.neutron.ui.components.NewPageProgressIndicator
 import com.tecknobit.neutron.ui.icons.ReceiptLong
 import com.tecknobit.neutron.ui.screens.project.components.InitialRevenueItem
+import com.tecknobit.neutron.ui.screens.project.components.TicketCard
 import com.tecknobit.neutron.ui.screens.project.components.TicketsFilterBar
 import com.tecknobit.neutron.ui.screens.project.presentation.ProjectScreenViewModel
-import com.tecknobit.neutron.ui.screens.project.components.TicketCard
 import com.tecknobit.neutron.ui.screens.revenues.data.ProjectRevenue
 import com.tecknobit.neutron.ui.screens.shared.presenters.RevenuesContainerScreen
+import com.tecknobit.neutron.ui.screens.shared.presenters.RevenuesContainerScreen.Companion.HIDE_BALANCE
 import com.tecknobit.neutron.ui.theme.NeutronTheme
 import io.github.ahmad_hamwi.compose.pagination.PaginatedLazyColumn
 import neutron.composeapp.generated.resources.Res
@@ -80,6 +83,8 @@ class ProjectScreen(
     private lateinit var project: State<ProjectRevenue?>
 
     private lateinit var balance: State<Double>
+
+    override lateinit var hideBalances: State<Boolean>
 
     /**
      * Method to arrange the content of the screen to display
@@ -139,47 +144,30 @@ class ProjectScreen(
                 bottomEnd = 15.dp
             )
         ) {
-            Row (
+            Column(
                 modifier = Modifier
                     .weight(1f)
                     .fillMaxWidth()
                     .padding(
                         all = 10.dp
-                    ),
-                verticalAlignment = Alignment.CenterVertically
+                    )
             ) {
-                Column(
-                    modifier = Modifier
-                        .weight(1f)
+                Row (
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Row (
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        NavButton()
-                        Text(
-                            modifier = Modifier
-                                .weight(1f),
-                            text = project.value!!.title,
-                            fontSize = 30.sp,
-                            fontFamily = displayFontFamily,
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis
-                        )
-                        Toolbar()
-                    }
+                    NavButton()
                     Text(
                         modifier = Modifier
-                            .padding(
-                                start = 16.dp
-                            ),
-                        text = stringResource(
-                            resource = Res.string.total_revenues,
-                            balance.value, localUser.currency.symbol
-                        ),
+                            .weight(1f),
+                        text = project.value!!.title,
+                        fontSize = 30.sp,
+                        fontFamily = displayFontFamily,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
+                    Toolbar()
                 }
+                TotalRevenues()
             }
             TicketsFilterBar(
                 viewModel = viewModel!!
@@ -237,6 +225,52 @@ class ProjectScreen(
 
     @Composable
     @NonRestartableComposable
+    private fun TotalRevenues() {
+        Row (
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(5.dp)
+        ) {
+            AnimatedVisibility(
+                visible = hideBalances.value
+            ) {
+                Text(
+                    text = HIDE_BALANCE
+                )
+            }
+            AnimatedVisibility(
+                visible = !hideBalances.value
+            ) {
+                Text(
+                    modifier = Modifier
+                        .padding(
+                            start = 16.dp
+                        ),
+                    text = stringResource(
+                        resource = Res.string.total_revenues,
+                        balance.value, localUser.currency.symbol
+                    ),
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
+                )
+            }
+            IconButton(
+                modifier = Modifier
+                    .size(32.dp),
+                onClick = { viewModel!!.manageBalancesVisibility() }
+            ) {
+                Icon(
+                    imageVector = if(hideBalances.value)
+                        Icons.Default.Visibility
+                    else
+                        Icons.Default.VisibilityOff,
+                    contentDescription = null
+                )
+            }
+        }
+    }
+
+    @Composable
+    @NonRestartableComposable
     private fun Tickets() {
         PaginatedLazyColumn(
             modifier = Modifier
@@ -264,6 +298,7 @@ class ProjectScreen(
         ) {
             item {
                 InitialRevenueItem(
+                    viewModel = viewModel!!,
                     initialRevenue = project.value!!.initialRevenue
                 )
             }
@@ -293,6 +328,7 @@ class ProjectScreen(
     override fun CollectStates() {
         project = viewModel!!.project.collectAsState()
         balance = viewModel!!.balance.collectAsState()
+        hideBalances = viewModel!!.hideBalances.collectAsState()
     }
 
 }

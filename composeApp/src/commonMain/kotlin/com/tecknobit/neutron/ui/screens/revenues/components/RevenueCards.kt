@@ -235,6 +235,7 @@ private fun RevenueItem(
     actionButton: @Composable () -> Unit
 ) {
     RevenueListItem(
+        viewModel = viewModel,
         revenue = revenue,
         labels = labels,
         containerColor = containerColor,
