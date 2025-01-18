@@ -1,34 +1,23 @@
 @file:OptIn(ExperimentalMultiplatform::class)
 
-package com.tecknobit.neutron.ui.screens.insert.presenter
+package com.tecknobit.neutron.ui.screens.insert.shared.presenter
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.Label
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Description
 import androidx.compose.material.icons.filled.EditCalendar
-import androidx.compose.material.icons.filled.Remove
-import androidx.compose.material.icons.filled.Savings
 import androidx.compose.material.icons.filled.Title
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.RadioButton
-import androidx.compose.material3.SmallFloatingActionButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextFieldDefaults
@@ -53,10 +42,10 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.tecknobit.equinoxcompose.components.EquinoxTextField
-import com.tecknobit.equinoxcompose.components.getContrastColor
 import com.tecknobit.equinoxcompose.session.ManagedContent
 import com.tecknobit.equinoxcompose.utilities.ResponsiveContent
-import com.tecknobit.equinoxcompose.utilities.toColor
+import com.tecknobit.equinoxcore.annotations.RequiresSuperCall
+import com.tecknobit.equinoxcore.annotations.Structure
 import com.tecknobit.neutron.bodyFontFamily
 import com.tecknobit.neutron.displayFontFamily
 import com.tecknobit.neutron.localUser
@@ -65,12 +54,10 @@ import com.tecknobit.neutron.ui.components.Stepper
 import com.tecknobit.neutron.ui.components.screenkeyboard.ScreenKeyboard
 import com.tecknobit.neutron.ui.components.screenkeyboard.ScreenKeyboardState.Companion.ZERO
 import com.tecknobit.neutron.ui.components.screenkeyboard.rememberKeyboardState
-import com.tecknobit.neutron.ui.screens.shared.presenters.NeutronScreen
-import com.tecknobit.neutron.ui.screens.insert.components.LabelsPicker
-import com.tecknobit.neutron.ui.screens.insert.presentation.InsertRevenueScreenViewModel
-import com.tecknobit.neutron.ui.screens.revenues.components.RevenueLabels
+import com.tecknobit.neutron.ui.screens.insert.shared.presentation.InsertScreenViewModel
 import com.tecknobit.neutron.ui.screens.revenues.data.GeneralRevenue
 import com.tecknobit.neutron.ui.screens.revenues.data.Revenue
+import com.tecknobit.neutron.ui.screens.shared.presenters.NeutronScreen
 import com.tecknobit.neutroncore.helpers.NeutronInputsValidator.isRevenueDescriptionValid
 import com.tecknobit.neutroncore.helpers.NeutronInputsValidator.isRevenueTitleValid
 import dev.darkokoa.datetimewheelpicker.WheelDateTimePicker
@@ -79,40 +66,66 @@ import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 import neutron.composeapp.generated.resources.Res
-import neutron.composeapp.generated.resources.add_revenue
 import neutron.composeapp.generated.resources.description
 import neutron.composeapp.generated.resources.description_not_valid
 import neutron.composeapp.generated.resources.edit
-import neutron.composeapp.generated.resources.edit_revenue
-import neutron.composeapp.generated.resources.generals
 import neutron.composeapp.generated.resources.go_back
 import neutron.composeapp.generated.resources.insert
 import neutron.composeapp.generated.resources.insertion_date
-import neutron.composeapp.generated.resources.labels
 import neutron.composeapp.generated.resources.next
-import neutron.composeapp.generated.resources.project
-import neutron.composeapp.generated.resources.revenue_type
 import neutron.composeapp.generated.resources.title
 import neutron.composeapp.generated.resources.title_not_valid
+import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 
-class InsertRevenueScreen(
-    revenueId: String?
-) : NeutronScreen<InsertRevenueScreenViewModel>(
-    viewModel = InsertRevenueScreenViewModel(
-        revenueId = revenueId
-    ),
+@Structure
+abstract class InsertScreen<V : InsertScreenViewModel>(
+    revenueId: String?,
+    addingTitle: StringResource,
+    editingTitle: StringResource,
+    viewModel: V
+) : NeutronScreen<V>(
     title = if(revenueId != null)
-            Res.string.edit_revenue
-        else
-            Res.string.add_revenue,
+        editingTitle
+    else
+        addingTitle,
+    viewModel = viewModel
 ) {
 
-    private lateinit var displayKeyboard: MutableState<Boolean>
+    protected val titleStep by lazy {
+        Step(
+            stepIcon = Icons.Default.Title,
+            title = Res.string.title,
+            content = { RevenueTitle() },
+            isError = viewModel.titleError,
+            dismissAction = { viewModel.title.value = "" }
+        )
+    }
 
-    private lateinit var revenue: State<Revenue?>
+    protected val descriptionStep by lazy {
+        Step(
+            enabled = viewModel.addingGeneralRevenue,
+            stepIcon = Icons.Default.Description,
+            title = Res.string.description,
+            content = { RevenueDescription() },
+            isError = viewModel.descriptionError,
+            dismissAction = { viewModel.description.value = "" }
+        )
+    }
 
-    private val isEditing: Boolean = revenueId != null
+    protected val insertionDateStep by lazy {
+        Step(
+            stepIcon = Icons.Default.EditCalendar,
+            title = Res.string.insertion_date,
+            content = { InsertionDate() }
+        )
+    }
+
+    protected lateinit var displayKeyboard: MutableState<Boolean>
+
+    protected lateinit var revenue: State<Revenue?>
+
+    protected val isEditing: Boolean = revenueId != null
 
     @Composable
     override fun ScreenContent() {
@@ -197,7 +210,7 @@ class InsertRevenueScreen(
                                     containerColor = MaterialTheme.colorScheme.primary,
                                     contentColor = MaterialTheme.colorScheme.onPrimary
                                 ),
-                                onClick = { viewModel!!.insertRevenue() }
+                                onClick = { viewModel!!.insert() }
                             ) {
                                 Text(
                                     text = stringResource(
@@ -273,46 +286,7 @@ class InsertRevenueScreen(
         AnimatedVisibility(
             visible = !displayKeyboard.value
         ) {
-            val steps = remember {
-                mutableListOf(
-                    Step(
-                        initiallyExpanded = !isEditing,
-                        stepIcon = Icons.Default.Savings,
-                        title = Res.string.revenue_type,
-                        content = { RevenueType() }
-                    ),
-                    Step(
-                        stepIcon = Icons.Default.Title,
-                        title = Res.string.title,
-                        content = { RevenueTitle() },
-                        isError = viewModel!!.titleError,
-                        dismissAction = { viewModel!!.title.value = "" }
-                    ),
-                    Step(
-                        enabled = viewModel!!.addingGeneralRevenue,
-                        stepIcon = Icons.Default.Description,
-                        title = Res.string.description,
-                        content = { RevenueDescription() },
-                        isError = viewModel!!.descriptionError,
-                        dismissAction = { viewModel!!.description.value = "" }
-                    ),
-                    Step(
-                        enabled = viewModel!!.addingGeneralRevenue,
-                        stepIcon = Icons.AutoMirrored.Filled.Label,
-                        title = Res.string.labels,
-                        content = { RevenueLabelsForm() }
-                    ),
-                    Step(
-                        stepIcon = Icons.Default.EditCalendar,
-                        title = Res.string.insertion_date,
-                        content = { InsertionDate() }
-                    )
-                )
-            }
-            LaunchedEffect(Unit) {
-                if(isEditing)
-                    steps.removeAt(0)
-            }
+            val steps = getInsertionSteps()
             Stepper(
                 modifier = Modifier
                     .padding(
@@ -321,59 +295,18 @@ class InsertRevenueScreen(
                     .padding(
                         bottom = 10.dp
                     ),
-                steps = steps.toTypedArray()
+                steps = steps
             )
         }
     }
 
     @Composable
-    @NonRestartableComposable
-    // TODO: ANNOTATE AS SPECIAL STEP WITH THE RELATED EQUINOX-ANNOTATION
-    private fun RevenueType() {
-        Row (
-            modifier = Modifier
-                .padding(
-                    start = 4.dp
-                )
-                .fillMaxWidth()
-                .selectableGroup(),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Row (
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                RadioButton(
-                    selected = viewModel!!.addingGeneralRevenue.value,
-                    onClick = {
-                        if(!viewModel!!.addingGeneralRevenue.value)
-                            viewModel!!.addingGeneralRevenue.value = true
-                    }
-                )
-                Text(
-                    text = stringResource(Res.string.generals)
-                )
-            }
-            Row (
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                RadioButton(
-                    selected = !viewModel!!.addingGeneralRevenue.value,
-                    onClick = {
-                        if(viewModel!!.addingGeneralRevenue.value)
-                            viewModel!!.addingGeneralRevenue.value = false
-                    }
-                )
-                Text(
-                    text = stringResource(Res.string.project)
-                )
-            }
-        }
-    }
+    protected abstract fun getInsertionSteps() : Array<out Step>
 
     @Composable
     @NonRestartableComposable
     // TODO: ANNOTATE AS SPECIAL STEP WITH THE RELATED EQUINOX-ANNOTATION
-    private fun RevenueTitle() {
+    protected fun RevenueTitle() {
         val focusRequester = remember { FocusRequester() }
         LaunchedEffect(Unit) {
             focusRequester.requestFocus()
@@ -413,7 +346,7 @@ class InsertRevenueScreen(
     @Composable
     @NonRestartableComposable
     // TODO: ANNOTATE AS SPECIAL STEP WITH THE RELATED EQUINOX-ANNOTATION
-    private fun RevenueDescription() {
+    protected fun RevenueDescription() {
         val focusRequester = remember { FocusRequester() }
         LaunchedEffect(Unit) {
             focusRequester.requestFocus()
@@ -454,49 +387,7 @@ class InsertRevenueScreen(
     @Composable
     @NonRestartableComposable
     // TODO: ANNOTATE AS SPECIAL STEP WITH THE RELATED EQUINOX-ANNOTATION
-    private fun RevenueLabelsForm() {
-        val pickLabels = remember { mutableStateOf(false) }
-        RevenueLabels(
-            contentPadding = PaddingValues(
-                all = 16.dp
-            ),
-            labels = viewModel!!.labels,
-            stickyHeaderContent = {
-                SmallFloatingActionButton(
-                    onClick = { pickLabels.value = true }
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Add,
-                        contentDescription = null
-                    )
-                }
-            },
-            trailingIcon = { label ->
-                IconButton(
-                    modifier = Modifier
-                        .size(24.dp),
-                    onClick = { viewModel!!.labels.remove(label) }
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Remove,
-                        contentDescription = null,
-                        tint = getContrastColor(
-                            backgroundColor = label.color.toColor()
-                        )
-                    )
-                }
-            }
-        )
-        LabelsPicker(
-            show = pickLabels,
-            viewModel = viewModel!!
-        )
-    }
-
-    @Composable
-    @NonRestartableComposable
-    // TODO: ANNOTATE AS SPECIAL STEP WITH THE RELATED EQUINOX-ANNOTATION
-    private fun ColumnScope.InsertionDate() {
+    protected fun ColumnScope.InsertionDate() {
         WheelDateTimePicker(
             modifier = Modifier
                 .padding(
@@ -517,6 +408,7 @@ class InsertRevenueScreen(
      * Method to collect or instantiate the states of the screen
      */
     @Composable
+    @RequiresSuperCall
     override fun CollectStates() {
         displayKeyboard = remember { mutableStateOf(true) }
         revenue = viewModel!!.revenue.collectAsState()

@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalMultiplatform::class)
 
-package com.tecknobit.neutron.ui.screens.insert.components
+package com.tecknobit.neutron.ui.screens.insert.revenue.components
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
@@ -49,7 +49,7 @@ import com.tecknobit.neutron.ui.screens.shared.presentations.RevenueLabelsRetrie
 import com.tecknobit.neutron.helpers.mergeIfNotContained
 import com.tecknobit.neutron.ui.components.LabelsGrid
 import com.tecknobit.neutron.ui.icons.ArrowSelectorTool
-import com.tecknobit.neutron.ui.screens.insert.presentation.InsertRevenueScreenViewModel
+import com.tecknobit.neutron.ui.screens.insert.revenue.presentation.InsertRevenueScreenViewModel
 import com.tecknobit.neutron.ui.screens.revenues.data.RevenueLabel
 import neutron.composeapp.generated.resources.Res
 import neutron.composeapp.generated.resources.add

@@ -22,7 +22,6 @@ import neutron.composeapp.generated.resources.revenue
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.pluralStringResource
 import org.jetbrains.compose.resources.stringResource
-import kotlin.math.round
 
 @Composable
 @NonRestartableComposable
@@ -83,7 +82,7 @@ fun RevenueInfo(
         Text(
             text = stringResource(
                 resource = Res.string.revenue,
-                round(revenue.value), // TODO: CHANGE WITH ANY METHOD TO FORMAT DIGITS INSTEAD 
+                revenue.value,
                 localUser.currency.symbol
             ),
             maxLines = 1,

@@ -126,4 +126,5 @@
         <item formatted="false" quantity="other">Durée : %1$d jours</item>
     </plurals>
     <string name="add_ticket">Ajouter un billet</string>
+    <string name="edit_ticket">Modifier le ticket</string>
 </resources>

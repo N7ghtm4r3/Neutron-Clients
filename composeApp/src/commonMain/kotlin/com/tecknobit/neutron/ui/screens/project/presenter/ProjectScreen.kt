@@ -44,6 +44,7 @@ import com.tecknobit.equinoxcompose.resources.retry
 import com.tecknobit.equinoxcompose.session.EquinoxScreen
 import com.tecknobit.equinoxcompose.session.ManagedContent
 import com.tecknobit.neutron.INSERT_REVENUE_SCREEN
+import com.tecknobit.neutron.INSERT_TICKET_SCREEN
 import com.tecknobit.neutron.MAX_CONTAINER_WIDTH
 import com.tecknobit.neutron.bodyFontFamily
 import com.tecknobit.neutron.displayFontFamily
@@ -108,7 +109,7 @@ class ProjectScreen(
     }
 
     override fun navToInsert() {
-        // TODO: NAV TO INSERT 
+        navigator.navigate(INSERT_TICKET_SCREEN)
     }
 
     @Composable

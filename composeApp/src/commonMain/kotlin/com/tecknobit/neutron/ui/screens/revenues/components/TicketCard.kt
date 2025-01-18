@@ -27,6 +27,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.tecknobit.equinoxcompose.utilities.ResponsiveContent
 import com.tecknobit.equinoxcompose.utilities.toColor
+import com.tecknobit.neutron.INSERT_TICKET_SCREEN
+import com.tecknobit.neutron.navigator
 import com.tecknobit.neutron.ui.components.DeleteTicket
 import com.tecknobit.neutron.ui.components.RevenueDescription
 import com.tecknobit.neutron.ui.components.RevenueListItem
@@ -96,9 +98,7 @@ private fun TicketRevenueContent(
             revenue = ticket,
             labels = ticket.getTicketStatusLabel(),
             containerColor = containerColor,
-            onEdit = {
-                // TODO: NAV TO EDIT
-            },
+            onEdit = { navigator.navigate("$INSERT_TICKET_SCREEN/${ticket.id}") },
             overline = { ticketLabel ->
                 AnimatedVisibility(
                     visible = ticket.isPending()

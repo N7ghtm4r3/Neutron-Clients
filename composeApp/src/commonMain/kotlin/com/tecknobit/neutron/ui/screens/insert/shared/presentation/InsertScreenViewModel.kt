@@ -1,11 +1,10 @@
-package com.tecknobit.neutron.ui.screens.insert.presentation
+package com.tecknobit.neutron.ui.screens.insert.shared.presentation
 
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateListOf
 import com.tecknobit.equinoxcompose.viewmodels.EquinoxViewModel
-import com.tecknobit.neutron.ui.screens.shared.presentations.RevenueLabelsRetriever
-import com.tecknobit.neutron.navigator
+import com.tecknobit.equinoxcore.annotations.RequiresSuperCall
+import com.tecknobit.equinoxcore.annotations.Structure
 import com.tecknobit.neutron.ui.components.screenkeyboard.ScreenKeyboardState
 import com.tecknobit.neutron.ui.screens.revenues.data.GeneralRevenue
 import com.tecknobit.neutron.ui.screens.revenues.data.Revenue
@@ -16,13 +15,14 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.datetime.LocalDateTime
 
-class InsertRevenueScreenViewModel(
-    private val revenueId: String? = null
+@Structure
+abstract class InsertScreenViewModel(
+    private val revenueId: String?
 ) : EquinoxViewModel(
     snackbarHostState = SnackbarHostState()
-), RevenueLabelsRetriever {
+) {
 
-    private val _revenue = MutableStateFlow<Revenue?>(
+    protected val _revenue = MutableStateFlow<Revenue?>(
         value = null
     )
     val revenue : StateFlow<Revenue?> = _revenue
@@ -39,11 +39,10 @@ class InsertRevenueScreenViewModel(
 
     lateinit var descriptionError: MutableState<Boolean>
 
-    val labels = mutableStateListOf<RevenueLabel>()
-
     lateinit var insertionDate: MutableState<LocalDateTime>
 
-    fun retrieveRevenue() {
+    @RequiresSuperCall
+    open fun retrieveRevenue() {
         if(revenueId == null)
             return
         // TODO: MAKE THE REQUEST THEN
@@ -61,11 +60,9 @@ class InsertRevenueScreenViewModel(
                 )
             )
         )
-        if(_revenue.value!! is GeneralRevenue)
-            labels.addAll((_revenue.value!! as GeneralRevenue).labels)
     }
 
-    fun insertRevenue() {
+    fun insert() {
         if(!isRevenueTitleValid(title.value)) {
             titleError.value = true
             return
@@ -74,8 +71,9 @@ class InsertRevenueScreenViewModel(
             descriptionError.value = true
             return
         }
-        // TODO: MAKE THE REQUEST THEN
-        navigator.goBack()
+        insertRequest()
     }
+
+    protected abstract fun insertRequest()
 
 }

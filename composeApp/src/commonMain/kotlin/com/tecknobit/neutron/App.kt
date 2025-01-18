@@ -14,11 +14,13 @@ import com.tecknobit.neutron.helpers.NeutronRequester
 import com.tecknobit.neutron.helpers.customHttpClient
 import com.tecknobit.neutron.ui.screens.SplashScreen
 import com.tecknobit.neutron.ui.screens.auth.presenter.AuthScreen
-import com.tecknobit.neutron.ui.screens.insert.presenter.InsertRevenueScreen
+import com.tecknobit.neutron.ui.screens.insert.revenue.presenter.InsertRevenueScreen
+import com.tecknobit.neutron.ui.screens.insert.ticket.presenter.InsertTicketScreen
 import com.tecknobit.neutron.ui.screens.profile.presenter.ProfileScreen
 import com.tecknobit.neutron.ui.screens.project.presenter.ProjectScreen
 import com.tecknobit.neutron.ui.screens.revenues.presenter.RevenuesScreen
 import com.tecknobit.neutroncore.REVENUE_IDENTIFIER_KEY
+import com.tecknobit.neutroncore.TICKET_IDENTIFIER_KEY
 import moe.tlaster.precompose.PreComposeApp
 import moe.tlaster.precompose.navigation.NavHost
 import moe.tlaster.precompose.navigation.Navigator
@@ -82,9 +84,14 @@ const val REVENUES_SCREEN = "RevenuesScreen"
 const val PROFILE_SCREEN = "ProfileScreen"
 
 /**
- * `INSERT_REVENUE_SCREEN` route to navigate to the [com.tecknobit.neutron.ui.screens.insert.presenter.InsertRevenueScreen]
+ * `INSERT_REVENUE_SCREEN` route to navigate to the [com.tecknobit.neutron.ui.screens.insert.revenue.presenter.InsertRevenueScreen]
  */
 const val INSERT_REVENUE_SCREEN = "InsertRevenueScreen"
+
+/**
+ * `INSERT_TICKET_SCREEN` route to navigate to the [com.tecknobit.neutron.ui.screens.insert.ticket.presenter.InsertTicketScreen]
+ */
+const val INSERT_TICKET_SCREEN = "InsertTicketScreen"
 
 /**
  * `PROJECT_REVENUE_SCREEN` route to navigate to the [com.tecknobit.neutron.ui.screens.project.presenter.ProjectScreen]
@@ -135,11 +142,6 @@ fun App() {
             scene(
                 route = PROFILE_SCREEN
             ) {
-                // TODO: TO REMOVE THIS 
-                requester = NeutronRequester(
-                    host = ""
-                )
-                // TODO: TO REMOVE ABOVE
                 ProfileScreen().ShowContent()
             }
             scene(
@@ -156,6 +158,14 @@ fun App() {
                 val revenueId : String = backstackEntry.path(REVENUE_IDENTIFIER_KEY)!!
                 ProjectScreen(
                     projectId = revenueId
+                ).ShowContent()
+            }
+            scene(
+                route = "$INSERT_TICKET_SCREEN/{$TICKET_IDENTIFIER_KEY}?"
+            ) { backstackEntry ->
+                val ticketId : String? = backstackEntry.path(TICKET_IDENTIFIER_KEY)
+                InsertTicketScreen(
+                    ticketId = ticketId
                 ).ShowContent()
             }
         }
