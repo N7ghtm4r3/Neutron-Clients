@@ -127,4 +127,6 @@
     </plurals>
     <string name="add_ticket">Add ticket</string>
     <string name="edit_ticket">Edit ticket</string>
+    <string name="login_required">Login required</string>
+    <string name="enter_your_credentials_to_continue">Enter your credentials to continue</string>
 </resources>

@@ -1,18 +1,47 @@
 package com.tecknobit.neutron
 
-import android.app.Activity
+import androidx.activity.compose.LocalActivity
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.NonRestartableComposable
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import com.google.android.play.core.appupdate.AppUpdateOptions
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.UpdateAvailability.UPDATE_AVAILABLE
 import com.google.android.play.core.ktx.isImmediateUpdateAllowed
+import com.tecknobit.equinoxcompose.components.ErrorUI
+import com.tecknobit.equinoxcompose.utilities.context.AppContext
+import com.tecknobit.equinoxcompose.utilities.context.ContextActivityProvider
 import com.tecknobit.equinoxcore.helpers.InputsValidator.Companion.DEFAULT_LANGUAGE
 import com.tecknobit.neutron.MainActivity.Companion.appUpdateManager
 import com.tecknobit.neutron.MainActivity.Companion.launcher
+import com.tecknobit.neutron.helpers.BiometricPromptManager
+import com.tecknobit.neutron.helpers.BiometricPromptManager.BiometricResult.AuthenticationNotSet
+import com.tecknobit.neutron.helpers.BiometricPromptManager.BiometricResult.AuthenticationSuccess
+import com.tecknobit.neutron.helpers.BiometricPromptManager.BiometricResult.FeatureUnavailable
+import com.tecknobit.neutron.helpers.BiometricPromptManager.BiometricResult.HardwareUnavailable
+import com.tecknobit.neutron.ui.theme.NeutronTheme
 import moe.tlaster.precompose.navigation.BackHandler
+import neutron.composeapp.generated.resources.Res
+import neutron.composeapp.generated.resources.enter_your_credentials_to_continue
+import neutron.composeapp.generated.resources.login_required
+import org.jetbrains.compose.resources.stringResource
 import java.util.Locale
+
+/**
+ * `authWitBiometricParams` whether the biometric authentication must be effectuated because
+ * it's the first launch of the application
+ */
+private var authWitBiometricParams: Boolean = true
+
+/**
+ * `biometricPromptManager` the manager used to authenticate with the bio params
+ */
+private val biometricPromptManager by lazy {
+    BiometricPromptManager(ContextActivityProvider.getCurrentActivity() as AppCompatActivity)
+}
 
 /**
  * Method to check whether are available any updates for each platform and then launch the application
@@ -22,7 +51,39 @@ import java.util.Locale
 @Composable
 @NonRestartableComposable
 actual fun CheckForUpdatesAndLaunch() {
-    // TODO: ENABLE THE AUTHORIZATION WITH FINGERPRINT ETC... THEN
+    if(authWitBiometricParams) {
+        authWitBiometricParams = false
+        val biometricResult by biometricPromptManager.promptResults.collectAsState(
+            initial = null
+        )
+        LaunchedEffect(biometricResult) {
+            if (biometricResult is AuthenticationNotSet)
+                checkForUpdates()
+        }
+        if(biometricResult == null) {
+            biometricPromptManager.showBiometricPrompt(
+                title = stringResource(Res.string.login_required),
+                description = stringResource(Res.string.enter_your_credentials_to_continue)
+            )
+        }
+        biometricResult?.let { result ->
+            when(result) {
+                AuthenticationSuccess, AuthenticationNotSet, HardwareUnavailable,
+                FeatureUnavailable -> checkForUpdates()
+                else -> {
+                    NeutronTheme {
+                        ErrorUI(
+                            retryAction = { CheckForUpdatesAndLaunch() }
+                        )
+                    }
+                }
+            }
+        }
+    } else
+        checkForUpdates()
+}
+
+private fun checkForUpdates() {
     appUpdateManager.appUpdateInfo.addOnSuccessListener { info ->
         val isUpdateAvailable = info.updateAvailability() == UPDATE_AVAILABLE
         val isUpdateSupported = info.isImmediateUpdateAllowed
@@ -47,7 +108,7 @@ actual fun setUserLanguage() {
     val tag = localUser.language ?: DEFAULT_LANGUAGE
     val locale = Locale(tag)
     Locale.setDefault(locale)
-    val context = com.tecknobit.equinoxcompose.utilities.context.AppContext.get()
+    val context = AppContext.get()
     val config = context.resources.configuration
     config.setLocale(locale)
     context.createConfigurationContext(config)
@@ -60,7 +121,7 @@ actual fun setUserLanguage() {
 @Composable
 @NonRestartableComposable
 actual fun CloseApplicationOnNavBack() {
-    val context = LocalContext.current as Activity
+    val context = LocalActivity.current!!
     BackHandler {
         context.finishAffinity()
     }

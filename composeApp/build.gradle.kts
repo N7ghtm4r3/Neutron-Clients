@@ -73,6 +73,9 @@ kotlin {
             implementation(libs.review)
             implementation(libs.review.ktx)
             implementation(libs.ktor.client.okhttp)
+            implementation(libs.androidx.biometric)
+            implementation(libs.androidx.startup.runtime)
+            implementation(libs.androidx.appcompat)
         }
 
         val commonMain by getting {
