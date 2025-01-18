@@ -1,5 +1,6 @@
 package com.tecknobit.neutron.ui.components
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material.icons.Icons
@@ -37,6 +38,7 @@ fun RevenueListItem(
             revenue = revenue
         )
     },
+    allowEdit: Boolean = true,
     onEdit: () -> Unit,
     deleteIcon: ImageVector,
     actionButton: @Composable () -> Unit,
@@ -50,6 +52,7 @@ fun RevenueListItem(
         headlineContent = info,
         trailingContent = {
             RevenueToolbar(
+                allowEdit = allowEdit,
                 onEdit = onEdit,
                 deleteIcon = deleteIcon,
                 actionButton = actionButton,
@@ -64,6 +67,7 @@ fun RevenueListItem(
 @Composable
 @NonRestartableComposable
 private fun RevenueToolbar(
+    allowEdit: Boolean,
     onEdit: () -> Unit,
     deleteIcon: ImageVector,
     actionButton: @Composable (() -> Unit)? = null,
@@ -73,13 +77,17 @@ private fun RevenueToolbar(
         horizontalAlignment = Alignment.End
     ) {
         Row {
-            IconButton(
-                onClick = onEdit
+            AnimatedVisibility(
+                visible = allowEdit
             ) {
-                Icon(
-                    imageVector = Icons.Default.Edit,
-                    contentDescription = null
-                )
+                IconButton(
+                    onClick = onEdit
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Edit,
+                        contentDescription = null
+                    )
+                }
             }
             val delete = remember { mutableStateOf(false) }
             IconButton(

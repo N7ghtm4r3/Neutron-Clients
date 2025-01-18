@@ -57,7 +57,7 @@ import com.tecknobit.neutron.ui.icons.ReceiptLong
 import com.tecknobit.neutron.ui.screens.project.components.InitialRevenueItem
 import com.tecknobit.neutron.ui.screens.project.components.TicketsFilterBar
 import com.tecknobit.neutron.ui.screens.project.presentation.ProjectScreenViewModel
-import com.tecknobit.neutron.ui.screens.revenues.components.TicketCard
+import com.tecknobit.neutron.ui.screens.project.components.TicketCard
 import com.tecknobit.neutron.ui.screens.revenues.data.ProjectRevenue
 import com.tecknobit.neutron.ui.screens.shared.presenters.RevenuesContainerScreen
 import com.tecknobit.neutron.ui.theme.NeutronTheme

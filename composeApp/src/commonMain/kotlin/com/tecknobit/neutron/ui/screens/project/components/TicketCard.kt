@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalMultiplatform::class)
 
-package com.tecknobit.neutron.ui.screens.revenues.components
+package com.tecknobit.neutron.ui.screens.project.components
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Column
@@ -35,6 +35,7 @@ import com.tecknobit.neutron.ui.components.RevenueListItem
 import com.tecknobit.neutron.ui.components.TicketInfo
 import com.tecknobit.neutron.ui.icons.ContractDelete
 import com.tecknobit.neutron.ui.screens.project.presentation.ProjectScreenViewModel
+import com.tecknobit.neutron.ui.screens.revenues.components.RevenueLabels
 import com.tecknobit.neutron.ui.screens.revenues.data.RevenueLabel
 import com.tecknobit.neutron.ui.screens.revenues.data.TicketRevenue
 import com.tecknobit.neutroncore.CLOSED_TICKET_LABEL_COLOR
@@ -98,17 +99,18 @@ private fun TicketRevenueContent(
             revenue = ticket,
             labels = ticket.getTicketStatusLabel(),
             containerColor = containerColor,
+            allowEdit = ticket.isPending(),
             onEdit = { navigator.navigate("$INSERT_TICKET_SCREEN/${ticket.id}") },
             overline = { ticketLabel ->
-                AnimatedVisibility(
-                    visible = ticket.isPending()
+                Row (
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Row (
-                        verticalAlignment = Alignment.CenterVertically
+                    RevenueLabels(
+                        labels = ticketLabel
+                    )
+                    AnimatedVisibility(
+                        visible = ticket.isPending()
                     ) {
-                        RevenueLabels(
-                            labels = ticketLabel
-                        )
                         IconButton(
                             modifier = Modifier
                                 .size(28.dp),
