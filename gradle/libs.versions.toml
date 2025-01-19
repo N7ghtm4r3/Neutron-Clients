@@ -1,5 +1,6 @@
 [versions]
 agp = "8.5.2"
+ametistaEngine = "1.0.1"
 android-compileSdk = "35"
 android-minSdk = "30"
 android-targetSdk = "35"
@@ -28,6 +29,7 @@ review = "2.0.2"
 startupRuntime = "1.2.0"
 
 [libraries]
+ametista-engine = { module = "io.github.n7ghtm4r3:Ametista-Engine", version.ref = "ametistaEngine" }
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 androidx-biometric = { module = "androidx.biometric:biometric", version.ref = "biometric" }
 androidx-startup-runtime = { module = "androidx.startup:startup-runtime", version.ref = "startupRuntime" }

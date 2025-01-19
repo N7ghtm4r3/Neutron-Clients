@@ -103,6 +103,7 @@ kotlin {
                 implementation(libs.datetime.wheel.picker)
                 implementation(libs.kotlinx.datetime)
                 implementation(libs.colorpicker.compose)
+                implementation(libs.ametista.engine)
             }
         }
 

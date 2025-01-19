@@ -1,6 +1,9 @@
+@file:OptIn(ExperimentalResourceApi::class)
+
 package com.tecknobit.neutron
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
@@ -9,6 +12,8 @@ import coil3.compose.LocalPlatformContext
 import coil3.network.ktor3.KtorNetworkFetcherFactory
 import coil3.request.CachePolicy
 import coil3.request.addLastModifiedToFileCacheKey
+import com.tecknobit.ametistaengine.AmetistaEngine
+import com.tecknobit.ametistaengine.AmetistaEngine.Companion.FILES_AMETISTA_CONFIG_PATHNAME
 import com.tecknobit.neutron.helpers.NeutronLocalUser
 import com.tecknobit.neutron.helpers.NeutronRequester
 import com.tecknobit.neutron.helpers.customHttpClient
@@ -29,6 +34,7 @@ import moe.tlaster.precompose.navigation.rememberNavigator
 import neutron.composeapp.generated.resources.Res
 import neutron.composeapp.generated.resources.lilitaone
 import neutron.composeapp.generated.resources.roboto
+import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.Font
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -103,6 +109,14 @@ val MAX_CONTAINER_WIDTH = 1280.dp
 @Composable
 @Preview
 fun App() {
+    LaunchedEffect(Unit) {
+        val ametistaEngine = AmetistaEngine.ametistaEngine
+        ametistaEngine.fireUp(
+            configData = Res.readBytes(FILES_AMETISTA_CONFIG_PATHNAME),
+            debugMode = true //TODO: SET ON FALSE
+        )
+        ametistaEngine.connectPlatform()
+    }
     bodyFontFamily = FontFamily(Font(Res.font.roboto))
     displayFontFamily = FontFamily(Font(Res.font.lilitaone))
     imageLoader = ImageLoader.Builder(LocalPlatformContext.current)
