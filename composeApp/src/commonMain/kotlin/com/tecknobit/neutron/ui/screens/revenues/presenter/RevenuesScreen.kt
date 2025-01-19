@@ -70,7 +70,6 @@ import com.tecknobit.neutroncore.enums.RevenuePeriod.ALL
 import io.github.ahmad_hamwi.compose.pagination.PaginatedLazyColumn
 import neutron.composeapp.generated.resources.Res
 import neutron.composeapp.generated.resources.add_revenue
-import neutron.composeapp.generated.resources.earnings
 import neutron.composeapp.generated.resources.last_month_period
 import neutron.composeapp.generated.resources.last_six_months
 import neutron.composeapp.generated.resources.last_three_months
@@ -163,6 +162,9 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
                     .fillMaxWidth()
                     .padding(
                         all = 10.dp
+                    )
+                    .padding(
+                        top = 11.dp
                     ),
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -182,9 +184,6 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
             modifier = Modifier
                 .weight(2f)
         ) {
-            Text(
-                text = stringResource(Res.string.earnings)
-            )
             Row (
                 verticalAlignment = Alignment.CenterVertically
             ) {

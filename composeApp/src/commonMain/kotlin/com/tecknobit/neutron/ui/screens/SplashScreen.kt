@@ -16,10 +16,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.tecknobit.equinoxcompose.session.EquinoxScreen
 import com.tecknobit.equinoxcompose.viewmodels.EquinoxViewModel
-import com.tecknobit.neutron.CheckForUpdatesAndLaunch
 import com.tecknobit.neutron.CloseApplicationOnNavBack
+import com.tecknobit.neutron.REVENUES_SCREEN
 import com.tecknobit.neutron.bodyFontFamily
 import com.tecknobit.neutron.displayFontFamily
+import com.tecknobit.neutron.navigator
 import com.tecknobit.neutron.ui.theme.NeutronTheme
 import neutron.composeapp.generated.resources.Res
 import neutron.composeapp.generated.resources.app_name
@@ -69,7 +70,8 @@ class SplashScreen : EquinoxScreen<EquinoxViewModel>() {
                 }
             }
         }
-        CheckForUpdatesAndLaunch()
+        //CheckForUpdatesAndLaunch()
+        navigator.navigate(REVENUES_SCREEN)
     }
 
     /**

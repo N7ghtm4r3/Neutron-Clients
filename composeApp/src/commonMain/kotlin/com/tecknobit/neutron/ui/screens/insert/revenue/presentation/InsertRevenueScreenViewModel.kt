@@ -2,6 +2,7 @@ package com.tecknobit.neutron.ui.screens.insert.revenue.presentation
 
 import androidx.compose.runtime.mutableStateListOf
 import com.tecknobit.equinoxcore.annotations.RequiresSuperCall
+import com.tecknobit.neutron.helpers.KReviewer
 import com.tecknobit.neutron.navigator
 import com.tecknobit.neutron.ui.screens.insert.shared.presentation.InsertScreenViewModel
 import com.tecknobit.neutron.ui.screens.revenues.data.GeneralRevenue
@@ -25,7 +26,11 @@ class InsertRevenueScreenViewModel(
 
     override fun insertRequest() {
         // TODO: MAKE THE REQUEST THEN
-        navigator.goBack()
+        // ON SUCCESS SCOPE
+        val kReviewer = KReviewer()
+        kReviewer.reviewInApp {
+            navigator.goBack()
+        }
     }
 
 }

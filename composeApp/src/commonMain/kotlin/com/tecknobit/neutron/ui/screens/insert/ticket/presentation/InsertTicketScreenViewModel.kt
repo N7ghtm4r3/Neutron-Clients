@@ -1,5 +1,6 @@
 package com.tecknobit.neutron.ui.screens.insert.ticket.presentation
 
+import com.tecknobit.neutron.helpers.KReviewer
 import com.tecknobit.neutron.navigator
 import com.tecknobit.neutron.ui.screens.insert.shared.presentation.InsertScreenViewModel
 
@@ -11,7 +12,10 @@ class InsertTicketScreenViewModel(
 
     override fun insertRequest() {
         // TODO: MAKE THE REQUEST THEN
-        navigator.goBack()
+        val kReviewer = KReviewer()
+        kReviewer.reviewInApp {
+            navigator.goBack()
+        }
     }
 
 }

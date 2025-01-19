@@ -149,7 +149,7 @@ class ProjectScreen(
                     .weight(1f)
                     .fillMaxWidth()
                     .padding(
-                        all = 10.dp
+                        top = 21.dp
                     )
             ) {
                 Row (
