@@ -68,7 +68,6 @@ import com.tecknobit.equinoxcompose.components.ChameleonText
 import com.tecknobit.equinoxcompose.components.EquinoxOutlinedTextField
 import com.tecknobit.equinoxcompose.components.EquinoxTextField
 import com.tecknobit.equinoxcompose.session.EquinoxLocalUser.ApplicationTheme
-import com.tecknobit.equinoxcompose.session.EquinoxLocalUser.ApplicationTheme.Auto
 import com.tecknobit.equinoxcore.helpers.InputsValidator.Companion.LANGUAGES_SUPPORTED
 import com.tecknobit.equinoxcore.helpers.InputsValidator.Companion.isEmailValid
 import com.tecknobit.equinoxcore.helpers.InputsValidator.Companion.isPasswordValid
@@ -77,12 +76,12 @@ import com.tecknobit.neutron.bodyFontFamily
 import com.tecknobit.neutron.displayFontFamily
 import com.tecknobit.neutron.localUser
 import com.tecknobit.neutron.navigator
-import com.tecknobit.neutron.ui.icons.CurrencyDollar
 import com.tecknobit.neutron.ui.components.DeleteAccount
 import com.tecknobit.neutron.ui.components.Logout
 import com.tecknobit.neutron.ui.components.ProfilePic
-import com.tecknobit.neutron.ui.screens.shared.presenters.NeutronScreen
+import com.tecknobit.neutron.ui.icons.CurrencyDollar
 import com.tecknobit.neutron.ui.screens.profile.presentation.ProfileScreenViewModel
+import com.tecknobit.neutron.ui.screens.shared.presenters.NeutronScreen
 import com.tecknobit.neutroncore.enums.NeutronCurrency
 import io.github.vinceglb.filekit.compose.rememberFilePickerLauncher
 import io.github.vinceglb.filekit.core.PickerMode
@@ -275,10 +274,11 @@ class ProfileScreen : NeutronScreen<ProfileScreenViewModel>(
                     actionText = Res.string.change_email,
                     actionContent = { ChangeEmail() },
                     confirmAction = { visible ->
-                        changeEmail {
-                            viewModel!!.email.value = localUser.email!!
-                            visible.value = false
-                        }
+                        changeEmail(
+                            onSuccess = {
+                                visible.value = false
+                            }
+                        )
                     }
                 )
                 ProfileAction(
@@ -286,9 +286,11 @@ class ProfileScreen : NeutronScreen<ProfileScreenViewModel>(
                     actionText = Res.string.change_password,
                     actionContent = { ChangePassword() },
                     confirmAction = { visible ->
-                        changePassword {
-                            visible.value = false
-                        }
+                        changePassword(
+                            onSuccess = {
+                                visible.value = false
+                            }
+                        )
                     }
                 )
                 ProfileAction(
@@ -719,11 +721,12 @@ class ProfileScreen : NeutronScreen<ProfileScreenViewModel>(
      */
     @Composable
     override fun CollectStates() {
-        viewModel!!.profilePic = remember { mutableStateOf(localUser.profilePic ?: "") } // TODO: REMOVE THE ELVIS OPERATION AND USE !!
-        viewModel!!.email = remember { mutableStateOf(localUser.email ?: "") } // TODO: REMOVE THE ELVIS OPERATION AND USE !!
-        viewModel!!.language = remember { mutableStateOf(localUser.language ?: "") } // TODO: REMOVE THE ELVIS OPERATION AND USE !!
-        viewModel!!.currency = remember { mutableStateOf(localUser.currency) } // TODO: REMOVE THE ELVIS OPERATION AND USE !!
-        viewModel!!.theme = remember { mutableStateOf(localUser.theme ?: Auto) } // TODO: REMOVE THE ELVIS OPERATION AND USE !!
+        viewModel!!.profilePic = remember { mutableStateOf(localUser.profilePic!!) }
+        viewModel!!.email = remember { mutableStateOf(localUser.email!!) }
+        viewModel!!.password = remember { mutableStateOf(localUser.password!!) }
+        viewModel!!.language = remember { mutableStateOf(localUser.language!!) }
+        viewModel!!.currency = remember { mutableStateOf(localUser.currency) }
+        viewModel!!.theme = remember { mutableStateOf(localUser.theme!!) }
     }
 
 }

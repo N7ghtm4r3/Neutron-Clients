@@ -2,10 +2,13 @@ package com.tecknobit.neutron.ui.screens.profile.presentation
 
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.MutableState
+import androidx.lifecycle.viewModelScope
 import com.tecknobit.equinoxcompose.viewmodels.EquinoxProfileViewModel
+import com.tecknobit.equinoxcore.network.Requester.Companion.sendRequest
 import com.tecknobit.neutron.localUser
 import com.tecknobit.neutron.requester
 import com.tecknobit.neutroncore.enums.NeutronCurrency
+import kotlinx.coroutines.launch
 
 class ProfileScreenViewModel : EquinoxProfileViewModel(
     snackbarHostState = SnackbarHostState(),
@@ -21,21 +24,20 @@ class ProfileScreenViewModel : EquinoxProfileViewModel(
     fun changeCurrency(
         onSuccess: () -> Unit,
     ) {
-        // TODO: MAKE THE REQUEST THEN
-        /*viewModelScope.launch {
+        viewModelScope.launch {
             requester.sendRequest(
                 request = {
+                    changeCurrency(
+                        newCurrency = currency.value
+                    )
                 },
                 onSuccess = {
-                    localUser.currency = newCurrency
-                    currency.value = newCurrency
+                    localUser.currency = currency.value
                     onSuccess.invoke()
                 },
                 onFailure = { showSnackbarMessage(it) }
             )
-        }*/
-        localUser.currency = currency.value
-        onSuccess.invoke()
+        }
     }
 
 }

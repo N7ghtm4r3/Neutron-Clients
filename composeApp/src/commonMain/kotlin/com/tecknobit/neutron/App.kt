@@ -14,6 +14,8 @@ import coil3.request.CachePolicy
 import coil3.request.addLastModifiedToFileCacheKey
 import com.tecknobit.ametistaengine.AmetistaEngine
 import com.tecknobit.ametistaengine.AmetistaEngine.Companion.FILES_AMETISTA_CONFIG_PATHNAME
+import com.tecknobit.equinoxcore.network.Requester.Companion.sendRequest
+import com.tecknobit.equinoxcore.network.Requester.Companion.toResponseData
 import com.tecknobit.neutron.helpers.NeutronLocalUser
 import com.tecknobit.neutron.helpers.NeutronRequester
 import com.tecknobit.neutron.helpers.customHttpClient
@@ -26,6 +28,8 @@ import com.tecknobit.neutron.ui.screens.project.presenter.ProjectScreen
 import com.tecknobit.neutron.ui.screens.revenues.presenter.RevenuesScreen
 import com.tecknobit.neutroncore.REVENUE_IDENTIFIER_KEY
 import com.tecknobit.neutroncore.TICKET_IDENTIFIER_KEY
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
 import moe.tlaster.precompose.PreComposeApp
 import moe.tlaster.precompose.navigation.NavHost
 import moe.tlaster.precompose.navigation.Navigator
@@ -115,7 +119,6 @@ fun App() {
             configData = Res.readBytes(FILES_AMETISTA_CONFIG_PATHNAME),
             debugMode = true //TODO: SET ON FALSE
         )
-        ametistaEngine.connectPlatform()
     }
     bodyFontFamily = FontFamily(Font(Res.font.roboto))
     displayFontFamily = FontFamily(Font(Res.font.lilitaone))
@@ -203,11 +206,25 @@ fun startSession() {
     requester = NeutronRequester(
         host = localUser.hostAddress ?: "",
         userId = localUser.userId,
-        userToken = localUser.userToken
+        userToken = localUser.userToken,
+        debugMode = true // TODO: TO REMOVE 
     )
-    val route = if (localUser.isAuthenticated)
+    val route = if (localUser.isAuthenticated) {
+        MainScope().launch {
+            requester.sendRequest(
+                request = {
+                    getDynamicAccountData()
+                },
+                onSuccess = { response ->
+                    localUser.updateDynamicAccountData(
+                        dynamicData = response.toResponseData()
+                    )
+                },
+                onFailure = {}
+            )
+        }
         REVENUES_SCREEN
-    else
+    } else
         AUTH_SCREEN
     setUserLanguage()
     navigator.navigate(route)

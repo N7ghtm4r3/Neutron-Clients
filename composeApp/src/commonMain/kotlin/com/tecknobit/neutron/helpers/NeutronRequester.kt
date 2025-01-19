@@ -26,6 +26,7 @@ import com.tecknobit.neutroncore.REVENUE_TITLE_KEY
 import com.tecknobit.neutroncore.REVENUE_VALUE_KEY
 import com.tecknobit.neutroncore.enums.NeutronCurrency
 import com.tecknobit.neutroncore.helpers.NeutronEndpoints.CHANGE_CURRENCY_ENDPOINT
+import com.tecknobit.neutroncore.helpers.NeutronEndpoints.DYNAMIC_ACCOUNT_DATA_ENDPOINT
 import com.tecknobit.neutroncore.helpers.NeutronEndpoints.TICKETS_ENDPOINT
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.buildJsonObject
@@ -61,6 +62,14 @@ open class NeutronRequester(
         attachInterceptorOnRequest { 
             AmetistaEngine.ametistaEngine.notifyNetworkRequest()
         }
+    }
+
+    @Deprecated("REMOVE WHEN INTEGRATED IN THE EQUINOX LIBRARY")
+    @RequestPath(path = "/api/v1/users/{id}/dynamicAccountData", method = PATCH)
+    suspend fun getDynamicAccountData() : JsonObject {
+        return execGet(
+            endpoint = assembleUsersEndpointPath(DYNAMIC_ACCOUNT_DATA_ENDPOINT)
+        )
     }
 
     /**

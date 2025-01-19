@@ -6,6 +6,7 @@ import com.tecknobit.equinoxcore.annotations.RequiresSuperCall
 import com.tecknobit.neutroncore.CURRENCY_KEY
 import com.tecknobit.neutroncore.enums.NeutronCurrency
 import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.jsonPrimitive
 
 class NeutronLocalUser : EquinoxLocalUser(
     localStoragePath = "Neutron"
@@ -55,6 +56,16 @@ class NeutronLocalUser : EquinoxLocalUser(
                 key = CURRENCY_KEY
             )
         )
+    }
+
+    @Deprecated("REMOVE WHEN INTEGRATED IN THE EQUINOX LIBRARY")
+    fun updateDynamicAccountData(
+        dynamicData: JsonObject
+    ) {
+        dynamicData.entries.forEach { entry ->
+            setPreference(entry.key, entry.value.jsonPrimitive.content)
+        }
+        initLocalUser()
     }
 
 }

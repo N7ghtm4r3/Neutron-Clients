@@ -14,12 +14,12 @@ import androidx.compose.ui.unit.sp
 import com.tecknobit.equinoxcompose.components.EquinoxAlertDialog
 import com.tecknobit.neutron.SPLASHSCREEN
 import com.tecknobit.neutron.displayFontFamily
-import com.tecknobit.neutron.ui.screens.shared.presentations.RevenueRelatedScreenViewModel
 import com.tecknobit.neutron.navigator
 import com.tecknobit.neutron.ui.screens.profile.presentation.ProfileScreenViewModel
 import com.tecknobit.neutron.ui.screens.project.presentation.ProjectScreenViewModel
 import com.tecknobit.neutron.ui.screens.revenues.data.Revenue
 import com.tecknobit.neutron.ui.screens.revenues.data.TicketRevenue
+import com.tecknobit.neutron.ui.screens.shared.presentations.RevenueRelatedScreenViewModel
 import neutron.composeapp.generated.resources.Res
 import neutron.composeapp.generated.resources.delete_account
 import neutron.composeapp.generated.resources.delete_revenue
@@ -116,6 +116,7 @@ fun Logout(
         text = Res.string.logout_warn_text,
         confirmAction = {
             viewModel.clearSession {
+                show.value = false
                 navigator.navigate(SPLASHSCREEN)
             }
         }
@@ -146,9 +147,12 @@ fun DeleteAccount(
         titleStyle = titleStyle,
         text = Res.string.delete_warn_text,
         confirmAction = {
-            viewModel.deleteAccount {
-                navigator.navigate(SPLASHSCREEN)
-            }
+            viewModel.deleteAccount(
+                onDelete = {
+                    show.value = false
+                    navigator.navigate(SPLASHSCREEN)
+                }
+            )
         }
     )
 }
