@@ -128,4 +128,5 @@
     <string name="edit_ticket">Modifier le ticket</string>
     <string name="login_required">Connexion requise</string>
     <string name="enter_your_credentials_to_continue">Entrez vos informations d\'identification pour continuer</string>
+    <string name="no_labels_available">Pas d\'étiquettes disponibles</string>
 </resources>

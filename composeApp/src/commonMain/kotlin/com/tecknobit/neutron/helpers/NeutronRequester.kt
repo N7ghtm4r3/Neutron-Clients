@@ -34,9 +34,14 @@ import com.tecknobit.neutroncore.helpers.NeutronEndpoints.CHANGE_CURRENCY_ENDPOI
 import com.tecknobit.neutroncore.helpers.NeutronEndpoints.DYNAMIC_ACCOUNT_DATA_ENDPOINT
 import com.tecknobit.neutroncore.helpers.NeutronEndpoints.TICKETS_ENDPOINT
 import com.tecknobit.neutroncore.helpers.NeutronEndpoints.WALLET_ENDPOINT
+import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toInstant
 import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.add
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
+import kotlinx.serialization.json.putJsonArray
 
 
 /**
@@ -107,8 +112,9 @@ open class NeutronRequester(
     ): JsonObject {
         val query = buildJsonObject {
             put(REVENUE_PERIOD_KEY, period.name)
-            if(labels.isNotEmpty())
-                put(REVENUE_LABELS_KEY, labels.joinToString())
+            putJsonArray(REVENUE_LABELS_KEY) {
+                labels.forEach { add(it.text) }
+            }
             put(GENERAL_REVENUES_KEY, retrieveGeneralRevenues)
             put(PROJECT_REVENUES_KEY, retrieveProjectsRevenues)
         }
@@ -127,6 +133,16 @@ open class NeutronRequester(
         )
     }
 
+    @RequestPath(path = "/api/v1/users/{id}/revenues/revenue_labels", method = GET)
+    suspend fun getRevenuesLabels(): JsonObject {
+        return execGet(
+            endpoint = assembleCustomEndpointPath(
+                customEndpoint = REVENUES_KEY,
+                subEndpoint = REVENUE_LABELS_KEY
+            )
+        )
+    }
+
     @RequestPath(path = "/api/v1/users/{id}/revenues", method = GET)
     suspend fun getRevenues(
         page: Int,
@@ -138,8 +154,9 @@ open class NeutronRequester(
         val query = buildJsonObject {
             put(PAGE_KEY, page)
             put(REVENUE_PERIOD_KEY, period.name)
-            if(labels.isNotEmpty())
-                put(REVENUE_LABELS_KEY, labels.joinToString())
+            putJsonArray(REVENUE_LABELS_KEY) {
+                labels.forEach { add(it.text) }
+            }
             put(GENERAL_REVENUES_KEY, retrieveGeneralRevenues)
             put(PROJECT_REVENUES_KEY, retrieveProjectsRevenues)
         }
@@ -147,6 +164,34 @@ open class NeutronRequester(
             endpoint = assembleRevenuesEndpointPath(),
             query = query
         )
+    }
+
+    suspend fun insertRevenue(
+        addingGeneralRevenue: Boolean,
+        title: String,
+        description: String,
+        value: Double,
+        revenueDate: LocalDateTime,
+        labels: List<RevenueLabel> = emptyList(),
+    ): JsonObject {
+        val revenueDateMillis = revenueDate
+            .toInstant(TimeZone.currentSystemDefault())
+            .toEpochMilliseconds()
+        return if (addingGeneralRevenue) {
+            createGeneralRevenue(
+                title = title,
+                description = description,
+                value = value,
+                revenueDate = revenueDateMillis,
+                labels = labels
+            )
+        } else {
+            createProjectRevenue(
+                title = title,
+                value = value,
+                revenueDate = revenueDateMillis
+            )
+        }
     }
 
     /**
@@ -160,10 +205,10 @@ open class NeutronRequester(
      */
     @Wrapper
     @RequestPath(path = "/api/v1/users/{id}/revenues", method = POST)
-    suspend fun createProjectRevenue(
+    private suspend fun createProjectRevenue(
         title: String,
         value: Double,
-        revenueDate: Long
+        revenueDate: Long,
     ): JsonObject {
         return createRevenue(
             title = title,
@@ -185,12 +230,12 @@ open class NeutronRequester(
      */
     @Wrapper
     @RequestPath(path = "/api/v1/users/{id}/revenues", method = POST)
-    suspend fun createGeneralRevenue(
+    private suspend fun createGeneralRevenue(
         title: String,
         description: String,
         value: Double,
         revenueDate: Long,
-        labels: List<RevenueLabel> = emptyList()
+        labels: List<RevenueLabel> = emptyList(),
     ): JsonObject {
         val payload = buildJsonObject {
             put(REVENUE_DESCRIPTION_KEY, description)

@@ -20,7 +20,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.NonRestartableComposable
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -31,7 +30,6 @@ import androidx.compose.ui.unit.sp
 import com.tecknobit.equinoxcompose.components.EquinoxAlertDialog
 import com.tecknobit.neutron.bodyFontFamily
 import com.tecknobit.neutron.displayFontFamily
-import com.tecknobit.neutron.ui.screens.shared.presentations.RevenueLabelsRetriever
 import com.tecknobit.neutron.helpers.mergeIfNotContained
 import com.tecknobit.neutron.helpers.retainAndAdd
 import com.tecknobit.neutron.ui.components.CategoryChip
@@ -121,15 +119,11 @@ private fun LabelsDialog(
     filtering: MutableState<Boolean>,
     viewModel: RevenuesScreenViewModel
 ) {
-    val currentLabels = remember { mutableStateListOf<RevenueLabel>() }
     val supportLabelsList = remember { mutableListOf<RevenueLabel>() }
     LaunchedEffect(filtering.value) {
         supportLabelsList.mergeIfNotContained(
             mergeCollection = viewModel.labelsFilter
         )
-    }
-    LaunchedEffect(Unit) {
-        currentLabels.addAll((viewModel as RevenueLabelsRetriever).retrieveUserLabels())
     }
     EquinoxAlertDialog(
         modifier = Modifier
@@ -146,7 +140,7 @@ private fun LabelsDialog(
         ),
         text = {
             LabelsGrid(
-                currentLabels = currentLabels,
+                labelsRetriever = viewModel,
                 labels = viewModel.labelsFilter
             )
         },

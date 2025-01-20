@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalMultiplatform::class)
-
 package com.tecknobit.neutron.ui.screens.insert.revenue.components
 
 import androidx.compose.animation.AnimatedVisibility
@@ -45,7 +43,6 @@ import com.tecknobit.equinoxcompose.components.EquinoxDialog
 import com.tecknobit.equinoxcompose.components.EquinoxTextField
 import com.tecknobit.equinoxcompose.components.getContrastColor
 import com.tecknobit.equinoxcompose.utilities.toHex
-import com.tecknobit.neutron.ui.screens.shared.presentations.RevenueLabelsRetriever
 import com.tecknobit.neutron.helpers.mergeIfNotContained
 import com.tecknobit.neutron.ui.components.LabelsGrid
 import com.tecknobit.neutron.ui.icons.ArrowSelectorTool
@@ -264,19 +261,16 @@ private fun SelectLabels(
     viewModel: InsertRevenueScreenViewModel
 ) {
     Column {
-        val currentLabels = remember { (viewModel as RevenueLabelsRetriever).retrieveUserLabels() }
         val tmpLabels = remember { mutableStateListOf<RevenueLabel>() }
         LaunchedEffect(viewModel.labels) {
             tmpLabels.addAll(viewModel.labels)
         }
         LabelsGrid(
             modifier = Modifier
-                .fillMaxWidth()
-                .weight(1f)
                 .padding(
                     horizontal = 16.dp
                 ),
-            currentLabels = currentLabels,
+            labelsRetriever = viewModel,
             labels = tmpLabels
         )
         ConfirmOperationButton(

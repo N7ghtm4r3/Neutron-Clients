@@ -5,6 +5,8 @@ import androidx.compose.runtime.MutableState
 import com.tecknobit.equinoxcompose.viewmodels.EquinoxViewModel
 import com.tecknobit.equinoxcore.annotations.RequiresSuperCall
 import com.tecknobit.equinoxcore.annotations.Structure
+import com.tecknobit.neutron.helpers.KReviewer
+import com.tecknobit.neutron.navigator
 import com.tecknobit.neutron.ui.components.screenkeyboard.ScreenKeyboardState
 import com.tecknobit.neutron.ui.screens.revenues.data.GeneralRevenue
 import com.tecknobit.neutron.ui.screens.revenues.data.Revenue
@@ -75,5 +77,12 @@ abstract class InsertScreenViewModel(
     }
 
     protected abstract fun insertRequest()
+
+    protected fun onSuccessInsert() {
+        val kReviewer = KReviewer()
+        kReviewer.reviewInApp {
+            navigator.goBack()
+        }
+    }
 
 }

@@ -128,4 +128,5 @@
     <string name="edit_ticket">Editar ticket</string>
     <string name="login_required">Inicio de sesión obligatorio</string>
     <string name="enter_your_credentials_to_continue">Introduzca sus credenciales para continuar</string>
+    <string name="no_labels_available">No hay etiquetas disponibles</string>
 </resources>

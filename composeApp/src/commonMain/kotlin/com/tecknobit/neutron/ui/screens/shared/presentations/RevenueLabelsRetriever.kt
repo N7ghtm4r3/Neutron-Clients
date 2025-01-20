@@ -1,34 +1,32 @@
 package com.tecknobit.neutron.ui.screens.shared.presentations
 
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.snapshots.SnapshotStateList
-import com.tecknobit.equinoxcompose.utilities.generateRandomColor
-import com.tecknobit.equinoxcompose.utilities.toHex
+import com.tecknobit.equinoxcore.network.Requester.Companion.sendRequest
+import com.tecknobit.equinoxcore.network.Requester.Companion.toResponseArrayData
+import com.tecknobit.neutron.requester
 import com.tecknobit.neutron.ui.screens.revenues.data.RevenueLabel
-import kotlin.random.Random
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.decodeFromJsonElement
 
 interface RevenueLabelsRetriever {
 
-    fun retrieveUserLabels() : SnapshotStateList<RevenueLabel> {
-        // TODO: MAKE THE REQUEST THEN
-        val currentUserLabels = mutableStateListOf<RevenueLabel>()
-        for (j in 0 until Random.nextInt(10)) {
-            currentUserLabels.add(
-                RevenueLabel(
-                    id = Random.nextLong().toString(),
-                    text = "RevenueLabelBadge #$j",
-                    color = generateRandomColor().toHex()
-                )
+    fun retrieveUserLabels(
+        labels: SnapshotStateList<RevenueLabel>,
+    ) {
+        MainScope().launch {
+            requester.sendRequest(
+                request = { getRevenuesLabels() },
+                onSuccess = {
+                    val supportLabelsList: List<RevenueLabel> = Json.decodeFromJsonElement(
+                        json = it.toResponseArrayData()
+                    )
+                    labels.addAll(supportLabelsList)
+                },
+                onFailure = {}
             )
         }
-        currentUserLabels.add(
-            RevenueLabel(
-                id = "ga",
-                color = "#594DB6",
-                text = "ga"
-            )
-        )
-        return currentUserLabels
     }
 
 }
