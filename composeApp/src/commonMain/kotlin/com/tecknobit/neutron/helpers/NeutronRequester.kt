@@ -11,23 +11,29 @@ import com.tecknobit.equinoxcore.network.RequestMethod.PATCH
 import com.tecknobit.equinoxcore.network.RequestMethod.POST
 import com.tecknobit.equinoxcore.network.RequestMethod.PUT
 import com.tecknobit.equinoxcore.network.Requester
+import com.tecknobit.equinoxcore.pagination.PaginatedResponse.Companion.PAGE_KEY
 import com.tecknobit.neutron.ui.screens.revenues.data.ProjectRevenue
 import com.tecknobit.neutron.ui.screens.revenues.data.Revenue
 import com.tecknobit.neutron.ui.screens.revenues.data.RevenueLabel
 import com.tecknobit.neutron.ui.screens.revenues.data.TicketRevenue
 import com.tecknobit.neutroncore.CURRENCY_KEY
+import com.tecknobit.neutroncore.GENERAL_REVENUES_KEY
 import com.tecknobit.neutroncore.IS_PROJECT_REVENUE_KEY
 import com.tecknobit.neutroncore.PROJECTS_KEY
+import com.tecknobit.neutroncore.PROJECT_REVENUES_KEY
 import com.tecknobit.neutroncore.REVENUES_KEY
 import com.tecknobit.neutroncore.REVENUE_DATE_KEY
 import com.tecknobit.neutroncore.REVENUE_DESCRIPTION_KEY
 import com.tecknobit.neutroncore.REVENUE_LABELS_KEY
+import com.tecknobit.neutroncore.REVENUE_PERIOD_KEY
 import com.tecknobit.neutroncore.REVENUE_TITLE_KEY
 import com.tecknobit.neutroncore.REVENUE_VALUE_KEY
 import com.tecknobit.neutroncore.enums.NeutronCurrency
+import com.tecknobit.neutroncore.enums.RevenuePeriod
 import com.tecknobit.neutroncore.helpers.NeutronEndpoints.CHANGE_CURRENCY_ENDPOINT
 import com.tecknobit.neutroncore.helpers.NeutronEndpoints.DYNAMIC_ACCOUNT_DATA_ENDPOINT
 import com.tecknobit.neutroncore.helpers.NeutronEndpoints.TICKETS_ENDPOINT
+import com.tecknobit.neutroncore.helpers.NeutronEndpoints.WALLET_ENDPOINT
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
@@ -92,15 +98,54 @@ open class NeutronRequester(
         )
     }
 
-    /**
-     * Method to execute the request to get the revenues of the user
-     *
-     * @return the result of the request as [JsonObject]
-     */
     @RequestPath(path = "/api/v1/users/{id}/revenues", method = GET)
-    suspend fun getRevenues(): JsonObject {
+    suspend fun getWalletStatus(
+        period: RevenuePeriod,
+        labels: List<RevenueLabel>,
+        retrieveGeneralRevenues: Boolean,
+        retrieveProjectsRevenues: Boolean
+    ): JsonObject {
+        val query = buildJsonObject {
+            put(REVENUE_PERIOD_KEY, period.name)
+            if(labels.isNotEmpty())
+                put(REVENUE_LABELS_KEY, labels.joinToString())
+            put(GENERAL_REVENUES_KEY, retrieveGeneralRevenues)
+            put(PROJECT_REVENUES_KEY, retrieveProjectsRevenues)
+        }
         return execGet(
-            endpoint = assembleRevenuesEndpointPath()
+            endpoint = assembleWalletEndpoint(),
+            query = query
+        )
+    }
+
+    private fun assembleWalletEndpoint(
+        subEndpoint: String = ""
+    ) : String {
+        return assembleCustomEndpointPath(
+            customEndpoint = WALLET_ENDPOINT,
+            subEndpoint = subEndpoint
+        )
+    }
+
+    @RequestPath(path = "/api/v1/users/{id}/revenues", method = GET)
+    suspend fun getRevenues(
+        page: Int,
+        period: RevenuePeriod,
+        labels: List<RevenueLabel>,
+        retrieveGeneralRevenues: Boolean,
+        retrieveProjectsRevenues: Boolean
+    ): JsonObject {
+        val query = buildJsonObject {
+            put(PAGE_KEY, page)
+            put(REVENUE_PERIOD_KEY, period.name)
+            if(labels.isNotEmpty())
+                put(REVENUE_LABELS_KEY, labels.joinToString())
+            put(GENERAL_REVENUES_KEY, retrieveGeneralRevenues)
+            put(PROJECT_REVENUES_KEY, retrieveProjectsRevenues)
+        }
+        return execGet(
+            endpoint = assembleRevenuesEndpointPath(),
+            query = query
         )
     }
 

@@ -1,13 +1,17 @@
 package com.tecknobit.neutron.ui.screens.shared.presentations
 
 import androidx.compose.material3.SnackbarHostState
+import androidx.lifecycle.viewModelScope
 import com.tecknobit.equinoxcompose.viewmodels.EquinoxViewModel
 import com.tecknobit.equinoxcore.annotations.Structure
+import com.tecknobit.equinoxcore.network.Requester.Companion.sendRequest
+import com.tecknobit.neutron.requester
 import com.tecknobit.neutron.ui.screens.revenues.data.Revenue
 import com.tecknobit.neutroncore.enums.RevenuePeriod
 import com.tecknobit.neutroncore.enums.RevenuePeriod.LAST_MONTH
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 
 @Structure
 abstract class RevenueRelatedScreenViewModel : EquinoxViewModel(
@@ -41,8 +45,19 @@ abstract class RevenueRelatedScreenViewModel : EquinoxViewModel(
         revenue: Revenue,
         onDelete: () -> Unit
     ) {
-        // TODO: MAKE THE REQUEST THEN
-        onDelete.invoke()
+        viewModelScope.launch {
+            requester.sendRequest(
+                request = {
+                    deleteRevenue(
+                        revenue = revenue
+                    )
+                },
+                onSuccess = {
+                    onDelete.invoke()
+                },
+                onFailure = { showSnackbarMessage(it) }
+            )
+        }
     }
 
     abstract fun refreshData()

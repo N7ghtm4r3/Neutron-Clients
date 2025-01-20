@@ -68,6 +68,7 @@ import com.tecknobit.neutroncore.dtos.WalletStatus
 import com.tecknobit.neutroncore.enums.RevenuePeriod
 import com.tecknobit.neutroncore.enums.RevenuePeriod.ALL
 import io.github.ahmad_hamwi.compose.pagination.PaginatedLazyColumn
+import kotlinx.coroutines.delay
 import neutron.composeapp.generated.resources.Res
 import neutron.composeapp.generated.resources.add_revenue
 import neutron.composeapp.generated.resources.last_month_period
@@ -104,7 +105,10 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
         NeutronTheme {
             ManagedContent(
                 viewModel = viewModel!!,
-                loadingRoutine = { walletStatus.value != null },
+                loadingRoutine = {
+                    delay(500L) // FIXME: TO REMOVE WHEN COMPONENT BUILT-IN FIXED
+                    walletStatus.value != null
+                },
                 content = {
                     Scaffold(
                         snackbarHost = { SnackbarHost(viewModel!!.snackbarHostState!!) },
@@ -256,8 +260,10 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
                 ) {
                     val color = if(isPositiveTrend)
                         MaterialTheme.colorScheme.primary
-                    else
+                    else if(trend < 0.0)
                         MaterialTheme.colorScheme.error
+                    else
+                        MaterialTheme.colorScheme.onSurface
                     Text(
                         text = "$symbol${trend}%",
                         fontFamily = displayFontFamily,
