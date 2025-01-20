@@ -37,9 +37,13 @@ import com.tecknobit.neutroncore.helpers.NeutronEndpoints.WALLET_ENDPOINT
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toInstant
+import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.add
 import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.encodeToJsonElement
+import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.put
 import kotlinx.serialization.json.putJsonArray
 
@@ -110,14 +114,12 @@ open class NeutronRequester(
         retrieveGeneralRevenues: Boolean,
         retrieveProjectsRevenues: Boolean
     ): JsonObject {
-        val query = buildJsonObject {
-            put(REVENUE_PERIOD_KEY, period.name)
-            putJsonArray(REVENUE_LABELS_KEY) {
-                labels.forEach { add(it.text) }
-            }
-            put(GENERAL_REVENUES_KEY, retrieveGeneralRevenues)
-            put(PROJECT_REVENUES_KEY, retrieveProjectsRevenues)
-        }
+        val query = assembleRevenuesQuery(
+            period = period,
+            labels = labels,
+            retrieveGeneralRevenues = retrieveGeneralRevenues,
+            retrieveProjectsRevenues = retrieveProjectsRevenues
+        )
         return execGet(
             endpoint = assembleWalletEndpoint(),
             query = query
@@ -151,8 +153,26 @@ open class NeutronRequester(
         retrieveGeneralRevenues: Boolean,
         retrieveProjectsRevenues: Boolean
     ): JsonObject {
-        val query = buildJsonObject {
-            put(PAGE_KEY, page)
+        val query = assembleRevenuesQuery(
+            period = period,
+            labels = labels,
+            retrieveGeneralRevenues = retrieveGeneralRevenues,
+            retrieveProjectsRevenues = retrieveProjectsRevenues
+        ).toMutableMap()
+        query[PAGE_KEY] = JsonPrimitive(page)
+        return execGet(
+            endpoint = assembleRevenuesEndpointPath(),
+            query = Json.encodeToJsonElement(query).jsonObject
+        )
+    }
+
+    private fun assembleRevenuesQuery(
+        period: RevenuePeriod,
+        labels: List<RevenueLabel>,
+        retrieveGeneralRevenues: Boolean,
+        retrieveProjectsRevenues: Boolean,
+    ): JsonObject {
+        return buildJsonObject {
             put(REVENUE_PERIOD_KEY, period.name)
             putJsonArray(REVENUE_LABELS_KEY) {
                 labels.forEach { add(it.text) }
@@ -160,10 +180,6 @@ open class NeutronRequester(
             put(GENERAL_REVENUES_KEY, retrieveGeneralRevenues)
             put(PROJECT_REVENUES_KEY, retrieveProjectsRevenues)
         }
-        return execGet(
-            endpoint = assembleRevenuesEndpointPath(),
-            query = query
-        )
     }
 
     suspend fun insertRevenue(
@@ -195,29 +211,6 @@ open class NeutronRequester(
     }
 
     /**
-     * Method to execute the request to create a new project revenue
-     *
-     * @param title The title of the project
-     * @param value The initial revenue value
-     * @param revenueDate The date when the project has been created
-     *
-     * @return the result of the request as [JsonObject]
-     */
-    @Wrapper
-    @RequestPath(path = "/api/v1/users/{id}/revenues", method = POST)
-    private suspend fun createProjectRevenue(
-        title: String,
-        value: Double,
-        revenueDate: Long,
-    ): JsonObject {
-        return createRevenue(
-            title = title,
-            value = value,
-            revenueDate = revenueDate
-        )
-    }
-
-    /**
      * Method to execute the request to create a new general revenue
      *
      * @param title The title of the general revenue
@@ -246,6 +239,29 @@ open class NeutronRequester(
             value = value,
             revenueDate = revenueDate,
             payload = payload
+        )
+    }
+
+    /**
+     * Method to execute the request to create a new project revenue
+     *
+     * @param title The title of the project
+     * @param value The initial revenue value
+     * @param revenueDate The date when the project has been created
+     *
+     * @return the result of the request as [JsonObject]
+     */
+    @Wrapper
+    @RequestPath(path = "/api/v1/users/{id}/revenues", method = POST)
+    private suspend fun createProjectRevenue(
+        title: String,
+        value: Double,
+        revenueDate: Long,
+    ): JsonObject {
+        return createRevenue(
+            title = title,
+            value = value,
+            revenueDate = revenueDate
         )
     }
 
