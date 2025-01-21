@@ -1,41 +1,4 @@
 <resources>
-    <string name="opening_date_title">Data di apertura</string>
-    <string name="closing_date_title">Data di chiusura</string>
-    <string name="days">giorni</string>
-    <string name="insertion_time">Tempo di inserimento</string>
-    <string name="confirm">Conferma</string>
-    <string name="dismiss">Annulla</string>
-    <string name="add_project">Aggiungi progetto</string>
-    <string name="add_label">Aggiungi etichetta</string>
-    <string name="opening_time">Orario di apertura</string>
-    <string name="closing_time">Orario di chiusura</string>
-    <string name="storage_data">Dati di archiviazione</string>
-    <string name="change_storage_location">Cambia la posizione di archiviazione</string>
-    <string name="aware_server_message">Eseguendo questa modifica, i dati verranno memorizzati su un server esterno che memorizzerà tutti i dati e dove verranno memorizzati i dati futuri.</string>
-    <string name="aware_local_message">Eseguendo questa modifica, i vostri dati saranno trasferiti da un server esterno all'archivio locale e il vostro account e i relativi dati saranno cancellati da quel server.</string>
-    <string name="cancel">Annulla</string>
-    <string name="delete_project">Cancella il progetto</string>
-    <string name="delete_project_warn_text">Se confermi, il progetto verrà cancellato e tutti i dati relativi non saranno più recuperabili.</string>
-    <string name="store_data_online">Memorizza dati online</string>
-    <string name="stored_data_online">Dati memorizzati online</string>
-    <string name="signup_qr_code_title">Scansiona da un dispositivo connesso</string>
-    <string name="local_sign_in_message">È necessario aprire un dispositivo in cui si è effettuato l'accesso con l'account a cui si sta cercando di accedere, quindi aprire la schermata del profilo e fare clic sull'icona dedicata per eseguire l'accesso locale.</string>
-    <string name="qr_scanner_prompt_message">Scansiona il codice QR locale per condividere i dati della sessione</string>
-    <string name="close">Chiudi</string>
-    <string name="hosting_local_sign_in">Ospita l'accesso locale</string>
-    <string name="waiting_for_the_request">In attesa della richiesta…</string>
-    <string name="sign_in_executed_successfully">Accesso eseguito con successo!</string>
-    <string name="sign_in_failed_message">Accesso non riuscito…</string>
-    <string name="currency">Valuta</string>
-    <string name="disconnect">Disconnessione</string>
-    <string name="execute">Esegui</string>
-    <string name="transferring_data">Trasferimento dei dati…</string>
-    <string name="transfer_executed_successfully">Trasferimento eseguito con successo!</string>
-    <string name="transfer_failed">Trasferimento fallito…</string>
-    <string name="retry">Riprova</string>
-    <string name="an_error_occurred">Si è verificato un errore</string>
-
-    <!-- TODO CHECK TO REMOVE OLD RESOURCES -->
     <string name="app_name">Neutron</string>
     <string name="app_version">1.0.1</string>
     <string name="revenue">Ricavi: %1$d%2$s</string>

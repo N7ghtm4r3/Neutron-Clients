@@ -85,7 +85,7 @@ fun DeleteTicket(
         text = Res.string.delete_ticket_text,
         confirmAction = {
             viewModel.deleteTicket(
-                revenue = ticket
+                ticket = ticket
             )
         }
     )

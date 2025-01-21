@@ -10,15 +10,17 @@ import neutron.composeapp.generated.resources.add_ticket
 import neutron.composeapp.generated.resources.edit_ticket
 
 class InsertTicketScreen(
-    ticketId: String?
+    projectId: String,
+    ticketId: String?,
 ) : InsertScreen<InsertTicketScreenViewModel>(
     revenueId = ticketId,
     addingTitle = Res.string.add_ticket,
     editingTitle = Res.string.edit_ticket,
     viewModel = InsertTicketScreenViewModel(
+        projectId = projectId,
         ticketId = ticketId
     )
-){
+) {
 
     @Composable
     override fun getInsertionSteps(): Array<out Step> {

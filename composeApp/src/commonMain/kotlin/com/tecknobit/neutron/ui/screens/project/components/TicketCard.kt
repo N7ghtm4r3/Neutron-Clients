@@ -36,10 +36,12 @@ import com.tecknobit.neutron.ui.components.TicketInfo
 import com.tecknobit.neutron.ui.icons.ContractDelete
 import com.tecknobit.neutron.ui.screens.project.presentation.ProjectScreenViewModel
 import com.tecknobit.neutron.ui.screens.revenues.components.RevenueLabels
+import com.tecknobit.neutron.ui.screens.revenues.data.ProjectRevenue
 import com.tecknobit.neutron.ui.screens.revenues.data.RevenueLabel
 import com.tecknobit.neutron.ui.screens.revenues.data.TicketRevenue
 import com.tecknobit.neutroncore.CLOSED_TICKET_LABEL_COLOR
 import com.tecknobit.neutroncore.PENDING_TICKET_LABEL_COLOR
+import kotlinx.datetime.Clock
 import neutron.composeapp.generated.resources.closed_status
 import neutron.composeapp.generated.resources.pending_status
 import org.jetbrains.compose.resources.stringResource
@@ -48,8 +50,9 @@ import org.jetbrains.compose.resources.stringResource
 @NonRestartableComposable
 fun TicketCard(
     viewModel: ProjectScreenViewModel,
+    project: ProjectRevenue,
     ticket: TicketRevenue,
-    position: Int
+    position: Int,
 ) {
     ResponsiveContent(
         onExpandedSizeClass = {
@@ -57,6 +60,7 @@ fun TicketCard(
                 Card {
                     TicketRevenueContent(
                         viewModel = viewModel,
+                        project = project,
                         ticket = ticket,
                         containerColor = Color.Transparent
                     )
@@ -64,6 +68,7 @@ fun TicketCard(
             } else {
                 TicketRevenueContent(
                     viewModel = viewModel,
+                    project = project,
                     ticket = ticket,
                     containerColor = Color.Transparent
                 )
@@ -72,6 +77,7 @@ fun TicketCard(
         onMediumSizeClass = {
             TicketRevenueContent(
                 viewModel = viewModel,
+                project = project,
                 ticket = ticket
             )
             HorizontalDivider()
@@ -79,6 +85,7 @@ fun TicketCard(
         onCompactSizeClass = {
             TicketRevenueContent(
                 viewModel = viewModel,
+                project = project,
                 ticket = ticket
             )
             HorizontalDivider()
@@ -90,8 +97,9 @@ fun TicketCard(
 @NonRestartableComposable
 private fun TicketRevenueContent(
     viewModel: ProjectScreenViewModel,
+    project: ProjectRevenue,
     ticket: TicketRevenue,
-    containerColor: Color = ListItemDefaults.containerColor
+    containerColor: Color = ListItemDefaults.containerColor,
 ) {
     Column {
         var expanded by remember { mutableStateOf(false) }
@@ -101,7 +109,9 @@ private fun TicketRevenueContent(
             labels = ticket.getTicketStatusLabel(),
             containerColor = containerColor,
             allowEdit = ticket.isPending(),
-            onEdit = { navigator.navigate("$INSERT_TICKET_SCREEN/${ticket.id}") },
+            onEdit = {
+                navigator.navigate("$INSERT_TICKET_SCREEN/${project.id}/${ticket.id}")
+            },
             overline = { ticketLabel ->
                 Row (
                     verticalAlignment = Alignment.CenterVertically
@@ -110,12 +120,17 @@ private fun TicketRevenueContent(
                         labels = ticketLabel
                     )
                     AnimatedVisibility(
-                        visible = ticket.isPending()
+                        visible = ticket.isPending() &&
+                                Clock.System.now().toEpochMilliseconds() >= ticket.revenueDate
                     ) {
                         IconButton(
                             modifier = Modifier
                                 .size(28.dp),
-                            onClick = { viewModel.closeTicket() }
+                            onClick = {
+                                viewModel.closeTicket(
+                                    ticket = ticket
+                                )
+                            }
                         ) {
                             Icon(
                                 imageVector = Icons.Default.CheckCircle,

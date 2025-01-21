@@ -1,41 +1,4 @@
 <resources>
-    <string name="opening_date_title">Opening date</string>
-    <string name="closing_date_title">Closing date</string>
-    <string name="days">days</string>
-    <string name="insertion_time">Insertion time</string>
-    <string name="confirm">Confirm</string>
-    <string name="dismiss">Dismiss</string>
-    <string name="add_project">Add project</string>
-    <string name="add_label">Add label</string>
-    <string name="opening_time">Opening time</string>
-    <string name="closing_time">Closing time</string>
-    <string name="storage_data">Storage data</string>
-    <string name="change_storage_location">Change storage location</string>
-    <string name="aware_server_message">Executing this change your data will be store on an external backend server which will be store all your data and where your future data will be store, pay attention where are you storing the data</string>
-    <string name="aware_local_message">Executing this change your data will be transfer from an external server to local storage and will be deleted your account and the related data from that server</string>
-    <string name="cancel">Cancel</string>
-    <string name="delete_project">Delete project</string>
-    <string name="delete_project_warn_text">If you confirm the project will be deleted and all the related data will be no more recoverable</string>
-    <string name="store_data_online">Store data online</string>
-    <string name="stored_data_online">Stored data online</string>
-    <string name="signup_qr_code_title">Scan from a logged in device</string>
-    <string name="local_sign_in_message">You have to open a device where you logged in with the account you trying to access in and then open the profile screen and click the dedicated icon to execute the local sign in</string>
-    <string name="qr_scanner_prompt_message">Scan the local sign in QR Code to share the session data</string>
-    <string name="close">Close</string>
-    <string name="hosting_local_sign_in">Hosting local sign in</string>
-    <string name="waiting_for_the_request">Waiting for the request…</string>
-    <string name="sign_in_executed_successfully">Sign in executed successfully!</string>
-    <string name="sign_in_failed_message">Sign in failed…</string>
-    <string name="currency">Currency</string>
-    <string name="disconnect">Disconnect</string>
-    <string name="execute">Execute</string>
-    <string name="transferring_data">Transferring data…</string>
-    <string name="transfer_executed_successfully">Transfer executed successfully!</string>
-    <string name="transfer_failed">Transfer failed...</string>
-    <string name="retry">Retry</string>
-    <string name="an_error_occurred">An error occurred</string>
-
-    <!-- TODO CHECK TO REMOVE OLD RESOURCES -->
     <string name="app_name">Neutron</string>
     <string name="app_version">1.0.1</string>
     <string name="revenue">Revenue: %1$d%2$s</string>

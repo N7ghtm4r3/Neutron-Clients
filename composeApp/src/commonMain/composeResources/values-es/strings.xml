@@ -1,41 +1,4 @@
 <resources>
-    <string name="opening_date_title">Fecha de apertura</string>
-    <string name="closing_date_title">Fecha límite</string>
-    <string name="days">días</string>
-    <string name="insertion_time">Tiempo de inserción</string>
-    <string name="confirm">Confirme</string>
-    <string name="dismiss">Desestimar</string>
-    <string name="add_project">Agregar proyecto</string>
-    <string name="add_label">Añadir etiqueta</string>
-    <string name="opening_time">Hora de apertura</string>
-    <string name="closing_time">Hora de cierre</string>
-    <string name="storage_data">Datos de almacenamiento</string>
-    <string name="change_storage_location">Cambiar la ubicación de almacenamiento</string>
-    <string name="aware_server_message">Ejecutando este cambio sus datos serán almacenados en un servidor externo que almacenará todos sus datos y donde sus datos futuros serán almacenados, preste atención donde está almacenando los datos.</string>
-    <string name="aware_local_message">Al ejecutar este cambio, sus datos se transferirán de un servidor externo a un almacenamiento local y se eliminará su cuenta y los datos relacionados de ese servidor.</string>
-    <string name="cancel">Cancelar</string>
-    <string name="delete_project">Suprimir proyecto</string>
-    <string name="delete_project_warn_text">Si confirma, el proyecto se eliminará y todos los datos relacionados ya no se podrán recuperar.</string>
-    <string name="store_data_online">Almacenar datos en línea</string>
-    <string name="stored_data_online">Datos almacenados en línea</string>
-    <string name="signup_qr_code_title">Escanear desde un dispositivo conectado</string>
-    <string name="local_sign_in_message">Debe abrir un dispositivo en el que haya iniciado sesión con la cuenta a la que desea acceder y, a continuación, abrir la pantalla de perfil y hacer clic en el icono correspondiente para ejecutar el inicio de sesión local.</string>
-    <string name="qr_scanner_prompt_message">Escanee el código QR de la firma local para compartir los datos de la sesión</string>
-    <string name="close">Cerca</string>
-    <string name="hosting_local_sign_in">Inicio de sesión local</string>
-    <string name="waiting_for_the_request">Esperando la petición...</string>
-    <string name="sign_in_executed_successfully">¡Inicio de sesión ejecutado con éxito!</string>
-    <string name="sign_in_failed_message">No ha podido entrar...</string>
-    <string name="currency">Moneda</string>
-    <string name="disconnect">Desconecte</string>
-    <string name="execute">Ejecute</string>
-    <string name="transferring_data">Transferencia de datos...</string>
-    <string name="transfer_executed_successfully">¡Transferencia ejecutada con éxito!</string>
-    <string name="transfer_failed">Transferencia fallida...</string>
-    <string name="retry">Reintentar</string>
-    <string name="an_error_occurred">Se ha producido un error</string>
-
-    <!-- TODO CHECK TO REMOVE OLD RESOURCES -->
     <string name="app_name">Neutron</string>
     <string name="app_version">1.0.1</string>
     <string name="revenue">Ingresos: %1$d%2$s</string>

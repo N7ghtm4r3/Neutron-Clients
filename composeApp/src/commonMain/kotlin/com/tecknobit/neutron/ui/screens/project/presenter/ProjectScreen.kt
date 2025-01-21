@@ -65,6 +65,7 @@ import com.tecknobit.neutron.ui.screens.shared.presenters.RevenuesContainerScree
 import com.tecknobit.neutron.ui.screens.shared.presenters.RevenuesContainerScreen.Companion.HIDE_BALANCE
 import com.tecknobit.neutron.ui.theme.NeutronTheme
 import io.github.ahmad_hamwi.compose.pagination.PaginatedLazyColumn
+import kotlinx.coroutines.delay
 import neutron.composeapp.generated.resources.Res
 import neutron.composeapp.generated.resources.add_ticket
 import neutron.composeapp.generated.resources.no_revenues_yet
@@ -102,7 +103,10 @@ class ProjectScreen(
                         ScreenContent()
                     }
                 },
-                loadingRoutine = { project.value != null },
+                loadingRoutine = {
+                    delay(500L) // FIXME: TO REMOVE WHEN COMPONENT BUILT-IN FIXED
+                    project.value != null
+                },
                 noInternetConnectionRetryText = com.tecknobit.equinoxcompose.resources.Res.string.retry,
                 noInternetConnectionRetryAction = { viewModel!!.ticketsState.retryLastFailedRequest() }
             )
@@ -114,7 +118,7 @@ class ProjectScreen(
     }
 
     override fun navToInsert() {
-        navigator.navigate(INSERT_TICKET_SCREEN)
+        navigator.navigate("$INSERT_TICKET_SCREEN/${project.value!!.id}")
     }
 
     @Composable
@@ -227,6 +231,10 @@ class ProjectScreen(
     @NonRestartableComposable
     private fun TotalRevenues() {
         Row (
+            modifier = Modifier
+                .padding(
+                    start = 16.dp
+                ),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(5.dp)
         ) {
@@ -241,10 +249,6 @@ class ProjectScreen(
                 visible = !hideBalances.value
             ) {
                 Text(
-                    modifier = Modifier
-                        .padding(
-                            start = 16.dp
-                        ),
                     text = stringResource(
                         resource = Res.string.total_revenues,
                         balance.value, localUser.currency.symbol
@@ -272,45 +276,47 @@ class ProjectScreen(
     @Composable
     @NonRestartableComposable
     private fun Tickets() {
-        PaginatedLazyColumn(
+        Column(
             modifier = Modifier
                 .fillMaxHeight()
                 .widthIn(
                     max = MAX_CONTAINER_WIDTH
                 )
-                .navigationBarsPadding(),
-            paginationState = viewModel!!.ticketsState,
-            contentPadding = PaddingValues(
-                bottom = 16.dp
-            ),
-            verticalArrangement = Arrangement.spacedBy(10.dp),
-            firstPageProgressIndicator = { FirstPageProgressIndicator() },
-            firstPageEmptyIndicator = {
-                EmptyListUI(
-                    icon = ReceiptLong,
-                    subText = Res.string.no_revenues_yet,
-                    textStyle = TextStyle(
-                        fontFamily = bodyFontFamily
-                    )
-                )
-            },
-            newPageProgressIndicator = { NewPageProgressIndicator() }
+                .navigationBarsPadding()
         ) {
-            item {
-                InitialRevenueItem(
-                    viewModel = viewModel!!,
-                    initialRevenue = project.value!!.initialRevenue
-                )
-            }
-            itemsIndexed(
-                items = viewModel!!.ticketsState.allItems!!,
-                key = { _, revenue -> revenue.id }
-            ) { index, ticket ->
-                TicketCard(
-                    viewModel = viewModel!!,
-                    ticket = ticket,
-                    position = index
-                )
+            InitialRevenueItem(
+                viewModel = viewModel!!,
+                initialRevenue = project.value!!.initialRevenue
+            )
+            PaginatedLazyColumn(
+                paginationState = viewModel!!.ticketsState,
+                contentPadding = PaddingValues(
+                    bottom = 16.dp
+                ),
+                verticalArrangement = Arrangement.spacedBy(10.dp),
+                firstPageProgressIndicator = { FirstPageProgressIndicator() },
+                firstPageEmptyIndicator = {
+                    EmptyListUI(
+                        icon = ReceiptLong,
+                        subText = Res.string.no_revenues_yet,
+                        textStyle = TextStyle(
+                            fontFamily = bodyFontFamily
+                        )
+                    )
+                },
+                newPageProgressIndicator = { NewPageProgressIndicator() }
+            ) {
+                itemsIndexed(
+                    items = viewModel!!.ticketsState.allItems!!,
+                    key = { _, revenue -> revenue.id }
+                ) { index, ticket ->
+                    TicketCard(
+                        viewModel = viewModel!!,
+                        project = project.value!!,
+                        ticket = ticket,
+                        position = index
+                    )
+                }
             }
         }
     }
@@ -318,7 +324,7 @@ class ProjectScreen(
     override fun onStart() {
         super.onStart()
         viewModel!!.retrieveProject()
-        viewModel!!.getWalletBalance()
+        viewModel!!.getProjectBalance()
     }
 
     /**

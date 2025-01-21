@@ -178,10 +178,12 @@ fun App() {
                 ).ShowContent()
             }
             scene(
-                route = "$INSERT_TICKET_SCREEN/{$TICKET_IDENTIFIER_KEY}?"
+                route = "$INSERT_TICKET_SCREEN/{$REVENUE_IDENTIFIER_KEY}/{$TICKET_IDENTIFIER_KEY}?"
             ) { backstackEntry ->
+                val projectId: String = backstackEntry.path(REVENUE_IDENTIFIER_KEY)!!
                 val ticketId : String? = backstackEntry.path(TICKET_IDENTIFIER_KEY)
                 InsertTicketScreen(
+                    projectId = projectId,
                     ticketId = ticketId
                 ).ShowContent()
             }

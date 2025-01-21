@@ -12,14 +12,15 @@ import com.tecknobit.equinoxcore.network.RequestMethod.POST
 import com.tecknobit.equinoxcore.network.RequestMethod.PUT
 import com.tecknobit.equinoxcore.network.Requester
 import com.tecknobit.equinoxcore.pagination.PaginatedResponse.Companion.PAGE_KEY
-import com.tecknobit.neutron.ui.screens.revenues.data.ProjectRevenue
 import com.tecknobit.neutron.ui.screens.revenues.data.Revenue
 import com.tecknobit.neutron.ui.screens.revenues.data.RevenueLabel
 import com.tecknobit.neutron.ui.screens.revenues.data.TicketRevenue
+import com.tecknobit.neutroncore.CLOSED_TICKETS_KEY
 import com.tecknobit.neutroncore.CURRENCY_KEY
 import com.tecknobit.neutroncore.GENERAL_REVENUES_KEY
 import com.tecknobit.neutroncore.IS_PROJECT_REVENUE_KEY
 import com.tecknobit.neutroncore.LABELS_KEY
+import com.tecknobit.neutroncore.PENDING_TICKETS_KEY
 import com.tecknobit.neutroncore.PROJECTS_KEY
 import com.tecknobit.neutroncore.PROJECT_REVENUES_KEY
 import com.tecknobit.neutroncore.REVENUES_KEY
@@ -32,6 +33,7 @@ import com.tecknobit.neutroncore.enums.NeutronCurrency
 import com.tecknobit.neutroncore.enums.RevenuePeriod
 import com.tecknobit.neutroncore.helpers.NeutronEndpoints.CHANGE_CURRENCY_ENDPOINT
 import com.tecknobit.neutroncore.helpers.NeutronEndpoints.DYNAMIC_ACCOUNT_DATA_ENDPOINT
+import com.tecknobit.neutroncore.helpers.NeutronEndpoints.PROJECT_BALANCE_ENDPOINT
 import com.tecknobit.neutroncore.helpers.NeutronEndpoints.TICKETS_ENDPOINT
 import com.tecknobit.neutroncore.helpers.NeutronEndpoints.WALLET_ENDPOINT
 import kotlinx.datetime.LocalDateTime
@@ -191,9 +193,7 @@ open class NeutronRequester(
         revenueDate: LocalDateTime,
         labels: List<RevenueLabel> = emptyList(),
     ): JsonObject {
-        val revenueDateMillis = revenueDate
-            .toInstant(TimeZone.currentSystemDefault())
-            .toEpochMilliseconds()
+        val revenueDateMillis = revenueDate.toMillis()
         return if (revenue != null) {
             if (addingGeneralRevenue) {
                 editGeneralRevenue(
@@ -411,50 +411,93 @@ open class NeutronRequester(
     /**
      * Method to execute the request to get a project revenue
      *
-     * @param revenueId The identifier of the project revenue to get
+     * @param projectId The identifier of the project revenue to get
      *
      * @return the result of the request as [JsonObject]
      */
     @RequestPath(path = "/api/v1/users/{id}/revenues/projects/{revenue_id}", method = GET)
     suspend fun getProjectRevenue(
-        revenueId: String
+        projectId: String,
     ): JsonObject {
         return execGet(
             endpoint = assembleRevenuesEndpointPath(
-                revenueId = revenueId,
+                revenueId = projectId,
                 isProjectPath = true
             )
         )
     }
 
-    /**
-     * Method to execute the request to add a new ticket to a project revenue
-     *
-     * @param project The project where add the ticket
-     * @param title The title of the ticket
-     * @param value The value of the ticket
-     * @param description The description of the ticket
-     * @param openingDate The date when the ticket has been opened
-     *
-     * @return the result of the request as [JsonObject]
-     */
+    @RequestPath(path = "/api/v1/users/{id}/revenues/projects/{revenue_id}/balance", method = GET)
+    suspend fun getProjectBalance(
+        projectId: String,
+        period: RevenuePeriod,
+        retrieveClosedTickets: Boolean,
+    ): JsonObject {
+        val query = buildJsonObject {
+            put(REVENUE_PERIOD_KEY, period.name)
+            put(CLOSED_TICKETS_KEY, retrieveClosedTickets)
+        }
+        return execGet(
+            endpoint = assembleRevenuesEndpointPath(
+                revenueId = projectId,
+                isProjectPath = true,
+                extraPath = PROJECT_BALANCE_ENDPOINT
+            ),
+            query = query
+        )
+    }
+
     @RequestPath(path = "/api/v1/users/{id}/revenues/projects/{revenue_id}/tickets", method = POST)
-    suspend fun addTicketToProject(
-        project: ProjectRevenue,
+    suspend fun insertTicket(
+        projectId: String,
+        ticketId: String?,
         title: String,
         value: Double,
         description: String,
-        openingDate: Long
+        openingDate: LocalDateTime,
     ): JsonObject {
+        val openingDateMillis = openingDate.toMillis()
         val payload = buildJsonObject {
             put(REVENUE_TITLE_KEY, title)
             put(REVENUE_VALUE_KEY, value)
             put(REVENUE_DESCRIPTION_KEY, description)
-            put(REVENUE_DATE_KEY, openingDate)
+            put(REVENUE_DATE_KEY, openingDateMillis)
         }
+        return if (ticketId == null) {
+            addTicket(
+                projectId = projectId,
+                payload = payload
+            )
+        } else {
+            editTicket(
+                projectId = projectId,
+                ticketId = ticketId,
+                payload = payload
+            )
+        }
+    }
+
+    @Deprecated("USE THE TIMEFORMATTER OF EQUINOX BUILT-IN")
+    private fun LocalDateTime.toMillis(): Long {
+        return this.toInstant(TimeZone.currentSystemDefault())
+            .toEpochMilliseconds()
+    }
+
+    /**
+     * Method to execute the request to add a new ticket to a project revenue
+     *
+     * @param projectId The identifier of the project where add the ticket
+     *
+     * @return the result of the request as [JsonObject]
+     */
+    @RequestPath(path = "/api/v1/users/{id}/revenues/projects/{revenue_id}/tickets", method = POST)
+    private suspend fun addTicket(
+        projectId: String,
+        payload: JsonObject,
+    ): JsonObject {
         return execPost(
             endpoint = assembleRevenuesEndpointPath(
-                revenueId = project.id,
+                revenueId = projectId,
                 isProjectPath = true,
                 extraPath = TICKETS_ENDPOINT
             ),
@@ -463,21 +506,69 @@ open class NeutronRequester(
     }
 
     /**
+     * Method to execute the request to add a new ticket to a project revenue
+     *
+     * @param projectId The identifier of the project where add the ticket
+     *
+     * @return the result of the request as [JsonObject]
+     */
+    @RequestPath(path = "/api/v1/users/{id}/revenues/projects/{revenue_id}/tickets", method = PATCH)
+    private suspend fun editTicket(
+        projectId: String,
+        ticketId: String,
+        payload: JsonObject,
+    ): JsonObject {
+        return execPatch(
+            endpoint = assembleRevenuesEndpointPath(
+                revenueId = projectId,
+                isProjectPath = true,
+                extraPath = TICKETS_ENDPOINT,
+                extraId = "/$ticketId"
+            ),
+            payload = payload
+        )
+    }
+
+    @RequestPath(path = "/api/v1/users/{id}/revenues/projects/{revenue_id}/tickets", method = POST)
+    suspend fun getTickets(
+        projectId: String,
+        page: Int,
+        period: RevenuePeriod,
+        retrievePendingTickets: Boolean,
+        retrieveClosedTickets: Boolean,
+    ): JsonObject {
+        val query = buildJsonObject {
+            put(PAGE_KEY, page)
+            put(REVENUE_PERIOD_KEY, period.name)
+            put(PENDING_TICKETS_KEY, retrievePendingTickets)
+            put(CLOSED_TICKETS_KEY, retrieveClosedTickets)
+        }
+        return execGet(
+            endpoint = assembleRevenuesEndpointPath(
+                revenueId = projectId,
+                isProjectPath = true,
+                extraPath = TICKETS_ENDPOINT
+            ),
+            query = query
+        )
+    }
+
+    /**
      * Method to execute the request to close a ticket
      *
-     * @param project The project revenue where close a ticket
+     * @param projectId The identifier of the project revenue where close a ticket
      * @param ticket The ticket to close
      *
      * @return the result of the request as [JsonObject]
      */
     @RequestPath(path = "/api/v1/users/{id}/revenues/projects/{revenue_id}/tickets/{ticket_id}", method = PUT)
     suspend fun closeTicket(
-        project: ProjectRevenue,
-        ticket: TicketRevenue
+        projectId: String,
+        ticket: TicketRevenue,
     ): JsonObject {
         return execPut(
             endpoint = assembleRevenuesEndpointPath(
-                revenueId = project.id,
+                revenueId = projectId,
                 isProjectPath = true,
                 extraPath = TICKETS_ENDPOINT,
                 extraId = "/${ticket.id}"
@@ -488,7 +579,7 @@ open class NeutronRequester(
     /**
      * Method to execute the request to delete a ticket
      *
-     * @param project The project revenue where delete a ticket
+     * @param projectId The identifier of project revenue where delete a ticket
      * @param ticket The ticket to delete
      *
      * @return the result of the request as [JsonObject]
@@ -498,12 +589,12 @@ open class NeutronRequester(
         method = DELETE
     )
     suspend fun deleteTicket(
-        project: ProjectRevenue,
-        ticket: TicketRevenue
+        projectId: String,
+        ticket: TicketRevenue,
     ): JsonObject {
         return execDelete(
             endpoint = assembleRevenuesEndpointPath(
-                revenueId = project.id,
+                revenueId = projectId,
                 isProjectPath = true,
                 extraPath = TICKETS_ENDPOINT,
                 extraId = "/${ticket.id}"
