@@ -19,12 +19,12 @@ import com.tecknobit.neutron.ui.screens.revenues.data.TicketRevenue
 import com.tecknobit.neutroncore.CURRENCY_KEY
 import com.tecknobit.neutroncore.GENERAL_REVENUES_KEY
 import com.tecknobit.neutroncore.IS_PROJECT_REVENUE_KEY
+import com.tecknobit.neutroncore.LABELS_KEY
 import com.tecknobit.neutroncore.PROJECTS_KEY
 import com.tecknobit.neutroncore.PROJECT_REVENUES_KEY
 import com.tecknobit.neutroncore.REVENUES_KEY
 import com.tecknobit.neutroncore.REVENUE_DATE_KEY
 import com.tecknobit.neutroncore.REVENUE_DESCRIPTION_KEY
-import com.tecknobit.neutroncore.REVENUE_LABELS_KEY
 import com.tecknobit.neutroncore.REVENUE_PERIOD_KEY
 import com.tecknobit.neutroncore.REVENUE_TITLE_KEY
 import com.tecknobit.neutroncore.REVENUE_VALUE_KEY
@@ -135,12 +135,12 @@ open class NeutronRequester(
         )
     }
 
-    @RequestPath(path = "/api/v1/users/{id}/revenues/revenue_labels", method = GET)
+    @RequestPath(path = "/api/v1/users/{id}/revenues/labels", method = GET)
     suspend fun getRevenuesLabels(): JsonObject {
         return execGet(
             endpoint = assembleCustomEndpointPath(
                 customEndpoint = REVENUES_KEY,
-                subEndpoint = REVENUE_LABELS_KEY
+                subEndpoint = LABELS_KEY
             )
         )
     }
@@ -174,7 +174,7 @@ open class NeutronRequester(
     ): JsonObject {
         return buildJsonObject {
             put(REVENUE_PERIOD_KEY, period.name)
-            putJsonArray(REVENUE_LABELS_KEY) {
+            putJsonArray(LABELS_KEY) {
                 labels.forEach { add(it.text) }
             }
             put(GENERAL_REVENUES_KEY, retrieveGeneralRevenues)
@@ -184,6 +184,7 @@ open class NeutronRequester(
 
     suspend fun insertRevenue(
         addingGeneralRevenue: Boolean,
+        revenue: Revenue? = null,
         title: String,
         description: String,
         value: Double,
@@ -193,21 +194,102 @@ open class NeutronRequester(
         val revenueDateMillis = revenueDate
             .toInstant(TimeZone.currentSystemDefault())
             .toEpochMilliseconds()
-        return if (addingGeneralRevenue) {
-            createGeneralRevenue(
-                title = title,
-                description = description,
-                value = value,
-                revenueDate = revenueDateMillis,
-                labels = labels
-            )
+        return if (revenue != null) {
+            if (addingGeneralRevenue) {
+                editGeneralRevenue(
+                    revenue = revenue,
+                    title = title,
+                    description = description,
+                    value = value,
+                    revenueDate = revenueDateMillis,
+                    labels = labels
+                )
+            } else {
+                editProjectRevenue(
+                    revenue = revenue,
+                    title = title,
+                    value = value,
+                    revenueDate = revenueDateMillis
+                )
+            }
         } else {
-            createProjectRevenue(
-                title = title,
-                value = value,
-                revenueDate = revenueDateMillis
-            )
+            if (addingGeneralRevenue) {
+                createGeneralRevenue(
+                    title = title,
+                    description = description,
+                    value = value,
+                    revenueDate = revenueDateMillis,
+                    labels = labels
+                )
+            } else {
+                createProjectRevenue(
+                    title = title,
+                    value = value,
+                    revenueDate = revenueDateMillis
+                )
+            }
         }
+    }
+
+    @Wrapper
+    @RequestPath(path = "/api/v1/users/{id}/revenues/{revenue_id}", method = PATCH)
+    private suspend fun editGeneralRevenue(
+        revenue: Revenue,
+        title: String,
+        description: String,
+        value: Double,
+        revenueDate: Long,
+        labels: List<RevenueLabel> = emptyList(),
+    ): JsonObject {
+        val payload = buildJsonObject {
+            put(REVENUE_DESCRIPTION_KEY, description)
+            put(LABELS_KEY, Json.encodeToJsonElement(labels))
+        }
+        return editRevenue(
+            revenue = revenue,
+            title = title,
+            value = value,
+            revenueDate = revenueDate,
+            payload = payload
+        )
+    }
+
+    @Wrapper
+    @RequestPath(path = "/api/v1/users/{id}/revenues/{revenue_id}", method = PATCH)
+    private suspend fun editProjectRevenue(
+        revenue: Revenue,
+        title: String,
+        value: Double,
+        revenueDate: Long,
+    ): JsonObject {
+        return editRevenue(
+            revenue = revenue,
+            title = title,
+            value = value,
+            revenueDate = revenueDate
+        )
+    }
+
+    @RequestPath(path = "/api/v1/users/{id}/revenues/{revenue_id}", method = PATCH)
+    private suspend fun editRevenue(
+        revenue: Revenue,
+        payload: JsonObject? = null,
+        title: String,
+        value: Double,
+        revenueDate: Long,
+    ): JsonObject {
+        val revenuePayload = assembleRevenuePayload(
+            payload = payload,
+            title = title,
+            value = value,
+            revenueDate = revenueDate
+        )
+        return execPatch(
+            endpoint = assembleRevenuesEndpointPath(
+                revenueId = revenue.id
+            ),
+            payload = revenuePayload
+        )
     }
 
     /**
@@ -232,7 +314,7 @@ open class NeutronRequester(
     ): JsonObject {
         val payload = buildJsonObject {
             put(REVENUE_DESCRIPTION_KEY, description)
-            put(REVENUE_LABELS_KEY, labels.joinToString())
+            put(LABELS_KEY, Json.encodeToJsonElement(labels))
         }
         return createRevenue(
             title = title,
@@ -280,10 +362,28 @@ open class NeutronRequester(
         payload: JsonObject? = null,
         title: String,
         value: Double,
-        revenueDate: Long
+        revenueDate: Long,
+    ): JsonObject {
+        val revenuePayload = assembleRevenuePayload(
+            payload = payload,
+            title = title,
+            value = value,
+            revenueDate = revenueDate
+        )
+        return execPost(
+            endpoint = assembleRevenuesEndpointPath(),
+            payload = revenuePayload
+        )
+    }
+
+    private fun assembleRevenuePayload(
+        payload: JsonObject?,
+        title: String,
+        value: Double,
+        revenueDate: Long,
     ): JsonObject {
         val isProjectRevenue = payload == null
-        val revenuePayload = buildJsonObject {
+        return buildJsonObject {
             put(IS_PROJECT_REVENUE_KEY, isProjectRevenue)
             put(REVENUE_TITLE_KEY, title)
             put(REVENUE_VALUE_KEY, value)
@@ -294,25 +394,17 @@ open class NeutronRequester(
                 }
             }
         }
-        return execPost(
-            endpoint = assembleRevenuesEndpointPath(),
-            payload = revenuePayload
-        )
     }
 
-    /**
-     * Method to execute the request to get a project revenue
-     *
-     * @param revenue The project revenue to get
-     *
-     * @return the result of the request as [JsonObject]
-     */
-    @RequestPath(path = "/api/v1/users/{id}/revenues/projects/{revenue_id}", method = GET)
-    suspend fun getProjectRevenue(
-        revenue: Revenue
+    @Wrapper
+    @RequestPath(path = "/api/v1/users/{id}/revenues/{revenue_id}", method = GET)
+    suspend fun getRevenue(
+        revenueId: String,
     ): JsonObject {
-        return getProjectRevenue(
-            revenueId = revenue.id
+        return execGet(
+            endpoint = assembleRevenuesEndpointPath(
+                revenueId = revenueId
+            )
         )
     }
 

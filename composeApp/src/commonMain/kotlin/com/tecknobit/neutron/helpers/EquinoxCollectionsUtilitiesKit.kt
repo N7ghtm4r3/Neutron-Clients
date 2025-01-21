@@ -17,10 +17,10 @@ fun <T> MutableCollection<T>.retainAndAdd(
 
 @Deprecated("TO USE THE BUILT-IN IN EQUINOX ONE")
 fun <T> MutableCollection<T>.mergeIfNotContained(
-    mergeCollection: Collection<T>
+    collectionToMerge: Collection<T>,
 ) {
     val supportSet = this.toHashSet()
-    mergeCollection.forEach { element ->
+    collectionToMerge.forEach { element ->
         if(!supportSet.contains(element))
             this.add(element)
     }

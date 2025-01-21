@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -44,6 +45,7 @@ import com.tecknobit.equinoxcompose.components.EquinoxTextField
 import com.tecknobit.equinoxcompose.components.getContrastColor
 import com.tecknobit.equinoxcompose.utilities.toHex
 import com.tecknobit.neutron.helpers.mergeIfNotContained
+import com.tecknobit.neutron.helpers.retainAndAdd
 import com.tecknobit.neutron.ui.components.LabelsGrid
 import com.tecknobit.neutron.ui.icons.ArrowSelectorTool
 import com.tecknobit.neutron.ui.screens.insert.revenue.presentation.InsertRevenueScreenViewModel
@@ -253,31 +255,44 @@ private fun DummyRevenueLabelBadge(
     }
 }
 
-// TODO: CHECK THE REAL BEHAVIOR
 @Composable
 @NonRestartableComposable
 private fun SelectLabels(
     show: MutableState<Boolean>,
     viewModel: InsertRevenueScreenViewModel
 ) {
-    Column {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
         val tmpLabels = remember { mutableStateListOf<RevenueLabel>() }
-        LaunchedEffect(viewModel.labels) {
-            tmpLabels.addAll(viewModel.labels)
+        LaunchedEffect(show.value) {
+            tmpLabels.mergeIfNotContained(
+                collectionToMerge = viewModel.labels
+            )
         }
-        LabelsGrid(
+        Column(
             modifier = Modifier
-                .padding(
-                    horizontal = 16.dp
-                ),
-            labelsRetriever = viewModel,
-            labels = tmpLabels
-        )
+                .weight(
+                    weight = 1f,
+                    fill = false
+                )
+        ) {
+            LabelsGrid(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(
+                        horizontal = 16.dp
+                    ),
+                labelsRetriever = viewModel,
+                labels = tmpLabels
+            )
+        }
         ConfirmOperationButton(
             visible = tmpLabels.isNotEmpty(),
             action = {
-                viewModel.labels.mergeIfNotContained(
-                    mergeCollection = tmpLabels
+                viewModel.labels.retainAndAdd(
+                    supportCollection = tmpLabels
                 )
                 show.value = false
             }
@@ -288,10 +303,12 @@ private fun SelectLabels(
 @Composable
 @NonRestartableComposable
 private fun ColumnScope.ConfirmOperationButton(
+    modifier: Modifier = Modifier,
     visible: Boolean,
-    action: () -> Unit
+    action: () -> Unit,
 ) {
     AnimatedVisibility(
+        modifier = modifier,
         visible = visible
     ) {
         Row (

@@ -61,6 +61,7 @@ import com.tecknobit.neutron.ui.screens.shared.presenters.NeutronScreen
 import com.tecknobit.neutroncore.helpers.NeutronInputsValidator.isRevenueDescriptionValid
 import com.tecknobit.neutroncore.helpers.NeutronInputsValidator.isRevenueTitleValid
 import dev.darkokoa.datetimewheelpicker.WheelDateTimePicker
+import kotlinx.coroutines.delay
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone
@@ -156,9 +157,10 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
                 )
             },
             loadingRoutine = {
-                if(isEditing)
+                if (isEditing) {
+                    delay(500L) // FIXME: TO REMOVE WHEN COMPONENT BUILT-IN FIXED
                     revenue.value != null
-                else
+                } else
                     true
             }
         )

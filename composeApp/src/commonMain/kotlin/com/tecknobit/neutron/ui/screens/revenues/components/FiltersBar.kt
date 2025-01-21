@@ -5,6 +5,7 @@ package com.tecknobit.neutron.ui.screens.revenues.components
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.sizeIn
@@ -113,7 +114,6 @@ private fun LabelsChip(
     )
 }
 
-// TODO: CHECK THE REAL BEHAVIOR
 @Composable
 private fun LabelsDialog(
     filtering: MutableState<Boolean>,
@@ -122,7 +122,7 @@ private fun LabelsDialog(
     val supportLabelsList = remember { mutableListOf<RevenueLabel>() }
     LaunchedEffect(filtering.value) {
         supportLabelsList.mergeIfNotContained(
-            mergeCollection = viewModel.labelsFilter
+            collectionToMerge = viewModel.labelsFilter
         )
     }
     EquinoxAlertDialog(
@@ -140,6 +140,8 @@ private fun LabelsDialog(
         ),
         text = {
             LabelsGrid(
+                modifier = Modifier
+                    .fillMaxSize(),
                 labelsRetriever = viewModel,
                 labels = viewModel.labelsFilter
             )

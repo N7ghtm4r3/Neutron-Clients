@@ -6,7 +6,6 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -58,8 +57,7 @@ fun LabelsGrid(
         exit = fadeOut()
     ) {
         LazyVerticalGrid(
-            modifier = modifier
-                .fillMaxSize(),
+            modifier = modifier,
             columns = GridCells.Fixed(4),
             contentPadding = PaddingValues(
                 all = 5.dp

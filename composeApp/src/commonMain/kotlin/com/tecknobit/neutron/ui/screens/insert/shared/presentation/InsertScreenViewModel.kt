@@ -2,20 +2,25 @@ package com.tecknobit.neutron.ui.screens.insert.shared.presentation
 
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.MutableState
+import androidx.lifecycle.viewModelScope
 import com.tecknobit.equinoxcompose.viewmodels.EquinoxViewModel
 import com.tecknobit.equinoxcore.annotations.RequiresSuperCall
 import com.tecknobit.equinoxcore.annotations.Structure
+import com.tecknobit.equinoxcore.network.Requester.Companion.sendRequest
+import com.tecknobit.equinoxcore.network.Requester.Companion.toResponseData
 import com.tecknobit.neutron.helpers.KReviewer
 import com.tecknobit.neutron.navigator
+import com.tecknobit.neutron.requester
 import com.tecknobit.neutron.ui.components.screenkeyboard.ScreenKeyboardState
-import com.tecknobit.neutron.ui.screens.revenues.data.GeneralRevenue
 import com.tecknobit.neutron.ui.screens.revenues.data.Revenue
-import com.tecknobit.neutron.ui.screens.revenues.data.RevenueLabel
+import com.tecknobit.neutron.ui.screens.revenues.data.RevenueSerializer
 import com.tecknobit.neutroncore.helpers.NeutronInputsValidator.isRevenueDescriptionValid
 import com.tecknobit.neutroncore.helpers.NeutronInputsValidator.isRevenueTitleValid
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 import kotlinx.datetime.LocalDateTime
+import kotlinx.serialization.json.Json
 
 @Structure
 abstract class InsertScreenViewModel(
@@ -44,24 +49,28 @@ abstract class InsertScreenViewModel(
     lateinit var insertionDate: MutableState<LocalDateTime>
 
     @RequiresSuperCall
-    open fun retrieveRevenue() {
+    open fun retrieveRevenue(
+        onSuccess: (() -> Unit)? = null,
+    ) {
         if(revenueId == null)
             return
-        // TODO: MAKE THE REQUEST THEN
-        _revenue.value = GeneralRevenue.GeneralRevenueImpl(
-            id = "id",
-            title = "prova",
-            value = 100.0,
-            revenueDate = 1737055320000L,
-            description = "gagagaga",
-            labels = listOf(
-                RevenueLabel(
-                    id = "ga",
-                    color = "#594DB6",
-                    text = "ga"
-                )
+        viewModelScope.launch {
+            requester.sendRequest(
+                request = {
+                    getRevenue(
+                        revenueId = revenueId
+                    )
+                },
+                onSuccess = {
+                    _revenue.value = Json.decodeFromJsonElement(
+                        deserializer = RevenueSerializer,
+                        element = it.toResponseData()
+                    )
+                    onSuccess?.invoke()
+                },
+                onFailure = { showSnackbarMessage(it) }
             )
-        )
+        }
     }
 
     fun insert() {

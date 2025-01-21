@@ -4,6 +4,7 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.viewModelScope
 import com.tecknobit.equinoxcore.annotations.RequiresSuperCall
 import com.tecknobit.equinoxcore.network.Requester.Companion.sendRequest
+import com.tecknobit.neutron.helpers.mergeIfNotContained
 import com.tecknobit.neutron.requester
 import com.tecknobit.neutron.ui.screens.insert.shared.presentation.InsertScreenViewModel
 import com.tecknobit.neutron.ui.screens.revenues.data.GeneralRevenue
@@ -20,10 +21,15 @@ class InsertRevenueScreenViewModel(
     val labels = mutableStateListOf<RevenueLabel>()
 
     @RequiresSuperCall
-    override fun retrieveRevenue() {
-        super.retrieveRevenue()
-        if(_revenue.value != null && _revenue.value is GeneralRevenue)
-            labels.addAll((_revenue.value as GeneralRevenue).labels)
+    override fun retrieveRevenue(
+        onSuccess: (() -> Unit)?,
+    ) {
+        super.retrieveRevenue(
+            onSuccess = {
+                if (_revenue.value != null && _revenue.value is GeneralRevenue)
+                    labels.mergeIfNotContained((_revenue.value as GeneralRevenue).labels)
+            }
+        )
     }
 
     override fun insertRequest() {
@@ -32,6 +38,7 @@ class InsertRevenueScreenViewModel(
                 request = {
                     insertRevenue(
                         addingGeneralRevenue = addingGeneralRevenue.value,
+                        revenue = _revenue.value,
                         title = title.value,
                         description = description.value,
                         value = keyboardState.parseAmount(),
