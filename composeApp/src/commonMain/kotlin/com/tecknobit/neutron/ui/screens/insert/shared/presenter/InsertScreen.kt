@@ -56,6 +56,7 @@ import com.tecknobit.neutron.ui.components.screenkeyboard.ScreenKeyboardState.Co
 import com.tecknobit.neutron.ui.components.screenkeyboard.rememberKeyboardState
 import com.tecknobit.neutron.ui.screens.insert.shared.presentation.InsertScreenViewModel
 import com.tecknobit.neutron.ui.screens.revenues.data.GeneralRevenue
+import com.tecknobit.neutron.ui.screens.revenues.data.ProjectRevenue
 import com.tecknobit.neutron.ui.screens.revenues.data.Revenue
 import com.tecknobit.neutron.ui.screens.shared.presenters.NeutronScreen
 import com.tecknobit.neutroncore.helpers.NeutronInputsValidator.isRevenueDescriptionValid
@@ -422,9 +423,12 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
     @NonRestartableComposable
     private fun CollectStatesAfterLoading() {
         viewModel!!.keyboardState = rememberKeyboardState(
-            amount = if(isEditing)
-                revenue.value!!.value.toString()
-            else
+            amount = if (isEditing) {
+                if (revenue.value!! is ProjectRevenue)
+                    (revenue.value!! as ProjectRevenue).initialRevenue.value.toString()
+                else
+                    revenue.value!!.value.toString()
+            } else
                 ZERO
         )
         viewModel!!.addingGeneralRevenue = remember {
