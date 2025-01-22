@@ -83,6 +83,10 @@ actual fun CheckForUpdatesAndLaunch() {
         checkForUpdates()
 }
 
+/**
+ * Method to check whether are available any updates for the current application version.
+ * If available and allowed to install, after the installation enter in the application
+ */
 private fun checkForUpdates() {
     appUpdateManager.appUpdateInfo.addOnSuccessListener { info ->
         val isUpdateAvailable = info.updateAvailability() == UPDATE_AVAILABLE

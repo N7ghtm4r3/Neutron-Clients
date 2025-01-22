@@ -38,6 +38,14 @@ val titleStyle = TextStyle(
     fontSize = 20.sp
 )
 
+/**
+ * Custom [EquinoxAlertDialog] used to warn the user about the deletion of a [Revenue]
+ *
+ * @param show Whether the dialog is shown
+ * @param viewModel The support viewmodel for the screen
+ * @param revenue The revenue to delete
+ * @param onDelete The action to execute when the user confirm the revenue deletion
+ */
 @Composable
 @NonRestartableComposable
 fun DeleteRevenue(
@@ -66,6 +74,13 @@ fun DeleteRevenue(
     )
 }
 
+/**
+ * Custom [EquinoxAlertDialog] used to warn the user about the deletion of a [TicketRevenue]
+ *
+ * @param show Whether the dialog is shown
+ * @param viewModel The support viewmodel for the screen
+ * @param ticket The ticket to delete
+ */
 @Composable
 @NonRestartableComposable
 fun DeleteTicket(

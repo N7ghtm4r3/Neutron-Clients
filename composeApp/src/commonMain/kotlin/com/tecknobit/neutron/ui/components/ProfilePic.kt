@@ -13,10 +13,18 @@ import coil3.compose.AsyncImage
 import coil3.compose.LocalPlatformContext
 import coil3.request.ImageRequest
 import coil3.request.crossfade
+import com.tecknobit.neutron.imageLoader
 import neutron.composeapp.generated.resources.Res
 import neutron.composeapp.generated.resources.logo
 import org.jetbrains.compose.resources.painterResource
 
+/**
+ * Component used to display the profile picture of the [com.tecknobit.neutron.localUser]
+ *
+ * @param profilePic The picture to display
+ * @param size The size to apply to the component
+ * @param onClick The action to execute when the user clicked the component
+ */
 @Composable
 @NonRestartableComposable
 fun ProfilePic(
@@ -36,6 +44,7 @@ fun ProfilePic(
             .crossfade(enable = true)
             .crossfade(durationMillis = 500)
             .build(),
+        imageLoader = imageLoader,
         contentDescription = "User profile picture",
         error = painterResource(Res.drawable.logo),
         contentScale = ContentScale.Crop

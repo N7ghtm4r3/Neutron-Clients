@@ -26,7 +26,6 @@ actual fun CheckForUpdatesAndLaunch() {
  *
  */
 actual fun setUserLanguage() {
-    // TODO: TO IMPLEMENT AFTER 
     document.documentElement?.setAttribute("lang", localUser.language ?: DEFAULT_LANGUAGE)
 }
 

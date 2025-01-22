@@ -37,7 +37,7 @@ fun TicketsFilterBar(
             viewModel = viewModel
         )
         CategoryChip(
-            type = Res.string.pending,
+            category = Res.string.pending,
             onClick = { retrieve ->
                 viewModel.applyRetrievePendingTickets(
                     retrieve = retrieve
@@ -45,7 +45,7 @@ fun TicketsFilterBar(
             }
         )
         CategoryChip(
-            type = Res.string.closed,
+            category = Res.string.closed,
             onClick = { retrieve ->
                 viewModel.applyRetrieveClosedTickets(
                     retrieve = retrieve

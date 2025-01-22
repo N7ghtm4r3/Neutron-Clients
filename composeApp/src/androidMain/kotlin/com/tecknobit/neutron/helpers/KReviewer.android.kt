@@ -4,6 +4,11 @@ import com.google.android.play.core.review.ReviewManager
 import com.google.android.play.core.review.ReviewManagerFactory
 import com.tecknobit.equinoxcompose.utilities.context.ContextActivityProvider
 
+/**
+ * The `KReviewer` class is useful to manage the biometric authentication
+ *
+ * @author N7ghtm4r3 - Tecknobit
+ */
 @Suppress("EXPECT_ACTUAL_CLASSIFIERS_ARE_IN_BETA_WARNING")
 actual class KReviewer actual constructor() {
 
@@ -17,6 +22,12 @@ actual class KReviewer actual constructor() {
      */
     private var reviewManager: ReviewManager = ReviewManagerFactory.create(activity)
 
+    /**
+     * Method to review in-app the application
+     *
+     * @param flowAction The action to execute when the review form appears or not and if appeared
+     * the when user dismissed the action or leaved a review
+     */
     actual fun reviewInApp(
         flowAction: () -> Unit
     ) {

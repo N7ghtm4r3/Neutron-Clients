@@ -8,19 +8,41 @@ import com.tecknobit.neutroncore.enums.NeutronCurrency
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.jsonPrimitive
 
+/**
+ * The `NeutronLocalUser` class is useful to represent a user in the client application
+ *
+ * @author N7ghtm4r3 - Tecknobit
+ */
 class NeutronLocalUser : EquinoxLocalUser(
     localStoragePath = "Neutron"
 ) {
 
+    /**
+     * `currency` the currency of the user
+     */
     var currency: NeutronCurrency = NeutronCurrency.DOLLAR
         set(value) {
-            setPreference(
-                key = CURRENCY_KEY,
-                value = value.name
-            )
-            field = value
+            if (value != field) {
+                setPreference(
+                    key = CURRENCY_KEY,
+                    value = value.name
+                )
+                field = value
+            }
         }
 
+    /**
+     * Method to insert and initialize a new local user.
+     *
+     * @param hostAddress The host address with which the user communicates.
+     * @param name The name of the user.
+     * @param surname The surname of the user.
+     * @param email The email address of the user.
+     * @param password The password of the user.
+     * @param language The preferred language of the user.
+     * @param response The payload response received from an authentication request.
+     * @param custom Custom parameters added during the customization of the equinox user
+     */
     @RequiresSuperCall
     @CustomParametersOrder(CURRENCY_KEY)
     override fun insertNewUser(
@@ -48,6 +70,9 @@ class NeutronLocalUser : EquinoxLocalUser(
         )
     }
 
+    /**
+     * Method to init the local user session
+     */
     @RequiresSuperCall
     override fun initLocalUser() {
         super.initLocalUser()

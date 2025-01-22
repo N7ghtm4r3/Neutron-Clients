@@ -12,6 +12,12 @@ import androidx.compose.ui.unit.dp
 import com.tecknobit.neutron.bodyFontFamily
 import com.tecknobit.neutron.ui.screens.revenues.data.GeneralRevenue
 
+/**
+ * Used to display the description of a [revenue]
+ *
+ * @param expanded Whether the description is visible
+ * @param revenue The revenue from retrieve the description to display
+ */
 @Composable
 @NonRestartableComposable
 fun RevenueDescription(

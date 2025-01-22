@@ -66,7 +66,7 @@ fun FiltersBar(
             viewModel = viewModel
         )
         CategoryChip(
-            type = Res.string.generals,
+            category = Res.string.generals,
             onClick = { retrieve ->
                 viewModel.applyRetrieveGeneralRevenuesFilter(
                     retrieve = retrieve
@@ -74,7 +74,7 @@ fun FiltersBar(
             }
         )
         CategoryChip(
-            type = Res.string.projects,
+            category = Res.string.projects,
             onClick = { retrieve ->
                 viewModel.applyRetrieveProjectsFilter(
                     retrieve = retrieve

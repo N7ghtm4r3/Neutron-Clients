@@ -28,6 +28,12 @@ import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.pluralStringResource
 import org.jetbrains.compose.resources.stringResource
 
+/**
+ * Used to display the information of a [TicketRevenue] such title, opening date, closing date, etc
+ *
+ * @param viewModel The support viewmodel for the screen
+ * @param ticket The ticket to retrieve the information to display
+ */
 @Composable
 @NonRestartableComposable
 fun TicketInfo(
@@ -71,13 +77,21 @@ fun TicketInfo(
     }
 }
 
+/**
+ * Used to display the information of a [Revenue] such title, value, etc
+ *
+ * @param viewModel The support viewmodel for the screen
+ * @param revenue The revenue from retrieve the information to display
+ * @param customTitle Value of a custom title to use for the component
+ * @param dateHeader The header of the date
+ */
 @Composable
 @NonRestartableComposable
 fun RevenueInfo(
     viewModel: RevenueRelatedScreenViewModel,
     revenue: Revenue,
+    customTitle: String? = null,
     dateHeader: StringResource = Res.string.date,
-    customTitle: String? = null
 ) {
     val hideBalances by viewModel.hideBalances.collectAsState()
     Column {

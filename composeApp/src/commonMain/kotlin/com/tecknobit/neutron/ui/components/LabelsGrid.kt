@@ -38,6 +38,13 @@ import com.tecknobit.neutron.ui.screens.shared.presentations.RevenueLabelsRetrie
 import neutron.composeapp.generated.resources.Res
 import neutron.composeapp.generated.resources.no_labels_available
 
+/**
+ * Grid used to display a list of [labels]
+ *
+ * @param modifier The modifier to apply to the component
+ * @param labelsRetriever The retriever used to retrieve the labels to display
+ * @param labels The support labels list used to add or remove the labels selected or unselected
+ */
 @Composable
 @NonRestartableComposable
 fun LabelsGrid(

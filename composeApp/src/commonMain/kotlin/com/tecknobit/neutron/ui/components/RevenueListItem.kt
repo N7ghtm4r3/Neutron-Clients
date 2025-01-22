@@ -23,6 +23,21 @@ import com.tecknobit.neutron.ui.screens.revenues.data.Revenue
 import com.tecknobit.neutron.ui.screens.revenues.data.RevenueLabel
 import com.tecknobit.neutron.ui.screens.shared.presentations.RevenueRelatedScreenViewModel
 
+/**
+ * Custom [ListItem] used to display and to manage a [revenue]
+ *
+ * @param viewModel The support viewmodel for the screen
+ * @param revenue The revenue to display
+ * @param labels The labels attached to the [revenue]
+ * @param containerColor The color to apply to the container
+ * @param overline The overline section of the component
+ * @param info The info section of the component
+ * @param allowEdit Whether the edit of the revenue is allowed
+ * @param onEdit The action to execute when the user clicked the edit button
+ * @param deleteIcon The icon of the delete button
+ * @param actionButton The action button
+ * @param deleteAlertDialog The related dialog used to warn about the [revenue] deletion
+ */
 @Composable
 @NonRestartableComposable
 fun RevenueListItem(
@@ -67,6 +82,15 @@ fun RevenueListItem(
     )
 }
 
+/**
+ * The toolbar of the [RevenueListItem] component
+ *
+ * @param allowEdit Whether the edit of the revenue is allowed
+ * @param onEdit The action to execute when the user clicked the edit button
+ * @param deleteIcon The icon of the delete button
+ * @param actionButton The action button
+ * @param deleteAlertDialog The related dialog used to warn about a revenue deletion
+ */
 @Composable
 @NonRestartableComposable
 private fun RevenueToolbar(

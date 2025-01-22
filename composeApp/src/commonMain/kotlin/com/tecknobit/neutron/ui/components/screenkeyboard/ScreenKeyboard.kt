@@ -34,10 +34,23 @@ import com.tecknobit.neutron.MAX_CONTAINER_WIDTH
 import com.tecknobit.neutron.displayFontFamily
 import com.tecknobit.neutron.ui.components.screenkeyboard.ScreenKeyboardState.Companion.DOT_CHARACTER
 
+/**
+ * `buttons` the buttons list displayed in the keyboard, includes also the special buttons as backspace
+ * and dot separator
+ */
 private val buttons = listOf("1", "2", "3", "4", "5", "6", "7", "8", "9", "backspace", "0", ".")
 
+/**
+ * `BACKSPACE_INDEX` constant value to indicate the index of the [Backspace] button
+ */
 private const val BACKSPACE_INDEX = 9
 
+/**
+ * Custom keyboard displayed as component on screen
+ *
+ * @param modifier The modifier to apply to the component
+ * @param state The state manager of the component
+ */
 @Composable
 @NonRestartableComposable
 fun ScreenKeyboard(
@@ -83,6 +96,11 @@ fun ScreenKeyboard(
     }
 }
 
+/**
+ * Method to handle the hardware keyboard inputs and register them with the [state]
+ *
+ * @param state The state manager of the [ScreenKeyboard] component
+ */
 private inline fun Modifier.attachHardwareKeyboardEvents(
     state: ScreenKeyboardState
 ) : Modifier {
@@ -166,6 +184,11 @@ private inline fun Modifier.attachHardwareKeyboardEvents(
     }
 }
 
+/**
+ * Custom button used to remove the last character inserted in the [state]
+ *
+ * @param state The state manager of the [ScreenKeyboard] component
+ */
 @Composable
 @NonRestartableComposable
 private fun Backspace(
@@ -184,6 +207,12 @@ private fun Backspace(
     }
 }
 
+/**
+ * Custom button used to insert the amount value (and the dot separator) in the  [state]
+ *
+ * @param state The state manager of the [ScreenKeyboard] component
+ * @param digit The value of the digit managed by the button
+ */
 @Composable
 @NonRestartableComposable
 private fun DigitButton(

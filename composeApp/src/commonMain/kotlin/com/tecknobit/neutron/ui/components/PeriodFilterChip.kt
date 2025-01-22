@@ -33,6 +33,11 @@ import neutron.composeapp.generated.resources.last_year
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 
+/**
+ * Custom [FilterChip] used to select a [RevenuePeriod] value
+ *
+ * @param viewModel The support viewmodel for the screen
+ */
 @Composable
 @NonRestartableComposable
 fun PeriodFilterChip(
@@ -66,6 +71,12 @@ fun PeriodFilterChip(
     }
 }
 
+/**
+ * Menu to display and to select a specific [RevenuePeriod] value
+ *
+ * @param viewModel The support viewmodel for the screen
+ * @param expanded Whether the menu has been expanded or not
+ */
 @Composable
 @NonRestartableComposable
 private fun PeriodsMenu(
@@ -94,13 +105,23 @@ private fun PeriodsMenu(
     }
 }
 
+/**
+ * Method to convert a [RevenuePeriod] value as [String]
+ *
+ * @return the converted value as [String]
+ */
 @Composable
 private fun RevenuePeriod.asText() : String {
     return stringResource(
         resource = this.asResource()
-    ).capitalize()
+    ).replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() }
 }
 
+/**
+ * Method to internationalize the [RevenuePeriod] value
+ *
+ * @return the international value of the [RevenuePeriod] as [StringResource]
+ */
 private fun RevenuePeriod.asResource() : StringResource {
     return when(this) {
         LAST_WEEK -> Res.string.last_week_period

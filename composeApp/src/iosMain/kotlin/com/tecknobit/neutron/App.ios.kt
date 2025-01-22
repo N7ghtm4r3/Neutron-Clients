@@ -11,6 +11,10 @@ import platform.Foundation.NSUserDefaults
 import platform.LocalAuthentication.LAContext
 import platform.LocalAuthentication.LAPolicyDeviceOwnerAuthenticationWithBiometrics
 
+/**
+ * `context` the context used to check the availability about the bio-auth and then evaluate the policy
+ * to validate the authentication with the biometrics
+ */
 private val context = LAContext()
 
 /**
@@ -24,6 +28,10 @@ actual fun CheckForUpdatesAndLaunch() {
     authenticateWithBiometrics()
 }
 
+/**
+ * Method to execute the bio-authentication if available and then enter in the application
+ *
+ */
 private fun authenticateWithBiometrics() {
     if (context.canEvaluatePolicy(LAPolicyDeviceOwnerAuthenticationWithBiometrics, null)) {
         context.evaluatePolicy(LAPolicyDeviceOwnerAuthenticationWithBiometrics, "") { success, _ ->

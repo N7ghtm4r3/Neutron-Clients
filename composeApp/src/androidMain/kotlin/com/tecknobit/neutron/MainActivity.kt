@@ -1,11 +1,13 @@
 package com.tecknobit.neutron
 
 import android.os.Bundle
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts.StartIntentSenderForResult
+import androidx.annotation.ContentView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
@@ -13,6 +15,13 @@ import com.tecknobit.ametistaengine.AmetistaEngine
 import com.tecknobit.equinoxcompose.session.setUpSession
 import com.tecknobit.equinoxcompose.utilities.context.ContextActivityProvider
 
+/**
+ * The [MainActivity] is used as entry point of Neutron's application for Android
+ *
+ * @author N7ghtm4r3 - Tecknobit
+ * @see ComponentActivity
+ *
+ */
 class MainActivity : AppCompatActivity() {
 
     companion object {
@@ -36,6 +45,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * If your ComponentActivity is annotated with [ContentView], this will
+     * call [setContentView] for you.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         appUpdateManager = AppUpdateManagerFactory.create(applicationContext)

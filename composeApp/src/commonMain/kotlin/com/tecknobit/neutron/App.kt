@@ -40,7 +40,6 @@ import neutron.composeapp.generated.resources.lilitaone
 import neutron.composeapp.generated.resources.roboto
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.Font
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 /**
  *`bodyFontFamily` the Neutron's body font family
@@ -108,10 +107,16 @@ const val INSERT_TICKET_SCREEN = "InsertTicketScreen"
  */
 const val PROJECT_REVENUE_SCREEN = "ProjectRevenueScreen"
 
+/**
+ * `MAX_CONTAINER_WIDTH` constant value used to give a max dimension to container for the large screens
+ */
+@Deprecated("USE THE EQUINOX BUILT-IN")
 val MAX_CONTAINER_WIDTH = 1280.dp
 
+/**
+ * Common entry point of the **Neutron** application
+ */
 @Composable
-@Preview
 fun App() {
     LaunchedEffect(Unit) {
         val ametistaEngine = AmetistaEngine.ametistaEngine

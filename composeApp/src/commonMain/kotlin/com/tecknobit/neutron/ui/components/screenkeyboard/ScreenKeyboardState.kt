@@ -9,6 +9,13 @@ import androidx.compose.runtime.saveable.SaverScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import com.tecknobit.neutron.ui.components.screenkeyboard.ScreenKeyboardState.Companion.ZERO
 
+/**
+ * Method to remember the [ScreenKeyboardState] during the recompositions
+ *
+ * @param amount The initial amount value to register
+ *
+ * @return the state as [ScreenKeyboardState]
+ */
 @Composable
 fun rememberKeyboardState(
     amount: String = ZERO
@@ -26,22 +33,42 @@ fun rememberKeyboardState(
     return keyboardSaver.value
 }
 
+/**
+ * The `ScreenKeyboardState` is used to register the [ScreenKeyboard]'s event and assemble the total
+ * amount value inserted
+ *
+ * @property amount The current amount value inserted with the [ScreenKeyboard]
+ *
+ * @author N7ghtm4r3 - Tecknobit
+ */
 class ScreenKeyboardState internal constructor(
     var amount: MutableState<String>
 ) {
 
     internal companion object {
 
+        /**
+         * `DOT_CHARACTER` constant value represents the `.` character
+         */
         const val DOT_CHARACTER = "."
 
+        /**
+         * `ZERO` constant value represents the `0` character
+         */
         const val ZERO = "0"
 
     }
 
+    /**
+     * Method to remove the last digit registered by the state and inserted in the [amount]
+     */
     fun removeLastDigit() {
         amount.value = amount.value.dropLast(1).ifEmpty { ZERO }
     }
 
+    /**
+     * Method to append a new [Int] digit in the total [amount]
+     */
     fun appendDigit(
         digit: Int
     ) {
@@ -50,6 +77,10 @@ class ScreenKeyboardState internal constructor(
         )
     }
 
+    /**
+     * Method to append a new [String] digit in the total [amount]. This method handles the [DOT_CHARACTER]
+     * insertion also
+     */
     fun appendDigit(
         digit: String
     ) {
@@ -62,16 +93,34 @@ class ScreenKeyboardState internal constructor(
             amount.value += digit
     }
 
+    /**
+     * Method to retrieve the current amount registered by the state
+     *
+     * @return the current amount as [String]
+     */
     fun currentAmount() : String {
         return amount.value
     }
 
+    /**
+     * Method to parse the current amount registered by the state
+     *
+     * @return the current amount as [Double]
+     */
     fun parseAmount() : Double {
         return amount.value.toDouble()
     }
 
 }
 
+/**
+ * The `ScreenKeyboardSaver` is used to save and restore the [ScreenKeyboardState] value during the
+ * recomposition to avoid to lose the current values calculated and registered
+ *
+ * @author N7ghtm4r3 - Tecknobit
+ *
+ * @see Saver
+ */
 internal object ScreenKeyboardSaver : Saver<ScreenKeyboardState, MutableState<String>> {
 
     /**
