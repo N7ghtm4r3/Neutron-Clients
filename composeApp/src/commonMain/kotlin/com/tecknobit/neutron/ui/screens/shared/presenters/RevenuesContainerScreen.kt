@@ -19,16 +19,31 @@ import com.tecknobit.equinoxcompose.utilities.ResponsiveContent
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 
+/**
+ * The `RevenuesContainerScreen` interface allows to give the basic behavior to those screens which
+ * contains a list of revenues
+ *
+ * @author N7ghtm4r3 - Tecknobit
+ */
 interface RevenuesContainerScreen {
 
     companion object {
 
+        /**
+         *`HIDE_BALANCE` constant value used to hide balances values
+         */
         const val HIDE_BALANCE = "****"
 
     }
 
+    /**
+     *`hideBalances` state used to manage the visibilities of the balances
+     */
     var hideBalances: State<Boolean>
 
+    /**
+     * Custom floating action buttons responsively adapted
+     */
     @Composable
     @NonRestartableComposable
     fun FabButton() {
@@ -56,8 +71,16 @@ interface RevenuesContainerScreen {
         )
     }
 
+    /**
+     * Method to get the extended floating action button text
+     *
+     * @return the text to for the extended floating action as [StringResource]
+     */
     fun extendedFabText() : StringResource
 
+    /**
+     * The floating action button displayed on a medium and compact size class devices
+     */
     @Composable
     @NonRestartableComposable
     fun CompactFabButton() {
@@ -71,8 +94,14 @@ interface RevenuesContainerScreen {
         }
     }
 
+    /**
+     * Method to navigate to the related [com.tecknobit.neutron.ui.screens.insert.shared.presenter.InsertScreen]
+     */
     fun navToInsert()
 
+    /**
+     * The header section of the screen
+     */
     @Composable
     @NonRestartableComposable
     fun Header()

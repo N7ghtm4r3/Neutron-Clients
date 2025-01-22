@@ -80,20 +80,39 @@ import neutron.composeapp.generated.resources.no_revenues_yet
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 
+/**
+ * The [RevenuesScreen] displays the list of the revenues owned by the user
+ *
+ * @author N7ghtm4r3 - Tecknobit
+ * @see com.tecknobit.equinoxcompose.session.EquinoxScreen
+ * @see RevenuesContainerScreen
+ */
 class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
     viewModel = RevenuesScreenViewModel()
 ), RevenuesContainerScreen {
 
     private companion object {
 
+        /**
+         *`POSITIVE_TREND` the positive sign constant value
+         */
         const val POSITIVE_TREND = "+"
 
     }
 
+    /**
+     *`walletStatus` the current status of the wallet
+     */
     private lateinit var walletStatus: State<WalletStatus?>
 
+    /**
+     * `revenuePeriod` the current period of the revenues displayed
+     */
     private lateinit var revenuePeriod: State<RevenuePeriod>
 
+    /**
+     *`hideBalances` state used to manage the visibilities of the balances
+     */
     override lateinit var hideBalances: State<Boolean>
 
     /**
@@ -125,14 +144,25 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
         }
     }
 
+    /**
+     * Method to get the extended floating action button text
+     *
+     * @return the text to for the extended floating action as [StringResource]
+     */
     override fun extendedFabText(): StringResource {
         return Res.string.add_revenue
     }
 
+    /**
+     * Method to navigate to the related [com.tecknobit.neutron.ui.screens.insert.shared.presenter.InsertScreen]
+     */
     override fun navToInsert() {
         navigator.navigate(INSERT_REVENUE_SCREEN)
     }
 
+    /**
+     * Method to display the custom content of the screen
+     */
     @Composable
     @NonRestartableComposable
     private fun ScreenContent() {
@@ -146,6 +176,9 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
         }
     }
 
+    /**
+     * The header section of the screen
+     */
     @Composable
     @NonRestartableComposable
     override fun Header() {
@@ -181,6 +214,9 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
         }
     }
 
+    /**
+     * The section used to display the current status of the wallet
+     */
     @Composable
     @NonRestartableComposable
     private fun RowScope.WalletStatus() {
@@ -192,7 +228,7 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = formatWalletBalance(),
+                    text = manageWalletBalanceVisibility(),
                     fontFamily = displayFontFamily,
                     fontSize = 30.sp,
                     maxLines = 1,
@@ -214,13 +250,21 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
         }
     }
 
-    private fun formatWalletBalance(): String{
+    /**
+     * Method to manage the wallet balance visibility based on the [hideBalances]
+     *
+     * @return the wallet balance value to display as [String]
+     */
+    private fun manageWalletBalanceVisibility(): String {
         return if(hideBalances.value)
             "****"
         else
             "${walletStatus.value!!.totalEarnings}" + localUser.currency.symbol
     }
 
+    /**
+     * The section used to display the current trend of the wallet
+     */
     @Composable
     @NonRestartableComposable
     private fun WalletTrend() {
@@ -285,6 +329,9 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
         }
     }
 
+    /**
+     * The user profile picture used to navigate to the [com.tecknobit.neutron.ui.screens.profile.presenter.ProfileScreen]
+     */
     @Composable
     @NonRestartableComposable
     private fun RowScope.UserProfilePicture() {
@@ -307,6 +354,9 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
         }
     }
 
+    /**
+     * The current revenues owned by the user
+     */
     @Composable
     @NonRestartableComposable
     private fun Revenues() {
@@ -347,6 +397,9 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
         }
     }
 
+    /**
+     * Method invoked when the [ShowContent] composable has been started
+     */
     override fun onStart() {
         super.onStart()
         viewModel!!.getWalletStatus()

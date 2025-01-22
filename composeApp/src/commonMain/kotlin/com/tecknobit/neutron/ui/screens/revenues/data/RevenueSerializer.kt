@@ -7,8 +7,19 @@ import kotlinx.serialization.json.JsonContentPolymorphicSerializer
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.jsonObject
 
+/**
+ * The `RevenueSerializer` object is used as custom serializer to correctly serialize the different
+ * revenues types
+ *
+ * @author N7ghtm4r3 - Tecknobit
+ *
+ * @see JsonContentPolymorphicSerializer
+ */
 object RevenueSerializer : JsonContentPolymorphicSerializer<Revenue>(Revenue::class) {
 
+    /**
+     * Determines a particular strategy for deserialization by looking on a parsed JSON [element].
+     */
     override fun selectDeserializer(
         element: JsonElement
     ) = when {

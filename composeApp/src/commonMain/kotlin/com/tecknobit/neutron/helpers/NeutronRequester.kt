@@ -56,6 +56,8 @@ import kotlinx.serialization.json.putJsonArray
  * @param host The host where is running the Neutron's backend
  * @param userId The user identifier
  * @param userToken The user token
+ * @param debugMode Whether the requester is still in development and who is developing needs the log of the requester's
+ * workflow, if it is enabled all the details of the requests sent and the errors occurred will be printed in the console
  *
  * @author N7ghtm4r3 - Tecknobit
  * @see Requester
@@ -90,7 +92,7 @@ open class NeutronRequester(
     }
 
     /**
-     * Method to execute the request to change the currency of the user
+     * Method to request to change the currency of the user
      *
      * @param newCurrency The new currency of the user
      *
@@ -109,7 +111,17 @@ open class NeutronRequester(
         )
     }
 
-    @RequestPath(path = "/api/v1/users/{id}/revenues", method = GET)
+    /**
+     * Method to request the current wallet status of the user
+     *
+     * @param period The period of the revenues to consider in the wallet count
+     * @param labels The labels used as filters
+     * @param retrieveGeneralRevenues Whether count also the general revenues
+     * @param retrieveProjectsRevenues Whether count also the project
+     *
+     * @return the result of the request as [JsonObject]
+     */
+    @RequestPath(path = "/api/v1/users/{id}/wallet", method = GET)
     suspend fun getWalletStatus(
         period: RevenuePeriod,
         labels: List<RevenueLabel>,
@@ -128,6 +140,13 @@ open class NeutronRequester(
         )
     }
 
+    /**
+     * Method to assemble an endpoint url about the wallet section
+     *
+     * @param subEndpoint The sub-endpoint of the path
+     *
+     * @return the endpoint url as [String]
+     */
     private fun assembleWalletEndpoint(
         subEndpoint: String = ""
     ) : String {
@@ -137,6 +156,11 @@ open class NeutronRequester(
         )
     }
 
+    /**
+     * Method to request the current labels created by the user
+     *
+     * @return the result of the request as [JsonObject]
+     */
     @RequestPath(path = "/api/v1/users/{id}/revenues/labels", method = GET)
     suspend fun getRevenuesLabels(): JsonObject {
         return execGet(
@@ -147,6 +171,17 @@ open class NeutronRequester(
         )
     }
 
+    /**
+     * Method to request the current revenues owned by the user
+     *
+     * @param page The page to request
+     * @param period The period of the revenues to consider in the wallet count
+     * @param labels The labels used as filters
+     * @param retrieveGeneralRevenues Whether count also the general revenues
+     * @param retrieveProjectsRevenues Whether count also the project
+     *
+     * @return the result of the request as [JsonObject]
+     */
     @RequestPath(path = "/api/v1/users/{id}/revenues", method = GET)
     suspend fun getRevenues(
         page: Int,
@@ -168,6 +203,16 @@ open class NeutronRequester(
         )
     }
 
+    /**
+     * Method to assemble the query for the [getWalletStatus] and the [getRevenues] requests
+     *
+     * @param period The period of the revenues to consider in the wallet count
+     * @param labels The labels used as filters
+     * @param retrieveGeneralRevenues Whether count also the general revenues
+     * @param retrieveProjectsRevenues Whether count also the project
+     *
+     * @return the query as [JsonObject]
+     */
     private fun assembleRevenuesQuery(
         period: RevenuePeriod,
         labels: List<RevenueLabel>,
@@ -184,6 +229,19 @@ open class NeutronRequester(
         }
     }
 
+    /**
+     * Method to request the revenue insertion, this includes both the add or editing actions
+     *
+     * @param addingGeneralRevenue Whether the revenue to insert is a [com.tecknobit.neutron.ui.screens.revenues.data.GeneralRevenue] one
+     * @param revenue The revenue to edit
+     * @param title The title of the general revenue
+     * @param description The description of the general revenue
+     * @param value The amount revenue value
+     * @param revenueDate The date when the revenue has been created
+     * @param labels The labels to attach to the general revenue
+     *
+     * @return the result of the request as [JsonObject]
+     */
     suspend fun insertRevenue(
         addingGeneralRevenue: Boolean,
         revenue: Revenue? = null,
@@ -231,7 +289,18 @@ open class NeutronRequester(
         }
     }
 
-    @Wrapper
+    /**
+     * Method to request to edit an existing general revenue
+     *
+     * @param revenue The revenue to edit
+     * @param title The title of the general revenue
+     * @param description The description of the general revenue
+     * @param value The amount revenue value
+     * @param revenueDate The date when the general revenue has been created
+     * @param labels The labels to attach to the general revenue
+     *
+     * @return the result of the request as [JsonObject]
+     */
     @RequestPath(path = "/api/v1/users/{id}/revenues/{revenue_id}", method = PATCH)
     private suspend fun editGeneralRevenue(
         revenue: Revenue,
@@ -254,7 +323,16 @@ open class NeutronRequester(
         )
     }
 
-    @Wrapper
+    /**
+     * Method to request to edit an existing project revenue
+     *
+     * @param revenue The revenue to edit
+     * @param title The title of the general revenue
+     * @param value The amount revenue value
+     * @param revenueDate The date when the project revenue has been created
+     *
+     * @return the result of the request as [JsonObject]
+     */
     @RequestPath(path = "/api/v1/users/{id}/revenues/{revenue_id}", method = PATCH)
     private suspend fun editProjectRevenue(
         revenue: Revenue,
@@ -270,6 +348,17 @@ open class NeutronRequester(
         )
     }
 
+    /**
+     * Method to request to edit an existing project revenue
+     *
+     * @param revenue The revenue to edit
+     * @param payload The payload with the extra information of a general revenue
+     * @param title The title of the general revenue
+     * @param value The amount revenue value
+     * @param revenueDate The date when the project revenue has been created
+     *
+     * @return the result of the request as [JsonObject]
+     */
     @RequestPath(path = "/api/v1/users/{id}/revenues/{revenue_id}", method = PATCH)
     private suspend fun editRevenue(
         revenue: Revenue,
@@ -293,7 +382,7 @@ open class NeutronRequester(
     }
 
     /**
-     * Method to execute the request to create a new general revenue
+     * Method to request to create a new general revenue
      *
      * @param title The title of the general revenue
      * @param description The description of the general revenue
@@ -303,7 +392,6 @@ open class NeutronRequester(
      *
      * @return the result of the request as [JsonObject]
      */
-    @Wrapper
     @RequestPath(path = "/api/v1/users/{id}/revenues", method = POST)
     private suspend fun createGeneralRevenue(
         title: String,
@@ -325,7 +413,7 @@ open class NeutronRequester(
     }
 
     /**
-     * Method to execute the request to create a new project revenue
+     * Method to request to create a new project revenue
      *
      * @param title The title of the project
      * @param value The initial revenue value
@@ -333,7 +421,6 @@ open class NeutronRequester(
      *
      * @return the result of the request as [JsonObject]
      */
-    @Wrapper
     @RequestPath(path = "/api/v1/users/{id}/revenues", method = POST)
     private suspend fun createProjectRevenue(
         title: String,
@@ -348,7 +435,7 @@ open class NeutronRequester(
     }
 
     /**
-     * Method to execute the request to create a new revenue
+     * Method to request to create a new revenue
      *
      * @param payload The payload to send
      * @param title The title of the revenue
@@ -376,6 +463,16 @@ open class NeutronRequester(
         )
     }
 
+    /**
+     * Method to assemble the payload for the [insertRevenue] request
+     *
+     * @param payload The payload with the extra information of a general revenue
+     * @param title The title of the general revenue
+     * @param value The amount revenue value
+     * @param revenueDate The date when the revenue has been created
+     *
+     * @return the payload as [JsonObject]
+     */
     private fun assembleRevenuePayload(
         payload: JsonObject?,
         title: String,
@@ -409,7 +506,7 @@ open class NeutronRequester(
     }
 
     /**
-     * Method to execute the request to get a project revenue
+     * Method to request to get a project revenue
      *
      * @param projectId The identifier of the project revenue to get
      *
@@ -484,7 +581,7 @@ open class NeutronRequester(
     }
 
     /**
-     * Method to execute the request to add a new ticket to a project revenue
+     * Method to request to add a new ticket to a project revenue
      *
      * @param projectId The identifier of the project where add the ticket
      *
@@ -506,7 +603,7 @@ open class NeutronRequester(
     }
 
     /**
-     * Method to execute the request to add a new ticket to a project revenue
+     * Method to request to add a new ticket to a project revenue
      *
      * @param projectId The identifier of the project where add the ticket
      *
@@ -554,7 +651,7 @@ open class NeutronRequester(
     }
 
     /**
-     * Method to execute the request to close a ticket
+     * Method to request to close a ticket
      *
      * @param projectId The identifier of the project revenue where close a ticket
      * @param ticket The ticket to close
@@ -577,7 +674,7 @@ open class NeutronRequester(
     }
 
     /**
-     * Method to execute the request to delete a ticket
+     * Method to request to delete a ticket
      *
      * @param projectId The identifier of project revenue where delete a ticket
      * @param ticket The ticket to delete
@@ -603,7 +700,7 @@ open class NeutronRequester(
     }
 
     /**
-     * Method to execute the request to delete a revenue
+     * Method to request to delete a revenue
      *
      * @param revenue The revenue to delete
      *

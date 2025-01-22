@@ -4,6 +4,7 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.viewModelScope
 import com.tecknobit.equinoxcompose.session.setHasBeenDisconnectedValue
 import com.tecknobit.equinoxcompose.session.setServerOfflineValue
+import com.tecknobit.equinoxcompose.viewmodels.EquinoxViewModel
 import com.tecknobit.equinoxcore.network.Requester.Companion.sendPaginatedRequest
 import com.tecknobit.equinoxcore.network.Requester.Companion.sendRequest
 import com.tecknobit.equinoxcore.network.Requester.Companion.toResponseData
@@ -22,19 +23,44 @@ import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.decodeFromJsonElement
 
+/**
+ * The `RevenuesScreenViewModel` class is the support class used by the [com.tecknobit.neutron.ui.screens.revenues.presenter.RevenuesScreen]
+ *
+ * @author N7ghtm4r3 - Tecknobit
+ * @see androidx.lifecycle.ViewModel
+ * @see com.tecknobit.equinoxcompose.session.Retriever
+ * @see EquinoxViewModel
+ * @see RevenueRelatedScreenViewModel
+ * @see RevenueLabelsRetriever
+ */
 class RevenuesScreenViewModel : RevenueRelatedScreenViewModel() , RevenueLabelsRetriever {
 
+    /**
+     *`_walletStatus` the current status of the wallet
+     */
     private val _walletStatus = MutableStateFlow<WalletStatus?>(
         value = null
     )
     val walletStatus: StateFlow<WalletStatus?> = _walletStatus
 
+    /**
+     *`labelsFilter` the list of the labels to use as filters
+     */
     var labelsFilter = mutableStateListOf<RevenueLabel>()
 
+    /**
+     *`retrieveGeneralRevenues` whether retrieve the general revenues
+     */
     private var retrieveGeneralRevenues: Boolean = true
 
+    /**
+     *`retrieveProjectsRevenues` whether retrieve the projects revenues
+     */
     private var retrieveProjectsRevenues: Boolean = true
 
+    /**
+     * Method to request the current status of the wallet
+     */
     fun getWalletStatus() {
         viewModelScope.launch {
             requester.sendRequest(
@@ -56,6 +82,11 @@ class RevenuesScreenViewModel : RevenueRelatedScreenViewModel() , RevenueLabelsR
         }
     }
 
+    /**
+     * Method to apply the labels filters
+     *
+     * @param onApply The action to execute when the filters have been applied
+     */
     fun applyLabelsFilters(
         onApply: () -> Unit
     ) {
@@ -63,6 +94,11 @@ class RevenuesScreenViewModel : RevenueRelatedScreenViewModel() , RevenueLabelsR
         onApply()
     }
 
+    /**
+     * Method to apply the [retrieveGeneralRevenues] filter
+     *
+     * @param retrieve whether retrieve or not the general revenues
+     */
     fun applyRetrieveGeneralRevenuesFilter(
         retrieve: Boolean
     ) {
@@ -70,6 +106,11 @@ class RevenuesScreenViewModel : RevenueRelatedScreenViewModel() , RevenueLabelsR
         refreshData()
     }
 
+    /**
+     * Method to apply the [retrieveProjectsRevenues] filter
+     *
+     * @param retrieve whether retrieve or not the projects revenues
+     */
     fun applyRetrieveProjectsFilter(
         retrieve: Boolean
     ) {
@@ -77,6 +118,9 @@ class RevenuesScreenViewModel : RevenueRelatedScreenViewModel() , RevenueLabelsR
         refreshData()
     }
 
+    /**
+     *`revenuesState` the state used to manage the pagination of the revenues
+     */
     val revenuesState = PaginationState<Int, Revenue>(
         initialPageKey = PaginatedResponse.DEFAULT_PAGE,
         onRequestPage = { page ->
@@ -86,6 +130,11 @@ class RevenuesScreenViewModel : RevenueRelatedScreenViewModel() , RevenueLabelsR
         }
     )
 
+    /**
+     * Method to load the revenues
+     *
+     * @param page The page to request
+     */
     private fun loadRevenues(
         page: Int,
     ) {
@@ -115,6 +164,9 @@ class RevenuesScreenViewModel : RevenueRelatedScreenViewModel() , RevenueLabelsR
         }
     }
 
+    /**
+     * Method to refresh the data after a filter applying or a revenue deletion
+     */
     override fun refreshData() {
         revenuesState.refresh()
         getWalletStatus()

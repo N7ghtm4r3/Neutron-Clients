@@ -9,6 +9,15 @@ import kotlinx.serialization.Serializable
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
 
+/**
+ * The `RevenueLabel` class is useful to represent a label attachable to a [GeneralRevenue]
+ *
+ * @property id The identifier of the label
+ * @property text The text of the label
+ * @property color The color of the label
+ *
+ * @author N7ghtm4r3 - Tecknobit
+ */
 @Serializable
 data class RevenueLabel(
     val id: String = Uuid.random().toHexString(),

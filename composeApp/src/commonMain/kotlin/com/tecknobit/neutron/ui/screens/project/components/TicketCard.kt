@@ -46,6 +46,14 @@ import neutron.composeapp.generated.resources.closed_status
 import neutron.composeapp.generated.resources.pending_status
 import org.jetbrains.compose.resources.stringResource
 
+/**
+ * Custom card used to display a ticket details
+ *
+ * @param viewModel The support viewmodel for the screen
+ * @param project The project where the ticket is attached
+ * @param ticket The ticket to display
+ * @param position The position occupied by the ticket in the list
+ */
 @Composable
 @NonRestartableComposable
 fun TicketCard(
@@ -93,6 +101,14 @@ fun TicketCard(
     )
 }
 
+/**
+ * Custom card used to display a ticket details
+ *
+ * @param viewModel The support viewmodel for the screen
+ * @param project The project where the ticket is attached
+ * @param ticket The ticket to display
+ * @param containerColor The color to use for the container
+ */
 @Composable
 @NonRestartableComposable
 private fun TicketRevenueContent(
@@ -176,6 +192,11 @@ private fun TicketRevenueContent(
     }
 }
 
+/**
+ * Method to get the related labels based on the current status of a ticket
+ *
+ * @return the ticket status labels as [List] of [RevenueLabel]
+ */
 @Composable
 private fun TicketRevenue.getTicketStatusLabel() : List<RevenueLabel> {
     val pending = stringResource(neutron.composeapp.generated.resources.Res.string.pending_status)

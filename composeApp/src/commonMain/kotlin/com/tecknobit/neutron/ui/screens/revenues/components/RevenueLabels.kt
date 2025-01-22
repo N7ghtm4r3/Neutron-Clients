@@ -26,6 +26,14 @@ import com.tecknobit.equinoxcompose.components.ChameleonText
 import com.tecknobit.equinoxcompose.utilities.toColor
 import com.tecknobit.neutron.ui.screens.revenues.data.RevenueLabel
 
+/**
+ * Component used to display the labels attached to a revenue
+ *
+ * @param contentPadding The padding to apply to the component
+ * @param labels The labels attached to the revenue
+ * @param trailingIcon The trailing icon section
+ * @param stickyHeaderContent The content of the sticky header
+ */
 @Composable
 @NonRestartableComposable
 fun RevenueLabels(
@@ -57,6 +65,14 @@ fun RevenueLabels(
     }
 }
 
+/**
+ * Badge used to display a [RevenueLabel] information
+ *
+ * @param modifier The modifier to apply to the component
+ * @param fontSize The size of the font
+ * @param trailingIcon The trailing icon section
+ * @param label The label to display
+ */
 @Composable
 @NonRestartableComposable
 private fun RevenueLabelBadge(

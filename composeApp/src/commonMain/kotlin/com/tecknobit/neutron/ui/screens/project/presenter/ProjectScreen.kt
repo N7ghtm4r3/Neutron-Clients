@@ -73,6 +73,15 @@ import neutron.composeapp.generated.resources.total_revenues
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 
+/**
+ * The [ProjectScreen] displays a project and the attached tickets
+ *
+ * @param projectId The identifier of the project displayed
+ *
+ * @author N7ghtm4r3 - Tecknobit
+ * @see com.tecknobit.equinoxcompose.session.EquinoxScreen
+ * @see RevenuesContainerScreen
+ */
 class ProjectScreen(
     projectId: String
 ) : EquinoxScreen<ProjectScreenViewModel>(
@@ -81,10 +90,19 @@ class ProjectScreen(
     )
 ), RevenuesContainerScreen {
 
+    /**
+     *`project` the current project displayed
+     */
     private lateinit var project: State<ProjectRevenue?>
 
+    /**
+     *`balance` the current balance of the project displayed
+     */
     private lateinit var balance: State<Double>
 
+    /**
+     *`hideBalances` state used to manage the visibilities of the balances
+     */
     override lateinit var hideBalances: State<Boolean>
 
     /**
@@ -113,14 +131,25 @@ class ProjectScreen(
         }
     }
 
+    /**
+     * Method to get the extended floating action button text
+     *
+     * @return the text to for the extended floating action as [StringResource]
+     */
     override fun extendedFabText(): StringResource {
         return Res.string.add_ticket
     }
 
+    /**
+     * Method to navigate to the related [com.tecknobit.neutron.ui.screens.insert.shared.presenter.InsertScreen]
+     */
     override fun navToInsert() {
         navigator.navigate("$INSERT_TICKET_SCREEN/${project.value!!.id}")
     }
 
+    /**
+     * Method to display the custom content of the screen
+     */
     @Composable
     @NonRestartableComposable
     private fun ScreenContent() {
@@ -134,6 +163,9 @@ class ProjectScreen(
         }
     }
 
+    /**
+     * The header section of the screen
+     */
     @Composable
     @NonRestartableComposable
     override fun Header() {
@@ -179,6 +211,9 @@ class ProjectScreen(
         }
     }
 
+    /**
+     * Custom navigation button to navigate back from the current screen to the previous one
+     */
     @Composable
     @NonRestartableComposable
     private fun NavButton() {
@@ -192,6 +227,9 @@ class ProjectScreen(
         }
     }
 
+    /**
+     * Toolbar used to manage a ticket
+     */
     @Composable
     @NonRestartableComposable
     private fun RowScope.Toolbar() {
@@ -227,6 +265,9 @@ class ProjectScreen(
         }
     }
 
+    /**
+     * Section related to the total revenues about the current project
+     */
     @Composable
     @NonRestartableComposable
     private fun TotalRevenues() {
@@ -273,6 +314,9 @@ class ProjectScreen(
         }
     }
 
+    /**
+     * The tickets attached to the project
+     */
     @Composable
     @NonRestartableComposable
     private fun Tickets() {
@@ -321,6 +365,9 @@ class ProjectScreen(
         }
     }
 
+    /**
+     * Method invoked when the [ShowContent] composable has been started
+     */
     override fun onStart() {
         super.onStart()
         viewModel!!.retrieveProject()

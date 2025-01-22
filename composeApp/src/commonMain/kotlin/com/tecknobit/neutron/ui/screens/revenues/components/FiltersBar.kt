@@ -44,6 +44,11 @@ import neutron.composeapp.generated.resources.labels
 import neutron.composeapp.generated.resources.projects
 import org.jetbrains.compose.resources.stringResource
 
+/**
+ * The bar used to filter the revenues list
+ *
+ * @param viewModel The support viewmodel for the screen
+ */
 @Composable
 @NonRestartableComposable
 fun FiltersBar(
@@ -84,6 +89,11 @@ fun FiltersBar(
     }
 }
 
+/**
+ * Custom [FilterChip] used to open the [LabelsDialog] to select the labels to use as filters
+ *
+ * @param viewModel The support viewmodel for the screen
+ */
 @Composable
 private fun LabelsChip(
     viewModel: RevenuesScreenViewModel
@@ -114,6 +124,12 @@ private fun LabelsChip(
     )
 }
 
+/**
+ * Dialog used to display the [LabelsGrid] to select the labels to use as filters
+ *
+ * @param filtering Whether the dialog is shown
+ * @param viewModel The support viewmodel for the screen
+ */
 @Composable
 private fun LabelsDialog(
     filtering: MutableState<Boolean>,

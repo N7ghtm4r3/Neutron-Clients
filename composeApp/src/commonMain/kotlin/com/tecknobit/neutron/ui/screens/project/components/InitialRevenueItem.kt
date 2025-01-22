@@ -18,6 +18,12 @@ import neutron.composeapp.generated.resources.first_income
 import neutron.composeapp.generated.resources.initial_revenue
 import org.jetbrains.compose.resources.stringResource
 
+/**
+ * Custom [ListItem] used to display an initial revenue of a project
+ *
+ * @param viewModel The support viewmodel for the screen
+ * @param initialRevenue The initial revenue to display
+ */
 @Composable
 @NonRestartableComposable
 fun InitialRevenueItem(

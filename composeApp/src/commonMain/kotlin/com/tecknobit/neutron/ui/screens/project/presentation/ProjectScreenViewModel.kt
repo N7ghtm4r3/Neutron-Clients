@@ -3,6 +3,7 @@ package com.tecknobit.neutron.ui.screens.project.presentation
 import androidx.lifecycle.viewModelScope
 import com.tecknobit.equinoxcompose.session.setHasBeenDisconnectedValue
 import com.tecknobit.equinoxcompose.session.setServerOfflineValue
+import com.tecknobit.equinoxcompose.viewmodels.EquinoxViewModel
 import com.tecknobit.equinoxcore.network.Requester.Companion.sendPaginatedRequest
 import com.tecknobit.equinoxcore.network.Requester.Companion.sendRequest
 import com.tecknobit.equinoxcore.network.Requester.Companion.toResponseContent
@@ -19,24 +20,50 @@ import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.decodeFromJsonElement
 
+/**
+ * The `ProjectScreenViewModel` class is the support class used by the [com.tecknobit.neutron.ui.screens.project.presenter.ProjectScreen]
+ *
+ * @param projectId The identifier of the project displayed
+ *
+ * @author N7ghtm4r3 - Tecknobit
+ * @see androidx.lifecycle.ViewModel
+ * @see com.tecknobit.equinoxcompose.session.Retriever
+ * @see EquinoxViewModel
+ * @see RevenueRelatedScreenViewModel
+ */
 class ProjectScreenViewModel(
     val projectId: String,
 ) : RevenueRelatedScreenViewModel() {
 
+    /**
+     *`_project` the current project displayed
+     */
     private val _project = MutableStateFlow<ProjectRevenue?>(
         value = null
     )
     val project: StateFlow<ProjectRevenue?> = _project
 
+    /**
+     *`_balance` the current balance of the project displayed
+     */
     private val _balance = MutableStateFlow(
         value = 0.0
     )
     val balance: StateFlow<Double> = _balance
 
+    /**
+     *`retrievePendingTickets` whether retrieve the pending tickets
+     */
     private var retrievePendingTickets: Boolean = true
 
+    /**
+     *`retrieveClosedTickets` whether retrieve the closed tickets
+     */
     private var retrieveClosedTickets: Boolean = true
 
+    /**
+     * Method to retrieve the project specified by the [projectId]
+     */
     fun retrieveProject() {
         viewModelScope.launch {
             requester.sendRequest(
@@ -55,6 +82,9 @@ class ProjectScreenViewModel(
         }
     }
 
+    /**
+     * Method to request the current balance of a project
+     */
     fun getProjectBalance() {
         viewModelScope.launch {
             requester.sendRequest(
@@ -73,6 +103,9 @@ class ProjectScreenViewModel(
         }
     }
 
+    /**
+     *`ticketsState` the state used to manage the pagination of the tickets
+     */
     val ticketsState = PaginationState<Int, TicketRevenue>(
         initialPageKey = PaginatedResponse.DEFAULT_PAGE,
         onRequestPage = { page ->
@@ -82,6 +115,11 @@ class ProjectScreenViewModel(
         }
     )
 
+    /**
+     * Method to load the tickets
+     *
+     * @param page The page to request
+     */
     private fun loadTickets(
         page: Int
     ) {
@@ -114,6 +152,11 @@ class ProjectScreenViewModel(
         }
     }
 
+    /**
+     * Method to apply the [retrievePendingTickets] filter
+     *
+     * @param retrieve whether retrieve or not the pending tickets
+     */
     fun applyRetrievePendingTickets(
         retrieve: Boolean
     ) {
@@ -121,6 +164,11 @@ class ProjectScreenViewModel(
         refreshData()
     }
 
+    /**
+     * Method to apply the [retrieveClosedTickets] filter
+     *
+     * @param retrieve whether retrieve or not the closed tickets
+     */
     fun applyRetrieveClosedTickets(
         retrieve: Boolean
     ) {
@@ -128,6 +176,11 @@ class ProjectScreenViewModel(
         refreshData()
     }
 
+    /**
+     * Method request to close a [ticket]
+     *
+     * @param ticket The ticket to close
+     */
     fun closeTicket(
         ticket: TicketRevenue,
     ) {
@@ -145,6 +198,11 @@ class ProjectScreenViewModel(
         }
     }
 
+    /**
+     * Method request to delete a [ticket]
+     *
+     * @param ticket The ticket to delete
+     */
     fun deleteTicket(
         ticket: TicketRevenue,
     ) {
@@ -162,6 +220,9 @@ class ProjectScreenViewModel(
         }
     }
 
+    /**
+     * Method to refresh the data after a filter applying or a revenue deletion
+     */
     override fun refreshData() {
         ticketsState.refresh()
         getProjectBalance()

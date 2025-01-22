@@ -41,6 +41,13 @@ import org.jetbrains.compose.resources.stringResource
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
 
+/**
+ * Custom card used to display a revenue details
+ *
+ * @param viewModel The support viewmodel for the screen
+ * @param revenue The revenue to display
+ * @param position The position occupied by the revenue in the list
+ */
 @Composable
 @NonRestartableComposable
 fun RevenueCard(
@@ -76,6 +83,13 @@ fun RevenueCard(
     )
 }
 
+/**
+ * Custom card used to display a [GeneralRevenue] details
+ *
+ * @param viewModel The support viewmodel for the screen
+ * @param revenue The revenue to display
+ * @param position The position occupied by the revenue in the list
+ */
 @Composable
 @NonRestartableComposable
 private fun GeneralRevenueCard(
@@ -116,6 +130,13 @@ private fun GeneralRevenueCard(
     )
 }
 
+/**
+ * The content of the [GeneralRevenue] information
+ *
+ * @param viewModel The support viewmodel for the screen
+ * @param revenue The revenue to display
+ * @param containerColor The color to use for the container
+ */
 @Composable
 @NonRestartableComposable
 private fun GeneralRevenueContent(
@@ -152,6 +173,13 @@ private fun GeneralRevenueContent(
     }
 }
 
+/**
+ * Custom card used to display a [ProjectRevenue] details
+ *
+ * @param viewModel The support viewmodel for the screen
+ * @param revenue The revenue to display
+ * @param position The position occupied by the revenue in the list
+ */
 @Composable
 @NonRestartableComposable
 private fun ProjectRevenueCard(
@@ -192,6 +220,13 @@ private fun ProjectRevenueCard(
     )
 }
 
+/**
+ * The content of the [ProjectRevenue] information
+ *
+ * @param viewModel The support viewmodel for the screen
+ * @param revenue The revenue to display
+ * @param containerColor The color to use for the container
+ */
 @Composable
 @NonRestartableComposable
 private fun ProjectRevenueContent(
@@ -224,6 +259,16 @@ private fun ProjectRevenueContent(
     )
 }
 
+/**
+ * Layout used to display a revenue item
+ *
+ * @param viewModel The support viewmodel for the screen
+ * @param revenue The revenue to display
+ * @param labels The labels attached to the revenue
+ * @param containerColor The color to use for the container
+ * @param deleteIcon The icon of the delete button
+ * @param actionButton The action button
+ */
 @Composable
 @NonRestartableComposable
 private fun RevenueItem(

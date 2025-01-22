@@ -18,6 +18,11 @@ import neutron.composeapp.generated.resources.Res
 import neutron.composeapp.generated.resources.closed
 import neutron.composeapp.generated.resources.pending
 
+/**
+ * The filters bar used to filter a tickets list
+ *
+ * @param viewModel The support viewmodel for the screen
+ */
 @Composable
 @NonRestartableComposable
 fun TicketsFilterBar(
