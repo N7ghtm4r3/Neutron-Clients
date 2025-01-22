@@ -114,7 +114,7 @@ const val PROJECT_REVENUE_SCREEN = "ProjectRevenueScreen"
 val MAX_CONTAINER_WIDTH = 1280.dp
 
 /**
- * Common entry point of the **Neutron** application
+ * Common entry point of The `Neutron** application
  */
 @Composable
 fun App() {

@@ -10,6 +10,16 @@ import com.tecknobit.neutron.requester
 import com.tecknobit.neutroncore.enums.NeutronCurrency
 import kotlinx.coroutines.launch
 
+/**
+ * The `ProfileScreenViewModel` class is the support class used to change the user account settings
+ * or preferences
+ *
+ * @author N7ghtm4r3 - Tecknobit
+ * @see androidx.lifecycle.ViewModel
+ * @see com.tecknobit.equinoxcompose.session.Retriever
+ * @see com.tecknobit.equinoxcompose.viewmodels.EquinoxViewModel
+ * @see EquinoxProfileViewModel
+ */
 class ProfileScreenViewModel : EquinoxProfileViewModel(
     snackbarHostState = SnackbarHostState(),
     requester = requester,
@@ -21,6 +31,11 @@ class ProfileScreenViewModel : EquinoxProfileViewModel(
      */
     lateinit var currency: MutableState<NeutronCurrency>
 
+    /**
+     * Method to execute the currency change
+     *
+     * @param onSuccess The action to execute if the request has been successful
+     */
     fun changeCurrency(
         onSuccess: () -> Unit,
     ) {

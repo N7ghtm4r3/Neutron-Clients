@@ -24,12 +24,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.tecknobit.equinoxcompose.components.getContrastColor
+import com.tecknobit.equinoxcompose.session.EquinoxScreen
 import com.tecknobit.equinoxcompose.utilities.toColor
 import com.tecknobit.neutron.ui.components.Step
 import com.tecknobit.neutron.ui.screens.insert.revenue.components.LabelsPicker
 import com.tecknobit.neutron.ui.screens.insert.revenue.presentation.InsertRevenueScreenViewModel
 import com.tecknobit.neutron.ui.screens.insert.shared.presenter.InsertScreen
 import com.tecknobit.neutron.ui.screens.revenues.components.RevenueLabels
+import com.tecknobit.neutron.ui.screens.shared.presenters.NeutronScreen
 import neutron.composeapp.generated.resources.Res
 import neutron.composeapp.generated.resources.add_revenue
 import neutron.composeapp.generated.resources.edit_revenue
@@ -39,6 +41,16 @@ import neutron.composeapp.generated.resources.project
 import neutron.composeapp.generated.resources.revenue_type
 import org.jetbrains.compose.resources.stringResource
 
+/**
+ * The [InsertRevenueScreen] is used to allow the user to add or to edit a revenue
+ *
+ * @param revenueId The identifier of the revenue to edit
+ *
+ * @author N7ghtm4r3 - Tecknobit
+ * @see EquinoxScreen
+ * @see NeutronScreen
+ * @see InsertScreen
+ */
 class InsertRevenueScreen(
     revenueId: String?
 ) : InsertScreen<InsertRevenueScreenViewModel>(
@@ -50,6 +62,11 @@ class InsertRevenueScreen(
     )
 ) {
 
+    /**
+     * Method to get the custom insertion steps for the [FormSection]
+     *
+     * @return the custom insertion steps as [Array] of out [Step]
+     */
     @Composable
     override fun getInsertionSteps(): Array<out Step> {
         return remember {
@@ -87,6 +104,9 @@ class InsertRevenueScreen(
         }
     }
 
+    /**
+     * This section allows to insert the type of the revenue to create
+     */
     @Composable
     @NonRestartableComposable
     // TODO: ANNOTATE AS SPECIAL STEP WITH THE RELATED EQUINOX-ANNOTATION
@@ -131,6 +151,9 @@ class InsertRevenueScreen(
         }
     }
 
+    /**
+     * This section allows to insert the labels to attach to the revenue
+     */
     @Composable
     @NonRestartableComposable
     // TODO: ANNOTATE AS SPECIAL STEP WITH THE RELATED EQUINOX-ANNOTATION

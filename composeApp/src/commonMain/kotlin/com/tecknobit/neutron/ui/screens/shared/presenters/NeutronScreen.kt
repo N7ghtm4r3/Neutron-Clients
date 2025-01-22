@@ -30,6 +30,16 @@ import com.tecknobit.neutron.ui.theme.NeutronTheme
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 
+/**
+ * The [NeutronScreen] class is useful to provides the basic behavior of a NeutronScreen's UI screen
+ *
+ * @param viewModel The support viewmodel for the screen
+ *
+ * @property V generic type of the viewmodel of the screen
+ *
+ * @author N7ghtm4r3 - Tecknobit
+ * @see EquinoxScreen
+ */
 @Structure
 abstract class NeutronScreen<V : EquinoxViewModel>(
     viewModel: V,
@@ -38,6 +48,9 @@ abstract class NeutronScreen<V : EquinoxViewModel>(
     viewModel = viewModel
 ) {
 
+    /**
+     * Method to arrange the content of the screen to display
+     */
     @Composable
     override fun ArrangeScreenContent() {
         NeutronTheme {
@@ -87,6 +100,9 @@ abstract class NeutronScreen<V : EquinoxViewModel>(
         }
     }
 
+    /**
+     * Method to display the custom content of the screen
+     */
     @Composable
     abstract fun ScreenContent()
 

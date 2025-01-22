@@ -104,11 +104,22 @@ import neutron.composeapp.generated.resources.settings
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 
+/**
+ * The [ProfileScreen] display the account settings of the current [localUser],
+ * allow to customize the preferences and settings
+ *
+ * @author N7ghtm4r3 - Tecknobit
+ * @see com.tecknobit.equinoxcompose.session.EquinoxScreen
+ * @see NeutronScreen
+ */
 class ProfileScreen : NeutronScreen<ProfileScreenViewModel>(
     viewModel = ProfileScreenViewModel(),
     title = Res.string.profile
 ) {
 
+    /**
+     * Method to display the custom content of the screen
+     */
     @Composable
     override fun ScreenContent() {
         UserDetails()
@@ -508,7 +519,9 @@ class ProfileScreen : NeutronScreen<ProfileScreenViewModel>(
                         onClick = { viewModel!!.currency.value = currency }
                     )
                     Text(
-                        text = currency.name.lowercase().capitalize().replace("_", " ")
+                        text = currency.name.lowercase()
+                            .replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() }
+                            .replace("_", " ")
                     )
                 }
             }

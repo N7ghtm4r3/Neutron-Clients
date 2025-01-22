@@ -51,7 +51,7 @@ import kotlinx.serialization.json.putJsonArray
 
 
 /**
- * The **NeutronRequester** class is useful to communicate with the Neutron's backend
+ * The `NeutronRequester** class is useful to communicate with the Neutron's backend
  *
  * @param host The host where is running the Neutron's backend
  * @param userId The user identifier

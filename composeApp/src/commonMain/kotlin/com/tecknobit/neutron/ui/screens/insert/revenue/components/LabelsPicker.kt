@@ -57,6 +57,12 @@ import neutron.composeapp.generated.resources.label_text
 import neutron.composeapp.generated.resources.select
 import org.jetbrains.compose.resources.stringResource
 
+/**
+ * Picker used to crete or to pick the labels to attach to a revenue
+ *
+ * @param show Whether the picker is shown
+ * @param viewModel The support viewmodel for the screen
+ */
 @Composable
 @NonRestartableComposable
 fun LabelsPicker(
@@ -96,6 +102,13 @@ fun LabelsPicker(
     }
 }
 
+/**
+ * Selector used to select the section to display where the user can select the labels to attach
+ *
+ * @param creatingNewLabel State used to manage the selector
+ * @param onCreating The section used to create a new label
+ * @param onSelecting The section used to select existing labels
+ */
 @Composable
 @NonRestartableComposable
 private fun ColumnScope.SectionSelector(
@@ -169,6 +182,12 @@ private fun ColumnScope.SectionSelector(
     }
 }
 
+/**
+ * Form to create a new label
+ *
+ * @param show Whether the picker is shown
+ * @param viewModel The support viewmodel for the screen
+ */
 @Composable
 @NonRestartableComposable
 private fun CreateLabel(
@@ -212,6 +231,13 @@ private fun CreateLabel(
     }
 }
 
+/**
+ * The preview used to display the creating label
+ *
+ * @param modifier The modifier to apply to the component
+ * @param color The color choose for the label
+ * @param labelText The text of the label
+ */
 @Composable
 @NonRestartableComposable
 private fun DummyRevenueLabelBadge(
@@ -255,6 +281,12 @@ private fun DummyRevenueLabelBadge(
     }
 }
 
+/**
+ * Grid to select the existing labels to attach
+ *
+ * @param show Whether the picker is shown
+ * @param viewModel The support viewmodel for the screen
+ */
 @Composable
 @NonRestartableComposable
 private fun SelectLabels(
@@ -300,6 +332,13 @@ private fun SelectLabels(
     }
 }
 
+/**
+ * Custom [Button] used to confirm the action executed with the [LabelsPicker]
+ *
+ * @param modifier The modifier to apply to the component
+ * @param visible Whether the button is visible
+ * @param action The action to execute when the user confirms
+ */
 @Composable
 @NonRestartableComposable
 private fun ColumnScope.ConfirmOperationButton(

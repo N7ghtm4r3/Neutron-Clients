@@ -82,6 +82,12 @@ import neutron.composeapp.generated.resources.welcome_back
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
+/**
+ * The [AuthScreen] class is used to execute the authentication by the user
+ *
+ * @author N7ghtm4r3 - Tecknobit
+ * @see EquinoxScreen
+ */
 class AuthScreen : EquinoxScreen<AuthScreenViewModel>(
     viewModel = AuthScreenViewModel()
 ) {

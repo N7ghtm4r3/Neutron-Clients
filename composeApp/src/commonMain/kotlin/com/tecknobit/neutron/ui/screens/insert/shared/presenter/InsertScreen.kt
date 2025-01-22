@@ -42,6 +42,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.tecknobit.equinoxcompose.components.EquinoxTextField
+import com.tecknobit.equinoxcompose.session.EquinoxScreen
 import com.tecknobit.equinoxcompose.session.ManagedContent
 import com.tecknobit.equinoxcompose.utilities.ResponsiveContent
 import com.tecknobit.equinoxcore.annotations.RequiresSuperCall
@@ -80,6 +81,18 @@ import neutron.composeapp.generated.resources.title_not_valid
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 
+/**
+ * The [InsertScreen] is used to allow the user to add or to edit a revenue
+ *
+ * @param revenueId The identifier of the revenue to edit
+ * @param addingTitle The title to use when the insert operation is an adding
+ * @param editingTitle The title to use when the insert operation is an editing
+ * @param viewModel The support viewmodel for the screen
+ *
+ * @author N7ghtm4r3 - Tecknobit
+ * @see EquinoxScreen
+ * @see NeutronScreen
+ */
 @Structure
 abstract class InsertScreen<V : InsertScreenViewModel>(
     revenueId: String?,
@@ -94,6 +107,9 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
     viewModel = viewModel
 ) {
 
+    /**
+     * `titleStep` the step used to insert the title of the revenue
+     */
     protected val titleStep by lazy {
         Step(
             stepIcon = Icons.Default.Title,
@@ -104,6 +120,9 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
         )
     }
 
+    /**
+     * `descriptionStep` the step used to insert the description of the revenue
+     */
     protected val descriptionStep by lazy {
         Step(
             enabled = viewModel.addingGeneralRevenue,
@@ -115,6 +134,9 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
         )
     }
 
+    /**
+     * `insertionDateStep` the step used to insert the date of the revenue
+     */
     protected val insertionDateStep by lazy {
         Step(
             stepIcon = Icons.Default.EditCalendar,
@@ -123,12 +145,24 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
         )
     }
 
-    protected lateinit var displayKeyboard: MutableState<Boolean>
+    /**
+     * `displayKeyboard` whether the [ScreenKeyboard] is displayed
+     */
+    private lateinit var displayKeyboard: MutableState<Boolean>
 
+    /**
+     * `revenue` the existing revenue to edit
+     */
     protected lateinit var revenue: State<Revenue?>
 
+    /**
+     * `isEditing` whether the operation is an editing
+     */
     protected val isEditing: Boolean = revenueId != null
 
+    /**
+     * Method to display the custom content of the screen
+     */
     @Composable
     override fun ScreenContent() {
         ManagedContent(
@@ -167,6 +201,12 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
         )
     }
 
+    /**
+     * The section related to the current inserted amount of the revenue
+     *
+     * @param keyboardWeight The weight to apply to the keyboard
+     * @param keyboardModifier The modifier to apply to the keyboard
+     */
     @Composable
     @NonRestartableComposable
     private fun AmountSection(
@@ -240,6 +280,11 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
         }
     }
 
+    /**
+     * The current inserted amount of the revenue
+     *
+     * @param modifier The modifier to apply to the component
+     */
     @Composable
     @NonRestartableComposable
     private fun Amount(
@@ -267,6 +312,11 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
         }
     }
 
+    /**
+     * The container section of the [ScreenKeyboard] component
+     *
+     * @param keyboardModifier The modifier to apply to the keyboard
+     */
     @Composable
     @NonRestartableComposable
     private fun KeyboardSection(
@@ -283,6 +333,10 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
         }
     }
 
+    /**
+     * The container section of the [Stepper] component used to insert the revenue information to
+     * insert
+     */
     @Composable
     @NonRestartableComposable
     private fun FormSection() {
@@ -303,9 +357,17 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
         }
     }
 
+    /**
+     * Method to get the custom insertion steps for the [FormSection]
+     *
+     * @return the custom insertion steps as [Array] of out [Step]
+     */
     @Composable
     protected abstract fun getInsertionSteps() : Array<out Step>
 
+    /**
+     * This section allows to insert the title of the revenue
+     */
     @Composable
     @NonRestartableComposable
     // TODO: ANNOTATE AS SPECIAL STEP WITH THE RELATED EQUINOX-ANNOTATION
@@ -346,6 +408,9 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
         )
     }
 
+    /**
+     * This section allows to insert the description of the revenue
+     */
     @Composable
     @NonRestartableComposable
     // TODO: ANNOTATE AS SPECIAL STEP WITH THE RELATED EQUINOX-ANNOTATION
@@ -387,6 +452,9 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
         )
     }
 
+    /**
+     * This section allows to insert the date of the revenue
+     */
     @Composable
     @NonRestartableComposable
     // TODO: ANNOTATE AS SPECIAL STEP WITH THE RELATED EQUINOX-ANNOTATION
@@ -402,6 +470,9 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
         ) { snappedDateTime -> viewModel!!.insertionDate.value = snappedDateTime }
     }
 
+    /**
+     * Method invoked when the [ShowContent] composable has been started
+     */
     override fun onStart() {
         super.onStart()
         viewModel!!.retrieveRevenue()
@@ -420,7 +491,7 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
     }
 
     @Composable
-    @NonRestartableComposable
+    @Deprecated("TO USE THE BUILT-IN IN EQUINOX ONE")
     private fun CollectStatesAfterLoading() {
         viewModel!!.keyboardState = rememberKeyboardState(
             amount = if (isEditing) {
