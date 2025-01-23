@@ -1,52 +1,53 @@
-# Neutron-Desktop
+# Neutron-Clients
 
-**v1.0.0**
+**v1.0.1**
 
-This project, based on Java and the Spring Boot framework, iis an open source orders and ticket revenue manager for the
-projects
-you are developing
+This project, based on Java and the Spring Boot framework, is an open source orders and ticket
+revenue
+manager for the projects you are developing
 
-Trace your revenues with`Neutron**!
+Trace your revenues with **Neutron**!
 
-This repository contains the desktop version of`Neutron**,
-so if you want to customize you can fork it and work on it, if there are any errors, fixes to do or some
-idea to upgrade this project, please open a ticket or contact us to talk about, thanks and good
+This repository contains the clients version of **Neutron**,
+so if you want to customize you can fork it and work on it, if there are any errors, fixes to do or
+some idea to upgrade this project, please open a ticket or contact us to talk about, thanks and good
 use!
 
-## 🛠 Skills
+## Architecture
 
-- Java
-- Kotlin
-
-## Roadmap
-
-This project will be constantly developed to reach different platforms to work on, following the platforms releases
-steps:
+### Clients
 
 - Mobile
-    - <a href="https://github.com/N7ghtm4r3/Neutron-Android#readme">Android</a>
-    - iOS -> planned
-- <a href="https://github.com/N7ghtm4r3/Neutron-Desktop#readme">Desktop version</a>
-- <a href="https://github.com/N7ghtm4r3/Neutron/releases/tag/1.0.0">Backend service "out-of-the-box"</a>
+  - [Android](https://play.google.com/store/apps/details?id=com.tecknobit.neutron)
+  - [Neutron desktop version](https://github.com/N7ghtm4r3/Neutron-Clients/releases/tag/1.0.1)
+  - iOS -> source code available, but cannot distribute due
+    missing [Apple Developer Program license](https://developer.apple.com/programs/)
+  - [Neutron webapp version](https://github.com/N7ghtm4r3/Neutron-Clients/releases/tag/1.0.1)
+
+### Backend
+
+- [Backend service "out-of-the-box"](https://github.com/N7ghtm4r3/Neutron/releases/tag/1.0.1)
 
 ## Usages
 
-See how to use the`Neutron** service reading the <a href="https://github.com/N7ghtm4r3/Neutron#readme">Neutron backend
-procedures</a>
+### Run your own backend instance
+
+See how to run your own **Neutron** backend instance service reading
+the [Neutron backend procedures](https://github.com/N7ghtm4r3/Neutron#readme)
 
 ## Customize the application
 
 To customize and create your own version of this application you need to have
-the <a href="https://github.com/N7ghtm4r3/Neutron/tree/main/Neutron-core">
-core library</a> implemented in your project and published into maven local system
+the [core library](https://github.com/N7ghtm4r3/Neutron/tree/main/core)
+implemented in your project and published into maven local system
 
 ### Clone the core library and publish to maven local
 
 - Clone the repository or download the zip file of the current version available
 
 - Open the folder file in your development environment and publish to maven local with the
- `publishMavenPublicationToMavenLocal** gradle task, take a
-  look <a href="https://docs.gradle.org/current/userguide/publishing_maven.html">here</a>
+  **publishMavenPublicationToMavenLocal** gradle task, take a
+  look [here](https://docs.gradle.org/current/userguide/publishing_maven.html)
   for a help
 
 ### Implement the core library to your application
@@ -60,7 +61,7 @@ repositories {
 }
 
 dependencies {
-  implementation 'com.tecknobit.neutroncore:Neutron-core:1.0.0'
+  implementation 'com.tecknobit.neutroncore:neutroncore:1.0.1'
 }
 ```
 
@@ -73,29 +74,25 @@ repositories {
 }
 
 dependencies {
-  implementation("com.tecknobit.neutroncore:Neutron-core:1.0.0")
+  implementation("com.tecknobit.neutroncore:neutroncore:1.0.1")
 }
 ```
 
-## Appearance
+## Desktop appearance
 
 <details>
   <summary>Desktop UI</summary>
-  <img src="https://github.com/N7ghtm4r3/Neutron-Desktop/blob/main/images/revenues.png" alt="revenues"/>
-  <img src="https://github.com/N7ghtm4r3/Neutron-Desktop/blob/main/images/ticket.png" alt="project_and_tickets"/>
+  <img src="https://github.com/N7ghtm4r3/Neutron-Clients/blob/main/images/projects_desktop.png" alt="revenues"/>
+  <img src="https://github.com/N7ghtm4r3/Neutron-Clients/blob/main/images/project_desktop.png" alt="project"/>
 </details>
-
-## Authors
-
-- [@N7ghtm4r3](https://www.github.com/N7ghtm4r3)
 
 ## Support
 
 If you need help using the library or encounter any problems or bugs, please contact us via the
 following links:
 
-- Support via <a href="mailto:infotecknobitcompany@gmail.com">email</a>
-- Support via <a href="https://github.com/N7ghtm4r3/Neutron-Desktop/issues/new">GitHub</a>
+- Support via [email](mailto:infotecknobitcompany@gmail.com)
+- Support via [GitHub](https://github.com/N7ghtm4r3/Neutron-Clients/issues/new)
 
 Thank you for your help!
 
@@ -112,12 +109,32 @@ Thank you for your help!
 
 If you want support project and developer
 
-| Crypto                                                                                              | Address                                        | Network  |
-|-----------------------------------------------------------------------------------------------------|------------------------------------------------|----------|
-| ![](https://img.shields.io/badge/Bitcoin-000000?style=for-the-badge&logo=bitcoin&logoColor=white)   |`3H3jyCzcRmnxroHthuXh22GXXSmizin2yp**         | Bitcoin  |
-| ![](https://img.shields.io/badge/Ethereum-3C3C3D?style=for-the-badge&logo=Ethereum&logoColor=white) |`0x1b45bc41efeb3ed655b078f95086f25fc83345c4** | Ethereum |
+| Crypto                                                                                              | Address                                          | Network  |
+|-----------------------------------------------------------------------------------------------------|--------------------------------------------------|----------|
+| ![](https://img.shields.io/badge/Bitcoin-000000?style=for-the-badge&logo=bitcoin&logoColor=white)   | **3H3jyCzcRmnxroHthuXh22GXXSmizin2yp**           | Bitcoin  |
+| ![](https://img.shields.io/badge/Ethereum-3C3C3D?style=for-the-badge&logo=Ethereum&logoColor=white) | **0x1b45bc41efeb3ed655b078f95086f25fc83345c4**   | Ethereum |
+| ![](https://img.shields.io/badge/Solana-000?style=for-the-badge&logo=Solana&logoColor=9945FF)       | **AtPjUnxYFHw3a6Si9HinQtyPTqsdbfdKX3dJ1xiDjbrL** | Solana   |
 
 If you want support project and developer
-with <a href="https://www.paypal.com/donate/?hosted_button_id=5QMN5UQH7LDT4">PayPal</a>
+with [PayPal](https://www.paypal.com/donate/?hosted_button_id=5QMN5UQH7LDT4)
+
+## Privacy policy
+
+**Privacy Policy**
+
+This section outlines the privacy practices and policies for the use of the Neutron application,
+available on
+the Google Play Store.
+
+The Neutron application may anonymously collect and send performance reports, as well as track any
+issues or errors encountered during your experience. The data collected includes information related
+to the device, such
+as the brand, model, operating system, and operating system version, but only when an issue occurs.
+In the case of a
+web-based issue, the application may also collect the web user agent, browser, and browser version.
+
+This information is used solely to improve the application's functionality and user experience,
+ensuring a seamless and
+efficient service.
 
 Copyright © 2025 Tecknobit

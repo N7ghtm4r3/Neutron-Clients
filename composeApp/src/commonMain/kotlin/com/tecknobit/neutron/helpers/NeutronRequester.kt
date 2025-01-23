@@ -493,6 +493,13 @@ open class NeutronRequester(
         }
     }
 
+    /**
+     * Method to request a revenue by the [revenueId] specified
+     *
+     * @param revenueId The identifier of the revenue to get
+     *
+     * @return the result of the request as [JsonObject]
+     */
     @Wrapper
     @RequestPath(path = "/api/v1/users/{id}/revenues/{revenue_id}", method = GET)
     suspend fun getRevenue(
@@ -506,7 +513,7 @@ open class NeutronRequester(
     }
 
     /**
-     * Method to request to get a project revenue
+     * Method to request a project revenue
      *
      * @param projectId The identifier of the project revenue to get
      *
@@ -524,6 +531,15 @@ open class NeutronRequester(
         )
     }
 
+    /**
+     * Method to request the current balance of a project revenue
+     *
+     * @param projectId The identifier of the project revenue
+     * @param period The period of the revenues to consider in the balance
+     * @param retrieveClosedTickets Whether retrieve the closed tickets
+     *
+     * @return the result of the request as [JsonObject]
+     */
     @RequestPath(path = "/api/v1/users/{id}/revenues/projects/{revenue_id}/balance", method = GET)
     suspend fun getProjectBalance(
         projectId: String,
@@ -544,7 +560,18 @@ open class NeutronRequester(
         )
     }
 
-    @RequestPath(path = "/api/v1/users/{id}/revenues/projects/{revenue_id}/tickets", method = POST)
+    /**
+     * Method to request to insert a tickets, this includes both edit and addition of a ticket item
+     *
+     * @param projectId The identifier of the project where the tickets is attached
+     * @param ticketId The identifier of the ticket to edit
+     * @param title The title of the ticket
+     * @param value The amount revenue value
+     * @param description The description of the ticket
+     * @param openingDate The date when the ticket has been opened
+     *
+     * @return the result of the request as [JsonObject]
+     */
     suspend fun insertTicket(
         projectId: String,
         ticketId: String?,
@@ -581,9 +608,10 @@ open class NeutronRequester(
     }
 
     /**
-     * Method to request to add a new ticket to a project revenue
+     * Method to request to add a ticket
      *
-     * @param projectId The identifier of the project where add the ticket
+     * @param projectId The identifier of the project where the tickets is attached
+     * @param payload The payload with the ticket information
      *
      * @return the result of the request as [JsonObject]
      */
@@ -603,13 +631,18 @@ open class NeutronRequester(
     }
 
     /**
-     * Method to request to add a new ticket to a project revenue
+     * Method to request to edit an existing ticket
      *
-     * @param projectId The identifier of the project where add the ticket
+     * @param projectId The identifier of the project where the tickets is attached
+     * @param ticketId The identifier of the ticket to edit
+     * @param payload The payload with the ticket information
      *
      * @return the result of the request as [JsonObject]
      */
-    @RequestPath(path = "/api/v1/users/{id}/revenues/projects/{revenue_id}/tickets", method = PATCH)
+    @RequestPath(
+        path = "/api/v1/users/{id}/revenues/projects/{revenue_id}/tickets/{ticket_id}",
+        method = PATCH
+    )
     private suspend fun editTicket(
         projectId: String,
         ticketId: String,
@@ -626,7 +659,18 @@ open class NeutronRequester(
         )
     }
 
-    @RequestPath(path = "/api/v1/users/{id}/revenues/projects/{revenue_id}/tickets", method = POST)
+    /**
+     * Method to request the tickets attached to the [projectId]
+     *
+     * @param projectId The identifier of the project revenue
+     * @param page The page to request
+     * @param period The period of the tickets to retrieve
+     * @param retrievePendingTickets Whether retrieve the pending tickets
+     * @param retrieveClosedTickets Whether retrieve the closed tickets
+     *
+     * @return the result of the request as [JsonObject]
+     */
+    @RequestPath(path = "/api/v1/users/{id}/revenues/projects/{revenue_id}/tickets", method = GET)
     suspend fun getTickets(
         projectId: String,
         page: Int,
