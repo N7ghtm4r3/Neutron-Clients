@@ -122,7 +122,7 @@ fun App() {
         val ametistaEngine = AmetistaEngine.ametistaEngine
         ametistaEngine.fireUp(
             configData = Res.readBytes(FILES_AMETISTA_CONFIG_PATHNAME),
-            debugMode = true //TODO: SET ON FALSE
+            debugMode = false
         )
     }
     bodyFontFamily = FontFamily(Font(Res.font.roboto))
@@ -213,8 +213,7 @@ fun startSession() {
     requester = NeutronRequester(
         host = localUser.hostAddress ?: "",
         userId = localUser.userId,
-        userToken = localUser.userToken,
-        debugMode = true // TODO: TO REMOVE 
+        userToken = localUser.userToken
     )
     val route = if (localUser.isAuthenticated) {
         MainScope().launch {

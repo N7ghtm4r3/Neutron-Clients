@@ -5,7 +5,9 @@ import androidx.lifecycle.viewModelScope
 import com.tecknobit.equinoxcompose.viewmodels.EquinoxViewModel
 import com.tecknobit.equinoxcore.annotations.RequiresSuperCall
 import com.tecknobit.equinoxcore.network.Requester.Companion.sendRequest
+import com.tecknobit.neutron.helpers.KReviewer
 import com.tecknobit.neutron.helpers.mergeIfNotContained
+import com.tecknobit.neutron.navigator
 import com.tecknobit.neutron.requester
 import com.tecknobit.neutron.ui.screens.insert.shared.presentation.InsertScreenViewModel
 import com.tecknobit.neutron.ui.screens.revenues.data.GeneralRevenue
@@ -71,7 +73,12 @@ class InsertRevenueScreenViewModel(
                         labels = labels
                     )
                 },
-                onSuccess = { onSuccessInsert() },
+                onSuccess = {
+                    val kReviewer = KReviewer()
+                    kReviewer.reviewInApp {
+                        navigator.goBack()
+                    }
+                },
                 onFailure = { showSnackbarMessage(it) }
             )
         }

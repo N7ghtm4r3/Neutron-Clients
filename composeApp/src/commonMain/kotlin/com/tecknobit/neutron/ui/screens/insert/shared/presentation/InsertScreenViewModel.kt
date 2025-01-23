@@ -8,8 +8,6 @@ import com.tecknobit.equinoxcore.annotations.RequiresSuperCall
 import com.tecknobit.equinoxcore.annotations.Structure
 import com.tecknobit.equinoxcore.network.Requester.Companion.sendRequest
 import com.tecknobit.equinoxcore.network.Requester.Companion.toResponseData
-import com.tecknobit.neutron.helpers.KReviewer
-import com.tecknobit.neutron.navigator
 import com.tecknobit.neutron.requester
 import com.tecknobit.neutron.ui.components.screenkeyboard.ScreenKeyboardState
 import com.tecknobit.neutron.ui.screens.revenues.data.Revenue
@@ -132,15 +130,5 @@ abstract class InsertScreenViewModel(
      * Method to execute the correct request to insert the revenue
      */
     protected abstract fun insertRequest()
-
-    /**
-     * Method to eventually review the application after has been inserted
-     */
-    protected fun onSuccessInsert() {
-        val kReviewer = KReviewer()
-        kReviewer.reviewInApp {
-            navigator.goBack()
-        }
-    }
 
 }
