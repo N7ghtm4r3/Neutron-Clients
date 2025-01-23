@@ -22,7 +22,7 @@ use!
   - [Neutron desktop version](https://github.com/N7ghtm4r3/Neutron-Clients/releases/tag/1.0.1)
   - iOS -> source code available, but cannot distribute due
     missing [Apple Developer Program license](https://developer.apple.com/programs/)
-  - [Neutron webapp version](https://github.com/N7ghtm4r3/Neutron-Clients/releases/tag/1.0.1)
+  - [Neutron webapp version](https://github.com/N7ghtm4r3/Neutron-Webapp/blob/main/README.md)
 
 ### Backend
 
