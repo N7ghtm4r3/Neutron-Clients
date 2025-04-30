@@ -4,7 +4,6 @@ import androidx.activity.compose.LocalActivity
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import com.google.android.play.core.appupdate.AppUpdateOptions
@@ -48,7 +47,6 @@ private val biometricPromptManager by lazy {
  *
  */
 @Composable
-@NonRestartableComposable
 actual fun CheckForUpdatesAndLaunch() {
     if(authWitBiometricParams) {
         authWitBiometricParams = false
@@ -122,7 +120,6 @@ actual fun setUserLanguage() {
  *
  */
 @Composable
-@NonRestartableComposable
 actual fun CloseApplicationOnNavBack() {
     val context = LocalActivity.current!!
     BackHandler {

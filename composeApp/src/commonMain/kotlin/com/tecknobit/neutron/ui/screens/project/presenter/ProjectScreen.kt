@@ -170,7 +170,6 @@ class ProjectScreen(
      * The header section of the screen
      */
     @Composable
-    @NonRestartableComposable
     override fun Header() {
         Card (
             modifier = Modifier
@@ -234,7 +233,6 @@ class ProjectScreen(
      * Toolbar used to manage a ticket
      */
     @Composable
-    @NonRestartableComposable
     private fun RowScope.Toolbar() {
         Row (
             modifier = Modifier
@@ -272,7 +270,6 @@ class ProjectScreen(
      * Section related to the total revenues about the current project
      */
     @Composable
-    @NonRestartableComposable
     private fun TotalRevenues() {
         Row (
             modifier = Modifier
@@ -321,7 +318,6 @@ class ProjectScreen(
      * The tickets attached to the project
      */
     @Composable
-    @NonRestartableComposable
     private fun Tickets() {
         Column(
             modifier = Modifier

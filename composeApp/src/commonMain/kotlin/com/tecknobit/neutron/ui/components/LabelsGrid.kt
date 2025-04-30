@@ -17,7 +17,6 @@ import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
@@ -46,7 +45,6 @@ import neutron.composeapp.generated.resources.no_labels_available
  * @param labels The support labels list used to add or remove the labels selected or unselected
  */
 @Composable
-@NonRestartableComposable
 fun LabelsGrid(
     modifier: Modifier = Modifier,
     labelsRetriever: RevenueLabelsRetriever,

@@ -4,7 +4,6 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.text.style.TextOverflow
@@ -35,7 +34,6 @@ import org.jetbrains.compose.resources.stringResource
  * @param ticket The ticket to retrieve the information to display
  */
 @Composable
-@NonRestartableComposable
 fun TicketInfo(
     viewModel: ProjectScreenViewModel,
     ticket: TicketRevenue
@@ -86,7 +84,6 @@ fun TicketInfo(
  * @param dateHeader The header of the date
  */
 @Composable
-@NonRestartableComposable
 fun RevenueInfo(
     viewModel: RevenueRelatedScreenViewModel,
     revenue: Revenue,

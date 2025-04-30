@@ -8,7 +8,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import com.tecknobit.equinoxcore.helpers.InputsValidator.Companion.DEFAULT_LANGUAGE
 import com.tecknobit.neutron.ui.theme.NeutronTheme
 import neutron.composeapp.generated.resources.Res
 import neutron.composeapp.generated.resources.app_name
@@ -22,7 +21,6 @@ import java.util.Locale
  *
  */
 @Composable
-@NonRestartableComposable
 actual fun CheckForUpdatesAndLaunch() {
     var launchApp by remember { mutableStateOf(true) }
     NeutronTheme {
@@ -45,8 +43,7 @@ actual fun CheckForUpdatesAndLaunch() {
  *
  */
 actual fun setUserLanguage() {
-    val tag = localUser.language ?: DEFAULT_LANGUAGE
-    Locale.setDefault(Locale.forLanguageTag(tag))
+    Locale.setDefault(Locale.forLanguageTag(localUser.language))
 }
 
 /**

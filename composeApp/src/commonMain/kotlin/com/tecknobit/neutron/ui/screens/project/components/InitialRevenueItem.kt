@@ -5,7 +5,6 @@ package com.tecknobit.neutron.ui.screens.project.components
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.ListItem
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.NonRestartableComposable
 import com.tecknobit.equinoxcompose.utilities.ResponsiveContent
 import com.tecknobit.neutron.ui.components.RevenueInfo
 import com.tecknobit.neutron.ui.screens.project.presentation.ProjectScreenViewModel
@@ -25,7 +24,6 @@ import org.jetbrains.compose.resources.stringResource
  * @param initialRevenue The initial revenue to display
  */
 @Composable
-@NonRestartableComposable
 fun InitialRevenueItem(
     viewModel: ProjectScreenViewModel,
     initialRevenue: Revenue.RevenueImpl

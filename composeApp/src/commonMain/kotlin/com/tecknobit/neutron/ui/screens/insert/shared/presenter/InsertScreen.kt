@@ -24,7 +24,6 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
@@ -209,7 +208,6 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
      * @param keyboardModifier The modifier to apply to the keyboard
      */
     @Composable
-    @NonRestartableComposable
     private fun AmountSection(
         keyboardWeight: Float = 2f,
         keyboardModifier: Modifier = Modifier
@@ -287,7 +285,6 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
      * @param modifier The modifier to apply to the component
      */
     @Composable
-    @NonRestartableComposable
     private fun Amount(
         modifier: Modifier = Modifier
     ) {
@@ -319,7 +316,6 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
      * @param keyboardModifier The modifier to apply to the keyboard
      */
     @Composable
-    @NonRestartableComposable
     private fun KeyboardSection(
         keyboardModifier: Modifier
     ) {
@@ -339,7 +335,6 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
      * insert
      */
     @Composable
-    @NonRestartableComposable
     private fun FormSection() {
         AnimatedVisibility(
             visible = !displayKeyboard.value
@@ -459,7 +454,6 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
      * This section allows to insert the date of the revenue
      */
     @Composable
-    @NonRestartableComposable
     @StepContent(
         number = 3
     )

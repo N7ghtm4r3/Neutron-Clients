@@ -16,7 +16,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.ListItemDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -55,7 +54,6 @@ import org.jetbrains.compose.resources.stringResource
  * @param position The position occupied by the ticket in the list
  */
 @Composable
-@NonRestartableComposable
 fun TicketCard(
     viewModel: ProjectScreenViewModel,
     project: ProjectRevenue,
@@ -110,7 +108,6 @@ fun TicketCard(
  * @param containerColor The color to use for the container
  */
 @Composable
-@NonRestartableComposable
 private fun TicketRevenueContent(
     viewModel: ProjectScreenViewModel,
     project: ProjectRevenue,

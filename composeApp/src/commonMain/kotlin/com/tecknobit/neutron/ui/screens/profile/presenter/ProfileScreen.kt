@@ -31,7 +31,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -120,7 +119,6 @@ class ProfileScreen : NeutronScreen<ProfileScreenViewModel>(
      * The details of the [localUser]
      */
     @Composable
-    @NonRestartableComposable
     private fun UserDetails() {
         Row (
             modifier = Modifier
@@ -156,7 +154,6 @@ class ProfileScreen : NeutronScreen<ProfileScreenViewModel>(
      * The profile picker to allow the [localUser] to change his/her profile picture
      */
     @Composable
-    @NonRestartableComposable
     private fun ProfilePicker() {
         val launcher = rememberFilePickerLauncher(
             type = PickerType.Image,
@@ -182,7 +179,6 @@ class ProfileScreen : NeutronScreen<ProfileScreenViewModel>(
      * The actions can be execute on the [localUser] account such logout and delete account
      */
     @Composable
-    @NonRestartableComposable
     private fun ActionButtons() {
         Row (
             horizontalArrangement = Arrangement.spacedBy(5.dp)
@@ -237,7 +233,6 @@ class ProfileScreen : NeutronScreen<ProfileScreenViewModel>(
      * The settings section to customize the [localUser] experience
      */
     @Composable
-    @NonRestartableComposable
     private fun Settings() {
         val steps = remember(viewModel.currency.value) {
             arrayOf(

@@ -45,7 +45,6 @@ interface RevenuesContainerScreen {
      * Custom floating action buttons responsively adapted
      */
     @Composable
-    @NonRestartableComposable
     fun FabButton() {
         ResponsiveContent(
             onExpandedSizeClass = {
@@ -103,7 +102,7 @@ interface RevenuesContainerScreen {
      * The header section of the screen
      */
     @Composable
-    @NonRestartableComposable
+    // TODO: TO ANNOTATE AS ScreenSection
     fun Header()
 
 }

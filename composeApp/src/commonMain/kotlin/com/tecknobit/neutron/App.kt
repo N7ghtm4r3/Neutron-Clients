@@ -3,7 +3,6 @@
 package com.tecknobit.neutron
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.ui.text.font.FontFamily
 import coil3.ImageLoader
 import coil3.compose.LocalPlatformContext
@@ -192,7 +191,6 @@ fun App() {
  *
  */
 @Composable
-@NonRestartableComposable
 expect fun CheckForUpdatesAndLaunch()
 
 /**
@@ -236,5 +234,4 @@ expect fun setUserLanguage()
  *
  */
 @Composable
-@NonRestartableComposable
 expect fun CloseApplicationOnNavBack()

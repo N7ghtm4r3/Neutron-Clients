@@ -3,7 +3,6 @@ package com.tecknobit.neutron
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.NonRestartableComposable
-import com.tecknobit.equinoxcore.helpers.InputsValidator.Companion.DEFAULT_LANGUAGE
 import kotlinx.browser.document
 import kotlinx.coroutines.delay
 
@@ -13,7 +12,6 @@ import kotlinx.coroutines.delay
  *
  */
 @Composable
-@NonRestartableComposable
 actual fun CheckForUpdatesAndLaunch() {
     LaunchedEffect(Unit) {
         delay(1000)
@@ -26,7 +24,7 @@ actual fun CheckForUpdatesAndLaunch() {
  *
  */
 actual fun setUserLanguage() {
-    document.documentElement?.setAttribute("lang", localUser.language ?: DEFAULT_LANGUAGE)
+    document.documentElement?.setAttribute("lang", localUser.language)
 }
 
 /**

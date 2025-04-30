@@ -49,7 +49,6 @@ import kotlin.uuid.Uuid
  * @param position The position occupied by the revenue in the list
  */
 @Composable
-@NonRestartableComposable
 fun RevenueCard(
     viewModel: RevenuesScreenViewModel,
     revenue: Revenue,
@@ -91,7 +90,6 @@ fun RevenueCard(
  * @param position The position occupied by the revenue in the list
  */
 @Composable
-@NonRestartableComposable
 private fun GeneralRevenueCard(
     viewModel: RevenuesScreenViewModel,
     revenue: GeneralRevenue,
@@ -138,7 +136,6 @@ private fun GeneralRevenueCard(
  * @param containerColor The color to use for the container
  */
 @Composable
-@NonRestartableComposable
 private fun GeneralRevenueContent(
     viewModel: RevenuesScreenViewModel,
     revenue: GeneralRevenue,
@@ -181,7 +178,6 @@ private fun GeneralRevenueContent(
  * @param position The position occupied by the revenue in the list
  */
 @Composable
-@NonRestartableComposable
 private fun ProjectRevenueCard(
     viewModel: RevenuesScreenViewModel,
     revenue: ProjectRevenue,
@@ -228,7 +224,6 @@ private fun ProjectRevenueCard(
  * @param containerColor The color to use for the container
  */
 @Composable
-@NonRestartableComposable
 private fun ProjectRevenueContent(
     viewModel: RevenuesScreenViewModel,
     revenue: ProjectRevenue,

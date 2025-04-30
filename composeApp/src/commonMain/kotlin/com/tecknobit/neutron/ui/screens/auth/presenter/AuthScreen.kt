@@ -28,7 +28,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -193,7 +192,6 @@ class AuthScreen : EquinoxScreen<AuthScreenViewModel>(
      * Method to create the form where the user can fill it with his credentials
      */
     @Composable
-    @NonRestartableComposable
     private fun FormSection() {
         Column(
             modifier = Modifier

@@ -182,6 +182,7 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
      */
     @Composable
     @NonRestartableComposable
+
     override fun Header() {
         Card (
             modifier = Modifier
@@ -219,7 +220,6 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
      * The section used to display the current status of the wallet
      */
     @Composable
-    @NonRestartableComposable
     private fun RowScope.WalletStatus() {
         Column(
             modifier = Modifier
@@ -267,7 +267,6 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
      * The section used to display the current trend of the wallet
      */
     @Composable
-    @NonRestartableComposable
     private fun WalletTrend() {
         AnimatedVisibility(
             visible = revenuePeriod.value != ALL
@@ -334,7 +333,6 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
      * The user profile picture used to navigate to the [com.tecknobit.neutron.ui.screens.profile.presenter.ProfileScreen]
      */
     @Composable
-    @NonRestartableComposable
     private fun RowScope.UserProfilePicture() {
         Column(
             modifier = Modifier
@@ -359,7 +357,6 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
      * The current revenues owned by the user
      */
     @Composable
-    @NonRestartableComposable
     private fun Revenues() {
         PaginatedLazyColumn(
             modifier = Modifier
