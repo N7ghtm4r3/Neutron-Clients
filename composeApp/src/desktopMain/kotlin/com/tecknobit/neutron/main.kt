@@ -4,7 +4,6 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowPlacement
 import androidx.compose.ui.window.WindowState
 import androidx.compose.ui.window.application
-import com.tecknobit.ametistaengine.AmetistaEngine
 import com.tecknobit.equinoxcompose.session.setUpSession
 import neutron.composeapp.generated.resources.Res
 import neutron.composeapp.generated.resources.app_name
@@ -17,7 +16,7 @@ import org.jetbrains.compose.resources.stringResource
  *
  */
 fun main() {
-    AmetistaEngine.intake()
+    //TODO: To integrate after AmetistaEngine.intake()
     application {
         Window(
             onCloseRequest = ::exitApplication,
