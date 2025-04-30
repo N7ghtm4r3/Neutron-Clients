@@ -29,10 +29,10 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.tecknobit.equinoxcompose.components.EquinoxAlertDialog
+import com.tecknobit.equinoxcore.mergeIfNotContained
+import com.tecknobit.equinoxcore.retainAndAdd
 import com.tecknobit.neutron.bodyFontFamily
 import com.tecknobit.neutron.displayFontFamily
-import com.tecknobit.neutron.helpers.mergeIfNotContained
-import com.tecknobit.neutron.helpers.retainAndAdd
 import com.tecknobit.neutron.ui.components.CategoryChip
 import com.tecknobit.neutron.ui.components.LabelsGrid
 import com.tecknobit.neutron.ui.components.PeriodFilterChip

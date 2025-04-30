@@ -42,16 +42,17 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.tecknobit.equinoxcompose.components.EquinoxTextField
-import com.tecknobit.equinoxcompose.session.EquinoxScreen
+import com.tecknobit.equinoxcompose.components.stepper.Step
+import com.tecknobit.equinoxcompose.components.stepper.StepContent
+import com.tecknobit.equinoxcompose.components.stepper.Stepper
 import com.tecknobit.equinoxcompose.session.ManagedContent
+import com.tecknobit.equinoxcompose.session.screens.EquinoxScreen
 import com.tecknobit.equinoxcompose.utilities.ResponsiveContent
 import com.tecknobit.equinoxcore.annotations.RequiresSuperCall
 import com.tecknobit.equinoxcore.annotations.Structure
 import com.tecknobit.neutron.bodyFontFamily
 import com.tecknobit.neutron.displayFontFamily
 import com.tecknobit.neutron.localUser
-import com.tecknobit.neutron.ui.components.Step
-import com.tecknobit.neutron.ui.components.Stepper
 import com.tecknobit.neutron.ui.components.screenkeyboard.ScreenKeyboard
 import com.tecknobit.neutron.ui.components.screenkeyboard.ScreenKeyboardState.Companion.ZERO
 import com.tecknobit.neutron.ui.components.screenkeyboard.rememberKeyboardState
@@ -345,7 +346,7 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
         ) {
             val steps = getInsertionSteps()
             Stepper(
-                modifier = Modifier
+                containerModifier = Modifier
                     .padding(
                         horizontal = 16.dp
                     )
@@ -369,8 +370,9 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
      * This section allows to insert the title of the revenue
      */
     @Composable
-    @NonRestartableComposable
-    // TODO: ANNOTATE AS SPECIAL STEP WITH THE RELATED EQUINOX-ANNOTATION
+    @StepContent(
+        number = 1
+    )
     protected fun RevenueTitle() {
         val focusRequester = remember { FocusRequester() }
         LaunchedEffect(Unit) {
@@ -412,8 +414,9 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
      * This section allows to insert the description of the revenue
      */
     @Composable
-    @NonRestartableComposable
-    // TODO: ANNOTATE AS SPECIAL STEP WITH THE RELATED EQUINOX-ANNOTATION
+    @StepContent(
+        number = 2
+    )
     protected fun RevenueDescription() {
         val focusRequester = remember { FocusRequester() }
         LaunchedEffect(Unit) {
@@ -457,7 +460,9 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
      */
     @Composable
     @NonRestartableComposable
-    // TODO: ANNOTATE AS SPECIAL STEP WITH THE RELATED EQUINOX-ANNOTATION
+    @StepContent(
+        number = 3
+    )
     protected fun ColumnScope.InsertionDate() {
         WheelDateTimePicker(
             modifier = Modifier
@@ -490,9 +495,12 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
         viewModel.descriptionError = remember { mutableStateOf(false) }
     }
 
+    /**
+     * Method used to collect or instantiate the states of the screen after a loading required to correctly assign an
+     * initial value to the states
+     */
     @Composable
-    @Deprecated("TO USE THE BUILT-IN IN EQUINOX ONE")
-    private fun CollectStatesAfterLoading() {
+    override fun CollectStatesAfterLoading() {
         viewModel.keyboardState = rememberKeyboardState(
             amount = if (isEditing) {
                 if (revenue.value!! is ProjectRevenue)

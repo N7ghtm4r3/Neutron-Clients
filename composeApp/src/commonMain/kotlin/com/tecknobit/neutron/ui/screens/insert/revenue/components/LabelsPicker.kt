@@ -44,8 +44,8 @@ import com.tecknobit.equinoxcompose.components.EquinoxDialog
 import com.tecknobit.equinoxcompose.components.EquinoxTextField
 import com.tecknobit.equinoxcompose.components.getContrastColor
 import com.tecknobit.equinoxcompose.utilities.toHex
-import com.tecknobit.neutron.helpers.mergeIfNotContained
-import com.tecknobit.neutron.helpers.retainAndAdd
+import com.tecknobit.equinoxcore.mergeIfNotContained
+import com.tecknobit.equinoxcore.retainAndAdd
 import com.tecknobit.neutron.ui.components.LabelsGrid
 import com.tecknobit.neutron.ui.icons.ArrowSelectorTool
 import com.tecknobit.neutron.ui.screens.insert.revenue.presentation.InsertRevenueScreenViewModel

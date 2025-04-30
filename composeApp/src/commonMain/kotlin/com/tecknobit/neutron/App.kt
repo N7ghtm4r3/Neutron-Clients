@@ -3,17 +3,13 @@
 package com.tecknobit.neutron
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.unit.dp
 import coil3.ImageLoader
 import coil3.compose.LocalPlatformContext
 import coil3.network.ktor3.KtorNetworkFetcherFactory
 import coil3.request.CachePolicy
 import coil3.request.addLastModifiedToFileCacheKey
-import com.tecknobit.ametistaengine.AmetistaEngine
-import com.tecknobit.ametistaengine.AmetistaEngine.Companion.FILES_AMETISTA_CONFIG_PATHNAME
 import com.tecknobit.equinoxcore.network.Requester.Companion.toResponseData
 import com.tecknobit.equinoxcore.network.sendRequest
 import com.tecknobit.neutron.helpers.NeutronLocalUser
@@ -108,23 +104,17 @@ const val INSERT_TICKET_SCREEN = "InsertTicketScreen"
 const val PROJECT_REVENUE_SCREEN = "ProjectRevenueScreen"
 
 /**
- * `MAX_CONTAINER_WIDTH` constant value used to give a max dimension to container for the large screens
- */
-@Deprecated("USE THE EQUINOX BUILT-IN")
-val MAX_CONTAINER_WIDTH = 1280.dp
-
-/**
  * Common entry point of The `Neutron** application
  */
 @Composable
 fun App() {
-    LaunchedEffect(Unit) {
+    /*LaunchedEffect(Unit) {
         val ametistaEngine = AmetistaEngine.ametistaEngine
         ametistaEngine.fireUp(
             configData = Res.readBytes(FILES_AMETISTA_CONFIG_PATHNAME),
             debugMode = true // TODO: TO SET ON FALSE
         )
-    }
+    }*/
     bodyFontFamily = FontFamily(Font(Res.font.roboto))
     displayFontFamily = FontFamily(Font(Res.font.lilitaone))
     imageLoader = ImageLoader.Builder(LocalPlatformContext.current)
@@ -213,14 +203,13 @@ fun startSession() {
     requester = NeutronRequester(
         host = localUser.hostAddress,
         userId = localUser.userId,
-        userToken = localUser.userToken
+        userToken = localUser.userToken,
+        debugMode = true // TODO: TO REMOVE
     )
     val route = if (localUser.isAuthenticated) {
         MainScope().launch {
             requester.sendRequest(
-                request = {
-                    getDynamicAccountData()
-                },
+                request = { getDynamicAccountData() },
                 onSuccess = { response ->
                     localUser.updateDynamicAccountData(
                         dynamicData = response.toResponseData()

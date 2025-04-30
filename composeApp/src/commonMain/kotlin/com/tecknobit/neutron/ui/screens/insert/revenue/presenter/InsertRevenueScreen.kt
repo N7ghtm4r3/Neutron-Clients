@@ -17,16 +17,16 @@ import androidx.compose.material3.RadioButton
 import androidx.compose.material3.SmallFloatingActionButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.tecknobit.equinoxcompose.components.getContrastColor
-import com.tecknobit.equinoxcompose.session.EquinoxScreen
+import com.tecknobit.equinoxcompose.components.stepper.Step
+import com.tecknobit.equinoxcompose.components.stepper.StepContent
+import com.tecknobit.equinoxcompose.session.screens.EquinoxScreen
 import com.tecknobit.equinoxcompose.utilities.toColor
-import com.tecknobit.neutron.ui.components.Step
 import com.tecknobit.neutron.ui.screens.insert.revenue.components.LabelsPicker
 import com.tecknobit.neutron.ui.screens.insert.revenue.presentation.InsertRevenueScreenViewModel
 import com.tecknobit.neutron.ui.screens.insert.shared.presenter.InsertScreen
@@ -108,8 +108,10 @@ class InsertRevenueScreen(
      * This section allows to insert the type of the revenue to create
      */
     @Composable
-    @NonRestartableComposable
-    // TODO: ANNOTATE AS SPECIAL STEP WITH THE RELATED EQUINOX-ANNOTATION
+    @StepContent(
+        number = 1,
+        enabledWhen = "The revenue is in editing mode"
+    )
     private fun RevenueType() {
         Row (
             modifier = Modifier
@@ -155,8 +157,9 @@ class InsertRevenueScreen(
      * This section allows to insert the labels to attach to the revenue
      */
     @Composable
-    @NonRestartableComposable
-    // TODO: ANNOTATE AS SPECIAL STEP WITH THE RELATED EQUINOX-ANNOTATION
+    @StepContent(
+        number = 2
+    )
     private fun RevenueLabelsForm() {
         val pickLabels = remember { mutableStateOf(false) }
         RevenueLabels(

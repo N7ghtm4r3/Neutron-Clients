@@ -78,7 +78,6 @@ kotlin {
             implementation(libs.review.ktx)
             implementation(libs.ktor.client.okhttp)
             implementation(libs.androidx.biometric)
-            implementation(libs.androidx.startup.runtime)
             implementation(libs.androidx.appcompat)
         }
 
@@ -96,7 +95,6 @@ kotlin {
                 implementation(libs.equinox.compose)
                 implementation(libs.equinox.core)
                 implementation(libs.precompose)
-                implementation(libs.neutroncore)
                 implementation(libs.kotlinx.serialization.json)
                 implementation(libs.lazy.pagination.compose)
                 implementation(libs.material3.window.size)
@@ -107,7 +105,9 @@ kotlin {
                 implementation(libs.datetime.wheel.picker)
                 implementation(libs.kotlinx.datetime)
                 implementation(libs.colorpicker.compose)
-                implementation(libs.ametista.engine)
+                // TODO: TO INTEGRATE
+                //implementation(libs.ametista.engine)
+                implementation(libs.neutroncore)
             }
         }
 

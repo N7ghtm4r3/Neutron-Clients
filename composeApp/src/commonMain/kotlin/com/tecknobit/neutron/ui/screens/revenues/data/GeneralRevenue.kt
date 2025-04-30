@@ -2,7 +2,6 @@ package com.tecknobit.neutron.ui.screens.revenues.data
 
 import com.tecknobit.neutroncore.REVENUE_DATE_KEY
 import com.tecknobit.neutroncore.REVENUE_DESCRIPTION_KEY
-import com.tecknobit.neutroncore.REVENUE_LABELS_KEY
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -39,7 +38,6 @@ sealed interface GeneralRevenue : Revenue {
     /**
      *`labels` the labels attached to revenue
      */
-    @SerialName(REVENUE_LABELS_KEY)
     val labels: List<RevenueLabel>
 
     /**

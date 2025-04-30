@@ -4,7 +4,7 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.lifecycle.viewModelScope
 import com.tecknobit.equinoxcompose.viewmodels.EquinoxViewModel
 import com.tecknobit.equinoxcore.annotations.Structure
-import com.tecknobit.equinoxcore.network.Requester.Companion.sendRequest
+import com.tecknobit.equinoxcore.network.sendRequest
 import com.tecknobit.neutron.requester
 import com.tecknobit.neutron.ui.screens.revenues.data.Revenue
 import com.tecknobit.neutroncore.enums.RevenuePeriod

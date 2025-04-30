@@ -1,7 +1,6 @@
 package com.tecknobit.neutron
 
 import androidx.compose.ui.window.ComposeUIViewController
-import com.tecknobit.ametistaengine.AmetistaEngine
 import com.tecknobit.equinoxcompose.session.setUpSession
 
 /**
@@ -9,7 +8,7 @@ import com.tecknobit.equinoxcompose.session.setUpSession
  *
  */
 fun MainViewController() {
-    AmetistaEngine.intake()
+    // TODO: TO INTEGRATE AmetistaEngine.intake()
     ComposeUIViewController {
         setUpSession(
             hasBeenDisconnectedAction = {

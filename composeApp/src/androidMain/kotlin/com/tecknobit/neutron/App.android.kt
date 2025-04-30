@@ -12,9 +12,8 @@ import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.UpdateAvailability.UPDATE_AVAILABLE
 import com.google.android.play.core.ktx.isImmediateUpdateAllowed
 import com.tecknobit.equinoxcompose.components.ErrorUI
-import com.tecknobit.equinoxcompose.utilities.context.AppContext
-import com.tecknobit.equinoxcompose.utilities.context.ContextActivityProvider
-import com.tecknobit.equinoxcore.helpers.InputsValidator.Companion.DEFAULT_LANGUAGE
+import com.tecknobit.equinoxcore.utilities.AppContext
+import com.tecknobit.equinoxcore.utilities.ContextActivityProvider
 import com.tecknobit.neutron.MainActivity.Companion.appUpdateManager
 import com.tecknobit.neutron.MainActivity.Companion.launcher
 import com.tecknobit.neutron.helpers.BiometricPromptManager
@@ -109,7 +108,7 @@ private fun checkForUpdates() {
  *
  */
 actual fun setUserLanguage() {
-    val tag = localUser.language ?: DEFAULT_LANGUAGE
+    val tag = localUser.language
     val locale = Locale(tag)
     Locale.setDefault(locale)
     val context = AppContext.get()

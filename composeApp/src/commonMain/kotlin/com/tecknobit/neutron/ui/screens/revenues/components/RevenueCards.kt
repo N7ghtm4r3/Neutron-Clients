@@ -1,4 +1,4 @@
-@file:OptIn(ExperimentalUuidApi::class, ExperimentalMultiplatform::class)
+@file:OptIn(ExperimentalUuidApi::class)
 
 package com.tecknobit.neutron.ui.screens.revenues.components
 

@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalComposeApi::class)
+
 package com.tecknobit.neutron.ui.screens.project.presenter
 
 import androidx.compose.animation.AnimatedVisibility
@@ -30,6 +32,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.ExperimentalComposeApi
 import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
@@ -45,6 +48,7 @@ import com.tecknobit.equinoxcompose.components.EmptyListUI
 import com.tecknobit.equinoxcompose.resources.retry
 import com.tecknobit.equinoxcompose.session.ManagedContent
 import com.tecknobit.equinoxcompose.session.screens.EquinoxScreen
+import com.tecknobit.equinoxcompose.utilities.EXPANDED_CONTAINER
 import com.tecknobit.neutron.INSERT_REVENUE_SCREEN
 import com.tecknobit.neutron.INSERT_TICKET_SCREEN
 import com.tecknobit.neutron.bodyFontFamily
@@ -170,10 +174,10 @@ class ProjectScreen(
     override fun Header() {
         Card (
             modifier = Modifier
+                .height(175.dp)
                 .widthIn(
                     max = EXPANDED_CONTAINER
-                )
-                .height(175.dp),
+                ),
             shape = RoundedCornerShape(
                 bottomStart = 15.dp,
                 bottomEnd = 15.dp

@@ -1,9 +1,7 @@
 package com.tecknobit.neutron.helpers
 
-import com.tecknobit.ametistaengine.AmetistaEngine
 import com.tecknobit.equinoxcompose.network.EquinoxRequester
 import com.tecknobit.equinoxcore.annotations.RequestPath
-import com.tecknobit.equinoxcore.annotations.Structure
 import com.tecknobit.equinoxcore.annotations.Wrapper
 import com.tecknobit.equinoxcore.network.RequestMethod.DELETE
 import com.tecknobit.equinoxcore.network.RequestMethod.GET
@@ -12,6 +10,7 @@ import com.tecknobit.equinoxcore.network.RequestMethod.POST
 import com.tecknobit.equinoxcore.network.RequestMethod.PUT
 import com.tecknobit.equinoxcore.network.Requester
 import com.tecknobit.equinoxcore.pagination.PaginatedResponse.Companion.PAGE_KEY
+import com.tecknobit.equinoxcore.time.TimeFormatter.toMillis
 import com.tecknobit.neutron.ui.screens.revenues.data.Revenue
 import com.tecknobit.neutron.ui.screens.revenues.data.RevenueLabel
 import com.tecknobit.neutron.ui.screens.revenues.data.TicketRevenue
@@ -32,22 +31,17 @@ import com.tecknobit.neutroncore.REVENUE_VALUE_KEY
 import com.tecknobit.neutroncore.enums.NeutronCurrency
 import com.tecknobit.neutroncore.enums.RevenuePeriod
 import com.tecknobit.neutroncore.helpers.NeutronEndpoints.CHANGE_CURRENCY_ENDPOINT
-import com.tecknobit.neutroncore.helpers.NeutronEndpoints.DYNAMIC_ACCOUNT_DATA_ENDPOINT
 import com.tecknobit.neutroncore.helpers.NeutronEndpoints.PROJECT_BALANCE_ENDPOINT
 import com.tecknobit.neutroncore.helpers.NeutronEndpoints.TICKETS_ENDPOINT
 import com.tecknobit.neutroncore.helpers.NeutronEndpoints.WALLET_ENDPOINT
 import kotlinx.datetime.LocalDateTime
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toInstant
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonPrimitive
-import kotlinx.serialization.json.add
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.encodeToJsonElement
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.put
-import kotlinx.serialization.json.putJsonArray
 
 
 /**
@@ -62,12 +56,11 @@ import kotlinx.serialization.json.putJsonArray
  * @author N7ghtm4r3 - Tecknobit
  * @see Requester
  */
-@Structure
-open class NeutronRequester(
+class NeutronRequester(
     host: String,
     userId: String? = null,
     userToken: String? = null,
-    debugMode: Boolean = false
+    debugMode: Boolean = false,
 ) : EquinoxRequester (
     host = host,
     userId = userId,
@@ -78,17 +71,10 @@ open class NeutronRequester(
 ) {
     
     init {
-        attachInterceptorOnRequest { 
+        // TODO: TO INTEGRATE
+        /*attachInterceptorOnRequest {
             AmetistaEngine.ametistaEngine.notifyNetworkRequest()
-        }
-    }
-
-    @Deprecated("REMOVE WHEN INTEGRATED IN THE EQUINOX LIBRARY")
-    @RequestPath(path = "/api/v1/users/{id}/dynamicAccountData", method = PATCH)
-    suspend fun getDynamicAccountData() : JsonObject {
-        return execGet(
-            endpoint = assembleUsersEndpointPath(DYNAMIC_ACCOUNT_DATA_ENDPOINT)
-        )
+        }*/
     }
 
     /**
@@ -221,9 +207,7 @@ open class NeutronRequester(
     ): JsonObject {
         return buildJsonObject {
             put(REVENUE_PERIOD_KEY, period.name)
-            putJsonArray(LABELS_KEY) {
-                labels.forEach { add(it.text) }
-            }
+            put(LABELS_KEY, labels.joinToString { it.text })
             put(GENERAL_REVENUES_KEY, retrieveGeneralRevenues)
             put(PROJECT_REVENUES_KEY, retrieveProjectsRevenues)
         }
@@ -599,12 +583,6 @@ open class NeutronRequester(
                 payload = payload
             )
         }
-    }
-
-    @Deprecated("USE THE TIMEFORMATTER OF EQUINOX BUILT-IN")
-    private fun LocalDateTime.toMillis(): Long {
-        return this.toInstant(TimeZone.currentSystemDefault())
-            .toEpochMilliseconds()
     }
 
     /**

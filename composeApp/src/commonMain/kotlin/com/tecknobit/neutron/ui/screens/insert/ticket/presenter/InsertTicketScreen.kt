@@ -2,8 +2,8 @@ package com.tecknobit.neutron.ui.screens.insert.ticket.presenter
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import com.tecknobit.equinoxcompose.session.EquinoxScreen
-import com.tecknobit.neutron.ui.components.Step
+import com.tecknobit.equinoxcompose.components.stepper.Step
+import com.tecknobit.equinoxcompose.session.screens.EquinoxScreen
 import com.tecknobit.neutron.ui.screens.insert.shared.presenter.InsertScreen
 import com.tecknobit.neutron.ui.screens.insert.ticket.presentation.InsertTicketScreenViewModel
 import com.tecknobit.neutron.ui.screens.shared.presenters.NeutronScreen
