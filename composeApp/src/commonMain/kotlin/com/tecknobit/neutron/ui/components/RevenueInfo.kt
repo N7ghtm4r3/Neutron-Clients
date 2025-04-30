@@ -12,9 +12,9 @@ import com.tecknobit.equinoxcore.time.TimeFormatter.toDateString
 import com.tecknobit.neutron.bodyFontFamily
 import com.tecknobit.neutron.displayFontFamily
 import com.tecknobit.neutron.localUser
+import com.tecknobit.neutron.ui.screens.project.data.TicketRevenue
 import com.tecknobit.neutron.ui.screens.project.presentation.ProjectScreenViewModel
-import com.tecknobit.neutron.ui.screens.revenues.data.Revenue
-import com.tecknobit.neutron.ui.screens.revenues.data.TicketRevenue
+import com.tecknobit.neutron.ui.screens.shared.data.Revenue
 import com.tecknobit.neutron.ui.screens.shared.presentations.RevenueRelatedScreenViewModel
 import com.tecknobit.neutron.ui.screens.shared.presenters.RevenuesContainerScreen.Companion.HIDE_BALANCE
 import neutron.composeapp.generated.resources.Res

@@ -57,9 +57,9 @@ import com.tecknobit.neutron.ui.components.screenkeyboard.ScreenKeyboard
 import com.tecknobit.neutron.ui.components.screenkeyboard.ScreenKeyboardState.Companion.ZERO
 import com.tecknobit.neutron.ui.components.screenkeyboard.rememberKeyboardState
 import com.tecknobit.neutron.ui.screens.insert.shared.presentation.InsertScreenViewModel
-import com.tecknobit.neutron.ui.screens.revenues.data.GeneralRevenue
-import com.tecknobit.neutron.ui.screens.revenues.data.ProjectRevenue
-import com.tecknobit.neutron.ui.screens.revenues.data.Revenue
+import com.tecknobit.neutron.ui.screens.shared.data.GeneralRevenue
+import com.tecknobit.neutron.ui.screens.shared.data.ProjectRevenue
+import com.tecknobit.neutron.ui.screens.shared.data.Revenue
 import com.tecknobit.neutron.ui.screens.shared.presenters.NeutronScreen
 import com.tecknobit.neutroncore.helpers.NeutronInputsValidator.isRevenueDescriptionValid
 import com.tecknobit.neutroncore.helpers.NeutronInputsValidator.isRevenueTitleValid

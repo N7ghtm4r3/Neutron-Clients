@@ -33,11 +33,11 @@ import com.tecknobit.neutron.ui.components.RevenueDescription
 import com.tecknobit.neutron.ui.components.RevenueListItem
 import com.tecknobit.neutron.ui.components.TicketInfo
 import com.tecknobit.neutron.ui.icons.ContractDelete
+import com.tecknobit.neutron.ui.screens.project.data.TicketRevenue
 import com.tecknobit.neutron.ui.screens.project.presentation.ProjectScreenViewModel
 import com.tecknobit.neutron.ui.screens.revenues.components.RevenueLabels
-import com.tecknobit.neutron.ui.screens.revenues.data.ProjectRevenue
-import com.tecknobit.neutron.ui.screens.revenues.data.RevenueLabel
-import com.tecknobit.neutron.ui.screens.revenues.data.TicketRevenue
+import com.tecknobit.neutron.ui.screens.shared.data.ProjectRevenue
+import com.tecknobit.neutron.ui.screens.shared.data.RevenueLabel
 import com.tecknobit.neutroncore.CLOSED_TICKET_LABEL_COLOR
 import com.tecknobit.neutroncore.PENDING_TICKET_LABEL_COLOR
 import kotlinx.datetime.Clock

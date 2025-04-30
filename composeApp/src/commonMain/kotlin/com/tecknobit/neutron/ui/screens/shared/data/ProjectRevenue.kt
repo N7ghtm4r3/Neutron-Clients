@@ -1,6 +1,7 @@
-package com.tecknobit.neutron.ui.screens.revenues.data
+package com.tecknobit.neutron.ui.screens.shared.data
 
-import com.tecknobit.neutron.ui.screens.revenues.data.Revenue.RevenueImpl
+import com.tecknobit.neutron.ui.screens.project.data.TicketRevenue
+import com.tecknobit.neutron.ui.screens.shared.data.Revenue.RevenueImpl
 import com.tecknobit.neutroncore.INITIAL_REVENUE_KEY
 import com.tecknobit.neutroncore.REVENUE_DATE_KEY
 import kotlinx.serialization.SerialName

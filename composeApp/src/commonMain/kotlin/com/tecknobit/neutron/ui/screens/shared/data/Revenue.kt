@@ -1,4 +1,4 @@
-package com.tecknobit.neutron.ui.screens.revenues.data
+package com.tecknobit.neutron.ui.screens.shared.data
 
 import com.tecknobit.equinoxcore.time.TimeFormatter.toDateString
 import com.tecknobit.neutroncore.REVENUE_DATE_KEY
@@ -12,9 +12,8 @@ import kotlinx.serialization.Serializable
  *
  * @author N7ghtm4r3 - Tecknobit
  */
-@Serializable
 @Polymorphic
-sealed interface Revenue {
+interface Revenue {
 
     /**
      *`id` the identifier of the revenue

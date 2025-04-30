@@ -9,8 +9,8 @@ import com.tecknobit.equinoxcompose.utilities.ResponsiveContent
 import com.tecknobit.neutron.ui.components.RevenueInfo
 import com.tecknobit.neutron.ui.screens.project.presentation.ProjectScreenViewModel
 import com.tecknobit.neutron.ui.screens.revenues.components.RevenueLabels
-import com.tecknobit.neutron.ui.screens.revenues.data.Revenue
-import com.tecknobit.neutron.ui.screens.revenues.data.RevenueLabel
+import com.tecknobit.neutron.ui.screens.shared.data.Revenue
+import com.tecknobit.neutron.ui.screens.shared.data.RevenueLabel
 import com.tecknobit.neutroncore.FIRST_INCOME_LABEL_COLOR
 import neutron.composeapp.generated.resources.Res
 import neutron.composeapp.generated.resources.first_income

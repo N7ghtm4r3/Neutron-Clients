@@ -11,9 +11,9 @@ import com.tecknobit.equinoxcore.network.RequestMethod.PUT
 import com.tecknobit.equinoxcore.network.Requester
 import com.tecknobit.equinoxcore.pagination.PaginatedResponse.Companion.PAGE_KEY
 import com.tecknobit.equinoxcore.time.TimeFormatter.toMillis
-import com.tecknobit.neutron.ui.screens.revenues.data.Revenue
-import com.tecknobit.neutron.ui.screens.revenues.data.RevenueLabel
-import com.tecknobit.neutron.ui.screens.revenues.data.TicketRevenue
+import com.tecknobit.neutron.ui.screens.project.data.TicketRevenue
+import com.tecknobit.neutron.ui.screens.shared.data.Revenue
+import com.tecknobit.neutron.ui.screens.shared.data.RevenueLabel
 import com.tecknobit.neutroncore.CLOSED_TICKETS_KEY
 import com.tecknobit.neutroncore.CURRENCY_KEY
 import com.tecknobit.neutroncore.GENERAL_REVENUES_KEY

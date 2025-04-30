@@ -1,22 +1,16 @@
-@file:OptIn(ExperimentalMultiplatform::class, ExperimentalComposeApi::class)
-
 package com.tecknobit.neutron.ui.screens.revenues.presenter
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
-import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Visibility
@@ -29,7 +23,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.ExperimentalComposeApi
 import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
@@ -39,12 +32,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.tecknobit.equinoxcompose.annotations.ScreenSection
-import com.tecknobit.equinoxcompose.components.EmptyListUI
 import com.tecknobit.equinoxcompose.resources.retry
 import com.tecknobit.equinoxcompose.session.ManagedContent
 import com.tecknobit.equinoxcompose.session.screens.EquinoxScreen
@@ -53,16 +44,12 @@ import com.tecknobit.equinoxcompose.utilities.ResponsiveContent
 import com.tecknobit.neutron.CloseApplicationOnNavBack
 import com.tecknobit.neutron.INSERT_REVENUE_SCREEN
 import com.tecknobit.neutron.PROFILE_SCREEN
-import com.tecknobit.neutron.bodyFontFamily
 import com.tecknobit.neutron.displayFontFamily
 import com.tecknobit.neutron.localUser
 import com.tecknobit.neutron.navigator
-import com.tecknobit.neutron.ui.components.FirstPageProgressIndicator
-import com.tecknobit.neutron.ui.components.NewPageProgressIndicator
 import com.tecknobit.neutron.ui.components.ProfilePic
-import com.tecknobit.neutron.ui.icons.ReceiptLong
 import com.tecknobit.neutron.ui.screens.revenues.components.FiltersBar
-import com.tecknobit.neutron.ui.screens.revenues.components.RevenueCard
+import com.tecknobit.neutron.ui.screens.revenues.components.Revenues
 import com.tecknobit.neutron.ui.screens.revenues.presentation.RevenuesScreenViewModel
 import com.tecknobit.neutron.ui.screens.shared.presenters.RevenuesContainerScreen
 import com.tecknobit.neutron.ui.screens.shared.presenters.RevenuesContainerScreen.Companion.HIDE_BALANCE
@@ -70,7 +57,6 @@ import com.tecknobit.neutron.ui.theme.NeutronTheme
 import com.tecknobit.neutroncore.dtos.WalletStatus
 import com.tecknobit.neutroncore.enums.RevenuePeriod
 import com.tecknobit.neutroncore.enums.RevenuePeriod.ALL
-import io.github.ahmad_hamwi.compose.pagination.PaginatedLazyColumn
 import neutron.composeapp.generated.resources.Res
 import neutron.composeapp.generated.resources.add_revenue
 import neutron.composeapp.generated.resources.last_month_period
@@ -78,7 +64,6 @@ import neutron.composeapp.generated.resources.last_six_months
 import neutron.composeapp.generated.resources.last_three_months
 import neutron.composeapp.generated.resources.last_week_period
 import neutron.composeapp.generated.resources.last_year
-import neutron.composeapp.generated.resources.no_revenues_yet
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -172,7 +157,9 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Header()
-            Revenues()
+            Revenues(
+                viewModel = viewModel
+            )
         }
     }
 
@@ -348,48 +335,6 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
                 size = size,
                 onClick = { navigator.navigate(PROFILE_SCREEN) }
             )
-        }
-    }
-
-    /**
-     * The current revenues owned by the user
-     */
-    @Composable
-    private fun Revenues() {
-        PaginatedLazyColumn(
-            modifier = Modifier
-                .fillMaxHeight()
-                .widthIn(
-                    max = EXPANDED_CONTAINER
-                )
-                .navigationBarsPadding(),
-            paginationState = viewModel.revenuesState,
-            contentPadding = PaddingValues(
-                bottom = 16.dp
-            ),
-            verticalArrangement = Arrangement.spacedBy(10.dp),
-            firstPageProgressIndicator = { FirstPageProgressIndicator() },
-            firstPageEmptyIndicator = {
-                EmptyListUI(
-                    icon = ReceiptLong,
-                    subText = Res.string.no_revenues_yet,
-                    textStyle = TextStyle(
-                        fontFamily = bodyFontFamily
-                    )
-                )
-            },
-            newPageProgressIndicator = { NewPageProgressIndicator() }
-        ) {
-            itemsIndexed(
-                items = viewModel.revenuesState.allItems!!,
-                key = { _, revenue -> revenue.id }
-            ) { index, revenue ->
-                RevenueCard(
-                    viewModel = viewModel,
-                    revenue = revenue,
-                    position = index
-                )
-            }
         }
     }
 

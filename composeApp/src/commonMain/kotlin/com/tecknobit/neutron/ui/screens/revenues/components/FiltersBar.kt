@@ -35,8 +35,8 @@ import com.tecknobit.neutron.displayFontFamily
 import com.tecknobit.neutron.ui.components.CategoryChip
 import com.tecknobit.neutron.ui.components.LabelsGrid
 import com.tecknobit.neutron.ui.components.PeriodFilterChip
-import com.tecknobit.neutron.ui.screens.revenues.data.RevenueLabel
 import com.tecknobit.neutron.ui.screens.revenues.presentation.RevenuesScreenViewModel
+import com.tecknobit.neutron.ui.screens.shared.data.RevenueLabel
 import neutron.composeapp.generated.resources.Res
 import neutron.composeapp.generated.resources.generals
 import neutron.composeapp.generated.resources.labels

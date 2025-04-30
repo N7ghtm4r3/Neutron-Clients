@@ -1,4 +1,4 @@
-package com.tecknobit.neutron.ui.screens.revenues.data
+package com.tecknobit.neutron.ui.screens.shared.data
 
 import com.tecknobit.neutroncore.REVENUE_DATE_KEY
 import com.tecknobit.neutroncore.REVENUE_DESCRIPTION_KEY
@@ -12,8 +12,7 @@ import kotlinx.serialization.Serializable
  *
  * @see Revenue
  */
-@Serializable
-sealed interface GeneralRevenue : Revenue {
+interface GeneralRevenue : Revenue {
 
     /**
      *`id` the identifier of the revenue

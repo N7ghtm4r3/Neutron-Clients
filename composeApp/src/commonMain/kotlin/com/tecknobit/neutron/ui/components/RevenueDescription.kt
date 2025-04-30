@@ -9,7 +9,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.tecknobit.neutron.bodyFontFamily
-import com.tecknobit.neutron.ui.screens.revenues.data.GeneralRevenue
+import com.tecknobit.neutron.ui.screens.shared.data.GeneralRevenue
 
 /**
  * Used to display the description of a [revenue]

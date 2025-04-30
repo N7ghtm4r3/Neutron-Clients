@@ -1,5 +1,6 @@
-package com.tecknobit.neutron.ui.screens.revenues.data
+package com.tecknobit.neutron.ui.screens.shared.data
 
+import com.tecknobit.neutron.ui.screens.project.data.TicketRevenue
 import com.tecknobit.neutroncore.CLOSING_DATE_KEY
 import com.tecknobit.neutroncore.LABELS_KEY
 import com.tecknobit.neutroncore.TICKETS_KEY

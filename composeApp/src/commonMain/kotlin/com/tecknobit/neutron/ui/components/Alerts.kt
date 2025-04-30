@@ -15,9 +15,9 @@ import com.tecknobit.neutron.SPLASHSCREEN
 import com.tecknobit.neutron.displayFontFamily
 import com.tecknobit.neutron.navigator
 import com.tecknobit.neutron.ui.screens.profile.presentation.ProfileScreenViewModel
+import com.tecknobit.neutron.ui.screens.project.data.TicketRevenue
 import com.tecknobit.neutron.ui.screens.project.presentation.ProjectScreenViewModel
-import com.tecknobit.neutron.ui.screens.revenues.data.Revenue
-import com.tecknobit.neutron.ui.screens.revenues.data.TicketRevenue
+import com.tecknobit.neutron.ui.screens.shared.data.Revenue
 import com.tecknobit.neutron.ui.screens.shared.presentations.RevenueRelatedScreenViewModel
 import neutron.composeapp.generated.resources.Res
 import neutron.composeapp.generated.resources.delete_account

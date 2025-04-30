@@ -32,7 +32,7 @@ import com.tecknobit.equinoxcompose.components.EmptyListUI
 import com.tecknobit.equinoxcompose.components.UIAnimations
 import com.tecknobit.equinoxcompose.components.getContrastColor
 import com.tecknobit.equinoxcompose.utilities.toColor
-import com.tecknobit.neutron.ui.screens.revenues.data.RevenueLabel
+import com.tecknobit.neutron.ui.screens.shared.data.RevenueLabel
 import com.tecknobit.neutron.ui.screens.shared.presentations.RevenueLabelsRetriever
 import neutron.composeapp.generated.resources.Res
 import neutron.composeapp.generated.resources.no_labels_available

@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalUuidApi::class)
 
-package com.tecknobit.neutron.ui.screens.revenues.data
+package com.tecknobit.neutron.ui.screens.shared.data
 
 import com.tecknobit.neutroncore.REVENUE_LABEL_COLOR_KEY
 import com.tecknobit.neutroncore.REVENUE_LABEL_TEXT_KEY

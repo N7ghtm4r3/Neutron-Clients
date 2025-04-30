@@ -29,11 +29,11 @@ import com.tecknobit.neutron.ui.components.DeleteRevenue
 import com.tecknobit.neutron.ui.components.RevenueDescription
 import com.tecknobit.neutron.ui.components.RevenueListItem
 import com.tecknobit.neutron.ui.icons.ContractDelete
-import com.tecknobit.neutron.ui.screens.revenues.data.GeneralRevenue
-import com.tecknobit.neutron.ui.screens.revenues.data.ProjectRevenue
-import com.tecknobit.neutron.ui.screens.revenues.data.Revenue
-import com.tecknobit.neutron.ui.screens.revenues.data.RevenueLabel
 import com.tecknobit.neutron.ui.screens.revenues.presentation.RevenuesScreenViewModel
+import com.tecknobit.neutron.ui.screens.shared.data.GeneralRevenue
+import com.tecknobit.neutron.ui.screens.shared.data.ProjectRevenue
+import com.tecknobit.neutron.ui.screens.shared.data.Revenue
+import com.tecknobit.neutron.ui.screens.shared.data.RevenueLabel
 import com.tecknobit.neutroncore.PROJECT_LABEL_COLOR
 import neutron.composeapp.generated.resources.Res
 import neutron.composeapp.generated.resources.project

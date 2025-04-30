@@ -1,6 +1,8 @@
-package com.tecknobit.neutron.ui.screens.revenues.data
+package com.tecknobit.neutron.ui.screens.project.data
 
 import com.tecknobit.equinoxcore.time.TimeFormatter.daysUntil
+import com.tecknobit.neutron.ui.screens.shared.data.GeneralRevenue
+import com.tecknobit.neutron.ui.screens.shared.data.RevenueLabel
 import com.tecknobit.neutroncore.CLOSING_DATE_KEY
 import com.tecknobit.neutroncore.REVENUE_DATE_KEY
 import kotlinx.serialization.SerialName

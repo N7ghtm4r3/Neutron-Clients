@@ -48,7 +48,7 @@ import com.tecknobit.equinoxcore.retainAndAdd
 import com.tecknobit.neutron.ui.components.LabelsGrid
 import com.tecknobit.neutron.ui.icons.ArrowSelectorTool
 import com.tecknobit.neutron.ui.screens.insert.revenue.presentation.InsertRevenueScreenViewModel
-import com.tecknobit.neutron.ui.screens.revenues.data.RevenueLabel
+import com.tecknobit.neutron.ui.screens.shared.data.RevenueLabel
 import neutron.composeapp.generated.resources.Res
 import neutron.composeapp.generated.resources.add
 import neutron.composeapp.generated.resources.create

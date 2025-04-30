@@ -10,9 +10,9 @@ import com.tecknobit.equinoxcore.network.sendPaginatedRequest
 import com.tecknobit.equinoxcore.network.sendRequest
 import com.tecknobit.equinoxcore.pagination.PaginatedResponse
 import com.tecknobit.neutron.requester
-import com.tecknobit.neutron.ui.screens.revenues.data.Revenue
-import com.tecknobit.neutron.ui.screens.revenues.data.RevenueLabel
-import com.tecknobit.neutron.ui.screens.revenues.data.RevenueSerializer
+import com.tecknobit.neutron.ui.screens.shared.data.Revenue
+import com.tecknobit.neutron.ui.screens.shared.data.RevenueLabel
+import com.tecknobit.neutron.ui.screens.shared.data.RevenueSerializer
 import com.tecknobit.neutron.ui.screens.shared.presentations.RevenueLabelsRetriever
 import com.tecknobit.neutron.ui.screens.shared.presentations.RevenueRelatedScreenViewModel
 import com.tecknobit.neutroncore.dtos.WalletStatus
