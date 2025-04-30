@@ -95,4 +95,15 @@ abstract class RevenueRelatedScreenViewModel : EquinoxViewModel(
      */
     abstract fun refreshData()
 
+    /**
+     * Method to notify a connection error
+     */
+    abstract fun notifyConnectionError()
+
+    /**
+     * Method to retrieve the information on the revenues and the wallet status after a connection
+     * error
+     */
+    abstract fun retryAfterConnectionError()
+
 }

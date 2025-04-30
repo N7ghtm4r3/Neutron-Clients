@@ -77,7 +77,7 @@ class RevenuesScreenViewModel : RevenueRelatedScreenViewModel() , RevenueLabelsR
                     setServerOfflineValue(false)
                 },
                 onFailure = { setHasBeenDisconnectedValue(true) },
-                onConnectionError = { setServerOfflineValue(true) }
+                onConnectionError = { notifyConnectionError() }
             )
         }
     }
@@ -159,9 +159,17 @@ class RevenuesScreenViewModel : RevenueRelatedScreenViewModel() , RevenueLabelsR
                     setServerOfflineValue(false)
                 },
                 onFailure = { setHasBeenDisconnectedValue(true) },
-                onConnectionError = { setServerOfflineValue(true) }
+                onConnectionError = { notifyConnectionError() }
             )
         }
+    }
+
+    /**
+     * Method to notify a connection error
+     */
+    override fun notifyConnectionError() {
+        revenuesState.setError(Exception())
+        setServerOfflineValue(true)
     }
 
     /**
@@ -169,6 +177,15 @@ class RevenuesScreenViewModel : RevenueRelatedScreenViewModel() , RevenueLabelsR
      */
     override fun refreshData() {
         revenuesState.refresh()
+        getWalletStatus()
+    }
+
+    /**
+     * Method to retrieve the information on the revenues and the wallet status after a connection
+     * error
+     */
+    override fun retryAfterConnectionError() {
+        revenuesState.retryLastFailedRequest()
         getWalletStatus()
     }
 

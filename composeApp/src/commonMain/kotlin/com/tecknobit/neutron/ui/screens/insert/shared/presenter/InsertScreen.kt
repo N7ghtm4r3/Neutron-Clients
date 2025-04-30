@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalMultiplatform::class)
-
 package com.tecknobit.neutron.ui.screens.insert.shared.presenter
 
 import androidx.compose.animation.AnimatedVisibility

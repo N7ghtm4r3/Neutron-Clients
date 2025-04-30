@@ -75,9 +75,8 @@ class ProjectScreenViewModel(
                 onSuccess = {
                     _project.value = Json.decodeFromJsonElement(it.toResponseData())
                 },
-                onFailure = {
-                    showSnackbarMessage(it)
-                }
+                onFailure = { showSnackbarMessage(it) },
+                onConnectionError = { notifyConnectionError() }
             )
         }
     }
@@ -145,9 +144,7 @@ class ProjectScreenViewModel(
                     getProjectBalance()
                 },
                 onFailure = { setHasBeenDisconnectedValue(true) },
-                onConnectionError = {
-                    setServerOfflineValue(true)
-                }
+                onConnectionError = { notifyConnectionError() }
             )
         }
     }
@@ -228,4 +225,19 @@ class ProjectScreenViewModel(
         getProjectBalance()
     }
 
+    /**
+     * Method to notify a connection error
+     */
+    override fun notifyConnectionError() {
+        ticketsState.setError(Exception())
+        setServerOfflineValue(true)
+    }
+
+    /**
+     * Method to retrieve the information on the revenues and the wallet status after a connection
+     * error
+     */
+    override fun retryAfterConnectionError() {
+        ticketsState.retryLastFailedRequest()
+    }
 }

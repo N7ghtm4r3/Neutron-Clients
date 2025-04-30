@@ -115,8 +115,10 @@ class ProjectScreen(
                         ScreenContent()
                     }
                 },
+                serverOfflineRetryText = com.tecknobit.equinoxcompose.resources.Res.string.retry,
+                serverOfflineRetryAction = { viewModel.retryAfterConnectionError() },
                 noInternetConnectionRetryText = com.tecknobit.equinoxcompose.resources.Res.string.retry,
-                noInternetConnectionRetryAction = { viewModel.ticketsState.retryLastFailedRequest() }
+                noInternetConnectionRetryAction = { viewModel.retryAfterConnectionError() },
             )
         }
     }

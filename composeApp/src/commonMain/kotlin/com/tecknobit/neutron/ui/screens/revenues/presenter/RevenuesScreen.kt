@@ -125,8 +125,10 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
                         ScreenContent()
                     }
                 },
+                serverOfflineRetryText = com.tecknobit.equinoxcompose.resources.Res.string.retry,
+                serverOfflineRetryAction = { viewModel.retryAfterConnectionError() },
                 noInternetConnectionRetryText = com.tecknobit.equinoxcompose.resources.Res.string.retry,
-                noInternetConnectionRetryAction = { viewModel.revenuesState.retryLastFailedRequest() }
+                noInternetConnectionRetryAction = { viewModel.retryAfterConnectionError() },
             )
         }
     }
