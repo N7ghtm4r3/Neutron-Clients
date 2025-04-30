@@ -3,12 +3,15 @@
 package com.tecknobit.neutron
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.text.font.FontFamily
 import coil3.ImageLoader
 import coil3.compose.LocalPlatformContext
 import coil3.network.ktor3.KtorNetworkFetcherFactory
 import coil3.request.CachePolicy
 import coil3.request.addLastModifiedToFileCacheKey
+import com.tecknobit.ametistaengine.AmetistaEngine
+import com.tecknobit.ametistaengine.AmetistaEngine.Companion.FILES_AMETISTA_CONFIG_PATHNAME
 import com.tecknobit.equinoxcore.network.Requester.Companion.toResponseData
 import com.tecknobit.equinoxcore.network.sendRequest
 import com.tecknobit.neutron.helpers.NeutronLocalUser
@@ -107,13 +110,7 @@ const val PROJECT_REVENUE_SCREEN = "ProjectRevenueScreen"
  */
 @Composable
 fun App() {
-    /*LaunchedEffect(Unit) {
-        val ametistaEngine = AmetistaEngine.ametistaEngine
-        ametistaEngine.fireUp(
-            configData = Res.readBytes(FILES_AMETISTA_CONFIG_PATHNAME),
-            debugMode = true // TODO: TO SET ON FALSE
-        )
-    }*/
+    InitAmetista()
     bodyFontFamily = FontFamily(Font(Res.font.roboto))
     displayFontFamily = FontFamily(Font(Res.font.lilitaone))
     imageLoader = ImageLoader.Builder(LocalPlatformContext.current)
@@ -182,6 +179,25 @@ fun App() {
                 ).ShowContent()
             }
         }
+    }
+}
+
+/**
+ * Method used to initialize the Ametista system
+ */
+@Composable
+private fun InitAmetista() {
+    LaunchedEffect(Unit) {
+        val ametistaEngine = AmetistaEngine.ametistaEngine
+        ametistaEngine.fireUp(
+            configData = Res.readBytes(FILES_AMETISTA_CONFIG_PATHNAME),
+            host = AmetistaConfig.HOST,
+            serverSecret = AmetistaConfig.SERVER_SECRET!!,
+            applicationId = AmetistaConfig.APPLICATION_IDENTIFIER!!,
+            bypassSslValidation = AmetistaConfig.BYPASS_SSL_VALIDATION,
+            debugMode = true
+        )
+        ametistaEngine.connectPlatform()
     }
 }
 
