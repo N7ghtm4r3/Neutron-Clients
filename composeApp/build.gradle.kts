@@ -204,7 +204,7 @@ compose.desktop {
                 debMaintainer = "infotecknobitcompany@gmail.com"
                 appRelease = "1.0.2"
                 appCategory = "PERSONALIZATION"
-                rpmLicenseType = "MIT"
+                rpmLicenseType = "APACHE2"
             }
         }
         buildTypes.release.proguard {
