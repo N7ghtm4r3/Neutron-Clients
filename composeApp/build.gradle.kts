@@ -26,8 +26,8 @@ kotlin {
             jvmTarget.set(JvmTarget.JVM_18)
         }
     }
-    
-    listOf(
+
+    /*listOf(
         iosX64(),
         iosArm64(),
         iosSimulatorArm64()
@@ -36,7 +36,7 @@ kotlin {
             baseName = "Neutron"
             isStatic = true
         }
-    }
+    }*/
     
     jvm("desktop") {
         compilerOptions {
@@ -115,7 +115,7 @@ kotlin {
             implementation(libs.ktor.client.okhttp)
         }
 
-        val iosX64Main by getting
+        /*val iosX64Main by getting
         val iosArm64Main by getting
         val iosSimulatorArm64Main by getting
         val iosMain by creating {
@@ -126,7 +126,7 @@ kotlin {
             dependencies {
                 implementation(libs.ktor.client.cio)
             }
-        }
+        }*/
 
         val wasmJsMain by getting {
             dependencies {
