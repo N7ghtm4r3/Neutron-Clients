@@ -212,14 +212,14 @@ fun startSession() {
                     localUser.updateDynamicAccountData(
                         dynamicData = response.toResponseData()
                     )
+                    setUserLanguage()
                 },
-                onFailure = {}
+                onFailure = { setUserLanguage() }
             )
         }
         REVENUES_SCREEN
     } else
         AUTH_SCREEN
-    setUserLanguage()
     navigator.navigate(route)
 }
 
