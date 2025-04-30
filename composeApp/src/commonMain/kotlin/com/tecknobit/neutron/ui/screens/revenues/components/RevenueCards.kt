@@ -1,4 +1,4 @@
-@file:OptIn(ExperimentalUuidApi::class, ExperimentalMultiplatform::class)
+@file:OptIn(ExperimentalUuidApi::class)
 
 package com.tecknobit.neutron.ui.screens.revenues.components
 
@@ -22,20 +22,23 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.tecknobit.equinoxcompose.utilities.ResponsiveContent
+import com.tecknobit.equinoxcore.time.TimeFormatter.EUROPEAN_DATE_PATTERN
 import com.tecknobit.neutron.INSERT_REVENUE_SCREEN
 import com.tecknobit.neutron.PROJECT_REVENUE_SCREEN
 import com.tecknobit.neutron.navigator
 import com.tecknobit.neutron.ui.components.DeleteRevenue
 import com.tecknobit.neutron.ui.components.RevenueDescription
+import com.tecknobit.neutron.ui.components.RevenueInfo
 import com.tecknobit.neutron.ui.components.RevenueListItem
 import com.tecknobit.neutron.ui.icons.ContractDelete
-import com.tecknobit.neutron.ui.screens.revenues.data.GeneralRevenue
-import com.tecknobit.neutron.ui.screens.revenues.data.ProjectRevenue
-import com.tecknobit.neutron.ui.screens.revenues.data.Revenue
-import com.tecknobit.neutron.ui.screens.revenues.data.RevenueLabel
 import com.tecknobit.neutron.ui.screens.revenues.presentation.RevenuesScreenViewModel
+import com.tecknobit.neutron.ui.screens.shared.data.GeneralRevenue
+import com.tecknobit.neutron.ui.screens.shared.data.ProjectRevenue
+import com.tecknobit.neutron.ui.screens.shared.data.Revenue
+import com.tecknobit.neutron.ui.screens.shared.data.RevenueLabel
 import com.tecknobit.neutroncore.PROJECT_LABEL_COLOR
 import neutron.composeapp.generated.resources.Res
+import neutron.composeapp.generated.resources.last_revenue_on
 import neutron.composeapp.generated.resources.project
 import org.jetbrains.compose.resources.stringResource
 import kotlin.uuid.ExperimentalUuidApi
@@ -49,7 +52,6 @@ import kotlin.uuid.Uuid
  * @param position The position occupied by the revenue in the list
  */
 @Composable
-@NonRestartableComposable
 fun RevenueCard(
     viewModel: RevenuesScreenViewModel,
     revenue: Revenue,
@@ -91,7 +93,6 @@ fun RevenueCard(
  * @param position The position occupied by the revenue in the list
  */
 @Composable
-@NonRestartableComposable
 private fun GeneralRevenueCard(
     viewModel: RevenuesScreenViewModel,
     revenue: GeneralRevenue,
@@ -138,7 +139,6 @@ private fun GeneralRevenueCard(
  * @param containerColor The color to use for the container
  */
 @Composable
-@NonRestartableComposable
 private fun GeneralRevenueContent(
     viewModel: RevenuesScreenViewModel,
     revenue: GeneralRevenue,
@@ -181,7 +181,6 @@ private fun GeneralRevenueContent(
  * @param position The position occupied by the revenue in the list
  */
 @Composable
-@NonRestartableComposable
 private fun ProjectRevenueCard(
     viewModel: RevenuesScreenViewModel,
     revenue: ProjectRevenue,
@@ -228,7 +227,6 @@ private fun ProjectRevenueCard(
  * @param containerColor The color to use for the container
  */
 @Composable
-@NonRestartableComposable
 private fun ProjectRevenueContent(
     viewModel: RevenuesScreenViewModel,
     revenue: ProjectRevenue,
@@ -245,6 +243,14 @@ private fun ProjectRevenueContent(
                 color = PROJECT_LABEL_COLOR
             )
         ),
+        info = {
+            RevenueInfo(
+                viewModel = viewModel,
+                revenue = revenue,
+                dateHeader = Res.string.last_revenue_on,
+                pattern = EUROPEAN_DATE_PATTERN
+            )
+        },
         deleteIcon = Icons.Default.Delete,
         actionButton = {
             IconButton(
@@ -266,6 +272,7 @@ private fun ProjectRevenueContent(
  * @param revenue The revenue to display
  * @param labels The labels attached to the revenue
  * @param containerColor The color to use for the container
+ * @param info The info section of the component
  * @param deleteIcon The icon of the delete button
  * @param actionButton The action button
  */
@@ -276,8 +283,14 @@ private fun RevenueItem(
     revenue: Revenue,
     labels: List<RevenueLabel>,
     containerColor: Color,
+    info: @Composable () -> Unit = {
+        RevenueInfo(
+            viewModel = viewModel,
+            revenue = revenue
+        )
+    },
     deleteIcon: ImageVector,
-    actionButton: @Composable () -> Unit
+    actionButton: @Composable () -> Unit,
 ) {
     RevenueListItem(
         viewModel = viewModel,
@@ -296,7 +309,8 @@ private fun RevenueItem(
                 revenue = revenue,
                 onDelete = { viewModel.refreshData() }
             )
-        }
+        },
+        info = info
     )
 }
 

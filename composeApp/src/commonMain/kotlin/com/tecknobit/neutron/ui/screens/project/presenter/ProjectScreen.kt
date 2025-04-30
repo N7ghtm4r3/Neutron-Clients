@@ -3,7 +3,6 @@ package com.tecknobit.neutron.ui.screens.project.presenter
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -14,7 +13,6 @@ import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
-import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -37,38 +35,30 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.tecknobit.equinoxcompose.components.EmptyListUI
+import com.tecknobit.equinoxcompose.annotations.ScreenSection
 import com.tecknobit.equinoxcompose.resources.retry
-import com.tecknobit.equinoxcompose.session.EquinoxScreen
 import com.tecknobit.equinoxcompose.session.ManagedContent
+import com.tecknobit.equinoxcompose.session.screens.EquinoxScreen
+import com.tecknobit.equinoxcompose.utilities.EXPANDED_CONTAINER
 import com.tecknobit.neutron.INSERT_REVENUE_SCREEN
 import com.tecknobit.neutron.INSERT_TICKET_SCREEN
-import com.tecknobit.neutron.MAX_CONTAINER_WIDTH
-import com.tecknobit.neutron.bodyFontFamily
 import com.tecknobit.neutron.displayFontFamily
 import com.tecknobit.neutron.localUser
 import com.tecknobit.neutron.navigator
 import com.tecknobit.neutron.ui.components.DeleteRevenue
-import com.tecknobit.neutron.ui.components.FirstPageProgressIndicator
-import com.tecknobit.neutron.ui.components.NewPageProgressIndicator
-import com.tecknobit.neutron.ui.icons.ReceiptLong
 import com.tecknobit.neutron.ui.screens.project.components.InitialRevenueItem
-import com.tecknobit.neutron.ui.screens.project.components.TicketCard
+import com.tecknobit.neutron.ui.screens.project.components.Tickets
 import com.tecknobit.neutron.ui.screens.project.components.TicketsFilterBar
 import com.tecknobit.neutron.ui.screens.project.presentation.ProjectScreenViewModel
-import com.tecknobit.neutron.ui.screens.revenues.data.ProjectRevenue
+import com.tecknobit.neutron.ui.screens.shared.data.ProjectRevenue
 import com.tecknobit.neutron.ui.screens.shared.presenters.RevenuesContainerScreen
 import com.tecknobit.neutron.ui.screens.shared.presenters.RevenuesContainerScreen.Companion.HIDE_BALANCE
 import com.tecknobit.neutron.ui.theme.NeutronTheme
-import io.github.ahmad_hamwi.compose.pagination.PaginatedLazyColumn
-import kotlinx.coroutines.delay
 import neutron.composeapp.generated.resources.Res
 import neutron.composeapp.generated.resources.add_ticket
-import neutron.composeapp.generated.resources.no_revenues_yet
 import neutron.composeapp.generated.resources.total_revenues
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
@@ -79,7 +69,7 @@ import org.jetbrains.compose.resources.stringResource
  * @param projectId The identifier of the project displayed
  *
  * @author N7ghtm4r3 - Tecknobit
- * @see com.tecknobit.equinoxcompose.session.EquinoxScreen
+ * @see com.tecknobit.equinoxcompose.session.screens.EquinoxScreen
  * @see RevenuesContainerScreen
  */
 class ProjectScreen(
@@ -112,21 +102,23 @@ class ProjectScreen(
     override fun ArrangeScreenContent() {
         NeutronTheme {
             ManagedContent(
-                viewModel = viewModel!!,
+                modifier = Modifier
+                    .fillMaxSize(),
+                viewModel = viewModel,
+                initialDelay = 500L,
+                loadingRoutine = { project.value != null },
                 content = {
                     Scaffold(
-                        snackbarHost = { SnackbarHost(viewModel!!.snackbarHostState!!) },
+                        snackbarHost = { SnackbarHost(viewModel.snackbarHostState!!) },
                         floatingActionButton = { FabButton() }
                     ) {
                         ScreenContent()
                     }
                 },
-                loadingRoutine = {
-                    delay(500L) // FIXME: TO REMOVE WHEN COMPONENT BUILT-IN FIXED
-                    project.value != null
-                },
+                serverOfflineRetryText = com.tecknobit.equinoxcompose.resources.Res.string.retry,
+                serverOfflineRetryAction = { viewModel.retryAfterConnectionError() },
                 noInternetConnectionRetryText = com.tecknobit.equinoxcompose.resources.Res.string.retry,
-                noInternetConnectionRetryAction = { viewModel!!.ticketsState.retryLastFailedRequest() }
+                noInternetConnectionRetryAction = { viewModel.retryAfterConnectionError() },
             )
         }
     }
@@ -159,7 +151,7 @@ class ProjectScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Header()
-            Tickets()
+            TicketsSection()
         }
     }
 
@@ -167,14 +159,14 @@ class ProjectScreen(
      * The header section of the screen
      */
     @Composable
-    @NonRestartableComposable
+    @ScreenSection
     override fun Header() {
         Card (
             modifier = Modifier
+                .height(175.dp)
                 .widthIn(
-                    max = MAX_CONTAINER_WIDTH
-                )
-                .height(175.dp),
+                    max = EXPANDED_CONTAINER
+                ),
             shape = RoundedCornerShape(
                 bottomStart = 15.dp,
                 bottomEnd = 15.dp
@@ -206,7 +198,7 @@ class ProjectScreen(
                 TotalRevenues()
             }
             TicketsFilterBar(
-                viewModel = viewModel!!
+                viewModel = viewModel
             )
         }
     }
@@ -231,7 +223,6 @@ class ProjectScreen(
      * Toolbar used to manage a ticket
      */
     @Composable
-    @NonRestartableComposable
     private fun RowScope.Toolbar() {
         Row (
             modifier = Modifier
@@ -259,7 +250,7 @@ class ProjectScreen(
             DeleteRevenue(
                 show = deleteProject,
                 revenue = project.value!!,
-                viewModel = viewModel!!,
+                viewModel = viewModel,
                 onDelete = { navigator.goBack() }
             )
         }
@@ -269,7 +260,6 @@ class ProjectScreen(
      * Section related to the total revenues about the current project
      */
     @Composable
-    @NonRestartableComposable
     private fun TotalRevenues() {
         Row (
             modifier = Modifier
@@ -301,7 +291,7 @@ class ProjectScreen(
             IconButton(
                 modifier = Modifier
                     .size(32.dp),
-                onClick = { viewModel!!.manageBalancesVisibility() }
+                onClick = { viewModel.manageBalancesVisibility() }
             ) {
                 Icon(
                     imageVector = if(hideBalances.value)
@@ -318,50 +308,24 @@ class ProjectScreen(
      * The tickets attached to the project
      */
     @Composable
-    @NonRestartableComposable
-    private fun Tickets() {
+    @ScreenSection
+    private fun TicketsSection() {
         Column(
             modifier = Modifier
                 .fillMaxHeight()
                 .widthIn(
-                    max = MAX_CONTAINER_WIDTH
+                    max = EXPANDED_CONTAINER
                 )
                 .navigationBarsPadding()
         ) {
             InitialRevenueItem(
-                viewModel = viewModel!!,
+                viewModel = viewModel,
                 initialRevenue = project.value!!.initialRevenue
             )
-            PaginatedLazyColumn(
-                paginationState = viewModel!!.ticketsState,
-                contentPadding = PaddingValues(
-                    bottom = 16.dp
-                ),
-                verticalArrangement = Arrangement.spacedBy(10.dp),
-                firstPageProgressIndicator = { FirstPageProgressIndicator() },
-                firstPageEmptyIndicator = {
-                    EmptyListUI(
-                        icon = ReceiptLong,
-                        subText = Res.string.no_revenues_yet,
-                        textStyle = TextStyle(
-                            fontFamily = bodyFontFamily
-                        )
-                    )
-                },
-                newPageProgressIndicator = { NewPageProgressIndicator() }
-            ) {
-                itemsIndexed(
-                    items = viewModel!!.ticketsState.allItems!!,
-                    key = { _, revenue -> revenue.id }
-                ) { index, ticket ->
-                    TicketCard(
-                        viewModel = viewModel!!,
-                        project = project.value!!,
-                        ticket = ticket,
-                        position = index
-                    )
-                }
-            }
+            Tickets(
+                viewModel = viewModel,
+                project = project.value!!
+            )
         }
     }
 
@@ -370,8 +334,8 @@ class ProjectScreen(
      */
     override fun onStart() {
         super.onStart()
-        viewModel!!.retrieveProject()
-        viewModel!!.getProjectBalance()
+        viewModel.retrieveProject()
+        viewModel.getProjectBalance()
     }
 
     /**
@@ -379,9 +343,9 @@ class ProjectScreen(
      */
     @Composable
     override fun CollectStates() {
-        project = viewModel!!.project.collectAsState()
-        balance = viewModel!!.balance.collectAsState()
-        hideBalances = viewModel!!.hideBalances.collectAsState()
+        project = viewModel.project.collectAsState()
+        balance = viewModel.balance.collectAsState()
+        hideBalances = viewModel.hideBalances.collectAsState()
     }
 
 }

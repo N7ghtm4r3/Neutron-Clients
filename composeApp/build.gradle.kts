@@ -5,7 +5,6 @@ import org.jetbrains.compose.desktop.application.dsl.TargetFormat.Pkg
 import org.jetbrains.dokka.base.DokkaBase
 import org.jetbrains.dokka.base.DokkaBaseConfiguration
 import org.jetbrains.dokka.gradle.DokkaTask
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
@@ -18,17 +17,17 @@ plugins {
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.dokka)
     kotlin("plugin.serialization") version "2.0.20"
+    id("com.github.gmazzo.buildconfig") version "5.5.1"
 }
 
 kotlin {
     androidTarget {
-        @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_18)
         }
     }
-    
-    listOf(
+
+    /*listOf(
         iosX64(),
         iosArm64(),
         iosSimulatorArm64()
@@ -37,12 +36,11 @@ kotlin {
             baseName = "Neutron"
             isStatic = true
         }
-    }
+    }*/
     
     jvm("desktop") {
-        @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_22)
+            jvmTarget.set(JvmTarget.JVM_18)
         }
     }
     
@@ -78,7 +76,6 @@ kotlin {
             implementation(libs.review.ktx)
             implementation(libs.ktor.client.okhttp)
             implementation(libs.androidx.biometric)
-            implementation(libs.androidx.startup.runtime)
             implementation(libs.androidx.appcompat)
         }
 
@@ -96,7 +93,6 @@ kotlin {
                 implementation(libs.equinox.compose)
                 implementation(libs.equinox.core)
                 implementation(libs.precompose)
-                implementation(libs.neutroncore)
                 implementation(libs.kotlinx.serialization.json)
                 implementation(libs.lazy.pagination.compose)
                 implementation(libs.material3.window.size)
@@ -107,7 +103,8 @@ kotlin {
                 implementation(libs.datetime.wheel.picker)
                 implementation(libs.kotlinx.datetime)
                 implementation(libs.colorpicker.compose)
-                implementation(libs.ametista.engine)
+                //implementation(libs.ametista.engine)
+                implementation(libs.neutroncore)
             }
         }
 
@@ -118,7 +115,7 @@ kotlin {
             implementation(libs.ktor.client.okhttp)
         }
 
-        val iosX64Main by getting
+        /*val iosX64Main by getting
         val iosArm64Main by getting
         val iosSimulatorArm64Main by getting
         val iosMain by creating {
@@ -129,7 +126,7 @@ kotlin {
             dependencies {
                 implementation(libs.ktor.client.cio)
             }
-        }
+        }*/
 
         val wasmJsMain by getting {
             dependencies {
@@ -148,8 +145,8 @@ android {
         applicationId = "com.tecknobit.neutron"
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
-        versionCode = 4
-        versionName = "1.0.1"
+        versionCode = 5
+        versionName = "1.0.2"
     }
     packaging {
         resources {
@@ -182,10 +179,10 @@ compose.desktop {
                 "jdk.security.auth"
             )
             packageName = "Neutron"
-            packageVersion = "1.0.1"
+            packageVersion = "1.0.2"
             packageName = "Neutron"
-            packageVersion = "1.0.1"
-            version = "1.0.1"
+            packageVersion = "1.0.2"
+            version = "1.0.2"
             description = "Order and ticket revenue manager for the projects you are developing"
             copyright = "© 2025 Tecknobit"
             vendor = "Tecknobit"
@@ -202,9 +199,9 @@ compose.desktop {
                 iconFile.set(project.file("src/desktopMain/resources/logo.png"))
                 packageName = "com-tecknobit-neutron"
                 debMaintainer = "infotecknobitcompany@gmail.com"
-                appRelease = "1.0.0"
+                appRelease = "1.0.2"
                 appCategory = "PERSONALIZATION"
-                rpmLicenseType = "MIT"
+                rpmLicenseType = "APACHE2"
             }
         }
         buildTypes.release.proguard {
@@ -229,4 +226,25 @@ tasks.withType<DokkaTask>().configureEach {
         customAssets = listOf(file("../docs/logo-icon.svg"))
         footerMessage = "(c) 2025 Tecknobit"
     }
+}
+
+buildConfig {
+    className("AmetistaConfig")
+    packageName("com.tecknobit.ametista")
+    buildConfigField<String>(
+        name = "HOST",
+        value = project.findProperty("host").toString()
+    )
+    buildConfigField<String?>(
+        name = "SERVER_SECRET",
+        value = project.findProperty("server_secret").toString()
+    )
+    buildConfigField<String?>(
+        name = "APPLICATION_IDENTIFIER",
+        value = project.findProperty("application_id").toString()
+    )
+    buildConfigField<Boolean>(
+        name = "BYPASS_SSL_VALIDATION",
+        value = project.findProperty("bypass_ssl_validation").toString().toBoolean()
+    )
 }

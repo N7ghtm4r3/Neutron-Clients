@@ -5,14 +5,14 @@ import androidx.lifecycle.viewModelScope
 import com.tecknobit.equinoxcompose.session.setHasBeenDisconnectedValue
 import com.tecknobit.equinoxcompose.session.setServerOfflineValue
 import com.tecknobit.equinoxcompose.viewmodels.EquinoxViewModel
-import com.tecknobit.equinoxcore.network.Requester.Companion.sendPaginatedRequest
-import com.tecknobit.equinoxcore.network.Requester.Companion.sendRequest
 import com.tecknobit.equinoxcore.network.Requester.Companion.toResponseData
+import com.tecknobit.equinoxcore.network.sendPaginatedRequest
+import com.tecknobit.equinoxcore.network.sendRequest
 import com.tecknobit.equinoxcore.pagination.PaginatedResponse
 import com.tecknobit.neutron.requester
-import com.tecknobit.neutron.ui.screens.revenues.data.Revenue
-import com.tecknobit.neutron.ui.screens.revenues.data.RevenueLabel
-import com.tecknobit.neutron.ui.screens.revenues.data.RevenueSerializer
+import com.tecknobit.neutron.ui.screens.shared.data.Revenue
+import com.tecknobit.neutron.ui.screens.shared.data.RevenueLabel
+import com.tecknobit.neutron.ui.screens.shared.data.RevenueSerializer
 import com.tecknobit.neutron.ui.screens.shared.presentations.RevenueLabelsRetriever
 import com.tecknobit.neutron.ui.screens.shared.presentations.RevenueRelatedScreenViewModel
 import com.tecknobit.neutroncore.dtos.WalletStatus
@@ -77,7 +77,7 @@ class RevenuesScreenViewModel : RevenueRelatedScreenViewModel() , RevenueLabelsR
                     setServerOfflineValue(false)
                 },
                 onFailure = { setHasBeenDisconnectedValue(true) },
-                onConnectionError = { setServerOfflineValue(true) }
+                onConnectionError = { notifyConnectionError() }
             )
         }
     }
@@ -159,9 +159,17 @@ class RevenuesScreenViewModel : RevenueRelatedScreenViewModel() , RevenueLabelsR
                     setServerOfflineValue(false)
                 },
                 onFailure = { setHasBeenDisconnectedValue(true) },
-                onConnectionError = { setServerOfflineValue(true) }
+                onConnectionError = { notifyConnectionError() }
             )
         }
+    }
+
+    /**
+     * Method to notify a connection error
+     */
+    override fun notifyConnectionError() {
+        revenuesState.setError(Exception())
+        setServerOfflineValue(true)
     }
 
     /**
@@ -169,6 +177,15 @@ class RevenuesScreenViewModel : RevenueRelatedScreenViewModel() , RevenueLabelsR
      */
     override fun refreshData() {
         revenuesState.refresh()
+        getWalletStatus()
+    }
+
+    /**
+     * Method to retrieve the information on the revenues and the wallet status after a connection
+     * error
+     */
+    override fun retryAfterConnectionError() {
+        revenuesState.retryLastFailedRequest()
         getWalletStatus()
     }
 

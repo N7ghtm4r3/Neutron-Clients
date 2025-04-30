@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalMultiplatform::class)
-
 package com.tecknobit.neutron.ui.screens.insert.shared.presenter
 
 import androidx.compose.animation.AnimatedVisibility
@@ -24,7 +22,6 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
@@ -41,29 +38,30 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.tecknobit.equinoxcompose.annotations.ScreenSection
 import com.tecknobit.equinoxcompose.components.EquinoxTextField
-import com.tecknobit.equinoxcompose.session.EquinoxScreen
+import com.tecknobit.equinoxcompose.components.stepper.Step
+import com.tecknobit.equinoxcompose.components.stepper.StepContent
+import com.tecknobit.equinoxcompose.components.stepper.Stepper
 import com.tecknobit.equinoxcompose.session.ManagedContent
+import com.tecknobit.equinoxcompose.session.screens.EquinoxScreen
 import com.tecknobit.equinoxcompose.utilities.ResponsiveContent
 import com.tecknobit.equinoxcore.annotations.RequiresSuperCall
 import com.tecknobit.equinoxcore.annotations.Structure
 import com.tecknobit.neutron.bodyFontFamily
 import com.tecknobit.neutron.displayFontFamily
 import com.tecknobit.neutron.localUser
-import com.tecknobit.neutron.ui.components.Step
-import com.tecknobit.neutron.ui.components.Stepper
 import com.tecknobit.neutron.ui.components.screenkeyboard.ScreenKeyboard
 import com.tecknobit.neutron.ui.components.screenkeyboard.ScreenKeyboardState.Companion.ZERO
 import com.tecknobit.neutron.ui.components.screenkeyboard.rememberKeyboardState
 import com.tecknobit.neutron.ui.screens.insert.shared.presentation.InsertScreenViewModel
-import com.tecknobit.neutron.ui.screens.revenues.data.GeneralRevenue
-import com.tecknobit.neutron.ui.screens.revenues.data.ProjectRevenue
-import com.tecknobit.neutron.ui.screens.revenues.data.Revenue
+import com.tecknobit.neutron.ui.screens.shared.data.GeneralRevenue
+import com.tecknobit.neutron.ui.screens.shared.data.ProjectRevenue
+import com.tecknobit.neutron.ui.screens.shared.data.Revenue
 import com.tecknobit.neutron.ui.screens.shared.presenters.NeutronScreen
 import com.tecknobit.neutroncore.helpers.NeutronInputsValidator.isRevenueDescriptionValid
 import com.tecknobit.neutroncore.helpers.NeutronInputsValidator.isRevenueTitleValid
 import dev.darkokoa.datetimewheelpicker.WheelDateTimePicker
-import kotlinx.coroutines.delay
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone
@@ -166,7 +164,16 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
     @Composable
     override fun ScreenContent() {
         ManagedContent(
-            viewModel = viewModel!!,
+            modifier = Modifier
+                .fillMaxSize(),
+            viewModel = viewModel,
+            initialDelay = 500L,
+            loadingRoutine = if (isEditing) {
+                {
+                    revenue.value != null
+                }
+            } else
+                null,
             content = {
                 CollectStatesAfterLoading()
                 ResponsiveContent(
@@ -190,13 +197,6 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
                         AmountSection()
                     }
                 )
-            },
-            loadingRoutine = {
-                if (isEditing) {
-                    delay(500L) // FIXME: TO REMOVE WHEN COMPONENT BUILT-IN FIXED
-                    revenue.value != null
-                } else
-                    true
             }
         )
     }
@@ -208,7 +208,7 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
      * @param keyboardModifier The modifier to apply to the keyboard
      */
     @Composable
-    @NonRestartableComposable
+    @ScreenSection
     private fun AmountSection(
         keyboardWeight: Float = 2f,
         keyboardModifier: Modifier = Modifier
@@ -228,7 +228,7 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
             ) {
                 Amount()
                 AnimatedVisibility(
-                    visible = viewModel!!.keyboardState.parseAmount() > 0.0
+                    visible = viewModel.keyboardState.parseAmount() > 0.0
                 ) {
                     Row (
                         horizontalArrangement = Arrangement.spacedBy(10.dp)
@@ -253,7 +253,7 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
                                     containerColor = MaterialTheme.colorScheme.primary,
                                     contentColor = MaterialTheme.colorScheme.onPrimary
                                 ),
-                                onClick = { viewModel!!.insert() }
+                                onClick = { viewModel.insert() }
                             ) {
                                 Text(
                                     text = stringResource(
@@ -286,7 +286,6 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
      * @param modifier The modifier to apply to the component
      */
     @Composable
-    @NonRestartableComposable
     private fun Amount(
         modifier: Modifier = Modifier
     ) {
@@ -298,7 +297,7 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
             horizontalArrangement = Arrangement.spacedBy(5.dp)
         ) {
             Text(
-                text = viewModel!!.keyboardState.currentAmount(),
+                text = viewModel.keyboardState.currentAmount(),
                 fontFamily = displayFontFamily,
                 fontSize = 60.sp,
                 maxLines = 1,
@@ -318,7 +317,7 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
      * @param keyboardModifier The modifier to apply to the keyboard
      */
     @Composable
-    @NonRestartableComposable
+    @ScreenSection
     private fun KeyboardSection(
         keyboardModifier: Modifier
     ) {
@@ -328,7 +327,7 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
             ScreenKeyboard(
                 modifier = keyboardModifier
                     .fillMaxSize(),
-                state = viewModel!!.keyboardState
+                state = viewModel.keyboardState
             )
         }
     }
@@ -338,14 +337,14 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
      * insert
      */
     @Composable
-    @NonRestartableComposable
+    @ScreenSection
     private fun FormSection() {
         AnimatedVisibility(
             visible = !displayKeyboard.value
         ) {
             val steps = getInsertionSteps()
             Stepper(
-                modifier = Modifier
+                containerModifier = Modifier
                     .padding(
                         horizontal = 16.dp
                     )
@@ -369,8 +368,9 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
      * This section allows to insert the title of the revenue
      */
     @Composable
-    @NonRestartableComposable
-    // TODO: ANNOTATE AS SPECIAL STEP WITH THE RELATED EQUINOX-ANNOTATION
+    @StepContent(
+        number = 1
+    )
     protected fun RevenueTitle() {
         val focusRequester = remember { FocusRequester() }
         LaunchedEffect(Unit) {
@@ -387,13 +387,13 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
                 focusedIndicatorColor = Color.Transparent,
                 errorIndicatorColor = Color.Transparent
             ),
-            value = viewModel!!.title,
+            value = viewModel.title,
             textFieldStyle = TextStyle(
                 fontSize = 14.sp,
                 fontWeight = FontWeight.SemiBold,
                 fontFamily = bodyFontFamily
             ),
-            isError = viewModel!!.titleError,
+            isError = viewModel.titleError,
             validator = { isRevenueTitleValid(it) },
             errorText = Res.string.title_not_valid,
             errorTextStyle = TextStyle(
@@ -412,8 +412,9 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
      * This section allows to insert the description of the revenue
      */
     @Composable
-    @NonRestartableComposable
-    // TODO: ANNOTATE AS SPECIAL STEP WITH THE RELATED EQUINOX-ANNOTATION
+    @StepContent(
+        number = 2
+    )
     protected fun RevenueDescription() {
         val focusRequester = remember { FocusRequester() }
         LaunchedEffect(Unit) {
@@ -432,13 +433,13 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
                 errorIndicatorColor = Color.Transparent
             ),
             maxLines = 10,
-            value = viewModel!!.description,
+            value = viewModel.description,
             textFieldStyle = TextStyle(
                 fontSize = 14.sp,
                 fontWeight = FontWeight.SemiBold,
                 fontFamily = bodyFontFamily
             ),
-            isError = viewModel!!.descriptionError,
+            isError = viewModel.descriptionError,
             validator = { isRevenueDescriptionValid(it) },
             errorText = Res.string.description_not_valid,
             errorTextStyle = TextStyle(
@@ -456,8 +457,9 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
      * This section allows to insert the date of the revenue
      */
     @Composable
-    @NonRestartableComposable
-    // TODO: ANNOTATE AS SPECIAL STEP WITH THE RELATED EQUINOX-ANNOTATION
+    @StepContent(
+        number = 3
+    )
     protected fun ColumnScope.InsertionDate() {
         WheelDateTimePicker(
             modifier = Modifier
@@ -465,9 +467,9 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
                     vertical = 16.dp
                 )
                 .align(Alignment.CenterHorizontally),
-            startDateTime = viewModel!!.insertionDate.value,
+            startDateTime = viewModel.insertionDate.value,
             rowCount = 5
-        ) { snappedDateTime -> viewModel!!.insertionDate.value = snappedDateTime }
+        ) { snappedDateTime -> viewModel.insertionDate.value = snappedDateTime }
     }
 
     /**
@@ -475,7 +477,7 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
      */
     override fun onStart() {
         super.onStart()
-        viewModel!!.retrieveRevenue()
+        viewModel.retrieveRevenue()
     }
 
     /**
@@ -485,15 +487,19 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
     @RequiresSuperCall
     override fun CollectStates() {
         displayKeyboard = remember { mutableStateOf(true) }
-        revenue = viewModel!!.revenue.collectAsState()
-        viewModel!!.titleError = remember { mutableStateOf(false) }
-        viewModel!!.descriptionError = remember { mutableStateOf(false) }
+        revenue = viewModel.revenue.collectAsState()
+        viewModel.titleError = remember { mutableStateOf(false) }
+        viewModel.descriptionError = remember { mutableStateOf(false) }
     }
 
+    /**
+     * Method used to collect or instantiate the states of the screen after a loading required to correctly assign an
+     * initial value to the states
+     */
     @Composable
-    @Deprecated("TO USE THE BUILT-IN IN EQUINOX ONE")
-    private fun CollectStatesAfterLoading() {
-        viewModel!!.keyboardState = rememberKeyboardState(
+    @RequiresSuperCall
+    override fun CollectStatesAfterLoading() {
+        viewModel.keyboardState = rememberKeyboardState(
             amount = if (isEditing) {
                 if (revenue.value!! is ProjectRevenue)
                     (revenue.value!! as ProjectRevenue).initialRevenue.value.toString()
@@ -502,10 +508,10 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
             } else
                 ZERO
         )
-        viewModel!!.addingGeneralRevenue = remember {
+        viewModel.addingGeneralRevenue = remember {
             mutableStateOf(!isEditing || revenue.value!! is GeneralRevenue)
         }
-        viewModel!!.title = remember {
+        viewModel.title = remember {
             mutableStateOf(
                 if(isEditing)
                     revenue.value!!.title
@@ -513,7 +519,7 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
                     ""
             )
         }
-        viewModel!!.description = remember {
+        viewModel.description = remember {
             mutableStateOf(
                 if(revenue.value != null && revenue.value is GeneralRevenue)
                     (revenue.value as GeneralRevenue).description
@@ -521,7 +527,7 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
                     ""
             )
         }
-        viewModel!!.insertionDate = remember {
+        viewModel.insertionDate = remember {
             mutableStateOf(
                 if(isEditing) {
                     Instant.fromEpochMilliseconds(revenue.value!!.revenueDate)

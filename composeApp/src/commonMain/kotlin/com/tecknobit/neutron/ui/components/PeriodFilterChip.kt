@@ -11,7 +11,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import com.tecknobit.neutron.bodyFontFamily
@@ -39,7 +38,6 @@ import org.jetbrains.compose.resources.stringResource
  * @param viewModel The support viewmodel for the screen
  */
 @Composable
-@NonRestartableComposable
 fun PeriodFilterChip(
     viewModel: RevenueRelatedScreenViewModel
 ) {
@@ -78,7 +76,6 @@ fun PeriodFilterChip(
  * @param expanded Whether the menu has been expanded or not
  */
 @Composable
-@NonRestartableComposable
 private fun PeriodsMenu(
     viewModel: RevenueRelatedScreenViewModel,
     expanded: MutableState<Boolean>

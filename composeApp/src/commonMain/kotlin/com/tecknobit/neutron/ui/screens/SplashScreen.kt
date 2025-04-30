@@ -14,8 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.tecknobit.equinoxcompose.session.EquinoxScreen
-import com.tecknobit.equinoxcompose.viewmodels.EquinoxViewModel
+import com.tecknobit.equinoxcompose.session.screens.EquinoxNoModelScreen
 import com.tecknobit.neutron.CheckForUpdatesAndLaunch
 import com.tecknobit.neutron.CloseApplicationOnNavBack
 import com.tecknobit.neutron.bodyFontFamily
@@ -29,9 +28,9 @@ import org.jetbrains.compose.resources.stringResource
  * The [SplashScreen] class is used to retrieve and load the session data and enter the application's workflow
  *
  * @author N7ghtm4r3 - Tecknobit
- * @see EquinoxScreen
+ * @see EquinoxNoModelScreen
  */
-class SplashScreen : EquinoxScreen<EquinoxViewModel>() {
+class SplashScreen : EquinoxNoModelScreen() {
 
     /**
      * Method to arrange the content of the screen to display

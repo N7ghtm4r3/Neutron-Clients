@@ -2,19 +2,19 @@ package com.tecknobit.neutron
 
 import androidx.activity.compose.LocalActivity
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import com.google.android.play.core.appupdate.AppUpdateOptions
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.UpdateAvailability.UPDATE_AVAILABLE
 import com.google.android.play.core.ktx.isImmediateUpdateAllowed
 import com.tecknobit.equinoxcompose.components.ErrorUI
-import com.tecknobit.equinoxcompose.utilities.context.AppContext
-import com.tecknobit.equinoxcompose.utilities.context.ContextActivityProvider
-import com.tecknobit.equinoxcore.helpers.InputsValidator.Companion.DEFAULT_LANGUAGE
+import com.tecknobit.equinoxcore.utilities.AppContext
+import com.tecknobit.equinoxcore.utilities.ContextActivityProvider
 import com.tecknobit.neutron.MainActivity.Companion.appUpdateManager
 import com.tecknobit.neutron.MainActivity.Companion.launcher
 import com.tecknobit.neutron.helpers.BiometricPromptManager
@@ -49,10 +49,8 @@ private val biometricPromptManager by lazy {
  *
  */
 @Composable
-@NonRestartableComposable
 actual fun CheckForUpdatesAndLaunch() {
     if(authWitBiometricParams) {
-        authWitBiometricParams = false
         val biometricResult by biometricPromptManager.promptResults.collectAsState(
             initial = null
         )
@@ -73,6 +71,8 @@ actual fun CheckForUpdatesAndLaunch() {
                 else -> {
                     NeutronTheme {
                         ErrorUI(
+                            containerModifier = Modifier
+                                .fillMaxSize(),
                             retryAction = { CheckForUpdatesAndLaunch() }
                         )
                     }
@@ -88,6 +88,7 @@ actual fun CheckForUpdatesAndLaunch() {
  * If available and allowed to install, after the installation enter in the application
  */
 private fun checkForUpdates() {
+    authWitBiometricParams = false
     appUpdateManager.appUpdateInfo.addOnSuccessListener { info ->
         val isUpdateAvailable = info.updateAvailability() == UPDATE_AVAILABLE
         val isUpdateSupported = info.isImmediateUpdateAllowed
@@ -109,7 +110,7 @@ private fun checkForUpdates() {
  *
  */
 actual fun setUserLanguage() {
-    val tag = localUser.language ?: DEFAULT_LANGUAGE
+    val tag = localUser.language
     val locale = Locale(tag)
     Locale.setDefault(locale)
     val context = AppContext.get()
@@ -123,7 +124,6 @@ actual fun setUserLanguage() {
  *
  */
 @Composable
-@NonRestartableComposable
 actual fun CloseApplicationOnNavBack() {
     val context = LocalActivity.current!!
     BackHandler {

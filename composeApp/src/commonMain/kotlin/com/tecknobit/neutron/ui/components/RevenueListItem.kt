@@ -12,15 +12,14 @@ import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.tecknobit.neutron.ui.screens.revenues.components.RevenueLabels
-import com.tecknobit.neutron.ui.screens.revenues.data.Revenue
-import com.tecknobit.neutron.ui.screens.revenues.data.RevenueLabel
+import com.tecknobit.neutron.ui.screens.shared.data.Revenue
+import com.tecknobit.neutron.ui.screens.shared.data.RevenueLabel
 import com.tecknobit.neutron.ui.screens.shared.presentations.RevenueRelatedScreenViewModel
 
 /**
@@ -39,7 +38,6 @@ import com.tecknobit.neutron.ui.screens.shared.presentations.RevenueRelatedScree
  * @param deleteAlertDialog The related dialog used to warn about the [revenue] deletion
  */
 @Composable
-@NonRestartableComposable
 fun RevenueListItem(
     viewModel: RevenueRelatedScreenViewModel,
     revenue: Revenue,
@@ -92,7 +90,6 @@ fun RevenueListItem(
  * @param deleteAlertDialog The related dialog used to warn about a revenue deletion
  */
 @Composable
-@NonRestartableComposable
 private fun RevenueToolbar(
     allowEdit: Boolean,
     onEdit: () -> Unit,

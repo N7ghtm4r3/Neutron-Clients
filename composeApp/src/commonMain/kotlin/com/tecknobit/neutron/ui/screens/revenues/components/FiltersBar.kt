@@ -20,7 +20,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -29,15 +28,15 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.tecknobit.equinoxcompose.components.EquinoxAlertDialog
+import com.tecknobit.equinoxcore.mergeIfNotContained
+import com.tecknobit.equinoxcore.retainAndAdd
 import com.tecknobit.neutron.bodyFontFamily
 import com.tecknobit.neutron.displayFontFamily
-import com.tecknobit.neutron.helpers.mergeIfNotContained
-import com.tecknobit.neutron.helpers.retainAndAdd
 import com.tecknobit.neutron.ui.components.CategoryChip
 import com.tecknobit.neutron.ui.components.LabelsGrid
 import com.tecknobit.neutron.ui.components.PeriodFilterChip
-import com.tecknobit.neutron.ui.screens.revenues.data.RevenueLabel
 import com.tecknobit.neutron.ui.screens.revenues.presentation.RevenuesScreenViewModel
+import com.tecknobit.neutron.ui.screens.shared.data.RevenueLabel
 import neutron.composeapp.generated.resources.Res
 import neutron.composeapp.generated.resources.generals
 import neutron.composeapp.generated.resources.labels
@@ -50,7 +49,6 @@ import org.jetbrains.compose.resources.stringResource
  * @param viewModel The support viewmodel for the screen
  */
 @Composable
-@NonRestartableComposable
 fun FiltersBar(
     viewModel: RevenuesScreenViewModel
 ) {
@@ -169,6 +167,7 @@ private fun LabelsDialog(
         },
         onDismissAction = {
             viewModel.labelsFilter.retainAndAdd(
+                addFrom = 0, // TODO: REMOVE WHEN FIXED 
                 supportCollection = supportLabelsList
             )
             filtering.value = false

@@ -80,6 +80,16 @@
     ]
   },
   {
+    "name": "abstract fun notifyConnectionError()",
+    "description": "com.tecknobit.neutron.ui.screens.shared.presentations.RevenueRelatedScreenViewModel.notifyConnectionError",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.shared.presentations/-revenue-related-screen-view-model/notify-connection-error.html",
+    "searchKeys": [
+      "notifyConnectionError",
+      "abstract fun notifyConnectionError()",
+      "com.tecknobit.neutron.ui.screens.shared.presentations.RevenueRelatedScreenViewModel.notifyConnectionError"
+    ]
+  },
+  {
     "name": "abstract fun refreshData()",
     "description": "com.tecknobit.neutron.ui.screens.shared.presentations.RevenueRelatedScreenViewModel.refreshData",
     "location": "-neutron/com.tecknobit.neutron.ui.screens.shared.presentations/-revenue-related-screen-view-model/refresh-data.html",
@@ -90,103 +100,113 @@
     ]
   },
   {
+    "name": "abstract fun retryAfterConnectionError()",
+    "description": "com.tecknobit.neutron.ui.screens.shared.presentations.RevenueRelatedScreenViewModel.retryAfterConnectionError",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.shared.presentations/-revenue-related-screen-view-model/retry-after-connection-error.html",
+    "searchKeys": [
+      "retryAfterConnectionError",
+      "abstract fun retryAfterConnectionError()",
+      "com.tecknobit.neutron.ui.screens.shared.presentations.RevenueRelatedScreenViewModel.retryAfterConnectionError"
+    ]
+  },
+  {
     "name": "abstract override val id: String",
-    "description": "com.tecknobit.neutron.ui.screens.revenues.data.GeneralRevenue.id",
-    "location": "-neutron/com.tecknobit.neutron.ui.screens.revenues.data/-general-revenue/id.html",
+    "description": "com.tecknobit.neutron.ui.screens.shared.data.GeneralRevenue.id",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.shared.data/-general-revenue/id.html",
     "searchKeys": [
       "id",
       "abstract override val id: String",
-      "com.tecknobit.neutron.ui.screens.revenues.data.GeneralRevenue.id"
+      "com.tecknobit.neutron.ui.screens.shared.data.GeneralRevenue.id"
     ]
   },
   {
     "name": "abstract override val revenueDate: Long",
-    "description": "com.tecknobit.neutron.ui.screens.revenues.data.GeneralRevenue.revenueDate",
-    "location": "-neutron/com.tecknobit.neutron.ui.screens.revenues.data/-general-revenue/revenue-date.html",
+    "description": "com.tecknobit.neutron.ui.screens.shared.data.GeneralRevenue.revenueDate",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.shared.data/-general-revenue/revenue-date.html",
     "searchKeys": [
       "revenueDate",
       "abstract override val revenueDate: Long",
-      "com.tecknobit.neutron.ui.screens.revenues.data.GeneralRevenue.revenueDate"
+      "com.tecknobit.neutron.ui.screens.shared.data.GeneralRevenue.revenueDate"
     ]
   },
   {
     "name": "abstract override val title: String",
-    "description": "com.tecknobit.neutron.ui.screens.revenues.data.GeneralRevenue.title",
-    "location": "-neutron/com.tecknobit.neutron.ui.screens.revenues.data/-general-revenue/title.html",
+    "description": "com.tecknobit.neutron.ui.screens.shared.data.GeneralRevenue.title",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.shared.data/-general-revenue/title.html",
     "searchKeys": [
       "title",
       "abstract override val title: String",
-      "com.tecknobit.neutron.ui.screens.revenues.data.GeneralRevenue.title"
+      "com.tecknobit.neutron.ui.screens.shared.data.GeneralRevenue.title"
     ]
   },
   {
     "name": "abstract override val value: Double",
-    "description": "com.tecknobit.neutron.ui.screens.revenues.data.GeneralRevenue.value",
-    "location": "-neutron/com.tecknobit.neutron.ui.screens.revenues.data/-general-revenue/value.html",
+    "description": "com.tecknobit.neutron.ui.screens.shared.data.GeneralRevenue.value",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.shared.data/-general-revenue/value.html",
     "searchKeys": [
       "value",
       "abstract override val value: Double",
-      "com.tecknobit.neutron.ui.screens.revenues.data.GeneralRevenue.value"
+      "com.tecknobit.neutron.ui.screens.shared.data.GeneralRevenue.value"
     ]
   },
   {
     "name": "abstract val description: String",
-    "description": "com.tecknobit.neutron.ui.screens.revenues.data.GeneralRevenue.description",
-    "location": "-neutron/com.tecknobit.neutron.ui.screens.revenues.data/-general-revenue/description.html",
+    "description": "com.tecknobit.neutron.ui.screens.shared.data.GeneralRevenue.description",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.shared.data/-general-revenue/description.html",
     "searchKeys": [
       "description",
       "abstract val description: String",
-      "com.tecknobit.neutron.ui.screens.revenues.data.GeneralRevenue.description"
+      "com.tecknobit.neutron.ui.screens.shared.data.GeneralRevenue.description"
     ]
   },
   {
     "name": "abstract val id: String",
-    "description": "com.tecknobit.neutron.ui.screens.revenues.data.Revenue.id",
-    "location": "-neutron/com.tecknobit.neutron.ui.screens.revenues.data/-revenue/id.html",
+    "description": "com.tecknobit.neutron.ui.screens.shared.data.Revenue.id",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.shared.data/-revenue/id.html",
     "searchKeys": [
       "id",
       "abstract val id: String",
-      "com.tecknobit.neutron.ui.screens.revenues.data.Revenue.id"
+      "com.tecknobit.neutron.ui.screens.shared.data.Revenue.id"
     ]
   },
   {
     "name": "abstract val labels: List<RevenueLabel>",
-    "description": "com.tecknobit.neutron.ui.screens.revenues.data.GeneralRevenue.labels",
-    "location": "-neutron/com.tecknobit.neutron.ui.screens.revenues.data/-general-revenue/labels.html",
+    "description": "com.tecknobit.neutron.ui.screens.shared.data.GeneralRevenue.labels",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.shared.data/-general-revenue/labels.html",
     "searchKeys": [
       "labels",
       "abstract val labels: List<RevenueLabel>",
-      "com.tecknobit.neutron.ui.screens.revenues.data.GeneralRevenue.labels"
+      "com.tecknobit.neutron.ui.screens.shared.data.GeneralRevenue.labels"
     ]
   },
   {
     "name": "abstract val revenueDate: Long",
-    "description": "com.tecknobit.neutron.ui.screens.revenues.data.Revenue.revenueDate",
-    "location": "-neutron/com.tecknobit.neutron.ui.screens.revenues.data/-revenue/revenue-date.html",
+    "description": "com.tecknobit.neutron.ui.screens.shared.data.Revenue.revenueDate",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.shared.data/-revenue/revenue-date.html",
     "searchKeys": [
       "revenueDate",
       "abstract val revenueDate: Long",
-      "com.tecknobit.neutron.ui.screens.revenues.data.Revenue.revenueDate"
+      "com.tecknobit.neutron.ui.screens.shared.data.Revenue.revenueDate"
     ]
   },
   {
     "name": "abstract val title: String",
-    "description": "com.tecknobit.neutron.ui.screens.revenues.data.Revenue.title",
-    "location": "-neutron/com.tecknobit.neutron.ui.screens.revenues.data/-revenue/title.html",
+    "description": "com.tecknobit.neutron.ui.screens.shared.data.Revenue.title",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.shared.data/-revenue/title.html",
     "searchKeys": [
       "title",
       "abstract val title: String",
-      "com.tecknobit.neutron.ui.screens.revenues.data.Revenue.title"
+      "com.tecknobit.neutron.ui.screens.shared.data.Revenue.title"
     ]
   },
   {
     "name": "abstract val value: Double",
-    "description": "com.tecknobit.neutron.ui.screens.revenues.data.Revenue.value",
-    "location": "-neutron/com.tecknobit.neutron.ui.screens.revenues.data/-revenue/value.html",
+    "description": "com.tecknobit.neutron.ui.screens.shared.data.Revenue.value",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.shared.data/-revenue/value.html",
     "searchKeys": [
       "value",
       "abstract val value: Double",
-      "com.tecknobit.neutron.ui.screens.revenues.data.Revenue.value"
+      "com.tecknobit.neutron.ui.screens.shared.data.Revenue.value"
     ]
   },
   {
@@ -290,6 +310,16 @@
     ]
   },
   {
+    "name": "class NeutronRequester(host: String, userId: String? = null, userToken: String? = null, debugMode: Boolean = false) : EquinoxRequester",
+    "description": "com.tecknobit.neutron.helpers.NeutronRequester",
+    "location": "-neutron/com.tecknobit.neutron.helpers/-neutron-requester/index.html",
+    "searchKeys": [
+      "NeutronRequester",
+      "class NeutronRequester(host: String, userId: String? = null, userToken: String? = null, debugMode: Boolean = false) : EquinoxRequester",
+      "com.tecknobit.neutron.helpers.NeutronRequester"
+    ]
+  },
+  {
     "name": "class ProfileScreen : NeutronScreen<ProfileScreenViewModel> ",
     "description": "com.tecknobit.neutron.ui.screens.profile.presenter.ProfileScreen",
     "location": "-neutron/com.tecknobit.neutron.ui.screens.profile.presenter/-profile-screen/index.html",
@@ -360,12 +390,12 @@
     ]
   },
   {
-    "name": "class SplashScreen : EquinoxScreen<EquinoxViewModel> ",
+    "name": "class SplashScreen : EquinoxNoModelScreen",
     "description": "com.tecknobit.neutron.ui.screens.SplashScreen",
     "location": "-neutron/com.tecknobit.neutron.ui.screens/-splash-screen/index.html",
     "searchKeys": [
       "SplashScreen",
-      "class SplashScreen : EquinoxScreen<EquinoxViewModel> ",
+      "class SplashScreen : EquinoxNoModelScreen",
       "com.tecknobit.neutron.ui.screens.SplashScreen"
     ]
   },
@@ -581,72 +611,52 @@
   },
   {
     "name": "constructor(id: String = Uuid.random().toHexString(), text: String, color: String)",
-    "description": "com.tecknobit.neutron.ui.screens.revenues.data.RevenueLabel.RevenueLabel",
-    "location": "-neutron/com.tecknobit.neutron.ui.screens.revenues.data/-revenue-label/-revenue-label.html",
+    "description": "com.tecknobit.neutron.ui.screens.shared.data.RevenueLabel.RevenueLabel",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.shared.data/-revenue-label/-revenue-label.html",
     "searchKeys": [
       "RevenueLabel",
       "constructor(id: String = Uuid.random().toHexString(), text: String, color: String)",
-      "com.tecknobit.neutron.ui.screens.revenues.data.RevenueLabel.RevenueLabel"
+      "com.tecknobit.neutron.ui.screens.shared.data.RevenueLabel.RevenueLabel"
     ]
   },
   {
     "name": "constructor(id: String, title: String = \"\", value: Double, revenueDate: Long)",
-    "description": "com.tecknobit.neutron.ui.screens.revenues.data.Revenue.RevenueImpl.RevenueImpl",
-    "location": "-neutron/com.tecknobit.neutron.ui.screens.revenues.data/-revenue/-revenue-impl/-revenue-impl.html",
+    "description": "com.tecknobit.neutron.ui.screens.shared.data.Revenue.RevenueImpl.RevenueImpl",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.shared.data/-revenue/-revenue-impl/-revenue-impl.html",
     "searchKeys": [
       "RevenueImpl",
       "constructor(id: String, title: String = \"\", value: Double, revenueDate: Long)",
-      "com.tecknobit.neutron.ui.screens.revenues.data.Revenue.RevenueImpl.RevenueImpl"
+      "com.tecknobit.neutron.ui.screens.shared.data.Revenue.RevenueImpl.RevenueImpl"
     ]
   },
   {
     "name": "constructor(id: String, title: String, value: Double, revenueDate: Long, initialRevenue: Revenue.RevenueImpl, tickets: List<TicketRevenue> = emptyList())",
-    "description": "com.tecknobit.neutron.ui.screens.revenues.data.ProjectRevenue.ProjectRevenue",
-    "location": "-neutron/com.tecknobit.neutron.ui.screens.revenues.data/-project-revenue/-project-revenue.html",
+    "description": "com.tecknobit.neutron.ui.screens.shared.data.ProjectRevenue.ProjectRevenue",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.shared.data/-project-revenue/-project-revenue.html",
     "searchKeys": [
       "ProjectRevenue",
       "constructor(id: String, title: String, value: Double, revenueDate: Long, initialRevenue: Revenue.RevenueImpl, tickets: List<TicketRevenue> = emptyList())",
-      "com.tecknobit.neutron.ui.screens.revenues.data.ProjectRevenue.ProjectRevenue"
+      "com.tecknobit.neutron.ui.screens.shared.data.ProjectRevenue.ProjectRevenue"
     ]
   },
   {
     "name": "constructor(id: String, title: String, value: Double, revenueDate: Long, labels: List<RevenueLabel> = emptyList(), description: String = \"\")",
-    "description": "com.tecknobit.neutron.ui.screens.revenues.data.GeneralRevenue.GeneralRevenueImpl.GeneralRevenueImpl",
-    "location": "-neutron/com.tecknobit.neutron.ui.screens.revenues.data/-general-revenue/-general-revenue-impl/-general-revenue-impl.html",
+    "description": "com.tecknobit.neutron.ui.screens.shared.data.GeneralRevenue.GeneralRevenueImpl.GeneralRevenueImpl",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.shared.data/-general-revenue/-general-revenue-impl/-general-revenue-impl.html",
     "searchKeys": [
       "GeneralRevenueImpl",
       "constructor(id: String, title: String, value: Double, revenueDate: Long, labels: List<RevenueLabel> = emptyList(), description: String = \"\")",
-      "com.tecknobit.neutron.ui.screens.revenues.data.GeneralRevenue.GeneralRevenueImpl.GeneralRevenueImpl"
+      "com.tecknobit.neutron.ui.screens.shared.data.GeneralRevenue.GeneralRevenueImpl.GeneralRevenueImpl"
     ]
   },
   {
     "name": "constructor(id: String, title: String, value: Double, revenueDate: Long, labels: List<RevenueLabel> = emptyList(), description: String, closingDate: Long = -1)",
-    "description": "com.tecknobit.neutron.ui.screens.revenues.data.TicketRevenue.TicketRevenue",
-    "location": "-neutron/com.tecknobit.neutron.ui.screens.revenues.data/-ticket-revenue/-ticket-revenue.html",
+    "description": "com.tecknobit.neutron.ui.screens.project.data.TicketRevenue.TicketRevenue",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.project.data/-ticket-revenue/-ticket-revenue.html",
     "searchKeys": [
       "TicketRevenue",
       "constructor(id: String, title: String, value: Double, revenueDate: Long, labels: List<RevenueLabel> = emptyList(), description: String, closingDate: Long = -1)",
-      "com.tecknobit.neutron.ui.screens.revenues.data.TicketRevenue.TicketRevenue"
-    ]
-  },
-  {
-    "name": "constructor(initiallyExpanded: Boolean = false, enabled: MutableState<Boolean>? = null, stepIcon: ImageVector, title: StringResource, content: ColumnScope.() -> Unit, isError: MutableState<Boolean>? = null, dismissAction: () -> Unit? = null, confirmAction: (MutableState<Boolean>) -> Unit = { it.value = false })",
-    "description": "com.tecknobit.neutron.ui.components.Step.Step",
-    "location": "-neutron/com.tecknobit.neutron.ui.components/-step/-step.html",
-    "searchKeys": [
-      "Step",
-      "constructor(initiallyExpanded: Boolean = false, enabled: MutableState<Boolean>? = null, stepIcon: ImageVector, title: StringResource, content: ColumnScope.() -> Unit, isError: MutableState<Boolean>? = null, dismissAction: () -> Unit? = null, confirmAction: (MutableState<Boolean>) -> Unit = { it.value = false })",
-      "com.tecknobit.neutron.ui.components.Step.Step"
-    ]
-  },
-  {
-    "name": "constructor(initiallyExpanded: Boolean = false, enabledIf: () -> MutableState<Boolean>?, stepIcon: ImageVector, title: StringResource, content: ColumnScope.() -> Unit, isError: MutableState<Boolean>? = null, dismissAction: () -> Unit? = null, confirmAction: (MutableState<Boolean>) -> Unit = { it.value = false })",
-    "description": "com.tecknobit.neutron.ui.components.Step.Step",
-    "location": "-neutron/com.tecknobit.neutron.ui.components/-step/-step.html",
-    "searchKeys": [
-      "Step",
-      "constructor(initiallyExpanded: Boolean = false, enabledIf: () -> MutableState<Boolean>?, stepIcon: ImageVector, title: StringResource, content: ColumnScope.() -> Unit, isError: MutableState<Boolean>? = null, dismissAction: () -> Unit? = null, confirmAction: (MutableState<Boolean>) -> Unit = { it.value = false })",
-      "com.tecknobit.neutron.ui.components.Step.Step"
+      "com.tecknobit.neutron.ui.screens.project.data.TicketRevenue.TicketRevenue"
     ]
   },
   {
@@ -751,62 +761,52 @@
   },
   {
     "name": "data class GeneralRevenueImpl(val id: String, val title: String, val value: Double, val revenueDate: Long, val labels: List<RevenueLabel> = emptyList(), val description: String = \"\") : GeneralRevenue",
-    "description": "com.tecknobit.neutron.ui.screens.revenues.data.GeneralRevenue.GeneralRevenueImpl",
-    "location": "-neutron/com.tecknobit.neutron.ui.screens.revenues.data/-general-revenue/-general-revenue-impl/index.html",
+    "description": "com.tecknobit.neutron.ui.screens.shared.data.GeneralRevenue.GeneralRevenueImpl",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.shared.data/-general-revenue/-general-revenue-impl/index.html",
     "searchKeys": [
       "GeneralRevenueImpl",
       "data class GeneralRevenueImpl(val id: String, val title: String, val value: Double, val revenueDate: Long, val labels: List<RevenueLabel> = emptyList(), val description: String = \"\") : GeneralRevenue",
-      "com.tecknobit.neutron.ui.screens.revenues.data.GeneralRevenue.GeneralRevenueImpl"
+      "com.tecknobit.neutron.ui.screens.shared.data.GeneralRevenue.GeneralRevenueImpl"
     ]
   },
   {
     "name": "data class ProjectRevenue(val id: String, val title: String, val value: Double, val revenueDate: Long, val initialRevenue: Revenue.RevenueImpl, val tickets: List<TicketRevenue> = emptyList()) : Revenue",
-    "description": "com.tecknobit.neutron.ui.screens.revenues.data.ProjectRevenue",
-    "location": "-neutron/com.tecknobit.neutron.ui.screens.revenues.data/-project-revenue/index.html",
+    "description": "com.tecknobit.neutron.ui.screens.shared.data.ProjectRevenue",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.shared.data/-project-revenue/index.html",
     "searchKeys": [
       "ProjectRevenue",
       "data class ProjectRevenue(val id: String, val title: String, val value: Double, val revenueDate: Long, val initialRevenue: Revenue.RevenueImpl, val tickets: List<TicketRevenue> = emptyList()) : Revenue",
-      "com.tecknobit.neutron.ui.screens.revenues.data.ProjectRevenue"
+      "com.tecknobit.neutron.ui.screens.shared.data.ProjectRevenue"
     ]
   },
   {
     "name": "data class RevenueImpl(val id: String, val title: String = \"\", val value: Double, val revenueDate: Long) : Revenue",
-    "description": "com.tecknobit.neutron.ui.screens.revenues.data.Revenue.RevenueImpl",
-    "location": "-neutron/com.tecknobit.neutron.ui.screens.revenues.data/-revenue/-revenue-impl/index.html",
+    "description": "com.tecknobit.neutron.ui.screens.shared.data.Revenue.RevenueImpl",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.shared.data/-revenue/-revenue-impl/index.html",
     "searchKeys": [
       "RevenueImpl",
       "data class RevenueImpl(val id: String, val title: String = \"\", val value: Double, val revenueDate: Long) : Revenue",
-      "com.tecknobit.neutron.ui.screens.revenues.data.Revenue.RevenueImpl"
+      "com.tecknobit.neutron.ui.screens.shared.data.Revenue.RevenueImpl"
     ]
   },
   {
     "name": "data class RevenueLabel(val id: String = Uuid.random().toHexString(), val text: String, val color: String)",
-    "description": "com.tecknobit.neutron.ui.screens.revenues.data.RevenueLabel",
-    "location": "-neutron/com.tecknobit.neutron.ui.screens.revenues.data/-revenue-label/index.html",
+    "description": "com.tecknobit.neutron.ui.screens.shared.data.RevenueLabel",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.shared.data/-revenue-label/index.html",
     "searchKeys": [
       "RevenueLabel",
       "data class RevenueLabel(val id: String = Uuid.random().toHexString(), val text: String, val color: String)",
-      "com.tecknobit.neutron.ui.screens.revenues.data.RevenueLabel"
-    ]
-  },
-  {
-    "name": "data class Step(val initiallyExpanded: Boolean = false, val enabled: MutableState<Boolean>? = null, val stepIcon: ImageVector, val title: StringResource, val content: ColumnScope.() -> Unit, val isError: MutableState<Boolean>? = null, val dismissAction: () -> Unit? = null, val confirmAction: (MutableState<Boolean>) -> Unit = { it.value = false })",
-    "description": "com.tecknobit.neutron.ui.components.Step",
-    "location": "-neutron/com.tecknobit.neutron.ui.components/-step/index.html",
-    "searchKeys": [
-      "Step",
-      "data class Step(val initiallyExpanded: Boolean = false, val enabled: MutableState<Boolean>? = null, val stepIcon: ImageVector, val title: StringResource, val content: ColumnScope.() -> Unit, val isError: MutableState<Boolean>? = null, val dismissAction: () -> Unit? = null, val confirmAction: (MutableState<Boolean>) -> Unit = { it.value = false })",
-      "com.tecknobit.neutron.ui.components.Step"
+      "com.tecknobit.neutron.ui.screens.shared.data.RevenueLabel"
     ]
   },
   {
     "name": "data class TicketRevenue(val id: String, val title: String, val value: Double, val revenueDate: Long, val labels: List<RevenueLabel> = emptyList(), val description: String, val closingDate: Long = -1) : GeneralRevenue",
-    "description": "com.tecknobit.neutron.ui.screens.revenues.data.TicketRevenue",
-    "location": "-neutron/com.tecknobit.neutron.ui.screens.revenues.data/-ticket-revenue/index.html",
+    "description": "com.tecknobit.neutron.ui.screens.project.data.TicketRevenue",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.project.data/-ticket-revenue/index.html",
     "searchKeys": [
       "TicketRevenue",
       "data class TicketRevenue(val id: String, val title: String, val value: Double, val revenueDate: Long, val labels: List<RevenueLabel> = emptyList(), val description: String, val closingDate: Long = -1) : GeneralRevenue",
-      "com.tecknobit.neutron.ui.screens.revenues.data.TicketRevenue"
+      "com.tecknobit.neutron.ui.screens.project.data.TicketRevenue"
     ]
   },
   {
@@ -930,26 +930,6 @@
     ]
   },
   {
-    "name": "fun <T> MutableCollection<T>.mergeIfNotContained(collectionToMerge: Collection<T>)",
-    "description": "com.tecknobit.neutron.helpers.mergeIfNotContained",
-    "location": "-neutron/com.tecknobit.neutron.helpers/merge-if-not-contained.html",
-    "searchKeys": [
-      "mergeIfNotContained",
-      "fun <T> MutableCollection<T>.mergeIfNotContained(collectionToMerge: Collection<T>)",
-      "com.tecknobit.neutron.helpers.mergeIfNotContained"
-    ]
-  },
-  {
-    "name": "fun <T> MutableCollection<T>.retainAndAdd(supportCollection: Collection<T>)",
-    "description": "com.tecknobit.neutron.helpers.retainAndAdd",
-    "location": "-neutron/com.tecknobit.neutron.helpers/retain-and-add.html",
-    "searchKeys": [
-      "retainAndAdd",
-      "fun <T> MutableCollection<T>.retainAndAdd(supportCollection: Collection<T>)",
-      "com.tecknobit.neutron.helpers.retainAndAdd"
-    ]
-  },
-  {
     "name": "fun App()",
     "description": "com.tecknobit.neutron.App",
     "location": "-neutron/com.tecknobit.neutron/-app.html",
@@ -1060,12 +1040,12 @@
     ]
   },
   {
-    "name": "fun NeutronTheme(darkTheme: Boolean = when (localUser.theme) {\n        Light -> false\n        Dark -> true\n        else -> isSystemInDarkTheme()\n    }, content: () -> Unit)",
+    "name": "fun NeutronTheme(darkTheme: Boolean = applyDarkTheme(), content: () -> Unit)",
     "description": "com.tecknobit.neutron.ui.theme.NeutronTheme",
     "location": "-neutron/com.tecknobit.neutron.ui.theme/-neutron-theme.html",
     "searchKeys": [
       "NeutronTheme",
-      "fun NeutronTheme(darkTheme: Boolean = when (localUser.theme) {\n        Light -> false\n        Dark -> true\n        else -> isSystemInDarkTheme()\n    }, content: () -> Unit)",
+      "fun NeutronTheme(darkTheme: Boolean = applyDarkTheme(), content: () -> Unit)",
       "com.tecknobit.neutron.ui.theme.NeutronTheme"
     ]
   },
@@ -1077,6 +1057,16 @@
       "NewPageProgressIndicator",
       "fun NewPageProgressIndicator(modifier: Modifier = Modifier)",
       "com.tecknobit.neutron.ui.components.NewPageProgressIndicator"
+    ]
+  },
+  {
+    "name": "fun NoRevenues(titleRes: StringResource)",
+    "description": "com.tecknobit.neutron.ui.components.NoRevenues",
+    "location": "-neutron/com.tecknobit.neutron.ui.components/-no-revenues.html",
+    "searchKeys": [
+      "NoRevenues",
+      "fun NoRevenues(titleRes: StringResource)",
+      "com.tecknobit.neutron.ui.components.NoRevenues"
     ]
   },
   {
@@ -1120,12 +1110,12 @@
     ]
   },
   {
-    "name": "fun RevenueInfo(viewModel: RevenueRelatedScreenViewModel, revenue: Revenue, customTitle: String? = null, dateHeader: StringResource = Res.string.date)",
+    "name": "fun RevenueInfo(viewModel: RevenueRelatedScreenViewModel, revenue: Revenue, customTitle: String? = null, dateHeader: StringResource = Res.string.date, pattern: String = COMPLETE_EUROPEAN_DATE_PATTERN)",
     "description": "com.tecknobit.neutron.ui.components.RevenueInfo",
     "location": "-neutron/com.tecknobit.neutron.ui.components/-revenue-info.html",
     "searchKeys": [
       "RevenueInfo",
-      "fun RevenueInfo(viewModel: RevenueRelatedScreenViewModel, revenue: Revenue, customTitle: String? = null, dateHeader: StringResource = Res.string.date)",
+      "fun RevenueInfo(viewModel: RevenueRelatedScreenViewModel, revenue: Revenue, customTitle: String? = null, dateHeader: StringResource = Res.string.date, pattern: String = COMPLETE_EUROPEAN_DATE_PATTERN)",
       "com.tecknobit.neutron.ui.components.RevenueInfo"
     ]
   },
@@ -1150,6 +1140,16 @@
     ]
   },
   {
+    "name": "fun Revenues(viewModel: RevenuesScreenViewModel)",
+    "description": "com.tecknobit.neutron.ui.screens.revenues.components.Revenues",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.revenues.components/-revenues.html",
+    "searchKeys": [
+      "Revenues",
+      "fun Revenues(viewModel: RevenuesScreenViewModel)",
+      "com.tecknobit.neutron.ui.screens.revenues.components.Revenues"
+    ]
+  },
+  {
     "name": "fun ScreenKeyboard(modifier: Modifier = Modifier, state: ScreenKeyboardState)",
     "description": "com.tecknobit.neutron.ui.components.screenkeyboard.ScreenKeyboard",
     "location": "-neutron/com.tecknobit.neutron.ui.components.screenkeyboard/-screen-keyboard.html",
@@ -1157,16 +1157,6 @@
       "ScreenKeyboard",
       "fun ScreenKeyboard(modifier: Modifier = Modifier, state: ScreenKeyboardState)",
       "com.tecknobit.neutron.ui.components.screenkeyboard.ScreenKeyboard"
-    ]
-  },
-  {
-    "name": "fun Stepper(modifier: Modifier = Modifier, headerSection: () -> Unit? = null, startStepShape: Shape = RoundedCornerShape(\n        topStart = 12.dp,\n        topEnd = 12.dp\n    ), middleStepShape: Shape = RectangleShape, finalStepShape: Shape = RoundedCornerShape(\n        bottomStart = 12.dp,\n        bottomEnd = 12.dp\n    ), vararg steps: Step)",
-    "description": "com.tecknobit.neutron.ui.components.Stepper",
-    "location": "-neutron/com.tecknobit.neutron.ui.components/-stepper.html",
-    "searchKeys": [
-      "Stepper",
-      "fun Stepper(modifier: Modifier = Modifier, headerSection: () -> Unit? = null, startStepShape: Shape = RoundedCornerShape(\n        topStart = 12.dp,\n        topEnd = 12.dp\n    ), middleStepShape: Shape = RectangleShape, finalStepShape: Shape = RoundedCornerShape(\n        bottomStart = 12.dp,\n        bottomEnd = 12.dp\n    ), vararg steps: Step)",
-      "com.tecknobit.neutron.ui.components.Stepper"
     ]
   },
   {
@@ -1187,6 +1177,16 @@
       "TicketInfo",
       "fun TicketInfo(viewModel: ProjectScreenViewModel, ticket: TicketRevenue)",
       "com.tecknobit.neutron.ui.components.TicketInfo"
+    ]
+  },
+  {
+    "name": "fun Tickets(viewModel: ProjectScreenViewModel, project: ProjectRevenue)",
+    "description": "com.tecknobit.neutron.ui.screens.project.components.Tickets",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.project.components/-tickets.html",
+    "searchKeys": [
+      "Tickets",
+      "fun Tickets(viewModel: ProjectScreenViewModel, project: ProjectRevenue)",
+      "com.tecknobit.neutron.ui.screens.project.components.Tickets"
     ]
   },
   {
@@ -1217,6 +1217,16 @@
       "appendDigit",
       "fun appendDigit(digit: String)",
       "com.tecknobit.neutron.ui.components.screenkeyboard.ScreenKeyboardState.appendDigit"
+    ]
+  },
+  {
+    "name": "fun applyDarkTheme(): Boolean",
+    "description": "com.tecknobit.neutron.ui.theme.applyDarkTheme",
+    "location": "-neutron/com.tecknobit.neutron.ui.theme/apply-dark-theme.html",
+    "searchKeys": [
+      "applyDarkTheme",
+      "fun applyDarkTheme(): Boolean",
+      "com.tecknobit.neutron.ui.theme.applyDarkTheme"
     ]
   },
   {
@@ -1280,12 +1290,12 @@
     ]
   },
   {
-    "name": "fun changeCurrency(onSuccess: () -> Unit)",
+    "name": "fun changeCurrency(onChange: () -> Unit)",
     "description": "com.tecknobit.neutron.ui.screens.profile.presentation.ProfileScreenViewModel.changeCurrency",
     "location": "-neutron/com.tecknobit.neutron.ui.screens.profile.presentation/-profile-screen-view-model/change-currency.html",
     "searchKeys": [
       "changeCurrency",
-      "fun changeCurrency(onSuccess: () -> Unit)",
+      "fun changeCurrency(onChange: () -> Unit)",
       "com.tecknobit.neutron.ui.screens.profile.presentation.ProfileScreenViewModel.changeCurrency"
     ]
   },
@@ -1341,12 +1351,12 @@
   },
   {
     "name": "fun getTicketDuration(): Int",
-    "description": "com.tecknobit.neutron.ui.screens.revenues.data.TicketRevenue.getTicketDuration",
-    "location": "-neutron/com.tecknobit.neutron.ui.screens.revenues.data/-ticket-revenue/get-ticket-duration.html",
+    "description": "com.tecknobit.neutron.ui.screens.project.data.TicketRevenue.getTicketDuration",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.project.data/-ticket-revenue/get-ticket-duration.html",
     "searchKeys": [
       "getTicketDuration",
       "fun getTicketDuration(): Int",
-      "com.tecknobit.neutron.ui.screens.revenues.data.TicketRevenue.getTicketDuration"
+      "com.tecknobit.neutron.ui.screens.project.data.TicketRevenue.getTicketDuration"
     ]
   },
   {
@@ -1371,12 +1381,12 @@
   },
   {
     "name": "fun isPending(): Boolean",
-    "description": "com.tecknobit.neutron.ui.screens.revenues.data.TicketRevenue.isPending",
-    "location": "-neutron/com.tecknobit.neutron.ui.screens.revenues.data/-ticket-revenue/is-pending.html",
+    "description": "com.tecknobit.neutron.ui.screens.project.data.TicketRevenue.isPending",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.project.data/-ticket-revenue/is-pending.html",
     "searchKeys": [
       "isPending",
       "fun isPending(): Boolean",
-      "com.tecknobit.neutron.ui.screens.revenues.data.TicketRevenue.isPending"
+      "com.tecknobit.neutron.ui.screens.project.data.TicketRevenue.isPending"
     ]
   },
   {
@@ -1470,13 +1480,23 @@
     ]
   },
   {
-    "name": "fun updateDynamicAccountData(dynamicData: JsonObject)",
-    "description": "com.tecknobit.neutron.helpers.NeutronLocalUser.updateDynamicAccountData",
-    "location": "-neutron/com.tecknobit.neutron.helpers/-neutron-local-user/update-dynamic-account-data.html",
+    "name": "interface GeneralRevenue : Revenue",
+    "description": "com.tecknobit.neutron.ui.screens.shared.data.GeneralRevenue",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.shared.data/-general-revenue/index.html",
     "searchKeys": [
-      "updateDynamicAccountData",
-      "fun updateDynamicAccountData(dynamicData: JsonObject)",
-      "com.tecknobit.neutron.helpers.NeutronLocalUser.updateDynamicAccountData"
+      "GeneralRevenue",
+      "interface GeneralRevenue : Revenue",
+      "com.tecknobit.neutron.ui.screens.shared.data.GeneralRevenue"
+    ]
+  },
+  {
+    "name": "interface Revenue",
+    "description": "com.tecknobit.neutron.ui.screens.shared.data.Revenue",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.shared.data/-revenue/index.html",
+    "searchKeys": [
+      "Revenue",
+      "interface Revenue",
+      "com.tecknobit.neutron.ui.screens.shared.data.Revenue"
     ]
   },
   {
@@ -1671,32 +1691,12 @@
   },
   {
     "name": "object RevenueSerializer : JsonContentPolymorphicSerializer<Revenue> ",
-    "description": "com.tecknobit.neutron.ui.screens.revenues.data.RevenueSerializer",
-    "location": "-neutron/com.tecknobit.neutron.ui.screens.revenues.data/-revenue-serializer/index.html",
+    "description": "com.tecknobit.neutron.ui.screens.shared.data.RevenueSerializer",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.shared.data/-revenue-serializer/index.html",
     "searchKeys": [
       "RevenueSerializer",
       "object RevenueSerializer : JsonContentPolymorphicSerializer<Revenue> ",
-      "com.tecknobit.neutron.ui.screens.revenues.data.RevenueSerializer"
-    ]
-  },
-  {
-    "name": "open class NeutronRequester(host: String, userId: String? = null, userToken: String? = null, debugMode: Boolean = false) : EquinoxRequester",
-    "description": "com.tecknobit.neutron.helpers.NeutronRequester",
-    "location": "-neutron/com.tecknobit.neutron.helpers/-neutron-requester/index.html",
-    "searchKeys": [
-      "NeutronRequester",
-      "open class NeutronRequester(host: String, userId: String? = null, userToken: String? = null, debugMode: Boolean = false) : EquinoxRequester",
-      "com.tecknobit.neutron.helpers.NeutronRequester"
-    ]
-  },
-  {
-    "name": "open fun CompactFabButton()",
-    "description": "com.tecknobit.neutron.ui.screens.shared.presenters.RevenuesContainerScreen.CompactFabButton",
-    "location": "-neutron/com.tecknobit.neutron.ui.screens.shared.presenters/-revenues-container-screen/-compact-fab-button.html",
-    "searchKeys": [
-      "CompactFabButton",
-      "open fun CompactFabButton()",
-      "com.tecknobit.neutron.ui.screens.shared.presenters.RevenuesContainerScreen.CompactFabButton"
+      "com.tecknobit.neutron.ui.screens.shared.data.RevenueSerializer"
     ]
   },
   {
@@ -1727,16 +1727,6 @@
       "retrieveUserLabels",
       "open fun retrieveUserLabels(labels: SnapshotStateList<RevenueLabel>)",
       "com.tecknobit.neutron.ui.screens.shared.presentations.RevenueLabelsRetriever.retrieveUserLabels"
-    ]
-  },
-  {
-    "name": "open fun revenueDateAsString(): String",
-    "description": "com.tecknobit.neutron.ui.screens.revenues.data.Revenue.revenueDateAsString",
-    "location": "-neutron/com.tecknobit.neutron.ui.screens.revenues.data/-revenue/revenue-date-as-string.html",
-    "searchKeys": [
-      "revenueDateAsString",
-      "open fun revenueDateAsString(): String",
-      "com.tecknobit.neutron.ui.screens.revenues.data.Revenue.revenueDateAsString"
     ]
   },
   {
@@ -1850,6 +1840,26 @@
     ]
   },
   {
+    "name": "open override fun notifyConnectionError()",
+    "description": "com.tecknobit.neutron.ui.screens.project.presentation.ProjectScreenViewModel.notifyConnectionError",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.project.presentation/-project-screen-view-model/notify-connection-error.html",
+    "searchKeys": [
+      "notifyConnectionError",
+      "open override fun notifyConnectionError()",
+      "com.tecknobit.neutron.ui.screens.project.presentation.ProjectScreenViewModel.notifyConnectionError"
+    ]
+  },
+  {
+    "name": "open override fun notifyConnectionError()",
+    "description": "com.tecknobit.neutron.ui.screens.revenues.presentation.RevenuesScreenViewModel.notifyConnectionError",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.revenues.presentation/-revenues-screen-view-model/notify-connection-error.html",
+    "searchKeys": [
+      "notifyConnectionError",
+      "open override fun notifyConnectionError()",
+      "com.tecknobit.neutron.ui.screens.revenues.presentation.RevenuesScreenViewModel.notifyConnectionError"
+    ]
+  },
+  {
     "name": "open override fun refreshData()",
     "description": "com.tecknobit.neutron.ui.screens.project.presentation.ProjectScreenViewModel.refreshData",
     "location": "-neutron/com.tecknobit.neutron.ui.screens.project.presentation/-project-screen-view-model/refresh-data.html",
@@ -1880,203 +1890,223 @@
     ]
   },
   {
-    "name": "open override val description: String",
-    "description": "com.tecknobit.neutron.ui.screens.revenues.data.GeneralRevenue.GeneralRevenueImpl.description",
-    "location": "-neutron/com.tecknobit.neutron.ui.screens.revenues.data/-general-revenue/-general-revenue-impl/description.html",
+    "name": "open override fun retryAfterConnectionError()",
+    "description": "com.tecknobit.neutron.ui.screens.project.presentation.ProjectScreenViewModel.retryAfterConnectionError",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.project.presentation/-project-screen-view-model/retry-after-connection-error.html",
     "searchKeys": [
-      "description",
-      "open override val description: String",
-      "com.tecknobit.neutron.ui.screens.revenues.data.GeneralRevenue.GeneralRevenueImpl.description"
+      "retryAfterConnectionError",
+      "open override fun retryAfterConnectionError()",
+      "com.tecknobit.neutron.ui.screens.project.presentation.ProjectScreenViewModel.retryAfterConnectionError"
+    ]
+  },
+  {
+    "name": "open override fun retryAfterConnectionError()",
+    "description": "com.tecknobit.neutron.ui.screens.revenues.presentation.RevenuesScreenViewModel.retryAfterConnectionError",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.revenues.presentation/-revenues-screen-view-model/retry-after-connection-error.html",
+    "searchKeys": [
+      "retryAfterConnectionError",
+      "open override fun retryAfterConnectionError()",
+      "com.tecknobit.neutron.ui.screens.revenues.presentation.RevenuesScreenViewModel.retryAfterConnectionError"
     ]
   },
   {
     "name": "open override val description: String",
-    "description": "com.tecknobit.neutron.ui.screens.revenues.data.TicketRevenue.description",
-    "location": "-neutron/com.tecknobit.neutron.ui.screens.revenues.data/-ticket-revenue/description.html",
+    "description": "com.tecknobit.neutron.ui.screens.project.data.TicketRevenue.description",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.project.data/-ticket-revenue/description.html",
     "searchKeys": [
       "description",
       "open override val description: String",
-      "com.tecknobit.neutron.ui.screens.revenues.data.TicketRevenue.description"
+      "com.tecknobit.neutron.ui.screens.project.data.TicketRevenue.description"
+    ]
+  },
+  {
+    "name": "open override val description: String",
+    "description": "com.tecknobit.neutron.ui.screens.shared.data.GeneralRevenue.GeneralRevenueImpl.description",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.shared.data/-general-revenue/-general-revenue-impl/description.html",
+    "searchKeys": [
+      "description",
+      "open override val description: String",
+      "com.tecknobit.neutron.ui.screens.shared.data.GeneralRevenue.GeneralRevenueImpl.description"
     ]
   },
   {
     "name": "open override val id: String",
-    "description": "com.tecknobit.neutron.ui.screens.revenues.data.GeneralRevenue.GeneralRevenueImpl.id",
-    "location": "-neutron/com.tecknobit.neutron.ui.screens.revenues.data/-general-revenue/-general-revenue-impl/id.html",
+    "description": "com.tecknobit.neutron.ui.screens.project.data.TicketRevenue.id",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.project.data/-ticket-revenue/id.html",
     "searchKeys": [
       "id",
       "open override val id: String",
-      "com.tecknobit.neutron.ui.screens.revenues.data.GeneralRevenue.GeneralRevenueImpl.id"
+      "com.tecknobit.neutron.ui.screens.project.data.TicketRevenue.id"
     ]
   },
   {
     "name": "open override val id: String",
-    "description": "com.tecknobit.neutron.ui.screens.revenues.data.ProjectRevenue.id",
-    "location": "-neutron/com.tecknobit.neutron.ui.screens.revenues.data/-project-revenue/id.html",
+    "description": "com.tecknobit.neutron.ui.screens.shared.data.GeneralRevenue.GeneralRevenueImpl.id",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.shared.data/-general-revenue/-general-revenue-impl/id.html",
     "searchKeys": [
       "id",
       "open override val id: String",
-      "com.tecknobit.neutron.ui.screens.revenues.data.ProjectRevenue.id"
+      "com.tecknobit.neutron.ui.screens.shared.data.GeneralRevenue.GeneralRevenueImpl.id"
     ]
   },
   {
     "name": "open override val id: String",
-    "description": "com.tecknobit.neutron.ui.screens.revenues.data.Revenue.RevenueImpl.id",
-    "location": "-neutron/com.tecknobit.neutron.ui.screens.revenues.data/-revenue/-revenue-impl/id.html",
+    "description": "com.tecknobit.neutron.ui.screens.shared.data.ProjectRevenue.id",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.shared.data/-project-revenue/id.html",
     "searchKeys": [
       "id",
       "open override val id: String",
-      "com.tecknobit.neutron.ui.screens.revenues.data.Revenue.RevenueImpl.id"
+      "com.tecknobit.neutron.ui.screens.shared.data.ProjectRevenue.id"
     ]
   },
   {
     "name": "open override val id: String",
-    "description": "com.tecknobit.neutron.ui.screens.revenues.data.TicketRevenue.id",
-    "location": "-neutron/com.tecknobit.neutron.ui.screens.revenues.data/-ticket-revenue/id.html",
+    "description": "com.tecknobit.neutron.ui.screens.shared.data.Revenue.RevenueImpl.id",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.shared.data/-revenue/-revenue-impl/id.html",
     "searchKeys": [
       "id",
       "open override val id: String",
-      "com.tecknobit.neutron.ui.screens.revenues.data.TicketRevenue.id"
+      "com.tecknobit.neutron.ui.screens.shared.data.Revenue.RevenueImpl.id"
     ]
   },
   {
     "name": "open override val labels: List<RevenueLabel>",
-    "description": "com.tecknobit.neutron.ui.screens.revenues.data.GeneralRevenue.GeneralRevenueImpl.labels",
-    "location": "-neutron/com.tecknobit.neutron.ui.screens.revenues.data/-general-revenue/-general-revenue-impl/labels.html",
+    "description": "com.tecknobit.neutron.ui.screens.project.data.TicketRevenue.labels",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.project.data/-ticket-revenue/labels.html",
     "searchKeys": [
       "labels",
       "open override val labels: List<RevenueLabel>",
-      "com.tecknobit.neutron.ui.screens.revenues.data.GeneralRevenue.GeneralRevenueImpl.labels"
+      "com.tecknobit.neutron.ui.screens.project.data.TicketRevenue.labels"
     ]
   },
   {
     "name": "open override val labels: List<RevenueLabel>",
-    "description": "com.tecknobit.neutron.ui.screens.revenues.data.TicketRevenue.labels",
-    "location": "-neutron/com.tecknobit.neutron.ui.screens.revenues.data/-ticket-revenue/labels.html",
+    "description": "com.tecknobit.neutron.ui.screens.shared.data.GeneralRevenue.GeneralRevenueImpl.labels",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.shared.data/-general-revenue/-general-revenue-impl/labels.html",
     "searchKeys": [
       "labels",
       "open override val labels: List<RevenueLabel>",
-      "com.tecknobit.neutron.ui.screens.revenues.data.TicketRevenue.labels"
+      "com.tecknobit.neutron.ui.screens.shared.data.GeneralRevenue.GeneralRevenueImpl.labels"
     ]
   },
   {
     "name": "open override val revenueDate: Long",
-    "description": "com.tecknobit.neutron.ui.screens.revenues.data.GeneralRevenue.GeneralRevenueImpl.revenueDate",
-    "location": "-neutron/com.tecknobit.neutron.ui.screens.revenues.data/-general-revenue/-general-revenue-impl/revenue-date.html",
+    "description": "com.tecknobit.neutron.ui.screens.project.data.TicketRevenue.revenueDate",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.project.data/-ticket-revenue/revenue-date.html",
     "searchKeys": [
       "revenueDate",
       "open override val revenueDate: Long",
-      "com.tecknobit.neutron.ui.screens.revenues.data.GeneralRevenue.GeneralRevenueImpl.revenueDate"
+      "com.tecknobit.neutron.ui.screens.project.data.TicketRevenue.revenueDate"
     ]
   },
   {
     "name": "open override val revenueDate: Long",
-    "description": "com.tecknobit.neutron.ui.screens.revenues.data.ProjectRevenue.revenueDate",
-    "location": "-neutron/com.tecknobit.neutron.ui.screens.revenues.data/-project-revenue/revenue-date.html",
+    "description": "com.tecknobit.neutron.ui.screens.shared.data.GeneralRevenue.GeneralRevenueImpl.revenueDate",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.shared.data/-general-revenue/-general-revenue-impl/revenue-date.html",
     "searchKeys": [
       "revenueDate",
       "open override val revenueDate: Long",
-      "com.tecknobit.neutron.ui.screens.revenues.data.ProjectRevenue.revenueDate"
+      "com.tecknobit.neutron.ui.screens.shared.data.GeneralRevenue.GeneralRevenueImpl.revenueDate"
     ]
   },
   {
     "name": "open override val revenueDate: Long",
-    "description": "com.tecknobit.neutron.ui.screens.revenues.data.Revenue.RevenueImpl.revenueDate",
-    "location": "-neutron/com.tecknobit.neutron.ui.screens.revenues.data/-revenue/-revenue-impl/revenue-date.html",
+    "description": "com.tecknobit.neutron.ui.screens.shared.data.ProjectRevenue.revenueDate",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.shared.data/-project-revenue/revenue-date.html",
     "searchKeys": [
       "revenueDate",
       "open override val revenueDate: Long",
-      "com.tecknobit.neutron.ui.screens.revenues.data.Revenue.RevenueImpl.revenueDate"
+      "com.tecknobit.neutron.ui.screens.shared.data.ProjectRevenue.revenueDate"
     ]
   },
   {
     "name": "open override val revenueDate: Long",
-    "description": "com.tecknobit.neutron.ui.screens.revenues.data.TicketRevenue.revenueDate",
-    "location": "-neutron/com.tecknobit.neutron.ui.screens.revenues.data/-ticket-revenue/revenue-date.html",
+    "description": "com.tecknobit.neutron.ui.screens.shared.data.Revenue.RevenueImpl.revenueDate",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.shared.data/-revenue/-revenue-impl/revenue-date.html",
     "searchKeys": [
       "revenueDate",
       "open override val revenueDate: Long",
-      "com.tecknobit.neutron.ui.screens.revenues.data.TicketRevenue.revenueDate"
+      "com.tecknobit.neutron.ui.screens.shared.data.Revenue.RevenueImpl.revenueDate"
     ]
   },
   {
     "name": "open override val title: String",
-    "description": "com.tecknobit.neutron.ui.screens.revenues.data.GeneralRevenue.GeneralRevenueImpl.title",
-    "location": "-neutron/com.tecknobit.neutron.ui.screens.revenues.data/-general-revenue/-general-revenue-impl/title.html",
+    "description": "com.tecknobit.neutron.ui.screens.project.data.TicketRevenue.title",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.project.data/-ticket-revenue/title.html",
     "searchKeys": [
       "title",
       "open override val title: String",
-      "com.tecknobit.neutron.ui.screens.revenues.data.GeneralRevenue.GeneralRevenueImpl.title"
+      "com.tecknobit.neutron.ui.screens.project.data.TicketRevenue.title"
     ]
   },
   {
     "name": "open override val title: String",
-    "description": "com.tecknobit.neutron.ui.screens.revenues.data.ProjectRevenue.title",
-    "location": "-neutron/com.tecknobit.neutron.ui.screens.revenues.data/-project-revenue/title.html",
+    "description": "com.tecknobit.neutron.ui.screens.shared.data.GeneralRevenue.GeneralRevenueImpl.title",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.shared.data/-general-revenue/-general-revenue-impl/title.html",
     "searchKeys": [
       "title",
       "open override val title: String",
-      "com.tecknobit.neutron.ui.screens.revenues.data.ProjectRevenue.title"
+      "com.tecknobit.neutron.ui.screens.shared.data.GeneralRevenue.GeneralRevenueImpl.title"
     ]
   },
   {
     "name": "open override val title: String",
-    "description": "com.tecknobit.neutron.ui.screens.revenues.data.Revenue.RevenueImpl.title",
-    "location": "-neutron/com.tecknobit.neutron.ui.screens.revenues.data/-revenue/-revenue-impl/title.html",
+    "description": "com.tecknobit.neutron.ui.screens.shared.data.ProjectRevenue.title",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.shared.data/-project-revenue/title.html",
     "searchKeys": [
       "title",
       "open override val title: String",
-      "com.tecknobit.neutron.ui.screens.revenues.data.Revenue.RevenueImpl.title"
+      "com.tecknobit.neutron.ui.screens.shared.data.ProjectRevenue.title"
     ]
   },
   {
     "name": "open override val title: String",
-    "description": "com.tecknobit.neutron.ui.screens.revenues.data.TicketRevenue.title",
-    "location": "-neutron/com.tecknobit.neutron.ui.screens.revenues.data/-ticket-revenue/title.html",
+    "description": "com.tecknobit.neutron.ui.screens.shared.data.Revenue.RevenueImpl.title",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.shared.data/-revenue/-revenue-impl/title.html",
     "searchKeys": [
       "title",
       "open override val title: String",
-      "com.tecknobit.neutron.ui.screens.revenues.data.TicketRevenue.title"
+      "com.tecknobit.neutron.ui.screens.shared.data.Revenue.RevenueImpl.title"
     ]
   },
   {
     "name": "open override val value: Double",
-    "description": "com.tecknobit.neutron.ui.screens.revenues.data.GeneralRevenue.GeneralRevenueImpl.value",
-    "location": "-neutron/com.tecknobit.neutron.ui.screens.revenues.data/-general-revenue/-general-revenue-impl/value.html",
+    "description": "com.tecknobit.neutron.ui.screens.project.data.TicketRevenue.value",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.project.data/-ticket-revenue/value.html",
     "searchKeys": [
       "value",
       "open override val value: Double",
-      "com.tecknobit.neutron.ui.screens.revenues.data.GeneralRevenue.GeneralRevenueImpl.value"
+      "com.tecknobit.neutron.ui.screens.project.data.TicketRevenue.value"
     ]
   },
   {
     "name": "open override val value: Double",
-    "description": "com.tecknobit.neutron.ui.screens.revenues.data.ProjectRevenue.value",
-    "location": "-neutron/com.tecknobit.neutron.ui.screens.revenues.data/-project-revenue/value.html",
+    "description": "com.tecknobit.neutron.ui.screens.shared.data.GeneralRevenue.GeneralRevenueImpl.value",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.shared.data/-general-revenue/-general-revenue-impl/value.html",
     "searchKeys": [
       "value",
       "open override val value: Double",
-      "com.tecknobit.neutron.ui.screens.revenues.data.ProjectRevenue.value"
+      "com.tecknobit.neutron.ui.screens.shared.data.GeneralRevenue.GeneralRevenueImpl.value"
     ]
   },
   {
     "name": "open override val value: Double",
-    "description": "com.tecknobit.neutron.ui.screens.revenues.data.Revenue.RevenueImpl.value",
-    "location": "-neutron/com.tecknobit.neutron.ui.screens.revenues.data/-revenue/-revenue-impl/value.html",
+    "description": "com.tecknobit.neutron.ui.screens.shared.data.ProjectRevenue.value",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.shared.data/-project-revenue/value.html",
     "searchKeys": [
       "value",
       "open override val value: Double",
-      "com.tecknobit.neutron.ui.screens.revenues.data.Revenue.RevenueImpl.value"
+      "com.tecknobit.neutron.ui.screens.shared.data.ProjectRevenue.value"
     ]
   },
   {
     "name": "open override val value: Double",
-    "description": "com.tecknobit.neutron.ui.screens.revenues.data.TicketRevenue.value",
-    "location": "-neutron/com.tecknobit.neutron.ui.screens.revenues.data/-ticket-revenue/value.html",
+    "description": "com.tecknobit.neutron.ui.screens.shared.data.Revenue.RevenueImpl.value",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.shared.data/-revenue/-revenue-impl/value.html",
     "searchKeys": [
       "value",
       "open override val value: Double",
-      "com.tecknobit.neutron.ui.screens.revenues.data.TicketRevenue.value"
+      "com.tecknobit.neutron.ui.screens.shared.data.Revenue.RevenueImpl.value"
     ]
   },
   {
@@ -2087,26 +2117,6 @@
       "BiometricResult",
       "sealed interface BiometricResult",
       "com.tecknobit.neutron.helpers.BiometricPromptManager.BiometricResult"
-    ]
-  },
-  {
-    "name": "sealed interface GeneralRevenue : Revenue",
-    "description": "com.tecknobit.neutron.ui.screens.revenues.data.GeneralRevenue",
-    "location": "-neutron/com.tecknobit.neutron.ui.screens.revenues.data/-general-revenue/index.html",
-    "searchKeys": [
-      "GeneralRevenue",
-      "sealed interface GeneralRevenue : Revenue",
-      "com.tecknobit.neutron.ui.screens.revenues.data.GeneralRevenue"
-    ]
-  },
-  {
-    "name": "sealed interface Revenue",
-    "description": "com.tecknobit.neutron.ui.screens.revenues.data.Revenue",
-    "location": "-neutron/com.tecknobit.neutron.ui.screens.revenues.data/-revenue/index.html",
-    "searchKeys": [
-      "Revenue",
-      "sealed interface Revenue",
-      "com.tecknobit.neutron.ui.screens.revenues.data.Revenue"
     ]
   },
   {
@@ -2147,16 +2157,6 @@
       "deleteTicket",
       "suspend fun deleteTicket(projectId: String, ticket: TicketRevenue): JsonObject",
       "com.tecknobit.neutron.helpers.NeutronRequester.deleteTicket"
-    ]
-  },
-  {
-    "name": "suspend fun getDynamicAccountData(): JsonObject",
-    "description": "com.tecknobit.neutron.helpers.NeutronRequester.getDynamicAccountData",
-    "location": "-neutron/com.tecknobit.neutron.helpers/-neutron-requester/get-dynamic-account-data.html",
-    "searchKeys": [
-      "getDynamicAccountData",
-      "suspend fun getDynamicAccountData(): JsonObject",
-      "com.tecknobit.neutron.helpers.NeutronRequester.getDynamicAccountData"
     ]
   },
   {
@@ -2290,16 +2290,6 @@
     ]
   },
   {
-    "name": "val MAX_CONTAINER_WIDTH: Dp",
-    "description": "com.tecknobit.neutron.MAX_CONTAINER_WIDTH",
-    "location": "-neutron/com.tecknobit.neutron/-m-a-x_-c-o-n-t-a-i-n-e-r_-w-i-d-t-h.html",
-    "searchKeys": [
-      "MAX_CONTAINER_WIDTH",
-      "val MAX_CONTAINER_WIDTH: Dp",
-      "com.tecknobit.neutron.MAX_CONTAINER_WIDTH"
-    ]
-  },
-  {
     "name": "val ReceiptLong: ImageVector",
     "description": "com.tecknobit.neutron.ui.icons.ReceiptLong",
     "location": "-neutron/com.tecknobit.neutron.ui.icons/-receipt-long.html",
@@ -2391,62 +2381,22 @@
   },
   {
     "name": "val closingDate: Long",
-    "description": "com.tecknobit.neutron.ui.screens.revenues.data.TicketRevenue.closingDate",
-    "location": "-neutron/com.tecknobit.neutron.ui.screens.revenues.data/-ticket-revenue/closing-date.html",
+    "description": "com.tecknobit.neutron.ui.screens.project.data.TicketRevenue.closingDate",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.project.data/-ticket-revenue/closing-date.html",
     "searchKeys": [
       "closingDate",
       "val closingDate: Long",
-      "com.tecknobit.neutron.ui.screens.revenues.data.TicketRevenue.closingDate"
+      "com.tecknobit.neutron.ui.screens.project.data.TicketRevenue.closingDate"
     ]
   },
   {
     "name": "val color: String",
-    "description": "com.tecknobit.neutron.ui.screens.revenues.data.RevenueLabel.color",
-    "location": "-neutron/com.tecknobit.neutron.ui.screens.revenues.data/-revenue-label/color.html",
+    "description": "com.tecknobit.neutron.ui.screens.shared.data.RevenueLabel.color",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.shared.data/-revenue-label/color.html",
     "searchKeys": [
       "color",
       "val color: String",
-      "com.tecknobit.neutron.ui.screens.revenues.data.RevenueLabel.color"
-    ]
-  },
-  {
-    "name": "val confirmAction: (MutableState<Boolean>) -> Unit",
-    "description": "com.tecknobit.neutron.ui.components.Step.confirmAction",
-    "location": "-neutron/com.tecknobit.neutron.ui.components/-step/confirm-action.html",
-    "searchKeys": [
-      "confirmAction",
-      "val confirmAction: (MutableState<Boolean>) -> Unit",
-      "com.tecknobit.neutron.ui.components.Step.confirmAction"
-    ]
-  },
-  {
-    "name": "val content: ColumnScope.() -> Unit",
-    "description": "com.tecknobit.neutron.ui.components.Step.content",
-    "location": "-neutron/com.tecknobit.neutron.ui.components/-step/content.html",
-    "searchKeys": [
-      "content",
-      "val content: ColumnScope.() -> Unit",
-      "com.tecknobit.neutron.ui.components.Step.content"
-    ]
-  },
-  {
-    "name": "val dismissAction: () -> Unit? = null",
-    "description": "com.tecknobit.neutron.ui.components.Step.dismissAction",
-    "location": "-neutron/com.tecknobit.neutron.ui.components/-step/dismiss-action.html",
-    "searchKeys": [
-      "dismissAction",
-      "val dismissAction: () -> Unit? = null",
-      "com.tecknobit.neutron.ui.components.Step.dismissAction"
-    ]
-  },
-  {
-    "name": "val enabled: MutableState<Boolean>? = null",
-    "description": "com.tecknobit.neutron.ui.components.Step.enabled",
-    "location": "-neutron/com.tecknobit.neutron.ui.components/-step/enabled.html",
-    "searchKeys": [
-      "enabled",
-      "val enabled: MutableState<Boolean>? = null",
-      "com.tecknobit.neutron.ui.components.Step.enabled"
+      "com.tecknobit.neutron.ui.screens.shared.data.RevenueLabel.color"
     ]
   },
   {
@@ -2591,32 +2541,22 @@
   },
   {
     "name": "val id: String",
-    "description": "com.tecknobit.neutron.ui.screens.revenues.data.RevenueLabel.id",
-    "location": "-neutron/com.tecknobit.neutron.ui.screens.revenues.data/-revenue-label/id.html",
+    "description": "com.tecknobit.neutron.ui.screens.shared.data.RevenueLabel.id",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.shared.data/-revenue-label/id.html",
     "searchKeys": [
       "id",
       "val id: String",
-      "com.tecknobit.neutron.ui.screens.revenues.data.RevenueLabel.id"
+      "com.tecknobit.neutron.ui.screens.shared.data.RevenueLabel.id"
     ]
   },
   {
     "name": "val initialRevenue: Revenue.RevenueImpl",
-    "description": "com.tecknobit.neutron.ui.screens.revenues.data.ProjectRevenue.initialRevenue",
-    "location": "-neutron/com.tecknobit.neutron.ui.screens.revenues.data/-project-revenue/initial-revenue.html",
+    "description": "com.tecknobit.neutron.ui.screens.shared.data.ProjectRevenue.initialRevenue",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.shared.data/-project-revenue/initial-revenue.html",
     "searchKeys": [
       "initialRevenue",
       "val initialRevenue: Revenue.RevenueImpl",
-      "com.tecknobit.neutron.ui.screens.revenues.data.ProjectRevenue.initialRevenue"
-    ]
-  },
-  {
-    "name": "val initiallyExpanded: Boolean = false",
-    "description": "com.tecknobit.neutron.ui.components.Step.initiallyExpanded",
-    "location": "-neutron/com.tecknobit.neutron.ui.components/-step/initially-expanded.html",
-    "searchKeys": [
-      "initiallyExpanded",
-      "val initiallyExpanded: Boolean = false",
-      "com.tecknobit.neutron.ui.components.Step.initiallyExpanded"
+      "com.tecknobit.neutron.ui.screens.shared.data.ProjectRevenue.initialRevenue"
     ]
   },
   {
@@ -2797,16 +2737,6 @@
       "inverseSurfaceLightMediumContrast",
       "val inverseSurfaceLightMediumContrast: Color",
       "com.tecknobit.neutron.ui.theme.inverseSurfaceLightMediumContrast"
-    ]
-  },
-  {
-    "name": "val isError: MutableState<Boolean>? = null",
-    "description": "com.tecknobit.neutron.ui.components.Step.isError",
-    "location": "-neutron/com.tecknobit.neutron.ui.components/-step/is-error.html",
-    "searchKeys": [
-      "isError",
-      "val isError: MutableState<Boolean>? = null",
-      "com.tecknobit.neutron.ui.components.Step.isError"
     ]
   },
   {
@@ -3980,16 +3910,6 @@
     ]
   },
   {
-    "name": "val stepIcon: ImageVector",
-    "description": "com.tecknobit.neutron.ui.components.Step.stepIcon",
-    "location": "-neutron/com.tecknobit.neutron.ui.components/-step/step-icon.html",
-    "searchKeys": [
-      "stepIcon",
-      "val stepIcon: ImageVector",
-      "com.tecknobit.neutron.ui.components.Step.stepIcon"
-    ]
-  },
-  {
     "name": "val surfaceBrightDark: Color",
     "description": "com.tecknobit.neutron.ui.theme.surfaceBrightDark",
     "location": "-neutron/com.tecknobit.neutron.ui.theme/surface-bright-dark.html",
@@ -4651,12 +4571,12 @@
   },
   {
     "name": "val text: String",
-    "description": "com.tecknobit.neutron.ui.screens.revenues.data.RevenueLabel.text",
-    "location": "-neutron/com.tecknobit.neutron.ui.screens.revenues.data/-revenue-label/text.html",
+    "description": "com.tecknobit.neutron.ui.screens.shared.data.RevenueLabel.text",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.shared.data/-revenue-label/text.html",
     "searchKeys": [
       "text",
       "val text: String",
-      "com.tecknobit.neutron.ui.screens.revenues.data.RevenueLabel.text"
+      "com.tecknobit.neutron.ui.screens.shared.data.RevenueLabel.text"
     ]
   },
   {
@@ -4671,12 +4591,12 @@
   },
   {
     "name": "val tickets: List<TicketRevenue>",
-    "description": "com.tecknobit.neutron.ui.screens.revenues.data.ProjectRevenue.tickets",
-    "location": "-neutron/com.tecknobit.neutron.ui.screens.revenues.data/-project-revenue/tickets.html",
+    "description": "com.tecknobit.neutron.ui.screens.shared.data.ProjectRevenue.tickets",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens.shared.data/-project-revenue/tickets.html",
     "searchKeys": [
       "tickets",
       "val tickets: List<TicketRevenue>",
-      "com.tecknobit.neutron.ui.screens.revenues.data.ProjectRevenue.tickets"
+      "com.tecknobit.neutron.ui.screens.shared.data.ProjectRevenue.tickets"
     ]
   },
   {
@@ -4687,16 +4607,6 @@
       "ticketsState",
       "val ticketsState: PaginationState<Int, TicketRevenue>",
       "com.tecknobit.neutron.ui.screens.project.presentation.ProjectScreenViewModel.ticketsState"
-    ]
-  },
-  {
-    "name": "val title: StringResource",
-    "description": "com.tecknobit.neutron.ui.components.Step.title",
-    "location": "-neutron/com.tecknobit.neutron.ui.components/-step/title.html",
-    "searchKeys": [
-      "title",
-      "val title: StringResource",
-      "com.tecknobit.neutron.ui.components.Step.title"
     ]
   },
   {

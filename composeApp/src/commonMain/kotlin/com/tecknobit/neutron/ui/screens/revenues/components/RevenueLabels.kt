@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import com.tecknobit.equinoxcompose.components.ChameleonText
 import com.tecknobit.equinoxcompose.utilities.toColor
-import com.tecknobit.neutron.ui.screens.revenues.data.RevenueLabel
+import com.tecknobit.neutron.ui.screens.shared.data.RevenueLabel
 
 /**
  * Component used to display the labels attached to a revenue

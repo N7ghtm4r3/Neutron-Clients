@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalComposeApi::class)
+
 package com.tecknobit.neutron.ui.components.screenkeyboard
 
 import androidx.compose.foundation.background
@@ -16,8 +18,8 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.ExperimentalComposeApi
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -30,7 +32,7 @@ import androidx.compose.ui.input.key.onKeyEvent
 import androidx.compose.ui.input.key.type
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.tecknobit.neutron.MAX_CONTAINER_WIDTH
+import com.tecknobit.equinoxcompose.utilities.EXPANDED_CONTAINER
 import com.tecknobit.neutron.displayFontFamily
 import com.tecknobit.neutron.ui.components.screenkeyboard.ScreenKeyboardState.Companion.DOT_CHARACTER
 
@@ -52,7 +54,6 @@ private const val BACKSPACE_INDEX = 9
  * @param state The state manager of the component
  */
 @Composable
-@NonRestartableComposable
 fun ScreenKeyboard(
     modifier: Modifier = Modifier,
     state: ScreenKeyboardState
@@ -63,13 +64,13 @@ fun ScreenKeyboard(
     }
     LazyVerticalGrid(
         modifier = modifier
-            .widthIn(
-                max = MAX_CONTAINER_WIDTH
-            )
             .background(MaterialTheme.colorScheme.primary)
             .focusRequester(focusRequester)
             .attachHardwareKeyboardEvents(
                 state = state
+            )
+            .widthIn(
+                max = EXPANDED_CONTAINER
             ),
         contentPadding = PaddingValues(
             all = 5.dp
@@ -190,7 +191,6 @@ private inline fun Modifier.attachHardwareKeyboardEvents(
  * @param state The state manager of the [ScreenKeyboard] component
  */
 @Composable
-@NonRestartableComposable
 private fun Backspace(
     state: ScreenKeyboardState
 ) {
@@ -214,7 +214,6 @@ private fun Backspace(
  * @param digit The value of the digit managed by the button
  */
 @Composable
-@NonRestartableComposable
 private fun DigitButton(
     state: ScreenKeyboardState,
     digit: String

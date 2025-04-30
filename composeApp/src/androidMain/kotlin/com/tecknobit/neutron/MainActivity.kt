@@ -11,9 +11,8 @@ import androidx.annotation.ContentView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
-import com.tecknobit.ametistaengine.AmetistaEngine
 import com.tecknobit.equinoxcompose.session.setUpSession
-import com.tecknobit.equinoxcompose.utilities.context.ContextActivityProvider
+import com.tecknobit.equinoxcore.utilities.ContextActivityProvider
 
 /**
  * The [MainActivity] is used as entry point of Neutron's application for Android
@@ -55,7 +54,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         appUpdateManager = AppUpdateManagerFactory.create(applicationContext)
         ContextActivityProvider.setCurrentActivity(this)
-        AmetistaEngine.intake()
+        //TODO: To integrate after AmetistaEngine.intake()
         setContent {
             enableEdgeToEdge()
             setUpSession(

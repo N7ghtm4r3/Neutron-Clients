@@ -10,7 +10,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -28,7 +27,6 @@ import org.jetbrains.compose.resources.stringResource
  * @param onClick The action to execute when the chip has been selected
  */
 @Composable
-@NonRestartableComposable
 fun CategoryChip(
     category: StringResource,
     onClick: (Boolean) -> Unit,

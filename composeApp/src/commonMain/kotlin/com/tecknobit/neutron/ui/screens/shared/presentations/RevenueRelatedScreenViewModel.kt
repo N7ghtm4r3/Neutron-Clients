@@ -4,9 +4,9 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.lifecycle.viewModelScope
 import com.tecknobit.equinoxcompose.viewmodels.EquinoxViewModel
 import com.tecknobit.equinoxcore.annotations.Structure
-import com.tecknobit.equinoxcore.network.Requester.Companion.sendRequest
+import com.tecknobit.equinoxcore.network.sendRequest
 import com.tecknobit.neutron.requester
-import com.tecknobit.neutron.ui.screens.revenues.data.Revenue
+import com.tecknobit.neutron.ui.screens.shared.data.Revenue
 import com.tecknobit.neutroncore.enums.RevenuePeriod
 import com.tecknobit.neutroncore.enums.RevenuePeriod.LAST_MONTH
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -94,5 +94,16 @@ abstract class RevenueRelatedScreenViewModel : EquinoxViewModel(
      * Method to refresh the data after a filter applying or a revenue deletion
      */
     abstract fun refreshData()
+
+    /**
+     * Method to notify a connection error
+     */
+    abstract fun notifyConnectionError()
+
+    /**
+     * Method to retrieve the information on the revenues and the wallet status after a connection
+     * error
+     */
+    abstract fun retryAfterConnectionError()
 
 }

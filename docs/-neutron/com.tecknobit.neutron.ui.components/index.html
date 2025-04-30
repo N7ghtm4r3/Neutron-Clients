@@ -29,49 +29,98 @@
     <link href="../../styles/prism.css" rel="Stylesheet">
     <link href="../../styles/logo-styles.css" rel="Stylesheet">
     <link href="../../styles/font-jb-sans-auto.css" rel="Stylesheet">
+    <link href="../../ui-kit/ui-kit.min.css" rel="Stylesheet">
     <script type="text/javascript" src="../../scripts/clipboard.js" async="async"></script>
     <script type="text/javascript" src="../../scripts/navigation-loader.js" async="async"></script>
     <script type="text/javascript" src="../../scripts/platform-content-handler.js"
             async="async"></script>
     <script type="text/javascript" src="../../scripts/main.js" defer="defer"></script>
     <script type="text/javascript" src="../../scripts/prism.js" async="async"></script>
+    <script type="text/javascript" src="../../ui-kit/ui-kit.min.js" defer="defer"></script>
     <script type="text/javascript" src="../../scripts/symbol-parameters-wrapper_deferred.js"
             defer="defer"></script>
     <link href="../../images/logo-icon.svg">
 </head>
 <body>
 <div class="root">
-    <nav class="navigation" id="navigation-wrapper">
-        <div class="navigation--inner">
-            <div class="navigation-title">
-                <button class="menu-toggle" id="menu-toggle" type="button">toggle menu</button>
-                <div class="library-name">
-                    <a class="library-name--link" href="../../index.html">
-                        Neutron
-                    </a>
-                </div>
-                <div class="library-version">
-                    1.0.1
-                </div>
-            </div>
-            <div class="filter-section" id="filter-section">
+    <nav class="navigation theme-dark" id="navigation-wrapper">
+        <a class="library-name--link" href="../../index.html">
+            Neutron
+        </a>
+        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only"
+                id="toc-toggle"
+                type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">
+            1.0.2
+        </div>
+        <div class="navigation-controls">
+            <div class="filter-section filter-section_loading" id="filter-section">
                 <button class="platform-tag platform-selector common-like" data-active=""
                         data-filter=":composeApp:dokkaHtml/commonMain">common
                 </button>
+                <div class="dropdown filter-section--dropdown" data-role="dropdown"
+                     id="filter-section-dropdown">
+                    <button class="button button_dropdown filter-section--dropdown-toggle"
+                            role="combobox"
+                            data-role="dropdown-toggle"
+                            aria-controls="platform-tags-listbox"
+                            aria-haspopup="listbox"
+                            aria-expanded="false"
+                            aria-label="Toggle source sets"
+                    ></button>
+                    <ul role="listbox" id="platform-tags-listbox" class="dropdown--list"
+                        data-role="dropdown-listbox">
+                        <div class="dropdown--header"><span>Platform filter</span>
+                            <button class="button" data-role="dropdown-toggle"
+                                    aria-label="Close platform filter">
+                                <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                            </button>
+                        </div>
+                        <li role="option"
+                            class="dropdown--option platform-selector-option common-like"
+                            tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input"
+                                       id=":composeApp:dokkaHtml/commonMain"
+                                       data-filter=":composeApp:dokkaHtml/commonMain"/>
+                                <span class="checkbox--icon"></span>
+                                common
+                            </label>
+                        </li>
+                    </ul>
+                    <div class="dropdown--overlay"></div>
+                </div>
             </div>
-        </div>
-        <div class="navigation-controls">
-            <button class="navigation-controls--btn navigation-controls--theme"
-                    id="theme-toggle-button" type="button">switch theme
+            <button class="navigation-controls--btn navigation-controls--btn_theme"
+                    id="theme-toggle-button"
+                    type="button">Switch theme
             </button>
-            <div class="navigation-controls--btn navigation-controls--search" id="searchBar"
-                 role="button">search in API
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar"
+                 role="button">Search in
+                API
             </div>
         </div>
     </nav>
     <div id="container">
         <div class="sidebar" id="leftColumn">
-            <div class="sidebar--inner" id="sideMenu"></div>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list"
+                    data-role="dropdown-listbox">
+                    <div class="dropdown--header">
+                            <span>
+                                    Neutron
+                            </span>
+                        <button class="button" data-role="dropdown-toggle"
+                                aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
         </div>
         <div id="main">
             <div class="main-content" data-page-type="package" id="content"
@@ -85,127 +134,14 @@
                 </div>
                 <div class="tabbedcontent">
                     <div class="tabs-section" tabs-section="tabs-section">
-                        <button class="section-tab" data-active="" data-togglable="TYPE">Types
-                        </button>
-                        <button class="section-tab" data-togglable="FUNCTION,EXTENSION_FUNCTION">
-                            Functions
+                        <button class="section-tab" data-active=""
+                                data-togglable="FUNCTION,EXTENSION_FUNCTION">Functions
                         </button>
                         <button class="section-tab" data-togglable="PROPERTY,EXTENSION_PROPERTY">
                             Properties
                         </button>
                     </div>
                     <div class="tabs-section-body">
-                        <div data-togglable="TYPE">
-                            <h2 class="">Types</h2>
-                            <div class="table"><a data-name="-2107594165%2FClasslikes%2F-813795679"
-                                                  anchor-label="Step"
-                                                  id="-2107594165%2FClasslikes%2F-813795679"
-                                                  data-filterable-set=":composeApp:dokkaHtml/commonMain"></a>
-                                <div class="table-row"
-                                     data-filterable-current=":composeApp:dokkaHtml/commonMain"
-                                     data-filterable-set=":composeApp:dokkaHtml/commonMain">
-                                    <div class="main-subrow keyValue ">
-                                        <div class=""><span class="inline-flex">
-                  <div><a href="-step/index.html"><span><span>Step</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon"
-                                   pointing-to="-2107594165%2FClasslikes%2F-813795679"></span>
-                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                  </span></span></div>
-                                        <div>
-                                            <div class="title">
-                                                <div class="platform-hinted "
-                                                     data-platform-hinted="data-platform-hinted">
-                                                    <div class="content sourceset-dependent-content"
-                                                         data-active=""
-                                                         data-togglable=":composeApp:dokkaHtml/commonMain">
-                                                        <div class="symbol monospace"><span
-                                                                class="token keyword">data </span><span
-                                                                class="token keyword">class </span><a
-                                                                href="-step/index.html">Step</a><span
-                                                                class="token punctuation">(</span><span
-                                                                class="parameters "><span
-                                                                class="parameter "><span
-                                                                class="token keyword">val </span>initiallyExpanded<span
-                                                                class="token operator">: </span><a
-                                                                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span
-                                                                class="token operator"> = </span><span
-                                                                class="token boolean">false</span><span
-                                                                class="token punctuation">, </span></span><span
-                                                                class="parameter "><span
-                                                                class="token keyword">val </span>enabled<span
-                                                                class="token operator">: </span><a
-                                                                href="https://developer.android.com/reference/kotlin/androidx/compose/runtime/MutableState.html">MutableState</a><span
-                                                                class="token operator">&lt;</span><a
-                                                                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span
-                                                                class="token operator">&gt;</span><span
-                                                                class="token operator">?</span><span
-                                                                class="token operator"> = </span>null<span
-                                                                class="token punctuation">, </span></span><span
-                                                                class="parameter "><span
-                                                                class="token keyword">val </span>stepIcon<span
-                                                                class="token operator">: </span><a
-                                                                href="https://developer.android.com/reference/kotlin/androidx/compose/ui/graphics/vector/ImageVector.html">ImageVector</a><span
-                                                                class="token punctuation">, </span></span><span
-                                                                class="parameter "><span
-                                                                class="token keyword">val </span>title<span
-                                                                class="token operator">: </span><span
-                                                                data-unresolved-link="org.jetbrains.compose.resources/StringResource///PointingToDeclaration/">StringResource</span><span
-                                                                class="token punctuation">, </span></span><span
-                                                                class="parameter "><span
-                                                                class="token keyword">val </span>content<span
-                                                                class="token operator">: </span><span><span
-                                                                class="token annotation builtin">@</span><a
-                                                                href="https://developer.android.com/reference/kotlin/androidx/compose/runtime/Composable.html"><span
-                                                                class="token annotation builtin">Composable</span></a> </span><a
-                                                                href="https://developer.android.com/reference/kotlin/androidx/compose/foundation/layout/ColumnScope.html">ColumnScope</a><span
-                                                                class="token punctuation">.</span><span
-                                                                class="token punctuation">(</span><span
-                                                                class="token punctuation">)</span><span
-                                                                class="token operator"> -&gt; </span><a
-                                                                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><span
-                                                                class="token punctuation">, </span></span><span
-                                                                class="parameter "><span
-                                                                class="token keyword">val </span>isError<span
-                                                                class="token operator">: </span><a
-                                                                href="https://developer.android.com/reference/kotlin/androidx/compose/runtime/MutableState.html">MutableState</a><span
-                                                                class="token operator">&lt;</span><a
-                                                                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span
-                                                                class="token operator">&gt;</span><span
-                                                                class="token operator">?</span><span
-                                                                class="token operator"> = </span>null<span
-                                                                class="token punctuation">, </span></span><span
-                                                                class="parameter "><span
-                                                                class="token keyword">val </span>dismissAction<span
-                                                                class="token operator">: </span><span
-                                                                class="token punctuation">(</span><span
-                                                                class="token punctuation">)</span><span
-                                                                class="token operator"> -&gt; </span><a
-                                                                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><span
-                                                                class="token operator">?</span><span
-                                                                class="token operator"> = </span>null<span
-                                                                class="token punctuation">, </span></span><span
-                                                                class="parameter "><span
-                                                                class="token keyword">val </span>confirmAction<span
-                                                                class="token operator">: </span><span
-                                                                class="token punctuation">(</span><a
-                                                                href="https://developer.android.com/reference/kotlin/androidx/compose/runtime/MutableState.html">MutableState</a><span
-                                                                class="token operator">&lt;</span><a
-                                                                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span
-                                                                class="token operator">&gt;</span><span
-                                                                class="token punctuation">)</span><span
-                                                                class="token operator"> -&gt; </span><a
-                                                                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><span
-                                                                class="token operator"> = </span>{ it.value = false }</span></span><span
-                                                                class="token punctuation">)</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         <div data-togglable="PROPERTY">
                             <h2 class="">Properties</h2>
                             <div class="table"><a data-name="592571599%2FProperties%2F-813795679"
@@ -238,7 +174,7 @@
                                                         <div class="brief "><p class="paragraph">
                                                             <strong>titleStyle</strong> -> the style
                                                             to apply to the title of the <span
-                                                                data-unresolved-link="com.tecknobit.equinoxcompose.components//EquinoxAlertDialog/#androidx.compose.ui.Modifier#androidx.compose.ui.Modifier#androidx.compose.ui.text.TextStyle#androidx.compose.runtime.MutableState[kotlin.Boolean]#androidx.compose.ui.graphics.vector.ImageVector?#com.tecknobit.equinoxcompose.viewmodels.EquinoxViewModel?#kotlin.Function0[kotlin.Unit]#org.jetbrains.compose.resources.StringResource#org.jetbrains.compose.resources.StringResource#kotlin.Function0[kotlin.Unit]#org.jetbrains.compose.resources.StringResource?#kotlin.Function0[kotlin.Unit]#org.jetbrains.compose.resources.StringResource/PointingToDeclaration/">EquinoxAlertDialog</span>
+                                                                data-unresolved-link="com.tecknobit.equinoxcompose.components//EquinoxAlertDialog/#androidx.compose.ui.Modifier#androidx.compose.ui.graphics.Shape#androidx.compose.ui.graphics.Color#androidx.compose.ui.graphics.Color#androidx.compose.ui.graphics.Color#androidx.compose.ui.graphics.Color#androidx.compose.ui.unit.Dp#androidx.compose.ui.window.DialogProperties#androidx.compose.ui.Modifier#androidx.compose.ui.text.TextStyle#androidx.compose.runtime.MutableState[kotlin.Boolean]#androidx.compose.ui.graphics.vector.ImageVector?#com.tecknobit.equinoxcompose.viewmodels.EquinoxViewModel?#kotlin.Function0[kotlin.Unit]#org.jetbrains.compose.resources.StringResource#org.jetbrains.compose.resources.StringResource#kotlin.Function0[kotlin.Unit]#org.jetbrains.compose.resources.StringResource?#androidx.compose.ui.text.TextStyle#kotlin.Function0[kotlin.Unit]#org.jetbrains.compose.resources.StringResource#androidx.compose.ui.text.TextStyle/PointingToDeclaration/">EquinoxAlertDialog</span>
                                                         </p></div>
                                                     </div>
                                                 </div>
@@ -291,10 +227,10 @@
                                                                 class="parameter ">onClick<span
                                                                 class="token operator">: </span><span
                                                                 class="token punctuation">(</span><a
-                                                                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span
+                                                                href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span
                                                                 class="token punctuation">)</span><span
                                                                 class="token operator"> -&gt; </span><a
-                                                                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span
+                                                                href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span
                                                                 class="token punctuation">)</span>
                                                         </div>
                                                         <div class="brief "><p class="paragraph">
@@ -351,7 +287,7 @@
                                                                 class="token operator">: </span><a
                                                                 href="https://developer.android.com/reference/kotlin/androidx/compose/runtime/MutableState.html">MutableState</a><span
                                                                 class="token operator">&lt;</span><a
-                                                                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span
+                                                                href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span
                                                                 class="token operator">&gt;</span></span></span><span
                                                                 class="token punctuation">)</span>
                                                         </div>
@@ -364,9 +300,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                <a data-name="-658264621%2FFunctions%2F-813795679"
+                                <a data-name="-580947615%2FFunctions%2F-813795679"
                                    anchor-label="DeleteRevenue"
-                                   id="-658264621%2FFunctions%2F-813795679"
+                                   id="-580947615%2FFunctions%2F-813795679"
                                    data-filterable-set=":composeApp:dokkaHtml/commonMain"></a>
                                 <div class="table-row"
                                      data-filterable-current=":composeApp:dokkaHtml/commonMain"
@@ -375,7 +311,7 @@
                                         <div class=""><span class="inline-flex">
                   <div><a href="-delete-revenue.html"><span>Delete</span><wbr></wbr><span><span>Revenue</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon"
-                                   pointing-to="-658264621%2FFunctions%2F-813795679"></span>
+                                   pointing-to="-580947615%2FFunctions%2F-813795679"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
                                         <div>
@@ -402,7 +338,7 @@
                                                                 class="token operator">: </span><a
                                                                 href="https://developer.android.com/reference/kotlin/androidx/compose/runtime/MutableState.html">MutableState</a><span
                                                                 class="token operator">&lt;</span><a
-                                                                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span
+                                                                href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span
                                                                 class="token operator">&gt;</span><span
                                                                 class="token punctuation">, </span></span><span
                                                                 class="parameter ">viewModel<span
@@ -411,22 +347,22 @@
                                                                 class="token punctuation">, </span></span><span
                                                                 class="parameter ">revenue<span
                                                                 class="token operator">: </span><a
-                                                                href="../com.tecknobit.neutron.ui.screens.revenues.data/-revenue/index.html">Revenue</a><span
+                                                                href="../com.tecknobit.neutron.ui.screens.shared.data/-revenue/index.html">Revenue</a><span
                                                                 class="token punctuation">, </span></span><span
                                                                 class="parameter ">onDelete<span
                                                                 class="token operator">: </span><span
                                                                 class="token punctuation">(</span><span
                                                                 class="token punctuation">)</span><span
                                                                 class="token operator"> -&gt; </span><a
-                                                                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span
+                                                                href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span
                                                                 class="token punctuation">)</span>
                                                         </div>
                                                         <div class="brief "><p class="paragraph">
                                                             Custom <span
-                                                                data-unresolved-link="com.tecknobit.equinoxcompose.components//EquinoxAlertDialog/#androidx.compose.ui.Modifier#androidx.compose.ui.Modifier#androidx.compose.ui.text.TextStyle#androidx.compose.runtime.MutableState[kotlin.Boolean]#androidx.compose.ui.graphics.vector.ImageVector?#com.tecknobit.equinoxcompose.viewmodels.EquinoxViewModel?#kotlin.Function0[kotlin.Unit]#org.jetbrains.compose.resources.StringResource#org.jetbrains.compose.resources.StringResource#kotlin.Function0[kotlin.Unit]#org.jetbrains.compose.resources.StringResource?#kotlin.Function0[kotlin.Unit]#org.jetbrains.compose.resources.StringResource/PointingToDeclaration/">EquinoxAlertDialog</span>
+                                                                data-unresolved-link="com.tecknobit.equinoxcompose.components//EquinoxAlertDialog/#androidx.compose.ui.Modifier#androidx.compose.ui.graphics.Shape#androidx.compose.ui.graphics.Color#androidx.compose.ui.graphics.Color#androidx.compose.ui.graphics.Color#androidx.compose.ui.graphics.Color#androidx.compose.ui.unit.Dp#androidx.compose.ui.window.DialogProperties#androidx.compose.ui.Modifier#androidx.compose.ui.text.TextStyle#androidx.compose.runtime.MutableState[kotlin.Boolean]#androidx.compose.ui.graphics.vector.ImageVector?#com.tecknobit.equinoxcompose.viewmodels.EquinoxViewModel?#kotlin.Function0[kotlin.Unit]#org.jetbrains.compose.resources.StringResource#org.jetbrains.compose.resources.StringResource#kotlin.Function0[kotlin.Unit]#org.jetbrains.compose.resources.StringResource?#androidx.compose.ui.text.TextStyle#kotlin.Function0[kotlin.Unit]#org.jetbrains.compose.resources.StringResource#androidx.compose.ui.text.TextStyle/PointingToDeclaration/">EquinoxAlertDialog</span>
                                                             used to warn the user about the deletion
                                                             of a <a
-                                                                href="../com.tecknobit.neutron.ui.screens.revenues.data/-revenue/index.html">Revenue</a>
+                                                                href="../com.tecknobit.neutron.ui.screens.shared.data/-revenue/index.html">Revenue</a>
                                                         </p></div>
                                                     </div>
                                                 </div>
@@ -434,9 +370,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                <a data-name="1408244739%2FFunctions%2F-813795679"
+                                <a data-name="-886253445%2FFunctions%2F-813795679"
                                    anchor-label="DeleteTicket"
-                                   id="1408244739%2FFunctions%2F-813795679"
+                                   id="-886253445%2FFunctions%2F-813795679"
                                    data-filterable-set=":composeApp:dokkaHtml/commonMain"></a>
                                 <div class="table-row"
                                      data-filterable-current=":composeApp:dokkaHtml/commonMain"
@@ -445,7 +381,7 @@
                                         <div class=""><span class="inline-flex">
                   <div><a href="-delete-ticket.html"><span>Delete</span><wbr></wbr><span><span>Ticket</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon"
-                                   pointing-to="1408244739%2FFunctions%2F-813795679"></span>
+                                   pointing-to="-886253445%2FFunctions%2F-813795679"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
                                         <div>
@@ -472,7 +408,7 @@
                                                                 class="token operator">: </span><a
                                                                 href="https://developer.android.com/reference/kotlin/androidx/compose/runtime/MutableState.html">MutableState</a><span
                                                                 class="token operator">&lt;</span><a
-                                                                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span
+                                                                href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span
                                                                 class="token operator">&gt;</span><span
                                                                 class="token punctuation">, </span></span><span
                                                                 class="parameter ">viewModel<span
@@ -481,15 +417,15 @@
                                                                 class="token punctuation">, </span></span><span
                                                                 class="parameter ">ticket<span
                                                                 class="token operator">: </span><a
-                                                                href="../com.tecknobit.neutron.ui.screens.revenues.data/-ticket-revenue/index.html">TicketRevenue</a></span></span><span
+                                                                href="../com.tecknobit.neutron.ui.screens.project.data/-ticket-revenue/index.html">TicketRevenue</a></span></span><span
                                                                 class="token punctuation">)</span>
                                                         </div>
                                                         <div class="brief "><p class="paragraph">
                                                             Custom <span
-                                                                data-unresolved-link="com.tecknobit.equinoxcompose.components//EquinoxAlertDialog/#androidx.compose.ui.Modifier#androidx.compose.ui.Modifier#androidx.compose.ui.text.TextStyle#androidx.compose.runtime.MutableState[kotlin.Boolean]#androidx.compose.ui.graphics.vector.ImageVector?#com.tecknobit.equinoxcompose.viewmodels.EquinoxViewModel?#kotlin.Function0[kotlin.Unit]#org.jetbrains.compose.resources.StringResource#org.jetbrains.compose.resources.StringResource#kotlin.Function0[kotlin.Unit]#org.jetbrains.compose.resources.StringResource?#kotlin.Function0[kotlin.Unit]#org.jetbrains.compose.resources.StringResource/PointingToDeclaration/">EquinoxAlertDialog</span>
+                                                                data-unresolved-link="com.tecknobit.equinoxcompose.components//EquinoxAlertDialog/#androidx.compose.ui.Modifier#androidx.compose.ui.graphics.Shape#androidx.compose.ui.graphics.Color#androidx.compose.ui.graphics.Color#androidx.compose.ui.graphics.Color#androidx.compose.ui.graphics.Color#androidx.compose.ui.unit.Dp#androidx.compose.ui.window.DialogProperties#androidx.compose.ui.Modifier#androidx.compose.ui.text.TextStyle#androidx.compose.runtime.MutableState[kotlin.Boolean]#androidx.compose.ui.graphics.vector.ImageVector?#com.tecknobit.equinoxcompose.viewmodels.EquinoxViewModel?#kotlin.Function0[kotlin.Unit]#org.jetbrains.compose.resources.StringResource#org.jetbrains.compose.resources.StringResource#kotlin.Function0[kotlin.Unit]#org.jetbrains.compose.resources.StringResource?#androidx.compose.ui.text.TextStyle#kotlin.Function0[kotlin.Unit]#org.jetbrains.compose.resources.StringResource#androidx.compose.ui.text.TextStyle/PointingToDeclaration/">EquinoxAlertDialog</span>
                                                             used to warn the user about the deletion
                                                             of a <a
-                                                                href="../com.tecknobit.neutron.ui.screens.revenues.data/-ticket-revenue/index.html">TicketRevenue</a>
+                                                                href="../com.tecknobit.neutron.ui.screens.project.data/-ticket-revenue/index.html">TicketRevenue</a>
                                                         </p></div>
                                                     </div>
                                                 </div>
@@ -547,9 +483,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                <a data-name="-1874420668%2FFunctions%2F-813795679"
+                                <a data-name="1410668050%2FFunctions%2F-813795679"
                                    anchor-label="LabelsGrid"
-                                   id="-1874420668%2FFunctions%2F-813795679"
+                                   id="1410668050%2FFunctions%2F-813795679"
                                    data-filterable-set=":composeApp:dokkaHtml/commonMain"></a>
                                 <div class="table-row"
                                      data-filterable-current=":composeApp:dokkaHtml/commonMain"
@@ -558,7 +494,7 @@
                                         <div class=""><span class="inline-flex">
                   <div><a href="-labels-grid.html"><span>Labels</span><wbr></wbr><span><span>Grid</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon"
-                                   pointing-to="-1874420668%2FFunctions%2F-813795679"></span>
+                                   pointing-to="1410668050%2FFunctions%2F-813795679"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
                                         <div>
@@ -594,7 +530,7 @@
                                                                 class="token operator">: </span><a
                                                                 href="https://developer.android.com/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateList.html">SnapshotStateList</a><span
                                                                 class="token operator">&lt;</span><a
-                                                                href="../com.tecknobit.neutron.ui.screens.revenues.data/-revenue-label/index.html">RevenueLabel</a><span
+                                                                href="../com.tecknobit.neutron.ui.screens.shared.data/-revenue-label/index.html">RevenueLabel</a><span
                                                                 class="token operator">&gt;</span></span></span><span
                                                                 class="token punctuation">)</span>
                                                         </div>
@@ -649,7 +585,7 @@
                                                                 class="token operator">: </span><a
                                                                 href="https://developer.android.com/reference/kotlin/androidx/compose/runtime/MutableState.html">MutableState</a><span
                                                                 class="token operator">&lt;</span><a
-                                                                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span
+                                                                href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span
                                                                 class="token operator">&gt;</span></span></span><span
                                                                 class="token punctuation">)</span>
                                                         </div>
@@ -706,6 +642,53 @@
                                                             custom progress indicator visible when a
                                                             new page of items has been requested</p>
                                                         </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a data-name="637761226%2FFunctions%2F-813795679"
+                                   anchor-label="NoRevenues" id="637761226%2FFunctions%2F-813795679"
+                                   data-filterable-set=":composeApp:dokkaHtml/commonMain"></a>
+                                <div class="table-row"
+                                     data-filterable-current=":composeApp:dokkaHtml/commonMain"
+                                     data-filterable-set=":composeApp:dokkaHtml/commonMain">
+                                    <div class="main-subrow keyValue ">
+                                        <div class=""><span class="inline-flex">
+                  <div><a href="-no-revenues.html"><span>No</span><wbr></wbr><span><span>Revenues</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon"
+                                   pointing-to="637761226%2FFunctions%2F-813795679"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+                                        <div>
+                                            <div class="title">
+                                                <div class="platform-hinted "
+                                                     data-platform-hinted="data-platform-hinted">
+                                                    <div class="content sourceset-dependent-content"
+                                                         data-active=""
+                                                         data-togglable=":composeApp:dokkaHtml/commonMain">
+                                                        <div class="symbol monospace">
+                                                            <div class="block">
+                                                                <div class="block"><span
+                                                                        class="token annotation builtin">@</span><a
+                                                                        href="https://developer.android.com/reference/kotlin/androidx/compose/runtime/Composable.html"><span
+                                                                        class="token annotation builtin">Composable</span></a>
+                                                                </div>
+                                                            </div>
+                                                            <span class="token keyword">fun </span><a
+                                                                href="-no-revenues.html"><span
+                                                                class="token function">NoRevenues</span></a><span
+                                                                class="token punctuation">(</span><span
+                                                                class="parameters "><span
+                                                                class="parameter ">titleRes<span
+                                                                class="token operator">: </span><span
+                                                                data-unresolved-link="org.jetbrains.compose.resources/StringResource///PointingToDeclaration/">StringResource</span></span></span><span
+                                                                class="token punctuation">)</span>
+                                                        </div>
+                                                        <div class="brief "><p class="paragraph">
+                                                            Empty state displayed when there are no
+                                                            revenues available</p></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -799,7 +782,7 @@
                                                                 class="parameters "><span
                                                                 class="parameter ">profilePic<span
                                                                 class="token operator">: </span><a
-                                                                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a><span
+                                                                href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span
                                                                 class="token operator">?</span><span
                                                                 class="token punctuation">, </span></span><span
                                                                 class="parameter ">size<span
@@ -811,7 +794,7 @@
                                                                 class="token punctuation">(</span><span
                                                                 class="token punctuation">)</span><span
                                                                 class="token operator"> -&gt; </span><a
-                                                                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span
+                                                                href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span
                                                                 class="token punctuation">)</span>
                                                         </div>
                                                         <div class="brief "><p class="paragraph">
@@ -825,9 +808,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                <a data-name="-177004823%2FFunctions%2F-813795679"
+                                <a data-name="1054730203%2FFunctions%2F-813795679"
                                    anchor-label="RevenueDescription"
-                                   id="-177004823%2FFunctions%2F-813795679"
+                                   id="1054730203%2FFunctions%2F-813795679"
                                    data-filterable-set=":composeApp:dokkaHtml/commonMain"></a>
                                 <div class="table-row"
                                      data-filterable-current=":composeApp:dokkaHtml/commonMain"
@@ -836,7 +819,7 @@
                                         <div class=""><span class="inline-flex">
                   <div><a href="-revenue-description.html"><span>Revenue</span><wbr></wbr><span><span>Description</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon"
-                                   pointing-to="-177004823%2FFunctions%2F-813795679"></span>
+                                   pointing-to="1054730203%2FFunctions%2F-813795679"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
                                         <div>
@@ -861,11 +844,11 @@
                                                                 class="parameters "><span
                                                                 class="parameter ">expanded<span
                                                                 class="token operator">: </span><a
-                                                                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span
+                                                                href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span
                                                                 class="token punctuation">, </span></span><span
                                                                 class="parameter ">revenue<span
                                                                 class="token operator">: </span><a
-                                                                href="../com.tecknobit.neutron.ui.screens.revenues.data/-general-revenue/index.html">GeneralRevenue</a></span></span><span
+                                                                href="../com.tecknobit.neutron.ui.screens.shared.data/-general-revenue/index.html">GeneralRevenue</a></span></span><span
                                                                 class="token punctuation">)</span>
                                                         </div>
                                                         <div class="brief "><p class="paragraph">
@@ -878,9 +861,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                <a data-name="-1394792568%2FFunctions%2F-813795679"
+                                <a data-name="-260144709%2FFunctions%2F-813795679"
                                    anchor-label="RevenueInfo"
-                                   id="-1394792568%2FFunctions%2F-813795679"
+                                   id="-260144709%2FFunctions%2F-813795679"
                                    data-filterable-set=":composeApp:dokkaHtml/commonMain"></a>
                                 <div class="table-row"
                                      data-filterable-current=":composeApp:dokkaHtml/commonMain"
@@ -889,7 +872,7 @@
                                         <div class=""><span class="inline-flex">
                   <div><a href="-revenue-info.html"><span>Revenue</span><wbr></wbr><span><span>Info</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon"
-                                   pointing-to="-1394792568%2FFunctions%2F-813795679"></span>
+                                   pointing-to="-260144709%2FFunctions%2F-813795679"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
                                         <div>
@@ -918,23 +901,28 @@
                                                                 class="token punctuation">, </span></span><span
                                                                 class="parameter ">revenue<span
                                                                 class="token operator">: </span><a
-                                                                href="../com.tecknobit.neutron.ui.screens.revenues.data/-revenue/index.html">Revenue</a><span
+                                                                href="../com.tecknobit.neutron.ui.screens.shared.data/-revenue/index.html">Revenue</a><span
                                                                 class="token punctuation">, </span></span><span
                                                                 class="parameter ">customTitle<span
                                                                 class="token operator">: </span><a
-                                                                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a><span
+                                                                href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span
                                                                 class="token operator">?</span><span
                                                                 class="token operator"> = </span>null<span
                                                                 class="token punctuation">, </span></span><span
                                                                 class="parameter ">dateHeader<span
                                                                 class="token operator">: </span><span
                                                                 data-unresolved-link="org.jetbrains.compose.resources/StringResource///PointingToDeclaration/">StringResource</span><span
-                                                                class="token operator"> = </span>Res.string.date</span></span><span
+                                                                class="token operator"> = </span>Res.string.date<span
+                                                                class="token punctuation">, </span></span><span
+                                                                class="parameter ">pattern<span
+                                                                class="token operator">: </span><a
+                                                                href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span
+                                                                class="token operator"> = </span>COMPLETE_EUROPEAN_DATE_PATTERN</span></span><span
                                                                 class="token punctuation">)</span>
                                                         </div>
                                                         <div class="brief "><p class="paragraph">
                                                             Used to display the information of a <a
-                                                                href="../com.tecknobit.neutron.ui.screens.revenues.data/-revenue/index.html">Revenue</a>
+                                                                href="../com.tecknobit.neutron.ui.screens.shared.data/-revenue/index.html">Revenue</a>
                                                             such title, value, etc</p></div>
                                                     </div>
                                                 </div>
@@ -942,9 +930,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                <a data-name="-791849423%2FFunctions%2F-813795679"
+                                <a data-name="-1694252737%2FFunctions%2F-813795679"
                                    anchor-label="RevenueListItem"
-                                   id="-791849423%2FFunctions%2F-813795679"
+                                   id="-1694252737%2FFunctions%2F-813795679"
                                    data-filterable-set=":composeApp:dokkaHtml/commonMain"></a>
                                 <div class="table-row"
                                      data-filterable-current=":composeApp:dokkaHtml/commonMain"
@@ -953,7 +941,7 @@
                                         <div class=""><span class="inline-flex">
                   <div><a href="-revenue-list-item.html"><span>Revenue</span><wbr></wbr><span>List</span><wbr></wbr><span><span>Item</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon"
-                                   pointing-to="-791849423%2FFunctions%2F-813795679"></span>
+                                   pointing-to="-1694252737%2FFunctions%2F-813795679"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
                                         <div>
@@ -982,13 +970,13 @@
                                                                 class="token punctuation">, </span></span><span
                                                                 class="parameter ">revenue<span
                                                                 class="token operator">: </span><a
-                                                                href="../com.tecknobit.neutron.ui.screens.revenues.data/-revenue/index.html">Revenue</a><span
+                                                                href="../com.tecknobit.neutron.ui.screens.shared.data/-revenue/index.html">Revenue</a><span
                                                                 class="token punctuation">, </span></span><span
                                                                 class="parameter ">labels<span
                                                                 class="token operator">: </span><a
-                                                                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span
+                                                                href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span
                                                                 class="token operator">&lt;</span><a
-                                                                href="../com.tecknobit.neutron.ui.screens.revenues.data/-revenue-label/index.html">RevenueLabel</a><span
+                                                                href="../com.tecknobit.neutron.ui.screens.shared.data/-revenue-label/index.html">RevenueLabel</a><span
                                                                 class="token operator">&gt;</span><span
                                                                 class="token punctuation">, </span></span><span
                                                                 class="parameter ">containerColor<span
@@ -1001,13 +989,13 @@
                                                                 href="https://developer.android.com/reference/kotlin/androidx/compose/runtime/Composable.html"><span
                                                                 class="token annotation builtin">Composable</span></a> </span><span
                                                                 class="token punctuation">(</span><a
-                                                                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span
+                                                                href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span
                                                                 class="token operator">&lt;</span><a
-                                                                href="../com.tecknobit.neutron.ui.screens.revenues.data/-revenue-label/index.html">RevenueLabel</a><span
+                                                                href="../com.tecknobit.neutron.ui.screens.shared.data/-revenue-label/index.html">RevenueLabel</a><span
                                                                 class="token operator">&gt;</span><span
                                                                 class="token punctuation">)</span><span
                                                                 class="token operator"> -&gt; </span><a
-                                                                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><span
+                                                                href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><span
                                                                 class="token operator"> = </span>{ ticketLabel -&gt;
         RevenueLabels(
             labels = ticketLabel
@@ -1020,7 +1008,7 @@
                                                                 class="token punctuation">(</span><span
                                                                 class="token punctuation">)</span><span
                                                                 class="token operator"> -&gt; </span><a
-                                                                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><span
+                                                                href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><span
                                                                 class="token operator"> = </span>{
         RevenueInfo(
             viewModel = viewModel,
@@ -1028,7 +1016,7 @@
         )
     }<span class="token punctuation">, </span></span><span class="parameter ">allowEdit<span
                                                                 class="token operator">: </span><a
-                                                                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span
+                                                                href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span
                                                                 class="token operator"> = </span><span
                                                                 class="token boolean">true</span><span
                                                                 class="token punctuation">, </span></span><span
@@ -1037,7 +1025,7 @@
                                                                 class="token punctuation">(</span><span
                                                                 class="token punctuation">)</span><span
                                                                 class="token operator"> -&gt; </span><a
-                                                                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><span
+                                                                href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><span
                                                                 class="token punctuation">, </span></span><span
                                                                 class="parameter ">deleteIcon<span
                                                                 class="token operator">: </span><a
@@ -1051,7 +1039,7 @@
                                                                 class="token punctuation">(</span><span
                                                                 class="token punctuation">)</span><span
                                                                 class="token operator"> -&gt; </span><a
-                                                                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><span
+                                                                href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><span
                                                                 class="token punctuation">, </span></span><span
                                                                 class="parameter ">deleteAlertDialog<span
                                                                 class="token operator">: </span><span><span
@@ -1061,11 +1049,11 @@
                                                                 class="token punctuation">(</span><a
                                                                 href="https://developer.android.com/reference/kotlin/androidx/compose/runtime/MutableState.html">MutableState</a><span
                                                                 class="token operator">&lt;</span><a
-                                                                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span
+                                                                href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span
                                                                 class="token operator">&gt;</span><span
                                                                 class="token punctuation">)</span><span
                                                                 class="token operator"> -&gt; </span><a
-                                                                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span
+                                                                href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span
                                                                 class="token punctuation">)</span>
                                                         </div>
                                                         <div class="brief "><p class="paragraph">
@@ -1080,87 +1068,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <a data-name="2097986297%2FFunctions%2F-813795679"
-                                   anchor-label="Stepper" id="2097986297%2FFunctions%2F-813795679"
-                                   data-filterable-set=":composeApp:dokkaHtml/commonMain"></a>
-                                <div class="table-row"
-                                     data-filterable-current=":composeApp:dokkaHtml/commonMain"
-                                     data-filterable-set=":composeApp:dokkaHtml/commonMain">
-                                    <div class="main-subrow keyValue ">
-                                        <div class=""><span class="inline-flex">
-                  <div><a href="-stepper.html"><span><span>Stepper</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon"
-                                   pointing-to="2097986297%2FFunctions%2F-813795679"></span>
-                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                  </span></span></div>
-                                        <div>
-                                            <div class="title">
-                                                <div class="platform-hinted "
-                                                     data-platform-hinted="data-platform-hinted">
-                                                    <div class="content sourceset-dependent-content"
-                                                         data-active=""
-                                                         data-togglable=":composeApp:dokkaHtml/commonMain">
-                                                        <div class="symbol monospace">
-                                                            <div class="block">
-                                                                <div class="block"><span
-                                                                        class="token annotation builtin">@</span><a
-                                                                        href="https://developer.android.com/reference/kotlin/androidx/compose/runtime/Composable.html"><span
-                                                                        class="token annotation builtin">Composable</span></a>
-                                                                </div>
-                                                            </div>
-                                                            <span class="token keyword">fun </span><a
-                                                                href="-stepper.html"><span
-                                                                class="token function"><strike>Stepper</strike></span></a><span
-                                                                class="token punctuation">(</span><span
-                                                                class="parameters "><span
-                                                                class="parameter ">modifier<span
-                                                                class="token operator">: </span><a
-                                                                href="https://developer.android.com/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a><span
-                                                                class="token operator"> = </span>Modifier<span
-                                                                class="token punctuation">, </span></span><span
-                                                                class="parameter ">headerSection<span
-                                                                class="token operator">: </span><span><span
-                                                                class="token annotation builtin">@</span><a
-                                                                href="https://developer.android.com/reference/kotlin/androidx/compose/runtime/Composable.html"><span
-                                                                class="token annotation builtin">Composable</span></a> </span><span
-                                                                class="token punctuation">(</span><span
-                                                                class="token punctuation">)</span><span
-                                                                class="token operator"> -&gt; </span><a
-                                                                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><span
-                                                                class="token operator">?</span><span
-                                                                class="token operator"> = </span>null<span
-                                                                class="token punctuation">, </span></span><span
-                                                                class="parameter ">startStepShape<span
-                                                                class="token operator">: </span><a
-                                                                href="https://developer.android.com/reference/kotlin/androidx/compose/ui/graphics/Shape.html">Shape</a><span
-                                                                class="token operator"> = </span>RoundedCornerShape(
-        topStart = 12.dp,
-        topEnd = 12.dp
-    )<span class="token punctuation">, </span></span><span class="parameter ">middleStepShape<span
-                                                                class="token operator">: </span><a
-                                                                href="https://developer.android.com/reference/kotlin/androidx/compose/ui/graphics/Shape.html">Shape</a><span
-                                                                class="token operator"> = </span>RectangleShape<span
-                                                                class="token punctuation">, </span></span><span
-                                                                class="parameter ">finalStepShape<span
-                                                                class="token operator">: </span><a
-                                                                href="https://developer.android.com/reference/kotlin/androidx/compose/ui/graphics/Shape.html">Shape</a><span
-                                                                class="token operator"> = </span>RoundedCornerShape(
-        bottomStart = 12.dp,
-        bottomEnd = 12.dp
-    )<span class="token punctuation">, </span></span><span class="parameter "><span
-                                                                class="token keyword">vararg </span>steps<span
-                                                                class="token operator">: </span><a
-                                                                href="-step/index.html">Step</a></span></span><span
-                                                                class="token punctuation">)</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <a data-name="463468716%2FFunctions%2F-813795679"
-                                   anchor-label="TicketInfo" id="463468716%2FFunctions%2F-813795679"
+                                <a data-name="53101234%2FFunctions%2F-813795679"
+                                   anchor-label="TicketInfo" id="53101234%2FFunctions%2F-813795679"
                                    data-filterable-set=":composeApp:dokkaHtml/commonMain"></a>
                                 <div class="table-row"
                                      data-filterable-current=":composeApp:dokkaHtml/commonMain"
@@ -1169,7 +1078,7 @@
                                         <div class=""><span class="inline-flex">
                   <div><a href="-ticket-info.html"><span>Ticket</span><wbr></wbr><span><span>Info</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon"
-                                   pointing-to="463468716%2FFunctions%2F-813795679"></span>
+                                   pointing-to="53101234%2FFunctions%2F-813795679"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
                                         <div>
@@ -1198,12 +1107,12 @@
                                                                 class="token punctuation">, </span></span><span
                                                                 class="parameter ">ticket<span
                                                                 class="token operator">: </span><a
-                                                                href="../com.tecknobit.neutron.ui.screens.revenues.data/-ticket-revenue/index.html">TicketRevenue</a></span></span><span
+                                                                href="../com.tecknobit.neutron.ui.screens.project.data/-ticket-revenue/index.html">TicketRevenue</a></span></span><span
                                                                 class="token punctuation">)</span>
                                                         </div>
                                                         <div class="brief "><p class="paragraph">
                                                             Used to display the information of a <a
-                                                                href="../com.tecknobit.neutron.ui.screens.revenues.data/-ticket-revenue/index.html">TicketRevenue</a>
+                                                                href="../com.tecknobit.neutron.ui.screens.project.data/-ticket-revenue/index.html">TicketRevenue</a>
                                                             such title, opening date, closing date,
                                                             etc</p></div>
                                                     </div>
@@ -1218,11 +1127,15 @@
                 </div>
             </div>
             <div class="footer">
-                <span class="go-to-top-icon"><a href="#content"
-                                                id="go-to-top-link"></a></span><span>(c) 2025 Tecknobit</span><span
-                    class="pull-right"><span>Generated by </span><a
-                    href="https://github.com/Kotlin/dokka"><span>dokka</span><span
-                    class="padded-icon"></span></a></span>
+                <a href="#content" id="go-to-top-link"
+                   class="footer--button footer--button_go-to-top"></a>
+                <span>(c) 2025 Tecknobit</span>
+                <span class="pull-right">
+            <span>Generated by </span>
+            <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                <span>dokka</span>
+            </a>
+        </span>
             </div>
         </div>
     </div>

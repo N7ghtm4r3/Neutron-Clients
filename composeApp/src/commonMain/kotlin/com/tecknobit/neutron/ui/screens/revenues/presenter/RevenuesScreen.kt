@@ -1,21 +1,16 @@
-@file:OptIn(ExperimentalMultiplatform::class)
-
 package com.tecknobit.neutron.ui.screens.revenues.presenter
 
+import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
-import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Visibility
@@ -37,29 +32,24 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.tecknobit.equinoxcompose.components.EmptyListUI
+import com.tecknobit.equinoxcompose.annotations.ScreenSection
 import com.tecknobit.equinoxcompose.resources.retry
-import com.tecknobit.equinoxcompose.session.EquinoxScreen
 import com.tecknobit.equinoxcompose.session.ManagedContent
+import com.tecknobit.equinoxcompose.session.screens.EquinoxScreen
+import com.tecknobit.equinoxcompose.utilities.EXPANDED_CONTAINER
 import com.tecknobit.equinoxcompose.utilities.ResponsiveContent
 import com.tecknobit.neutron.CloseApplicationOnNavBack
 import com.tecknobit.neutron.INSERT_REVENUE_SCREEN
-import com.tecknobit.neutron.MAX_CONTAINER_WIDTH
 import com.tecknobit.neutron.PROFILE_SCREEN
-import com.tecknobit.neutron.bodyFontFamily
 import com.tecknobit.neutron.displayFontFamily
 import com.tecknobit.neutron.localUser
 import com.tecknobit.neutron.navigator
-import com.tecknobit.neutron.ui.components.FirstPageProgressIndicator
-import com.tecknobit.neutron.ui.components.NewPageProgressIndicator
 import com.tecknobit.neutron.ui.components.ProfilePic
-import com.tecknobit.neutron.ui.icons.ReceiptLong
 import com.tecknobit.neutron.ui.screens.revenues.components.FiltersBar
-import com.tecknobit.neutron.ui.screens.revenues.components.RevenueCard
+import com.tecknobit.neutron.ui.screens.revenues.components.Revenues
 import com.tecknobit.neutron.ui.screens.revenues.presentation.RevenuesScreenViewModel
 import com.tecknobit.neutron.ui.screens.shared.presenters.RevenuesContainerScreen
 import com.tecknobit.neutron.ui.screens.shared.presenters.RevenuesContainerScreen.Companion.HIDE_BALANCE
@@ -67,8 +57,6 @@ import com.tecknobit.neutron.ui.theme.NeutronTheme
 import com.tecknobit.neutroncore.dtos.WalletStatus
 import com.tecknobit.neutroncore.enums.RevenuePeriod
 import com.tecknobit.neutroncore.enums.RevenuePeriod.ALL
-import io.github.ahmad_hamwi.compose.pagination.PaginatedLazyColumn
-import kotlinx.coroutines.delay
 import neutron.composeapp.generated.resources.Res
 import neutron.composeapp.generated.resources.add_revenue
 import neutron.composeapp.generated.resources.last_month_period
@@ -76,7 +64,6 @@ import neutron.composeapp.generated.resources.last_six_months
 import neutron.composeapp.generated.resources.last_three_months
 import neutron.composeapp.generated.resources.last_week_period
 import neutron.composeapp.generated.resources.last_year
-import neutron.composeapp.generated.resources.no_revenues_yet
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -84,7 +71,7 @@ import org.jetbrains.compose.resources.stringResource
  * The [RevenuesScreen] displays the list of the revenues owned by the user
  *
  * @author N7ghtm4r3 - Tecknobit
- * @see com.tecknobit.equinoxcompose.session.EquinoxScreen
+ * @see com.tecknobit.equinoxcompose.session.screens.EquinoxScreen
  * @see RevenuesContainerScreen
  */
 class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
@@ -123,14 +110,14 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
         CloseApplicationOnNavBack()
         NeutronTheme {
             ManagedContent(
-                viewModel = viewModel!!,
-                loadingRoutine = {
-                    delay(500L) // FIXME: TO REMOVE WHEN COMPONENT BUILT-IN FIXED
-                    walletStatus.value != null
-                },
+                modifier = Modifier
+                    .fillMaxSize(),
+                viewModel = viewModel,
+                initialDelay = 500L,
+                loadingRoutine = { walletStatus.value != null },
                 content = {
                     Scaffold(
-                        snackbarHost = { SnackbarHost(viewModel!!.snackbarHostState!!) },
+                        snackbarHost = { SnackbarHost(viewModel.snackbarHostState!!) },
                         floatingActionButton = {
                             FabButton()
                         }
@@ -138,8 +125,10 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
                         ScreenContent()
                     }
                 },
+                serverOfflineRetryText = com.tecknobit.equinoxcompose.resources.Res.string.retry,
+                serverOfflineRetryAction = { viewModel.retryAfterConnectionError() },
                 noInternetConnectionRetryText = com.tecknobit.equinoxcompose.resources.Res.string.retry,
-                noInternetConnectionRetryAction = { viewModel!!.revenuesState.retryLastFailedRequest() }
+                noInternetConnectionRetryAction = { viewModel.retryAfterConnectionError() },
             )
         }
     }
@@ -172,7 +161,9 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Header()
-            Revenues()
+            Revenues(
+                viewModel = viewModel
+            )
         }
     }
 
@@ -180,14 +171,15 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
      * The header section of the screen
      */
     @Composable
+    @ScreenSection
     @NonRestartableComposable
     override fun Header() {
         Card (
             modifier = Modifier
+                .height(175.dp)
                 .widthIn(
-                    max = MAX_CONTAINER_WIDTH
-                )
-                .height(175.dp),
+                    max = EXPANDED_CONTAINER
+                ),
             shape = RoundedCornerShape(
                 bottomStart = 15.dp,
                 bottomEnd = 15.dp
@@ -209,7 +201,7 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
                 UserProfilePicture()
             }
             FiltersBar(
-                viewModel = viewModel!!
+                viewModel = viewModel
             )
         }
     }
@@ -218,7 +210,6 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
      * The section used to display the current status of the wallet
      */
     @Composable
-    @NonRestartableComposable
     private fun RowScope.WalletStatus() {
         Column(
             modifier = Modifier
@@ -235,7 +226,7 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
                     overflow = TextOverflow.Ellipsis
                 )
                 IconButton(
-                    onClick = { viewModel!!.manageBalancesVisibility() }
+                    onClick = { viewModel.manageBalancesVisibility() }
                 ) {
                     Icon(
                         imageVector = if(hideBalances.value)
@@ -266,7 +257,6 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
      * The section used to display the current trend of the wallet
      */
     @Composable
-    @NonRestartableComposable
     private fun WalletTrend() {
         AnimatedVisibility(
             visible = revenuePeriod.value != ALL
@@ -285,45 +275,44 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
                 RevenuePeriod.LAST_YEAR -> Res.string.last_year
                 else -> return@AnimatedVisibility
             }
-            AnimatedVisibility(
-                visible = hideBalances.value
-            ) {
-                Text(
-                    text = HIDE_BALANCE,
-                    fontSize = 18.sp,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
-                )
-            }
-            AnimatedVisibility(
-                visible = !hideBalances.value
-            ) {
-                Row (
-                    verticalAlignment = Alignment.Bottom,
-                    horizontalArrangement = Arrangement.spacedBy(5.dp)
-                ) {
-                    val color = if(isPositiveTrend)
-                        MaterialTheme.colorScheme.primary
-                    else if(trend < 0.0)
-                        MaterialTheme.colorScheme.error
-                    else
-                        MaterialTheme.colorScheme.onSurface
+            AnimatedContent(
+                targetState = hideBalances.value
+            ) { hide ->
+                if (hide) {
                     Text(
-                        text = "$symbol${trend}%",
-                        fontFamily = displayFontFamily,
-                        color = color,
+                        text = HIDE_BALANCE,
                         fontSize = 18.sp,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
-                    Text(
-                        text = stringResource(periodText),
-                        fontFamily = displayFontFamily,
-                        fontSize = 14.sp,
-                        color = color,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
-                    )
+                } else {
+                    Row(
+                        verticalAlignment = Alignment.Bottom,
+                        horizontalArrangement = Arrangement.spacedBy(5.dp)
+                    ) {
+                        val color = if (isPositiveTrend)
+                            MaterialTheme.colorScheme.primary
+                        else if (trend < 0.0)
+                            MaterialTheme.colorScheme.error
+                        else
+                            MaterialTheme.colorScheme.onSurface
+                        Text(
+                            text = "$symbol${trend}%",
+                            fontFamily = displayFontFamily,
+                            color = color,
+                            fontSize = 18.sp,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                        Text(
+                            text = stringResource(periodText),
+                            fontFamily = displayFontFamily,
+                            fontSize = 14.sp,
+                            color = color,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                    }
                 }
             }
         }
@@ -333,7 +322,6 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
      * The user profile picture used to navigate to the [com.tecknobit.neutron.ui.screens.profile.presenter.ProfileScreen]
      */
     @Composable
-    @NonRestartableComposable
     private fun RowScope.UserProfilePicture() {
         Column(
             modifier = Modifier
@@ -355,54 +343,11 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
     }
 
     /**
-     * The current revenues owned by the user
-     */
-    @Composable
-    @NonRestartableComposable
-    private fun Revenues() {
-        PaginatedLazyColumn(
-            modifier = Modifier
-                .fillMaxHeight()
-                .widthIn(
-                    max = MAX_CONTAINER_WIDTH
-                )
-                .navigationBarsPadding(),
-            paginationState = viewModel!!.revenuesState,
-            contentPadding = PaddingValues(
-                bottom = 16.dp
-            ),
-            verticalArrangement = Arrangement.spacedBy(10.dp),
-            firstPageProgressIndicator = { FirstPageProgressIndicator() },
-            firstPageEmptyIndicator = {
-                EmptyListUI(
-                    icon = ReceiptLong,
-                    subText = Res.string.no_revenues_yet,
-                    textStyle = TextStyle(
-                        fontFamily = bodyFontFamily
-                    )
-                )
-            },
-            newPageProgressIndicator = { NewPageProgressIndicator() }
-        ) {
-            itemsIndexed(
-                items = viewModel!!.revenuesState.allItems!!,
-                key = { _, revenue -> revenue.id }
-            ) { index, revenue ->
-                RevenueCard(
-                    viewModel = viewModel!!,
-                    revenue = revenue,
-                    position = index
-                )
-            }
-        }
-    }
-
-    /**
      * Method invoked when the [ShowContent] composable has been started
      */
     override fun onStart() {
         super.onStart()
-        viewModel!!.getWalletStatus()
+        viewModel.getWalletStatus()
     }
 
     /**
@@ -410,9 +355,9 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
      */
     @Composable
     override fun CollectStates() {
-        walletStatus = viewModel!!.walletStatus.collectAsState()
-        revenuePeriod = viewModel!!.revenuePeriod.collectAsState()
-        hideBalances = viewModel!!.hideBalances.collectAsState()
+        walletStatus = viewModel.walletStatus.collectAsState()
+        revenuePeriod = viewModel.revenuePeriod.collectAsState()
+        hideBalances = viewModel.hideBalances.collectAsState()
     }
 
 }

@@ -3,19 +3,15 @@
 package com.tecknobit.neutron
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.unit.dp
 import coil3.ImageLoader
 import coil3.compose.LocalPlatformContext
 import coil3.network.ktor3.KtorNetworkFetcherFactory
 import coil3.request.CachePolicy
 import coil3.request.addLastModifiedToFileCacheKey
-import com.tecknobit.ametistaengine.AmetistaEngine
-import com.tecknobit.ametistaengine.AmetistaEngine.Companion.FILES_AMETISTA_CONFIG_PATHNAME
-import com.tecknobit.equinoxcore.network.Requester.Companion.sendRequest
 import com.tecknobit.equinoxcore.network.Requester.Companion.toResponseData
+import com.tecknobit.equinoxcore.network.sendRequest
 import com.tecknobit.neutron.helpers.NeutronLocalUser
 import com.tecknobit.neutron.helpers.NeutronRequester
 import com.tecknobit.neutron.helpers.customHttpClient
@@ -108,23 +104,11 @@ const val INSERT_TICKET_SCREEN = "InsertTicketScreen"
 const val PROJECT_REVENUE_SCREEN = "ProjectRevenueScreen"
 
 /**
- * `MAX_CONTAINER_WIDTH` constant value used to give a max dimension to container for the large screens
- */
-@Deprecated("USE THE EQUINOX BUILT-IN")
-val MAX_CONTAINER_WIDTH = 1280.dp
-
-/**
  * Common entry point of The `Neutron** application
  */
 @Composable
 fun App() {
-    LaunchedEffect(Unit) {
-        val ametistaEngine = AmetistaEngine.ametistaEngine
-        ametistaEngine.fireUp(
-            configData = Res.readBytes(FILES_AMETISTA_CONFIG_PATHNAME),
-            debugMode = false
-        )
-    }
+    //InitAmetista()
     bodyFontFamily = FontFamily(Font(Res.font.roboto))
     displayFontFamily = FontFamily(Font(Res.font.lilitaone))
     imageLoader = ImageLoader.Builder(LocalPlatformContext.current)
@@ -197,12 +181,31 @@ fun App() {
 }
 
 /**
+ * Method used to initialize the Ametista system
+ */
+@Composable
+@NonRestartableComposable
+private fun InitAmetista() {
+    // TODO: TO INTEGRATE AFTER 
+    /*LaunchedEffect(Unit) {
+        val ametistaEngine = AmetistaEngine.ametistaEngine
+        ametistaEngine.fireUp(
+            configData = Res.readBytes(FILES_AMETISTA_CONFIG_PATHNAME),
+            host = AmetistaConfig.HOST,
+            serverSecret = AmetistaConfig.SERVER_SECRET!!,
+            applicationId = AmetistaConfig.APPLICATION_IDENTIFIER!!,
+            bypassSslValidation = AmetistaConfig.BYPASS_SSL_VALIDATION,
+            debugMode = false
+        )
+    }*/
+}
+
+/**
  * Method to check whether are available any updates for each platform and then launch the application
  * which the correct first screen to display
  *
  */
 @Composable
-@NonRestartableComposable
 expect fun CheckForUpdatesAndLaunch()
 
 /**
@@ -211,28 +214,26 @@ expect fun CheckForUpdatesAndLaunch()
  */
 fun startSession() {
     requester = NeutronRequester(
-        host = localUser.hostAddress ?: "",
+        host = localUser.hostAddress,
         userId = localUser.userId,
         userToken = localUser.userToken
     )
     val route = if (localUser.isAuthenticated) {
         MainScope().launch {
             requester.sendRequest(
-                request = {
-                    getDynamicAccountData()
-                },
+                request = { getDynamicAccountData() },
                 onSuccess = { response ->
                     localUser.updateDynamicAccountData(
                         dynamicData = response.toResponseData()
                     )
+                    setUserLanguage()
                 },
-                onFailure = {}
+                onFailure = { setUserLanguage() }
             )
         }
         REVENUES_SCREEN
     } else
         AUTH_SCREEN
-    setUserLanguage()
     navigator.navigate(route)
 }
 
@@ -247,5 +248,4 @@ expect fun setUserLanguage()
  *
  */
 @Composable
-@NonRestartableComposable
 expect fun CloseApplicationOnNavBack()

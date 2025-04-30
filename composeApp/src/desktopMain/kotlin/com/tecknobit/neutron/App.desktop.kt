@@ -1,15 +1,14 @@
 package com.tecknobit.neutron
 
-import OctocatKDUConfig
-import UpdaterDialog
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import com.tecknobit.equinoxcore.helpers.InputsValidator.Companion.DEFAULT_LANGUAGE
 import com.tecknobit.neutron.ui.theme.NeutronTheme
+import com.tecknobit.octocatkdu.OctocatKDUConfig
+import com.tecknobit.octocatkdu.UpdaterDialog
 import neutron.composeapp.generated.resources.Res
 import neutron.composeapp.generated.resources.app_name
 import neutron.composeapp.generated.resources.app_version
@@ -22,7 +21,6 @@ import java.util.Locale
  *
  */
 @Composable
-@NonRestartableComposable
 actual fun CheckForUpdatesAndLaunch() {
     var launchApp by remember { mutableStateOf(true) }
     NeutronTheme {
@@ -45,8 +43,7 @@ actual fun CheckForUpdatesAndLaunch() {
  *
  */
 actual fun setUserLanguage() {
-    val tag = localUser.language ?: DEFAULT_LANGUAGE
-    Locale.setDefault(Locale.forLanguageTag(tag))
+    Locale.setDefault(Locale.forLanguageTag(localUser.language))
 }
 
 /**

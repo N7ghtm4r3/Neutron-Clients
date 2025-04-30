@@ -5,13 +5,12 @@ package com.tecknobit.neutron.ui.screens.project.components
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.ListItem
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.NonRestartableComposable
 import com.tecknobit.equinoxcompose.utilities.ResponsiveContent
 import com.tecknobit.neutron.ui.components.RevenueInfo
 import com.tecknobit.neutron.ui.screens.project.presentation.ProjectScreenViewModel
 import com.tecknobit.neutron.ui.screens.revenues.components.RevenueLabels
-import com.tecknobit.neutron.ui.screens.revenues.data.Revenue
-import com.tecknobit.neutron.ui.screens.revenues.data.RevenueLabel
+import com.tecknobit.neutron.ui.screens.shared.data.Revenue
+import com.tecknobit.neutron.ui.screens.shared.data.RevenueLabel
 import com.tecknobit.neutroncore.FIRST_INCOME_LABEL_COLOR
 import neutron.composeapp.generated.resources.Res
 import neutron.composeapp.generated.resources.first_income
@@ -25,7 +24,6 @@ import org.jetbrains.compose.resources.stringResource
  * @param initialRevenue The initial revenue to display
  */
 @Composable
-@NonRestartableComposable
 fun InitialRevenueItem(
     viewModel: ProjectScreenViewModel,
     initialRevenue: Revenue.RevenueImpl

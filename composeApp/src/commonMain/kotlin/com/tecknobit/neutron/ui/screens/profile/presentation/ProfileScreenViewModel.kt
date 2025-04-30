@@ -4,7 +4,7 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.MutableState
 import androidx.lifecycle.viewModelScope
 import com.tecknobit.equinoxcompose.viewmodels.EquinoxProfileViewModel
-import com.tecknobit.equinoxcore.network.Requester.Companion.sendRequest
+import com.tecknobit.equinoxcore.network.sendRequest
 import com.tecknobit.neutron.localUser
 import com.tecknobit.neutron.requester
 import com.tecknobit.neutroncore.enums.NeutronCurrency
@@ -34,10 +34,10 @@ class ProfileScreenViewModel : EquinoxProfileViewModel(
     /**
      * Method to execute the currency change
      *
-     * @param onSuccess The action to execute if the request has been successful
+     * @param onChange The callback action to invoke after currency changed
      */
     fun changeCurrency(
-        onSuccess: () -> Unit,
+        onChange: () -> Unit,
     ) {
         viewModelScope.launch {
             requester.sendRequest(
@@ -48,7 +48,7 @@ class ProfileScreenViewModel : EquinoxProfileViewModel(
                 },
                 onSuccess = {
                     localUser.currency = currency.value
-                    onSuccess.invoke()
+                    onChange.invoke()
                 },
                 onFailure = { showSnackbarMessage(it) }
             )

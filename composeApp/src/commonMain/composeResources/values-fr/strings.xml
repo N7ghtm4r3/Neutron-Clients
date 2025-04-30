@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Neutron</string>
-    <string name="app_version">1.0.1</string>
+    <string name="app_version">1.0.2</string>
     <string name="revenue">Les recettes: %1$d%2$s</string>
     <string name="date">Date: %1$s</string>
     <string name="project">Projet</string>
@@ -92,4 +92,5 @@
     <string name="login_required">Connexion requise</string>
     <string name="enter_your_credentials_to_continue">Entrez vos informations d\'identification pour continuer</string>
     <string name="no_labels_available">Pas d\'étiquettes disponibles</string>
+    <string name="last_revenue_on">Dernier revenu le : %1$s</string>
 </resources>

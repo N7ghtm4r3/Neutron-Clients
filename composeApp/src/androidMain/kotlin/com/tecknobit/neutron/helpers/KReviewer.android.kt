@@ -2,7 +2,7 @@ package com.tecknobit.neutron.helpers
 
 import com.google.android.play.core.review.ReviewManager
 import com.google.android.play.core.review.ReviewManagerFactory
-import com.tecknobit.equinoxcompose.utilities.context.ContextActivityProvider
+import com.tecknobit.equinoxcore.utilities.ContextActivityProvider
 
 /**
  * The `KReviewer` class is useful to manage the biometric authentication

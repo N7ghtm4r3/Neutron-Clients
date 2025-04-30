@@ -4,6 +4,7 @@ import androidx.compose.material3.SnackbarHostState
 import com.tecknobit.equinoxcompose.viewmodels.EquinoxAuthViewModel
 import com.tecknobit.equinoxcore.annotations.CustomParametersOrder
 import com.tecknobit.equinoxcore.annotations.RequiresSuperCall
+import com.tecknobit.equinoxcore.json.treatsAsString
 import com.tecknobit.neutron.REVENUES_SCREEN
 import com.tecknobit.neutron.localUser
 import com.tecknobit.neutron.navigator
@@ -51,6 +52,7 @@ class AuthScreenViewModel : EquinoxAuthViewModel(
      * @param custom The custom parameters added in a customization of the equinox user
      */
     @RequiresSuperCall
+    @CustomParametersOrder(CURRENCY_KEY)
     override fun launchApp(
         response: JsonObject,
         name: String,
@@ -58,7 +60,7 @@ class AuthScreenViewModel : EquinoxAuthViewModel(
         language: String,
         vararg custom: Any?
     ) {
-        super.launchApp(response, name, surname, language, *custom)
+        super.launchApp(response, name, surname, language, response[CURRENCY_KEY].treatsAsString())
         navigator.navigate(REVENUES_SCREEN)
     }
 

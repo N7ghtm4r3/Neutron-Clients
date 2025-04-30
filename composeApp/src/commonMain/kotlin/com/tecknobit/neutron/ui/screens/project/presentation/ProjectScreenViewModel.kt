@@ -4,14 +4,14 @@ import androidx.lifecycle.viewModelScope
 import com.tecknobit.equinoxcompose.session.setHasBeenDisconnectedValue
 import com.tecknobit.equinoxcompose.session.setServerOfflineValue
 import com.tecknobit.equinoxcompose.viewmodels.EquinoxViewModel
-import com.tecknobit.equinoxcore.network.Requester.Companion.sendPaginatedRequest
-import com.tecknobit.equinoxcore.network.Requester.Companion.sendRequest
 import com.tecknobit.equinoxcore.network.Requester.Companion.toResponseContent
 import com.tecknobit.equinoxcore.network.Requester.Companion.toResponseData
+import com.tecknobit.equinoxcore.network.sendPaginatedRequest
+import com.tecknobit.equinoxcore.network.sendRequest
 import com.tecknobit.equinoxcore.pagination.PaginatedResponse
 import com.tecknobit.neutron.requester
-import com.tecknobit.neutron.ui.screens.revenues.data.ProjectRevenue
-import com.tecknobit.neutron.ui.screens.revenues.data.TicketRevenue
+import com.tecknobit.neutron.ui.screens.project.data.TicketRevenue
+import com.tecknobit.neutron.ui.screens.shared.data.ProjectRevenue
 import com.tecknobit.neutron.ui.screens.shared.presentations.RevenueRelatedScreenViewModel
 import io.github.ahmad_hamwi.compose.pagination.PaginationState
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -75,9 +75,8 @@ class ProjectScreenViewModel(
                 onSuccess = {
                     _project.value = Json.decodeFromJsonElement(it.toResponseData())
                 },
-                onFailure = {
-                    showSnackbarMessage(it)
-                }
+                onFailure = { showSnackbarMessage(it) },
+                onConnectionError = { notifyConnectionError() }
             )
         }
     }
@@ -145,9 +144,7 @@ class ProjectScreenViewModel(
                     getProjectBalance()
                 },
                 onFailure = { setHasBeenDisconnectedValue(true) },
-                onConnectionError = {
-                    setServerOfflineValue(true)
-                }
+                onConnectionError = { notifyConnectionError() }
             )
         }
     }
@@ -228,4 +225,19 @@ class ProjectScreenViewModel(
         getProjectBalance()
     }
 
+    /**
+     * Method to notify a connection error
+     */
+    override fun notifyConnectionError() {
+        ticketsState.setError(Exception())
+        setServerOfflineValue(true)
+    }
+
+    /**
+     * Method to retrieve the information on the revenues and the wallet status after a connection
+     * error
+     */
+    override fun retryAfterConnectionError() {
+        ticketsState.retryLastFailedRequest()
+    }
 }

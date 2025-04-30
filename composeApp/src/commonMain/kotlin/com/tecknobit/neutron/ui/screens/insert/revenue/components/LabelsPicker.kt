@@ -29,7 +29,6 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -44,12 +43,12 @@ import com.tecknobit.equinoxcompose.components.EquinoxDialog
 import com.tecknobit.equinoxcompose.components.EquinoxTextField
 import com.tecknobit.equinoxcompose.components.getContrastColor
 import com.tecknobit.equinoxcompose.utilities.toHex
-import com.tecknobit.neutron.helpers.mergeIfNotContained
-import com.tecknobit.neutron.helpers.retainAndAdd
+import com.tecknobit.equinoxcore.mergeIfNotContained
+import com.tecknobit.equinoxcore.retainAndAdd
 import com.tecknobit.neutron.ui.components.LabelsGrid
 import com.tecknobit.neutron.ui.icons.ArrowSelectorTool
 import com.tecknobit.neutron.ui.screens.insert.revenue.presentation.InsertRevenueScreenViewModel
-import com.tecknobit.neutron.ui.screens.revenues.data.RevenueLabel
+import com.tecknobit.neutron.ui.screens.shared.data.RevenueLabel
 import neutron.composeapp.generated.resources.Res
 import neutron.composeapp.generated.resources.add
 import neutron.composeapp.generated.resources.create
@@ -64,7 +63,6 @@ import org.jetbrains.compose.resources.stringResource
  * @param viewModel The support viewmodel for the screen
  */
 @Composable
-@NonRestartableComposable
 fun LabelsPicker(
     show: MutableState<Boolean>,
     viewModel: InsertRevenueScreenViewModel
@@ -110,7 +108,6 @@ fun LabelsPicker(
  * @param onSelecting The section used to select existing labels
  */
 @Composable
-@NonRestartableComposable
 private fun ColumnScope.SectionSelector(
     creatingNewLabel: MutableState<Boolean>,
     onCreating: @Composable () -> Unit,
@@ -189,7 +186,6 @@ private fun ColumnScope.SectionSelector(
  * @param viewModel The support viewmodel for the screen
  */
 @Composable
-@NonRestartableComposable
 private fun CreateLabel(
     show: MutableState<Boolean>,
     viewModel: InsertRevenueScreenViewModel
@@ -239,7 +235,6 @@ private fun CreateLabel(
  * @param labelText The text of the label
  */
 @Composable
-@NonRestartableComposable
 private fun DummyRevenueLabelBadge(
     modifier: Modifier = Modifier,
     color: Color,
@@ -288,7 +283,6 @@ private fun DummyRevenueLabelBadge(
  * @param viewModel The support viewmodel for the screen
  */
 @Composable
-@NonRestartableComposable
 private fun SelectLabels(
     show: MutableState<Boolean>,
     viewModel: InsertRevenueScreenViewModel
@@ -340,7 +334,6 @@ private fun SelectLabels(
  * @param action The action to execute when the user confirms
  */
 @Composable
-@NonRestartableComposable
 private fun ColumnScope.ConfirmOperationButton(
     modifier: Modifier = Modifier,
     visible: Boolean,

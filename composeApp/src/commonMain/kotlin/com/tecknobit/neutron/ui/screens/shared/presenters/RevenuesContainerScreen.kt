@@ -1,21 +1,14 @@
-@file:OptIn(ExperimentalMultiplatform::class)
-
 package com.tecknobit.neutron.ui.screens.shared.presenters
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Row
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.StickyNote2
 import androidx.compose.material3.ExtendedFloatingActionButton
-import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.runtime.State
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.unit.dp
-import com.tecknobit.equinoxcompose.utilities.ResponsiveContent
+import com.tecknobit.equinoxcompose.annotations.ScreenSection
+import com.tecknobit.equinoxcompose.utilities.responsiveAssignment
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -45,29 +38,25 @@ interface RevenuesContainerScreen {
      * Custom floating action buttons responsively adapted
      */
     @Composable
-    @NonRestartableComposable
     fun FabButton() {
-        ResponsiveContent(
-            onExpandedSizeClass = {
-                ExtendedFloatingActionButton(
-                    onClick = { navToInsert() }
-                ) {
-                    Row (
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(5.dp)
-                    ) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.StickyNote2,
-                            contentDescription = null
-                        )
-                        Text(
-                            text = stringResource(extendedFabText())
-                        )
-                    }
-                }
+        ExtendedFloatingActionButton(
+            expanded = responsiveAssignment(
+                onExpandedSizeClass = { true },
+                onMediumSizeClass = { false },
+                onCompactSizeClass = { false }
+            ),
+            icon = {
+                Icon(
+                    imageVector = Icons.AutoMirrored.Filled.StickyNote2,
+                    contentDescription = null
+                )
             },
-            onMediumSizeClass = { CompactFabButton() },
-            onCompactSizeClass = { CompactFabButton() }
+            text = {
+                Text(
+                    text = stringResource(extendedFabText())
+                )
+            },
+            onClick = { navToInsert() }
         )
     }
 
@@ -79,22 +68,6 @@ interface RevenuesContainerScreen {
     fun extendedFabText() : StringResource
 
     /**
-     * The floating action button displayed on a medium and compact size class devices
-     */
-    @Composable
-    @NonRestartableComposable
-    fun CompactFabButton() {
-        FloatingActionButton(
-            onClick = { navToInsert() }
-        ) {
-            Icon(
-                imageVector = Icons.AutoMirrored.Filled.StickyNote2,
-                contentDescription = null
-            )
-        }
-    }
-
-    /**
      * Method to navigate to the related [com.tecknobit.neutron.ui.screens.insert.shared.presenter.InsertScreen]
      */
     fun navToInsert()
@@ -103,7 +76,7 @@ interface RevenuesContainerScreen {
      * The header section of the screen
      */
     @Composable
-    @NonRestartableComposable
+    @ScreenSection
     fun Header()
 
 }
