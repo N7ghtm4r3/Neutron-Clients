@@ -92,4 +92,5 @@
     <string name="login_required">Login required</string>
     <string name="enter_your_credentials_to_continue">Enter your credentials to continue</string>
     <string name="no_labels_available">No labels available</string>
+    <string name="last_revenue_on">Last revenue on: %1$s</string>
 </resources>

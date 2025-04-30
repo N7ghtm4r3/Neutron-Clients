@@ -8,6 +8,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.sp
+import com.tecknobit.equinoxcore.time.TimeFormatter.COMPLETE_EUROPEAN_DATE_PATTERN
 import com.tecknobit.equinoxcore.time.TimeFormatter.toDateString
 import com.tecknobit.neutron.bodyFontFamily
 import com.tecknobit.neutron.displayFontFamily
@@ -82,6 +83,7 @@ fun TicketInfo(
  * @param revenue The revenue from retrieve the information to display
  * @param customTitle Value of a custom title to use for the component
  * @param dateHeader The header of the date
+ * @param pattern The pattern to use to format the long value
  */
 @Composable
 fun RevenueInfo(
@@ -89,6 +91,7 @@ fun RevenueInfo(
     revenue: Revenue,
     customTitle: String? = null,
     dateHeader: StringResource = Res.string.date,
+    pattern: String = COMPLETE_EUROPEAN_DATE_PATTERN,
 ) {
     val hideBalances by viewModel.hideBalances.collectAsState()
     Column {
@@ -124,7 +127,9 @@ fun RevenueInfo(
         Text(
             text = stringResource(
                 resource = dateHeader,
-                revenue.revenueDateAsString()
+                revenue.revenueDate.toDateString(
+                    pattern = pattern
+                )
             ),
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,

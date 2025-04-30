@@ -92,4 +92,5 @@
     <string name="login_required">Accesso richiesto</string>
     <string name="enter_your_credentials_to_continue">Inserisci le tue credenziali per continuare</string>
     <string name="no_labels_available">Nessuna etichetta disponibile</string>
+    <string name="last_revenue_on">Ultima entrata il: %1$s</string>
 </resources>

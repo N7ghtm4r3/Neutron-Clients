@@ -92,4 +92,5 @@
     <string name="login_required">Connexion requise</string>
     <string name="enter_your_credentials_to_continue">Entrez vos informations d\'identification pour continuer</string>
     <string name="no_labels_available">Pas d\'étiquettes disponibles</string>
+    <string name="last_revenue_on">Dernier revenu le : %1$s</string>
 </resources>

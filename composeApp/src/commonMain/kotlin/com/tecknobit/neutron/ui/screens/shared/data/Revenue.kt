@@ -1,6 +1,5 @@
 package com.tecknobit.neutron.ui.screens.shared.data
 
-import com.tecknobit.equinoxcore.time.TimeFormatter.toDateString
 import com.tecknobit.neutroncore.REVENUE_DATE_KEY
 import com.tecknobit.neutroncore.REVENUE_TITLE_KEY
 import kotlinx.serialization.Polymorphic
@@ -34,15 +33,6 @@ interface Revenue {
      *`revenueDate` the date of the revenue
      */
     val revenueDate: Long
-
-    /**
-     * Method to format the [revenueDate] as date string
-     *
-     * @return the [revenueDate] formatted as [String]
-     */
-    fun revenueDateAsString() : String {
-        return revenueDate.toDateString()
-    }
 
     /**
      * The `RevenueImpl` class is the default implementation of the [Revenue]

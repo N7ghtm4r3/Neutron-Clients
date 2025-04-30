@@ -92,4 +92,5 @@
     <string name="login_required">Inicio de sesión obligatorio</string>
     <string name="enter_your_credentials_to_continue">Introduzca sus credenciales para continuar</string>
     <string name="no_labels_available">No hay etiquetas disponibles</string>
+    <string name="last_revenue_on">Último ingreso el: %1$s</string>
 </resources>
