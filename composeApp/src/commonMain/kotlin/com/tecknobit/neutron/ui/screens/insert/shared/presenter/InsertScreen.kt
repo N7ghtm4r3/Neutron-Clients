@@ -166,7 +166,7 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
     @Composable
     override fun ScreenContent() {
         ManagedContent(
-            viewModel = viewModel!!,
+            viewModel = viewModel,
             content = {
                 CollectStatesAfterLoading()
                 ResponsiveContent(
@@ -228,7 +228,7 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
             ) {
                 Amount()
                 AnimatedVisibility(
-                    visible = viewModel!!.keyboardState.parseAmount() > 0.0
+                    visible = viewModel.keyboardState.parseAmount() > 0.0
                 ) {
                     Row (
                         horizontalArrangement = Arrangement.spacedBy(10.dp)
@@ -253,7 +253,7 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
                                     containerColor = MaterialTheme.colorScheme.primary,
                                     contentColor = MaterialTheme.colorScheme.onPrimary
                                 ),
-                                onClick = { viewModel!!.insert() }
+                                onClick = { viewModel.insert() }
                             ) {
                                 Text(
                                     text = stringResource(
@@ -298,7 +298,7 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
             horizontalArrangement = Arrangement.spacedBy(5.dp)
         ) {
             Text(
-                text = viewModel!!.keyboardState.currentAmount(),
+                text = viewModel.keyboardState.currentAmount(),
                 fontFamily = displayFontFamily,
                 fontSize = 60.sp,
                 maxLines = 1,
@@ -328,7 +328,7 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
             ScreenKeyboard(
                 modifier = keyboardModifier
                     .fillMaxSize(),
-                state = viewModel!!.keyboardState
+                state = viewModel.keyboardState
             )
         }
     }
@@ -387,13 +387,13 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
                 focusedIndicatorColor = Color.Transparent,
                 errorIndicatorColor = Color.Transparent
             ),
-            value = viewModel!!.title,
+            value = viewModel.title,
             textFieldStyle = TextStyle(
                 fontSize = 14.sp,
                 fontWeight = FontWeight.SemiBold,
                 fontFamily = bodyFontFamily
             ),
-            isError = viewModel!!.titleError,
+            isError = viewModel.titleError,
             validator = { isRevenueTitleValid(it) },
             errorText = Res.string.title_not_valid,
             errorTextStyle = TextStyle(
@@ -432,13 +432,13 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
                 errorIndicatorColor = Color.Transparent
             ),
             maxLines = 10,
-            value = viewModel!!.description,
+            value = viewModel.description,
             textFieldStyle = TextStyle(
                 fontSize = 14.sp,
                 fontWeight = FontWeight.SemiBold,
                 fontFamily = bodyFontFamily
             ),
-            isError = viewModel!!.descriptionError,
+            isError = viewModel.descriptionError,
             validator = { isRevenueDescriptionValid(it) },
             errorText = Res.string.description_not_valid,
             errorTextStyle = TextStyle(
@@ -465,9 +465,9 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
                     vertical = 16.dp
                 )
                 .align(Alignment.CenterHorizontally),
-            startDateTime = viewModel!!.insertionDate.value,
+            startDateTime = viewModel.insertionDate.value,
             rowCount = 5
-        ) { snappedDateTime -> viewModel!!.insertionDate.value = snappedDateTime }
+        ) { snappedDateTime -> viewModel.insertionDate.value = snappedDateTime }
     }
 
     /**
@@ -475,7 +475,7 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
      */
     override fun onStart() {
         super.onStart()
-        viewModel!!.retrieveRevenue()
+        viewModel.retrieveRevenue()
     }
 
     /**
@@ -485,15 +485,15 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
     @RequiresSuperCall
     override fun CollectStates() {
         displayKeyboard = remember { mutableStateOf(true) }
-        revenue = viewModel!!.revenue.collectAsState()
-        viewModel!!.titleError = remember { mutableStateOf(false) }
-        viewModel!!.descriptionError = remember { mutableStateOf(false) }
+        revenue = viewModel.revenue.collectAsState()
+        viewModel.titleError = remember { mutableStateOf(false) }
+        viewModel.descriptionError = remember { mutableStateOf(false) }
     }
 
     @Composable
     @Deprecated("TO USE THE BUILT-IN IN EQUINOX ONE")
     private fun CollectStatesAfterLoading() {
-        viewModel!!.keyboardState = rememberKeyboardState(
+        viewModel.keyboardState = rememberKeyboardState(
             amount = if (isEditing) {
                 if (revenue.value!! is ProjectRevenue)
                     (revenue.value!! as ProjectRevenue).initialRevenue.value.toString()
@@ -502,10 +502,10 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
             } else
                 ZERO
         )
-        viewModel!!.addingGeneralRevenue = remember {
+        viewModel.addingGeneralRevenue = remember {
             mutableStateOf(!isEditing || revenue.value!! is GeneralRevenue)
         }
-        viewModel!!.title = remember {
+        viewModel.title = remember {
             mutableStateOf(
                 if(isEditing)
                     revenue.value!!.title
@@ -513,7 +513,7 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
                     ""
             )
         }
-        viewModel!!.description = remember {
+        viewModel.description = remember {
             mutableStateOf(
                 if(revenue.value != null && revenue.value is GeneralRevenue)
                     (revenue.value as GeneralRevenue).description
@@ -521,7 +521,7 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
                     ""
             )
         }
-        viewModel!!.insertionDate = remember {
+        viewModel.insertionDate = remember {
             mutableStateOf(
                 if(isEditing) {
                     Instant.fromEpochMilliseconds(revenue.value!!.revenueDate)

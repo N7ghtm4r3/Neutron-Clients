@@ -20,10 +20,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.tecknobit.equinoxcompose.session.EquinoxScreen
+import com.tecknobit.equinoxcompose.annotations.ScreenCoordinator
+import com.tecknobit.equinoxcompose.session.screens.EquinoxScreen
 import com.tecknobit.equinoxcompose.viewmodels.EquinoxViewModel
 import com.tecknobit.equinoxcore.annotations.Structure
-import com.tecknobit.neutron.MAX_CONTAINER_WIDTH
 import com.tecknobit.neutron.displayFontFamily
 import com.tecknobit.neutron.navigator
 import com.tecknobit.neutron.ui.theme.NeutronTheme
@@ -41,6 +41,7 @@ import org.jetbrains.compose.resources.stringResource
  * @see EquinoxScreen
  */
 @Structure
+@ScreenCoordinator
 abstract class NeutronScreen<V : EquinoxViewModel>(
     viewModel: V,
     private val title: StringResource
@@ -55,7 +56,7 @@ abstract class NeutronScreen<V : EquinoxViewModel>(
     override fun ArrangeScreenContent() {
         NeutronTheme {
             Scaffold (
-                snackbarHost = { SnackbarHost(viewModel!!.snackbarHostState!!) }
+                snackbarHost = { SnackbarHost(viewModel.snackbarHostState!!) }
             ) {
                 Column (
                     modifier = Modifier
@@ -66,7 +67,7 @@ abstract class NeutronScreen<V : EquinoxViewModel>(
                         modifier = Modifier
                             .fillMaxHeight()
                             .widthIn(
-                                max = MAX_CONTAINER_WIDTH
+                                max = EXPANDED_CONTAINER
                             ),
                         verticalArrangement = Arrangement.spacedBy(10.dp)
                     ) {

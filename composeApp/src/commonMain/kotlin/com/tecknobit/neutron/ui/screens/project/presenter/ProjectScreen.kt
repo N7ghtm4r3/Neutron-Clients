@@ -43,11 +43,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.tecknobit.equinoxcompose.components.EmptyListUI
 import com.tecknobit.equinoxcompose.resources.retry
-import com.tecknobit.equinoxcompose.session.EquinoxScreen
 import com.tecknobit.equinoxcompose.session.ManagedContent
+import com.tecknobit.equinoxcompose.session.screens.EquinoxScreen
 import com.tecknobit.neutron.INSERT_REVENUE_SCREEN
 import com.tecknobit.neutron.INSERT_TICKET_SCREEN
-import com.tecknobit.neutron.MAX_CONTAINER_WIDTH
 import com.tecknobit.neutron.bodyFontFamily
 import com.tecknobit.neutron.displayFontFamily
 import com.tecknobit.neutron.localUser
@@ -79,7 +78,7 @@ import org.jetbrains.compose.resources.stringResource
  * @param projectId The identifier of the project displayed
  *
  * @author N7ghtm4r3 - Tecknobit
- * @see com.tecknobit.equinoxcompose.session.EquinoxScreen
+ * @see com.tecknobit.equinoxcompose.session.screens.EquinoxScreen
  * @see RevenuesContainerScreen
  */
 class ProjectScreen(
@@ -112,10 +111,10 @@ class ProjectScreen(
     override fun ArrangeScreenContent() {
         NeutronTheme {
             ManagedContent(
-                viewModel = viewModel!!,
+                viewModel = viewModel,
                 content = {
                     Scaffold(
-                        snackbarHost = { SnackbarHost(viewModel!!.snackbarHostState!!) },
+                        snackbarHost = { SnackbarHost(viewModel.snackbarHostState!!) },
                         floatingActionButton = { FabButton() }
                     ) {
                         ScreenContent()
@@ -126,7 +125,7 @@ class ProjectScreen(
                     project.value != null
                 },
                 noInternetConnectionRetryText = com.tecknobit.equinoxcompose.resources.Res.string.retry,
-                noInternetConnectionRetryAction = { viewModel!!.ticketsState.retryLastFailedRequest() }
+                noInternetConnectionRetryAction = { viewModel.ticketsState.retryLastFailedRequest() }
             )
         }
     }
@@ -172,7 +171,7 @@ class ProjectScreen(
         Card (
             modifier = Modifier
                 .widthIn(
-                    max = MAX_CONTAINER_WIDTH
+                    max = EXPANDED_CONTAINER
                 )
                 .height(175.dp),
             shape = RoundedCornerShape(
@@ -206,7 +205,7 @@ class ProjectScreen(
                 TotalRevenues()
             }
             TicketsFilterBar(
-                viewModel = viewModel!!
+                viewModel = viewModel
             )
         }
     }
@@ -259,7 +258,7 @@ class ProjectScreen(
             DeleteRevenue(
                 show = deleteProject,
                 revenue = project.value!!,
-                viewModel = viewModel!!,
+                viewModel = viewModel,
                 onDelete = { navigator.goBack() }
             )
         }
@@ -301,7 +300,7 @@ class ProjectScreen(
             IconButton(
                 modifier = Modifier
                     .size(32.dp),
-                onClick = { viewModel!!.manageBalancesVisibility() }
+                onClick = { viewModel.manageBalancesVisibility() }
             ) {
                 Icon(
                     imageVector = if(hideBalances.value)
@@ -324,16 +323,16 @@ class ProjectScreen(
             modifier = Modifier
                 .fillMaxHeight()
                 .widthIn(
-                    max = MAX_CONTAINER_WIDTH
+                    max = EXPANDED_CONTAINER
                 )
                 .navigationBarsPadding()
         ) {
             InitialRevenueItem(
-                viewModel = viewModel!!,
+                viewModel = viewModel,
                 initialRevenue = project.value!!.initialRevenue
             )
             PaginatedLazyColumn(
-                paginationState = viewModel!!.ticketsState,
+                paginationState = viewModel.ticketsState,
                 contentPadding = PaddingValues(
                     bottom = 16.dp
                 ),
@@ -351,11 +350,11 @@ class ProjectScreen(
                 newPageProgressIndicator = { NewPageProgressIndicator() }
             ) {
                 itemsIndexed(
-                    items = viewModel!!.ticketsState.allItems!!,
+                    items = viewModel.ticketsState.allItems!!,
                     key = { _, revenue -> revenue.id }
                 ) { index, ticket ->
                     TicketCard(
-                        viewModel = viewModel!!,
+                        viewModel = viewModel,
                         project = project.value!!,
                         ticket = ticket,
                         position = index
@@ -370,8 +369,8 @@ class ProjectScreen(
      */
     override fun onStart() {
         super.onStart()
-        viewModel!!.retrieveProject()
-        viewModel!!.getProjectBalance()
+        viewModel.retrieveProject()
+        viewModel.getProjectBalance()
     }
 
     /**
@@ -379,9 +378,9 @@ class ProjectScreen(
      */
     @Composable
     override fun CollectStates() {
-        project = viewModel!!.project.collectAsState()
-        balance = viewModel!!.balance.collectAsState()
-        hideBalances = viewModel!!.hideBalances.collectAsState()
+        project = viewModel.project.collectAsState()
+        balance = viewModel.balance.collectAsState()
+        hideBalances = viewModel.hideBalances.collectAsState()
     }
 
 }

@@ -14,8 +14,8 @@ import coil3.request.CachePolicy
 import coil3.request.addLastModifiedToFileCacheKey
 import com.tecknobit.ametistaengine.AmetistaEngine
 import com.tecknobit.ametistaengine.AmetistaEngine.Companion.FILES_AMETISTA_CONFIG_PATHNAME
-import com.tecknobit.equinoxcore.network.Requester.Companion.sendRequest
 import com.tecknobit.equinoxcore.network.Requester.Companion.toResponseData
+import com.tecknobit.equinoxcore.network.sendRequest
 import com.tecknobit.neutron.helpers.NeutronLocalUser
 import com.tecknobit.neutron.helpers.NeutronRequester
 import com.tecknobit.neutron.helpers.customHttpClient
@@ -122,7 +122,7 @@ fun App() {
         val ametistaEngine = AmetistaEngine.ametistaEngine
         ametistaEngine.fireUp(
             configData = Res.readBytes(FILES_AMETISTA_CONFIG_PATHNAME),
-            debugMode = false
+            debugMode = true // TODO: TO SET ON FALSE
         )
     }
     bodyFontFamily = FontFamily(Font(Res.font.roboto))
@@ -211,7 +211,7 @@ expect fun CheckForUpdatesAndLaunch()
  */
 fun startSession() {
     requester = NeutronRequester(
-        host = localUser.hostAddress ?: "",
+        host = localUser.hostAddress,
         userId = localUser.userId,
         userToken = localUser.userToken
     )

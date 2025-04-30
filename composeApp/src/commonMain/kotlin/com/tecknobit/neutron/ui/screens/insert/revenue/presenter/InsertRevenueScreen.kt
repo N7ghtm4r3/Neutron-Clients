@@ -81,7 +81,7 @@ class InsertRevenueScreen(
                     titleStep,
                     descriptionStep,
                     Step(
-                        enabled = viewModel!!.addingGeneralRevenue,
+                        enabled = viewModel.addingGeneralRevenue,
                         stepIcon = Icons.AutoMirrored.Filled.Label,
                         title = Res.string.labels,
                         content = { RevenueLabelsForm() }
@@ -93,7 +93,7 @@ class InsertRevenueScreen(
                     titleStep,
                     descriptionStep,
                     Step(
-                        enabled = viewModel!!.addingGeneralRevenue,
+                        enabled = viewModel.addingGeneralRevenue,
                         stepIcon = Icons.AutoMirrored.Filled.Label,
                         title = Res.string.labels,
                         content = { RevenueLabelsForm() }
@@ -124,10 +124,10 @@ class InsertRevenueScreen(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 RadioButton(
-                    selected = viewModel!!.addingGeneralRevenue.value,
+                    selected = viewModel.addingGeneralRevenue.value,
                     onClick = {
-                        if(!viewModel!!.addingGeneralRevenue.value)
-                            viewModel!!.addingGeneralRevenue.value = true
+                        if (!viewModel.addingGeneralRevenue.value)
+                            viewModel.addingGeneralRevenue.value = true
                     }
                 )
                 Text(
@@ -138,10 +138,10 @@ class InsertRevenueScreen(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 RadioButton(
-                    selected = !viewModel!!.addingGeneralRevenue.value,
+                    selected = !viewModel.addingGeneralRevenue.value,
                     onClick = {
-                        if(viewModel!!.addingGeneralRevenue.value)
-                            viewModel!!.addingGeneralRevenue.value = false
+                        if (viewModel.addingGeneralRevenue.value)
+                            viewModel.addingGeneralRevenue.value = false
                     }
                 )
                 Text(
@@ -163,7 +163,7 @@ class InsertRevenueScreen(
             contentPadding = PaddingValues(
                 all = 16.dp
             ),
-            labels = viewModel!!.labels,
+            labels = viewModel.labels,
             stickyHeaderContent = {
                 SmallFloatingActionButton(
                     onClick = { pickLabels.value = true }
@@ -178,7 +178,7 @@ class InsertRevenueScreen(
                 IconButton(
                     modifier = Modifier
                         .size(24.dp),
-                    onClick = { viewModel!!.labels.remove(label) }
+                    onClick = { viewModel.labels.remove(label) }
                 ) {
                     Icon(
                         imageVector = Icons.Default.Remove,
@@ -192,7 +192,7 @@ class InsertRevenueScreen(
         )
         LabelsPicker(
             show = pickLabels,
-            viewModel = viewModel!!
+            viewModel = viewModel
         )
     }
 

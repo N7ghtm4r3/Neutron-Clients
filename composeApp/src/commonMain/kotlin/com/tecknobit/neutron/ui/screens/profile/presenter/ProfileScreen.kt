@@ -109,7 +109,7 @@ import org.jetbrains.compose.resources.stringResource
  * allow to customize the preferences and settings
  *
  * @author N7ghtm4r3 - Tecknobit
- * @see com.tecknobit.equinoxcompose.session.EquinoxScreen
+ * @see com.tecknobit.equinoxcompose.session.screens.EquinoxScreen
  * @see NeutronScreen
  */
 class ProfileScreen : NeutronScreen<ProfileScreenViewModel>(
@@ -152,7 +152,7 @@ class ProfileScreen : NeutronScreen<ProfileScreenViewModel>(
                     overflow = TextOverflow.Ellipsis,
                 )
                 Text(
-                    text = viewModel!!.email.value,
+                    text = viewModel.email.value,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     fontSize = 12.sp
@@ -173,8 +173,8 @@ class ProfileScreen : NeutronScreen<ProfileScreenViewModel>(
             mode = PickerMode.Single
         ) { image ->
             image?.let {
-                viewModel!!.viewModelScope.launch {
-                    viewModel!!.changeProfilePic(
+                viewModel.viewModelScope.launch {
+                    viewModel.changeProfilePic(
                         profilePicName = image.name,
                         profilePicBytes = image.readBytes()
                     )
@@ -183,7 +183,7 @@ class ProfileScreen : NeutronScreen<ProfileScreenViewModel>(
         }
         ProfilePic(
             size = 100.dp,
-            profilePic = viewModel!!.profilePic.value,
+            profilePic = viewModel.profilePic.value,
             onClick = { launcher.launch() }
         )
     }
@@ -216,7 +216,7 @@ class ProfileScreen : NeutronScreen<ProfileScreenViewModel>(
                 )
             }
             Logout(
-                viewModel = viewModel!!,
+                viewModel = viewModel,
                 show = logout
             )
             val deleteAccount = remember { mutableStateOf(false) }
@@ -237,7 +237,7 @@ class ProfileScreen : NeutronScreen<ProfileScreenViewModel>(
                 )
             }
             DeleteAccount(
-                viewModel = viewModel!!,
+                viewModel = viewModel,
                 show = deleteAccount
             )
         }
@@ -310,7 +310,7 @@ class ProfileScreen : NeutronScreen<ProfileScreenViewModel>(
                     actionContent = {
                         ChangeLanguage()
                     },
-                    dismissAction = { viewModel!!.language.value = localUser.language!! },
+                    dismissAction = { viewModel.language.value = localUser.language },
                     confirmAction = { visible ->
                         changeLanguage(
                             newLanguage = language.value,
@@ -322,7 +322,7 @@ class ProfileScreen : NeutronScreen<ProfileScreenViewModel>(
                     }
                 )
                 ProfileAction(
-                    leadingIcon = when(viewModel!!.currency.value) {
+                    leadingIcon = when (viewModel.currency.value) {
                         NeutronCurrency.EURO -> Icons.Default.EuroSymbol
                         NeutronCurrency.DOLLAR -> CurrencyDollar
                         NeutronCurrency.POUND_STERLING -> Icons.Default.CurrencyPound
@@ -332,7 +332,7 @@ class ProfileScreen : NeutronScreen<ProfileScreenViewModel>(
                     actionContent = {
                         ChangeCurrency()
                     },
-                    dismissAction = { viewModel!!.currency.value = localUser.currency },
+                    dismissAction = { viewModel.currency.value = localUser.currency },
                     confirmAction = { visible ->
                         changeCurrency(
                             onSuccess = {
@@ -351,7 +351,7 @@ class ProfileScreen : NeutronScreen<ProfileScreenViewModel>(
                     actionContent = {
                         ChangeTheme()
                     },
-                    dismissAction = { viewModel!!.theme.value = localUser.theme!! },
+                    dismissAction = { viewModel.theme.value = localUser.theme },
                     confirmAction = { visible ->
                         changeTheme(
                             newTheme = theme.value,
@@ -378,8 +378,8 @@ class ProfileScreen : NeutronScreen<ProfileScreenViewModel>(
         LaunchedEffect(Unit) {
             focusRequester.requestFocus()
         }
-        viewModel!!.newEmail = remember { mutableStateOf("") }
-        viewModel!!.newEmailError = remember { mutableStateOf(false) }
+        viewModel.newEmail = remember { mutableStateOf("") }
+        viewModel.newEmailError = remember { mutableStateOf(false) }
         EquinoxTextField(
             modifier = Modifier
                 .focusRequester(focusRequester),
@@ -388,13 +388,13 @@ class ProfileScreen : NeutronScreen<ProfileScreenViewModel>(
                 focusedIndicatorColor = Color.Transparent,
                 errorIndicatorColor = Color.Transparent
             ),
-            value = viewModel!!.newEmail,
+            value = viewModel.newEmail,
             textFieldStyle = TextStyle(
                 fontSize = 14.sp,
                 fontWeight = FontWeight.SemiBold,
                 fontFamily = bodyFontFamily
             ),
-            isError = viewModel!!.newEmailError,
+            isError = viewModel.newEmailError,
             mustBeInLowerCase = true,
             allowsBlankSpaces = false,
             validator = { isEmailValid(it) },
@@ -422,8 +422,8 @@ class ProfileScreen : NeutronScreen<ProfileScreenViewModel>(
         LaunchedEffect(Unit) {
             focusRequester.requestFocus()
         }
-        viewModel!!.newPassword = remember { mutableStateOf("") }
-        viewModel!!.newPasswordError = remember { mutableStateOf(false) }
+        viewModel.newPassword = remember { mutableStateOf("") }
+        viewModel.newPasswordError = remember { mutableStateOf(false) }
         var hiddenPassword by remember { mutableStateOf(true) }
         EquinoxOutlinedTextField(
             modifier = Modifier
@@ -433,13 +433,13 @@ class ProfileScreen : NeutronScreen<ProfileScreenViewModel>(
                 focusedIndicatorColor = Color.Transparent,
                 errorIndicatorColor = Color.Transparent
             ),
-            value = viewModel!!.newPassword,
+            value = viewModel.newPassword,
             outlinedTextFieldStyle = TextStyle(
                 fontSize = 14.sp,
                 fontWeight = FontWeight.SemiBold,
                 fontFamily = bodyFontFamily
             ),
-            isError = viewModel!!.newPasswordError,
+            isError = viewModel.newPasswordError,
             allowsBlankSpaces = false,
             trailingIcon = {
                 IconButton(
@@ -488,8 +488,8 @@ class ProfileScreen : NeutronScreen<ProfileScreenViewModel>(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     RadioButton(
-                        selected = viewModel!!.language.value == entry.key,
-                        onClick = { viewModel!!.language.value = entry.key }
+                        selected = viewModel.language.value == entry.key,
+                        onClick = { viewModel.language.value = entry.key }
                     )
                     Text(
                         text = entry.value
@@ -515,8 +515,8 @@ class ProfileScreen : NeutronScreen<ProfileScreenViewModel>(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     RadioButton(
-                        selected = viewModel!!.currency.value == currency,
-                        onClick = { viewModel!!.currency.value = currency }
+                        selected = viewModel.currency.value == currency,
+                        onClick = { viewModel.currency.value = currency }
                     )
                     Text(
                         text = currency.name.lowercase()
@@ -544,8 +544,8 @@ class ProfileScreen : NeutronScreen<ProfileScreenViewModel>(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     RadioButton(
-                        selected = viewModel!!.theme.value == entry,
-                        onClick = { viewModel!!.theme.value = entry }
+                        selected = viewModel.theme.value == entry,
+                        onClick = { viewModel.theme.value = entry }
                     )
                     Text(
                         text = entry.name
@@ -637,7 +637,7 @@ class ProfileScreen : NeutronScreen<ProfileScreenViewModel>(
                     IconButton(
                         onClick = {
                             confirmAction.invoke(
-                                viewModel!!,
+                                viewModel,
                                 expanded
                             )
                         }
@@ -734,12 +734,12 @@ class ProfileScreen : NeutronScreen<ProfileScreenViewModel>(
      */
     @Composable
     override fun CollectStates() {
-        viewModel!!.profilePic = remember { mutableStateOf(localUser.profilePic!!) }
-        viewModel!!.email = remember { mutableStateOf(localUser.email!!) }
-        viewModel!!.password = remember { mutableStateOf(localUser.password!!) }
-        viewModel!!.language = remember { mutableStateOf(localUser.language!!) }
-        viewModel!!.currency = remember { mutableStateOf(localUser.currency) }
-        viewModel!!.theme = remember { mutableStateOf(localUser.theme!!) }
+        viewModel.profilePic = remember { mutableStateOf(localUser.profilePic) }
+        viewModel.email = remember { mutableStateOf(localUser.email) }
+        viewModel.password = remember { mutableStateOf(localUser.password) }
+        viewModel.language = remember { mutableStateOf(localUser.language) }
+        viewModel.currency = remember { mutableStateOf(localUser.currency) }
+        viewModel.theme = remember { mutableStateOf(localUser.theme) }
     }
 
 }

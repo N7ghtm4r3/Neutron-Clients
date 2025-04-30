@@ -43,12 +43,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.tecknobit.equinoxcompose.components.EmptyListUI
 import com.tecknobit.equinoxcompose.resources.retry
-import com.tecknobit.equinoxcompose.session.EquinoxScreen
 import com.tecknobit.equinoxcompose.session.ManagedContent
+import com.tecknobit.equinoxcompose.session.screens.EquinoxScreen
 import com.tecknobit.equinoxcompose.utilities.ResponsiveContent
 import com.tecknobit.neutron.CloseApplicationOnNavBack
 import com.tecknobit.neutron.INSERT_REVENUE_SCREEN
-import com.tecknobit.neutron.MAX_CONTAINER_WIDTH
 import com.tecknobit.neutron.PROFILE_SCREEN
 import com.tecknobit.neutron.bodyFontFamily
 import com.tecknobit.neutron.displayFontFamily
@@ -84,7 +83,7 @@ import org.jetbrains.compose.resources.stringResource
  * The [RevenuesScreen] displays the list of the revenues owned by the user
  *
  * @author N7ghtm4r3 - Tecknobit
- * @see com.tecknobit.equinoxcompose.session.EquinoxScreen
+ * @see com.tecknobit.equinoxcompose.session.screens.EquinoxScreen
  * @see RevenuesContainerScreen
  */
 class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
@@ -123,14 +122,14 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
         CloseApplicationOnNavBack()
         NeutronTheme {
             ManagedContent(
-                viewModel = viewModel!!,
+                viewModel = viewModel,
                 loadingRoutine = {
                     delay(500L) // FIXME: TO REMOVE WHEN COMPONENT BUILT-IN FIXED
                     walletStatus.value != null
                 },
                 content = {
                     Scaffold(
-                        snackbarHost = { SnackbarHost(viewModel!!.snackbarHostState!!) },
+                        snackbarHost = { SnackbarHost(viewModel.snackbarHostState!!) },
                         floatingActionButton = {
                             FabButton()
                         }
@@ -139,7 +138,7 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
                     }
                 },
                 noInternetConnectionRetryText = com.tecknobit.equinoxcompose.resources.Res.string.retry,
-                noInternetConnectionRetryAction = { viewModel!!.revenuesState.retryLastFailedRequest() }
+                noInternetConnectionRetryAction = { viewModel.revenuesState.retryLastFailedRequest() }
             )
         }
     }
@@ -185,7 +184,7 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
         Card (
             modifier = Modifier
                 .widthIn(
-                    max = MAX_CONTAINER_WIDTH
+                    max = EXPANDED_CONTAINER
                 )
                 .height(175.dp),
             shape = RoundedCornerShape(
@@ -209,7 +208,7 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
                 UserProfilePicture()
             }
             FiltersBar(
-                viewModel = viewModel!!
+                viewModel = viewModel
             )
         }
     }
@@ -235,7 +234,7 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
                     overflow = TextOverflow.Ellipsis
                 )
                 IconButton(
-                    onClick = { viewModel!!.manageBalancesVisibility() }
+                    onClick = { viewModel.manageBalancesVisibility() }
                 ) {
                     Icon(
                         imageVector = if(hideBalances.value)
@@ -364,10 +363,10 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
             modifier = Modifier
                 .fillMaxHeight()
                 .widthIn(
-                    max = MAX_CONTAINER_WIDTH
+                    max = EXPANDED_CONTAINER
                 )
                 .navigationBarsPadding(),
-            paginationState = viewModel!!.revenuesState,
+            paginationState = viewModel.revenuesState,
             contentPadding = PaddingValues(
                 bottom = 16.dp
             ),
@@ -385,11 +384,11 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
             newPageProgressIndicator = { NewPageProgressIndicator() }
         ) {
             itemsIndexed(
-                items = viewModel!!.revenuesState.allItems!!,
+                items = viewModel.revenuesState.allItems!!,
                 key = { _, revenue -> revenue.id }
             ) { index, revenue ->
                 RevenueCard(
-                    viewModel = viewModel!!,
+                    viewModel = viewModel,
                     revenue = revenue,
                     position = index
                 )
@@ -402,7 +401,7 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
      */
     override fun onStart() {
         super.onStart()
-        viewModel!!.getWalletStatus()
+        viewModel.getWalletStatus()
     }
 
     /**
@@ -410,9 +409,9 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
      */
     @Composable
     override fun CollectStates() {
-        walletStatus = viewModel!!.walletStatus.collectAsState()
-        revenuePeriod = viewModel!!.revenuePeriod.collectAsState()
-        hideBalances = viewModel!!.hideBalances.collectAsState()
+        walletStatus = viewModel.walletStatus.collectAsState()
+        revenuePeriod = viewModel.revenuePeriod.collectAsState()
+        hideBalances = viewModel.hideBalances.collectAsState()
     }
 
 }
