@@ -4,12 +4,14 @@ package com.tecknobit.neutron
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.ui.text.font.FontFamily
 import coil3.ImageLoader
 import coil3.compose.LocalPlatformContext
 import coil3.network.ktor3.KtorNetworkFetcherFactory
 import coil3.request.CachePolicy
 import coil3.request.addLastModifiedToFileCacheKey
+import com.tecknobit.ametista.AmetistaConfig
 import com.tecknobit.ametistaengine.AmetistaEngine
 import com.tecknobit.ametistaengine.AmetistaEngine.Companion.FILES_AMETISTA_CONFIG_PATHNAME
 import com.tecknobit.equinoxcore.network.Requester.Companion.toResponseData
@@ -110,7 +112,7 @@ const val PROJECT_REVENUE_SCREEN = "ProjectRevenueScreen"
  */
 @Composable
 fun App() {
-    InitAmetista()
+    //InitAmetista()
     bodyFontFamily = FontFamily(Font(Res.font.roboto))
     displayFontFamily = FontFamily(Font(Res.font.lilitaone))
     imageLoader = ImageLoader.Builder(LocalPlatformContext.current)
@@ -186,6 +188,7 @@ fun App() {
  * Method used to initialize the Ametista system
  */
 @Composable
+@NonRestartableComposable
 private fun InitAmetista() {
     LaunchedEffect(Unit) {
         val ametistaEngine = AmetistaEngine.ametistaEngine
@@ -195,9 +198,8 @@ private fun InitAmetista() {
             serverSecret = AmetistaConfig.SERVER_SECRET!!,
             applicationId = AmetistaConfig.APPLICATION_IDENTIFIER!!,
             bypassSslValidation = AmetistaConfig.BYPASS_SSL_VALIDATION,
-            debugMode = true
+            debugMode = false
         )
-        ametistaEngine.connectPlatform()
     }
 }
 
@@ -217,8 +219,7 @@ fun startSession() {
     requester = NeutronRequester(
         host = localUser.hostAddress,
         userId = localUser.userId,
-        userToken = localUser.userToken,
-        debugMode = true // TODO: TO REMOVE
+        userToken = localUser.userToken
     )
     val route = if (localUser.isAuthenticated) {
         MainScope().launch {
