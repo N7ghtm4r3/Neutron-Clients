@@ -166,6 +166,8 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
     @Composable
     override fun ScreenContent() {
         ManagedContent(
+            modifier = Modifier
+                .fillMaxSize(),
             viewModel = viewModel,
             initialDelay = 500L,
             loadingRoutine = if (isEditing) {

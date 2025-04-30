@@ -110,6 +110,8 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
         CloseApplicationOnNavBack()
         NeutronTheme {
             ManagedContent(
+                modifier = Modifier
+                    .fillMaxSize(),
                 viewModel = viewModel,
                 initialDelay = 500L,
                 loadingRoutine = { walletStatus.value != null },

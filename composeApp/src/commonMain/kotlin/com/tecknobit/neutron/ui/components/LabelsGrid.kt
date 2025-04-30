@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalMultiplatform::class)
+
 package com.tecknobit.neutron.ui.components
 
 import androidx.compose.animation.AnimatedVisibility
@@ -6,12 +8,11 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.LabelOff
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
@@ -28,14 +29,19 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.tecknobit.equinoxcompose.components.EmptyListUI
+import com.tecknobit.equinoxcompose.components.EmptyState
 import com.tecknobit.equinoxcompose.components.UIAnimations
 import com.tecknobit.equinoxcompose.components.getContrastColor
 import com.tecknobit.equinoxcompose.utilities.toColor
 import com.tecknobit.neutron.ui.screens.shared.data.RevenueLabel
 import com.tecknobit.neutron.ui.screens.shared.presentations.RevenueLabelsRetriever
+import com.tecknobit.neutron.ui.theme.AppTypography
+import com.tecknobit.neutron.ui.theme.applyDarkTheme
 import neutron.composeapp.generated.resources.Res
 import neutron.composeapp.generated.resources.no_labels_available
+import neutron.composeapp.generated.resources.no_labels_dark
+import neutron.composeapp.generated.resources.no_labels_light
+import org.jetbrains.compose.resources.stringResource
 
 /**
  * Grid used to display a list of [labels]
@@ -116,13 +122,35 @@ fun LabelsGrid(
             }
         }
     }
-    EmptyListUI(
+    NoLabels(
+        currentLabels = currentLabels
+    )
+}
+
+/**
+ * Empty state displayed when there are no labels available
+ *
+ * @param currentLabels The current labels list
+ */
+@Composable
+private fun NoLabels(
+    currentLabels: List<RevenueLabel>,
+) {
+    val title = stringResource(Res.string.no_labels_available)
+    EmptyState(
+        containerModifier = Modifier
+            .fillMaxSize(),
         animations = UIAnimations(
             visible = currentLabels.isEmpty(),
             onEnter = fadeIn(),
             onExit = fadeOut()
         ),
-        icon = Icons.AutoMirrored.Filled.LabelOff,
-        subText = Res.string.no_labels_available
+        resourceSize = 185.dp,
+        lightResource = Res.drawable.no_labels_light,
+        darkResource = Res.drawable.no_labels_dark,
+        useDarkResource = applyDarkTheme(),
+        title = title,
+        titleStyle = AppTypography.titleMedium,
+        contentDescription = title
     )
 }

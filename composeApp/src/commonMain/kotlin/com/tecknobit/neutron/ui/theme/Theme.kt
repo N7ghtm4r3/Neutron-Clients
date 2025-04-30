@@ -257,17 +257,13 @@ private val highContrastDarkColorScheme = darkColorScheme(
 /**
  * Function to set the Neutron theme to the content
  *
- * @param darkTheme: whether to use the dark or light theme
- * @param content: the content to display
+ * @param darkTheme Whether to use the dark or light theme
+ * @param content The content to display
  */
 @Composable
 fun NeutronTheme(
-    darkTheme: Boolean = when (localUser.theme) {
-        Light -> false
-        Dark -> true
-        else -> isSystemInDarkTheme()
-    },
-    content: @Composable () -> Unit
+    darkTheme: Boolean = applyDarkTheme(),
+    content: @Composable () -> Unit,
 ) {
     val colorScheme = when {
         darkTheme -> darkScheme
@@ -278,5 +274,19 @@ fun NeutronTheme(
         typography = AppTypography,
         content = content
     )
+}
+
+/**
+ * Method used to check whether is required to apply the dark theme based on the [localUser] theme
+ *
+ * @return whether is required to apply the dark theme based on the [localUser] theme as [Boolean]
+ */
+@Composable
+fun applyDarkTheme(): Boolean {
+    return when (localUser.theme) {
+        Light -> false
+        Dark -> true
+        else -> isSystemInDarkTheme()
+    }
 }
 

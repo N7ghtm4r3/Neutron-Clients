@@ -167,6 +167,7 @@ private fun LabelsDialog(
         },
         onDismissAction = {
             viewModel.labelsFilter.retainAndAdd(
+                addFrom = 0, // TODO: REMOVE WHEN FIXED 
                 supportCollection = supportLabelsList
             )
             filtering.value = false
