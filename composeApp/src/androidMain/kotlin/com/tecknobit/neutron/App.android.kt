@@ -2,10 +2,12 @@ package com.tecknobit.neutron
 
 import androidx.activity.compose.LocalActivity
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import com.google.android.play.core.appupdate.AppUpdateOptions
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.UpdateAvailability.UPDATE_AVAILABLE
@@ -49,7 +51,6 @@ private val biometricPromptManager by lazy {
 @Composable
 actual fun CheckForUpdatesAndLaunch() {
     if(authWitBiometricParams) {
-        authWitBiometricParams = false
         val biometricResult by biometricPromptManager.promptResults.collectAsState(
             initial = null
         )
@@ -70,6 +71,8 @@ actual fun CheckForUpdatesAndLaunch() {
                 else -> {
                     NeutronTheme {
                         ErrorUI(
+                            containerModifier = Modifier
+                                .fillMaxSize(),
                             retryAction = { CheckForUpdatesAndLaunch() }
                         )
                     }
@@ -85,6 +88,7 @@ actual fun CheckForUpdatesAndLaunch() {
  * If available and allowed to install, after the installation enter in the application
  */
 private fun checkForUpdates() {
+    authWitBiometricParams = false
     appUpdateManager.appUpdateInfo.addOnSuccessListener { info ->
         val isUpdateAvailable = info.updateAvailability() == UPDATE_AVAILABLE
         val isUpdateSupported = info.isImmediateUpdateAllowed
