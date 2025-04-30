@@ -31,6 +31,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -50,6 +51,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewModelScope
+import com.tecknobit.equinoxcompose.annotations.ScreenSection
 import com.tecknobit.equinoxcompose.components.ChameleonText
 import com.tecknobit.equinoxcompose.components.EquinoxOutlinedTextField
 import com.tecknobit.equinoxcompose.components.EquinoxTextField
@@ -110,6 +112,7 @@ class ProfileScreen : NeutronScreen<ProfileScreenViewModel>(
      * Method to display the custom content of the screen
      */
     @Composable
+    @NonRestartableComposable
     override fun ScreenContent() {
         UserDetails()
         Settings()
@@ -119,6 +122,8 @@ class ProfileScreen : NeutronScreen<ProfileScreenViewModel>(
      * The details of the [localUser]
      */
     @Composable
+    @ScreenSection
+    @NonRestartableComposable
     private fun UserDetails() {
         Row (
             modifier = Modifier
@@ -233,6 +238,7 @@ class ProfileScreen : NeutronScreen<ProfileScreenViewModel>(
      * The settings section to customize the [localUser] experience
      */
     @Composable
+    @ScreenSection
     private fun Settings() {
         val steps = remember(viewModel.currency.value) {
             arrayOf(

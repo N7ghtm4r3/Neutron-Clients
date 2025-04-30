@@ -86,6 +86,10 @@ dependencies {
   <img src="https://github.com/N7ghtm4r3/Neutron-Clients/blob/main/images/project_desktop_eng.png" alt="project"/>
 </details>
 
+## Illustrations
+
+All the illustrations were sourced from [undraw](https://undraw.co/)!
+
 ## Support
 
 If you need help using the library or encounter any problems or bugs, please contact us via the

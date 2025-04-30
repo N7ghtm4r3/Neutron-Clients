@@ -44,6 +44,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.tecknobit.equinoxcompose.annotations.ScreenSection
 import com.tecknobit.equinoxcompose.components.EmptyListUI
 import com.tecknobit.equinoxcompose.resources.retry
 import com.tecknobit.equinoxcompose.session.ManagedContent
@@ -170,6 +171,7 @@ class ProjectScreen(
      * The header section of the screen
      */
     @Composable
+    @ScreenSection
     override fun Header() {
         Card (
             modifier = Modifier

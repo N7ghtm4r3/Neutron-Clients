@@ -40,6 +40,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.tecknobit.equinoxcompose.annotations.ScreenSection
 import com.tecknobit.equinoxcompose.components.EquinoxTextField
 import com.tecknobit.equinoxcompose.components.stepper.Step
 import com.tecknobit.equinoxcompose.components.stepper.StepContent
@@ -63,7 +64,6 @@ import com.tecknobit.neutron.ui.screens.shared.presenters.NeutronScreen
 import com.tecknobit.neutroncore.helpers.NeutronInputsValidator.isRevenueDescriptionValid
 import com.tecknobit.neutroncore.helpers.NeutronInputsValidator.isRevenueTitleValid
 import dev.darkokoa.datetimewheelpicker.WheelDateTimePicker
-import kotlinx.coroutines.delay
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone
@@ -167,6 +167,13 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
     override fun ScreenContent() {
         ManagedContent(
             viewModel = viewModel,
+            initialDelay = 500L,
+            loadingRoutine = if (isEditing) {
+                {
+                    revenue.value != null
+                }
+            } else
+                null,
             content = {
                 CollectStatesAfterLoading()
                 ResponsiveContent(
@@ -190,13 +197,6 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
                         AmountSection()
                     }
                 )
-            },
-            loadingRoutine = {
-                if (isEditing) {
-                    delay(500L) // FIXME: TO REMOVE WHEN COMPONENT BUILT-IN FIXED
-                    revenue.value != null
-                } else
-                    true
             }
         )
     }
@@ -208,6 +208,7 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
      * @param keyboardModifier The modifier to apply to the keyboard
      */
     @Composable
+    @ScreenSection
     private fun AmountSection(
         keyboardWeight: Float = 2f,
         keyboardModifier: Modifier = Modifier
@@ -316,6 +317,7 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
      * @param keyboardModifier The modifier to apply to the keyboard
      */
     @Composable
+    @ScreenSection
     private fun KeyboardSection(
         keyboardModifier: Modifier
     ) {
@@ -335,6 +337,7 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
      * insert
      */
     @Composable
+    @ScreenSection
     private fun FormSection() {
         AnimatedVisibility(
             visible = !displayKeyboard.value
@@ -494,6 +497,7 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
      * initial value to the states
      */
     @Composable
+    @RequiresSuperCall
     override fun CollectStatesAfterLoading() {
         viewModel.keyboardState = rememberKeyboardState(
             amount = if (isEditing) {

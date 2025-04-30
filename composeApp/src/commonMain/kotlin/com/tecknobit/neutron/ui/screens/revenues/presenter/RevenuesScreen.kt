@@ -2,6 +2,7 @@
 
 package com.tecknobit.neutron.ui.screens.revenues.presenter
 
+import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -42,6 +43,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.tecknobit.equinoxcompose.annotations.ScreenSection
 import com.tecknobit.equinoxcompose.components.EmptyListUI
 import com.tecknobit.equinoxcompose.resources.retry
 import com.tecknobit.equinoxcompose.session.ManagedContent
@@ -69,7 +71,6 @@ import com.tecknobit.neutroncore.dtos.WalletStatus
 import com.tecknobit.neutroncore.enums.RevenuePeriod
 import com.tecknobit.neutroncore.enums.RevenuePeriod.ALL
 import io.github.ahmad_hamwi.compose.pagination.PaginatedLazyColumn
-import kotlinx.coroutines.delay
 import neutron.composeapp.generated.resources.Res
 import neutron.composeapp.generated.resources.add_revenue
 import neutron.composeapp.generated.resources.last_month_period
@@ -125,10 +126,8 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
         NeutronTheme {
             ManagedContent(
                 viewModel = viewModel,
-                loadingRoutine = {
-                    delay(500L) // FIXME: TO REMOVE WHEN COMPONENT BUILT-IN FIXED
-                    walletStatus.value != null
-                },
+                initialDelay = 500L,
+                loadingRoutine = { walletStatus.value != null },
                 content = {
                     Scaffold(
                         snackbarHost = { SnackbarHost(viewModel.snackbarHostState!!) },
@@ -181,8 +180,8 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
      * The header section of the screen
      */
     @Composable
+    @ScreenSection
     @NonRestartableComposable
-
     override fun Header() {
         Card (
             modifier = Modifier
@@ -285,45 +284,44 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
                 RevenuePeriod.LAST_YEAR -> Res.string.last_year
                 else -> return@AnimatedVisibility
             }
-            AnimatedVisibility(
-                visible = hideBalances.value
-            ) {
-                Text(
-                    text = HIDE_BALANCE,
-                    fontSize = 18.sp,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
-                )
-            }
-            AnimatedVisibility(
-                visible = !hideBalances.value
-            ) {
-                Row (
-                    verticalAlignment = Alignment.Bottom,
-                    horizontalArrangement = Arrangement.spacedBy(5.dp)
-                ) {
-                    val color = if(isPositiveTrend)
-                        MaterialTheme.colorScheme.primary
-                    else if(trend < 0.0)
-                        MaterialTheme.colorScheme.error
-                    else
-                        MaterialTheme.colorScheme.onSurface
+            AnimatedContent(
+                targetState = hideBalances.value
+            ) { hide ->
+                if (hide) {
                     Text(
-                        text = "$symbol${trend}%",
-                        fontFamily = displayFontFamily,
-                        color = color,
+                        text = HIDE_BALANCE,
                         fontSize = 18.sp,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
-                    Text(
-                        text = stringResource(periodText),
-                        fontFamily = displayFontFamily,
-                        fontSize = 14.sp,
-                        color = color,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
-                    )
+                } else {
+                    Row(
+                        verticalAlignment = Alignment.Bottom,
+                        horizontalArrangement = Arrangement.spacedBy(5.dp)
+                    ) {
+                        val color = if (isPositiveTrend)
+                            MaterialTheme.colorScheme.primary
+                        else if (trend < 0.0)
+                            MaterialTheme.colorScheme.error
+                        else
+                            MaterialTheme.colorScheme.onSurface
+                        Text(
+                            text = "$symbol${trend}%",
+                            fontFamily = displayFontFamily,
+                            color = color,
+                            fontSize = 18.sp,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                        Text(
+                            text = stringResource(periodText),
+                            fontFamily = displayFontFamily,
+                            fontSize = 14.sp,
+                            color = color,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                    }
                 }
             }
         }

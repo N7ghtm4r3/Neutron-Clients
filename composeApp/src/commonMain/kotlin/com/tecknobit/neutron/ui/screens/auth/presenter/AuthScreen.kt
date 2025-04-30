@@ -43,6 +43,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.tecknobit.equinoxcompose.annotations.ScreenSection
 import com.tecknobit.equinoxcompose.components.EquinoxOutlinedTextField
 import com.tecknobit.equinoxcompose.session.screens.EquinoxScreen
 import com.tecknobit.equinoxcore.helpers.InputsValidator
@@ -116,6 +117,7 @@ class AuthScreen : EquinoxScreen<AuthScreenViewModel>(
      * Method to create the header section of the activity
      */
     @Composable
+    @ScreenSection
     private fun HeaderSection() {
         Column(
             modifier = Modifier
@@ -192,6 +194,7 @@ class AuthScreen : EquinoxScreen<AuthScreenViewModel>(
      * Method to create the form where the user can fill it with his credentials
      */
     @Composable
+    @ScreenSection
     private fun FormSection() {
         Column(
             modifier = Modifier

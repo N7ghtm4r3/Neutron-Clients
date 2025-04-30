@@ -15,6 +15,7 @@ import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.runtime.State
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.dp
+import com.tecknobit.equinoxcompose.annotations.ScreenSection
 import com.tecknobit.equinoxcompose.utilities.ResponsiveContent
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
@@ -102,7 +103,7 @@ interface RevenuesContainerScreen {
      * The header section of the screen
      */
     @Composable
-    // TODO: TO ANNOTATE AS ScreenSection
+    @ScreenSection
     fun Header()
 
 }
