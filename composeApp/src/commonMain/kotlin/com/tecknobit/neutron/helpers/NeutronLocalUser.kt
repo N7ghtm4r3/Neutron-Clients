@@ -5,6 +5,7 @@ import com.tecknobit.equinoxcore.annotations.CustomParametersOrder
 import com.tecknobit.equinoxcore.annotations.RequiresSuperCall
 import com.tecknobit.neutroncore.CURRENCY_KEY
 import com.tecknobit.neutroncore.enums.NeutronCurrency
+import com.tecknobit.neutroncore.enums.NeutronCurrency.DOLLAR
 import kotlinx.serialization.json.JsonObject
 
 /**
@@ -19,7 +20,7 @@ class NeutronLocalUser : EquinoxLocalUser(
     /**
      * `currency` the currency of the user
      */
-    var currency: NeutronCurrency = NeutronCurrency.DOLLAR
+    var currency: NeutronCurrency = DOLLAR
         set(value) {
             if (value != field) {
                 setPreference(
@@ -65,7 +66,9 @@ class NeutronLocalUser : EquinoxLocalUser(
             *custom
         )
         currency = NeutronCurrency.getInstance(
-            currencyName = custom[0].toString()
+            currencyName = custom.extractsCustomValue(
+                itemPosition = 0
+            )
         )
     }
 
