@@ -110,8 +110,7 @@ private fun checkForUpdates() {
  *
  */
 actual fun setUserLanguage() {
-    val tag = localUser.language
-    val locale = Locale(tag)
+    val locale = Locale(localUser.language)
     Locale.setDefault(locale)
     val context = AppContext.get()
     val config = context.resources.configuration

@@ -4,7 +4,6 @@ package com.tecknobit.neutron
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.NonRestartableComposable
-import com.tecknobit.equinoxcore.helpers.InputsValidator.Companion.DEFAULT_LANGUAGE
 import kotlinx.cinterop.ExperimentalForeignApi
 import platform.Foundation.NSLocale
 import platform.Foundation.NSUserDefaults
@@ -49,7 +48,7 @@ private fun authenticateWithBiometrics() {
  *
  */
 actual fun setUserLanguage() {
-    val locale = NSLocale(localeIdentifier = localUser.language ?: DEFAULT_LANGUAGE)
+    val locale = NSLocale(localeIdentifier = localUser.language)
     NSUserDefaults.standardUserDefaults.setObject(locale, forKey = "AppleLanguages")
     NSUserDefaults.standardUserDefaults.synchronize()
 }
