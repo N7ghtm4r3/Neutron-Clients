@@ -44,9 +44,6 @@ actual class KReviewer actual constructor() {
             } else
                 flowAction()
         }
-        request.addOnFailureListener {
-            flowAction()
-        }
     }
 
 }
