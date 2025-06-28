@@ -56,6 +56,9 @@ private val biometricPromptManager by lazy {
  */
 @Composable
 actual fun CheckForUpdatesAndLaunch() {
+    var retry by remember { mutableStateOf(false) }
+    if (retry)
+        CheckForUpdatesAndLaunch()
     if(authWitBiometricParams) {
         val biometricResult by biometricPromptManager.promptResults.collectAsState(
             initial = null
@@ -75,8 +78,8 @@ actual fun CheckForUpdatesAndLaunch() {
                 AuthenticationSuccess, AuthenticationNotSet, HardwareUnavailable,
                 FeatureUnavailable -> checkForUpdates()
                 else -> {
+                    retry = false
                     NeutronTheme {
-                        var retry by remember { mutableStateOf(false) }
                         ErrorUI(
                             containerModifier = Modifier
                                 .fillMaxSize(),
@@ -90,8 +93,6 @@ actual fun CheckForUpdatesAndLaunch() {
                                 }
                             }
                         )
-                        if (retry)
-                            CheckForUpdatesAndLaunch()
                     }
                 }
             }
