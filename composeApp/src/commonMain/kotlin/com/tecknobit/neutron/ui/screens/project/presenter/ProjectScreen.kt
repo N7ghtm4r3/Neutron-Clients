@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalComposeApi::class)
+
 package com.tecknobit.neutron.ui.screens.project.presenter
 
 import androidx.compose.animation.AnimatedVisibility
@@ -28,6 +30,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.ExperimentalComposeApi
 import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
@@ -39,9 +42,9 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.tecknobit.equinoxcompose.annotations.ScreenSection
-import com.tecknobit.equinoxcompose.resources.retry
-import com.tecknobit.equinoxcompose.session.ManagedContent
 import com.tecknobit.equinoxcompose.session.screens.EquinoxScreen
+import com.tecknobit.equinoxcompose.session.sessionflow.SessionFlowContainer
+import com.tecknobit.equinoxcompose.session.sessionflow.rememberSessionFlowState
 import com.tecknobit.equinoxcompose.utilities.EXPANDED_CONTAINER
 import com.tecknobit.neutron.INSERT_REVENUE_SCREEN
 import com.tecknobit.neutron.INSERT_TICKET_SCREEN
@@ -49,6 +52,7 @@ import com.tecknobit.neutron.displayFontFamily
 import com.tecknobit.neutron.localUser
 import com.tecknobit.neutron.navigator
 import com.tecknobit.neutron.ui.components.DeleteRevenue
+import com.tecknobit.neutron.ui.components.RetryButton
 import com.tecknobit.neutron.ui.screens.project.components.InitialRevenueItem
 import com.tecknobit.neutron.ui.screens.project.components.Tickets
 import com.tecknobit.neutron.ui.screens.project.components.TicketsFilterBar
@@ -101,11 +105,12 @@ class ProjectScreen(
     @Composable
     override fun ArrangeScreenContent() {
         NeutronTheme {
-            ManagedContent(
+            SessionFlowContainer(
                 modifier = Modifier
                     .fillMaxSize(),
+                state = viewModel.state,
                 viewModel = viewModel,
-                initialDelay = 500L,
+                initialLoadingRoutineDelay = 1000L,
                 loadingRoutine = { project.value != null },
                 content = {
                     Scaffold(
@@ -115,10 +120,11 @@ class ProjectScreen(
                         ScreenContent()
                     }
                 },
-                serverOfflineRetryText = com.tecknobit.equinoxcompose.resources.Res.string.retry,
-                serverOfflineRetryAction = { viewModel.retryAfterConnectionError() },
-                noInternetConnectionRetryText = com.tecknobit.equinoxcompose.resources.Res.string.retry,
-                noInternetConnectionRetryAction = { viewModel.retryAfterConnectionError() },
+                retryFailedFlowContent = {
+                    RetryButton(
+                        onRetry = { viewModel.retryAfterConnectionError() }
+                    )
+                }
             )
         }
     }
@@ -346,6 +352,7 @@ class ProjectScreen(
         project = viewModel.project.collectAsState()
         balance = viewModel.balance.collectAsState()
         hideBalances = viewModel.hideBalances.collectAsState()
+        viewModel.state = rememberSessionFlowState()
     }
 
 }

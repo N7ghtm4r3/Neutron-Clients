@@ -1,8 +1,12 @@
+@file:OptIn(ExperimentalComposeApi::class)
+
 package com.tecknobit.neutron.ui.screens.insert.shared.presentation
 
 import androidx.compose.material3.SnackbarHostState
+import androidx.compose.runtime.ExperimentalComposeApi
 import androidx.compose.runtime.MutableState
 import androidx.lifecycle.viewModelScope
+import com.tecknobit.equinoxcompose.session.sessionflow.SessionFlowState
 import com.tecknobit.equinoxcompose.viewmodels.EquinoxViewModel
 import com.tecknobit.equinoxcore.annotations.RequiresSuperCall
 import com.tecknobit.equinoxcore.annotations.Structure
@@ -82,6 +86,11 @@ abstract class InsertScreenViewModel(
     lateinit var insertionDate: MutableState<LocalDateTime>
 
     /**
+     * `sessionFlowState` the state used to manage the session lifecycle in the screen
+     */
+    lateinit var state: SessionFlowState
+
+    /**
      * Method to retrieve the revenue information to edit that revenue
      *
      * @param onSuccess The action to execute when the request has been successful
@@ -100,13 +109,15 @@ abstract class InsertScreenViewModel(
                     )
                 },
                 onSuccess = {
+                    state.notifyOperational()
                     _revenue.value = Json.decodeFromJsonElement(
                         deserializer = RevenueSerializer,
                         element = it.toResponseData()
                     )
                     onSuccess?.invoke()
                 },
-                onFailure = { showSnackbarMessage(it) }
+                onFailure = { showSnackbarMessage(it) },
+                onConnectionError = { state.notifyServerOffline() }
             )
         }
     }

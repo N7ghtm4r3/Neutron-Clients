@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalComposeApi::class)
+
 package com.tecknobit.neutron.ui.screens.revenues.presenter
 
 import androidx.compose.animation.AnimatedContent
@@ -23,6 +25,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.ExperimentalComposeApi
 import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
@@ -36,9 +39,9 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.tecknobit.equinoxcompose.annotations.ScreenSection
-import com.tecknobit.equinoxcompose.resources.retry
-import com.tecknobit.equinoxcompose.session.ManagedContent
 import com.tecknobit.equinoxcompose.session.screens.EquinoxScreen
+import com.tecknobit.equinoxcompose.session.sessionflow.SessionFlowContainer
+import com.tecknobit.equinoxcompose.session.sessionflow.rememberSessionFlowState
 import com.tecknobit.equinoxcompose.utilities.EXPANDED_CONTAINER
 import com.tecknobit.equinoxcompose.utilities.ResponsiveContent
 import com.tecknobit.neutron.CloseApplicationOnNavBack
@@ -48,6 +51,7 @@ import com.tecknobit.neutron.displayFontFamily
 import com.tecknobit.neutron.localUser
 import com.tecknobit.neutron.navigator
 import com.tecknobit.neutron.ui.components.ProfilePic
+import com.tecknobit.neutron.ui.components.RetryButton
 import com.tecknobit.neutron.ui.screens.revenues.components.FiltersBar
 import com.tecknobit.neutron.ui.screens.revenues.components.Revenues
 import com.tecknobit.neutron.ui.screens.revenues.presentation.RevenuesScreenViewModel
@@ -109,11 +113,12 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
     override fun ArrangeScreenContent() {
         CloseApplicationOnNavBack()
         NeutronTheme {
-            ManagedContent(
+            SessionFlowContainer(
                 modifier = Modifier
                     .fillMaxSize(),
+                state = viewModel.state,
                 viewModel = viewModel,
-                initialDelay = 500L,
+                initialLoadingRoutineDelay = 1000L,
                 loadingRoutine = { walletStatus.value != null },
                 content = {
                     Scaffold(
@@ -125,10 +130,11 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
                         ScreenContent()
                     }
                 },
-                serverOfflineRetryText = com.tecknobit.equinoxcompose.resources.Res.string.retry,
-                serverOfflineRetryAction = { viewModel.retryAfterConnectionError() },
-                noInternetConnectionRetryText = com.tecknobit.equinoxcompose.resources.Res.string.retry,
-                noInternetConnectionRetryAction = { viewModel.retryAfterConnectionError() },
+                retryFailedFlowContent = {
+                    RetryButton(
+                        onRetry = { viewModel.retryAfterConnectionError() }
+                    )
+                }
             )
         }
     }
@@ -358,6 +364,7 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
         walletStatus = viewModel.walletStatus.collectAsState()
         revenuePeriod = viewModel.revenuePeriod.collectAsState()
         hideBalances = viewModel.hideBalances.collectAsState()
+        viewModel.state = rememberSessionFlowState()
     }
 
 }

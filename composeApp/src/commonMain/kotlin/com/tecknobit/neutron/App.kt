@@ -1,6 +1,9 @@
+@file:OptIn(ExperimentalComposeApi::class)
+
 package com.tecknobit.neutron
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.ExperimentalComposeApi
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.ui.text.font.FontFamily
@@ -12,6 +15,7 @@ import coil3.request.addLastModifiedToFileCacheKey
 import com.tecknobit.ametista.AmetistaConfig
 import com.tecknobit.ametistaengine.AmetistaEngine
 import com.tecknobit.ametistaengine.AmetistaEngine.Companion.FILES_AMETISTA_CONFIG_PATHNAME
+import com.tecknobit.equinoxcompose.session.sessionflow.SessionFlowState
 import com.tecknobit.equinoxcore.network.Requester.Companion.toResponseData
 import com.tecknobit.equinoxcore.network.sendRequest
 import com.tecknobit.neutron.helpers.NeutronLocalUser
@@ -179,6 +183,10 @@ fun App() {
             }
         }
     }
+    SessionFlowState.invokeOnUserDisconnected {
+        localUser.clear()
+        navigator.navigate(SPLASHSCREEN)
+    }
 }
 
 /**
@@ -216,7 +224,8 @@ fun startSession() {
     requester = NeutronRequester(
         host = localUser.hostAddress,
         userId = localUser.userId,
-        userToken = localUser.userToken
+        userToken = localUser.userToken,
+        debugMode = true // TODO: TO REMOVE
     )
     val route = if (localUser.isAuthenticated) {
         MainScope().launch {

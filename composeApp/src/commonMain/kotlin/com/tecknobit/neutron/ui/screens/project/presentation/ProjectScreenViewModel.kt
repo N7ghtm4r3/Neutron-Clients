@@ -1,8 +1,10 @@
+@file:OptIn(ExperimentalComposeApi::class)
+
 package com.tecknobit.neutron.ui.screens.project.presentation
 
+import androidx.compose.runtime.ExperimentalComposeApi
 import androidx.lifecycle.viewModelScope
-import com.tecknobit.equinoxcompose.session.setHasBeenDisconnectedValue
-import com.tecknobit.equinoxcompose.session.setServerOfflineValue
+import com.tecknobit.equinoxcompose.session.sessionflow.SessionFlowState
 import com.tecknobit.equinoxcompose.viewmodels.EquinoxViewModel
 import com.tecknobit.equinoxcore.network.Requester.Companion.toResponseContent
 import com.tecknobit.equinoxcore.network.Requester.Companion.toResponseData
@@ -60,6 +62,11 @@ class ProjectScreenViewModel(
      *`retrieveClosedTickets` whether retrieve the closed tickets
      */
     private var retrieveClosedTickets: Boolean = true
+
+    /**
+     * `sessionFlowState` the state used to manage the session lifecycle in the screen
+     */
+    lateinit var state: SessionFlowState
 
     /**
      * Method to retrieve the project specified by the [projectId]
@@ -135,7 +142,7 @@ class ProjectScreenViewModel(
                 },
                 serializer = TicketRevenue.serializer(),
                 onSuccess = { paginatedResponse ->
-                    setServerOfflineValue(false)
+                    state.notifyOperational()
                     ticketsState.appendPage(
                         items = paginatedResponse.data,
                         nextPageKey = paginatedResponse.nextPage,
@@ -143,7 +150,7 @@ class ProjectScreenViewModel(
                     )
                     getProjectBalance()
                 },
-                onFailure = { setHasBeenDisconnectedValue(true) },
+                onFailure = { state.notifyUserDisconnected() },
                 onConnectionError = { notifyConnectionError() }
             )
         }
@@ -230,7 +237,7 @@ class ProjectScreenViewModel(
      */
     override fun notifyConnectionError() {
         ticketsState.setError(Exception())
-        setServerOfflineValue(true)
+        state.notifyServerOffline()
     }
 
     /**

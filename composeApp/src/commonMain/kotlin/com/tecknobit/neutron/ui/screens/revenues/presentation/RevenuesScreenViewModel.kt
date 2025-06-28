@@ -1,9 +1,11 @@
+@file:OptIn(ExperimentalComposeApi::class)
+
 package com.tecknobit.neutron.ui.screens.revenues.presentation
 
+import androidx.compose.runtime.ExperimentalComposeApi
 import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.viewModelScope
-import com.tecknobit.equinoxcompose.session.setHasBeenDisconnectedValue
-import com.tecknobit.equinoxcompose.session.setServerOfflineValue
+import com.tecknobit.equinoxcompose.session.sessionflow.SessionFlowState
 import com.tecknobit.equinoxcompose.viewmodels.EquinoxViewModel
 import com.tecknobit.equinoxcore.network.Requester.Companion.toResponseData
 import com.tecknobit.equinoxcore.network.sendPaginatedRequest
@@ -59,6 +61,11 @@ class RevenuesScreenViewModel : RevenueRelatedScreenViewModel() , RevenueLabelsR
     private var retrieveProjectsRevenues: Boolean = true
 
     /**
+     * `sessionFlowState` the state used to manage the session lifecycle in the screen
+     */
+    lateinit var state: SessionFlowState
+
+    /**
      * Method to request the current status of the wallet
      */
     fun getWalletStatus() {
@@ -73,10 +80,10 @@ class RevenuesScreenViewModel : RevenueRelatedScreenViewModel() , RevenueLabelsR
                     )
                 },
                 onSuccess = { response ->
+                    state.notifyOperational()
                     _walletStatus.value = Json.decodeFromJsonElement(response.toResponseData())
-                    setServerOfflineValue(false)
                 },
-                onFailure = { setHasBeenDisconnectedValue(true) },
+                onFailure = { state.notifyUserDisconnected() },
                 onConnectionError = { notifyConnectionError() }
             )
         }
@@ -151,14 +158,14 @@ class RevenuesScreenViewModel : RevenueRelatedScreenViewModel() , RevenueLabelsR
                 },
                 serializer = RevenueSerializer,
                 onSuccess = { paginatedResponse ->
+                    state.notifyOperational()
                     revenuesState.appendPage(
                         items = paginatedResponse.data,
                         nextPageKey = paginatedResponse.nextPage,
                         isLastPage = paginatedResponse.isLastPage
                     )
-                    setServerOfflineValue(false)
                 },
-                onFailure = { setHasBeenDisconnectedValue(true) },
+                onFailure = { state.notifyUserDisconnected() },
                 onConnectionError = { notifyConnectionError() }
             )
         }
@@ -169,7 +176,7 @@ class RevenuesScreenViewModel : RevenueRelatedScreenViewModel() , RevenueLabelsR
      */
     override fun notifyConnectionError() {
         revenuesState.setError(Exception())
-        setServerOfflineValue(true)
+        state.notifyServerOffline()
     }
 
     /**
