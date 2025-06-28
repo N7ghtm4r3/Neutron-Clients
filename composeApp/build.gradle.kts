@@ -7,6 +7,7 @@ import org.jetbrains.dokka.base.DokkaBaseConfiguration
 import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 import java.util.UUID
 
@@ -103,7 +104,7 @@ kotlin {
                 implementation(libs.datetime.wheel.picker)
                 implementation(libs.kotlinx.datetime)
                 implementation(libs.colorpicker.compose)
-                //implementation(libs.ametista.engine)
+                implementation(libs.ametista.engine)
                 implementation(libs.neutroncore)
             }
         }
@@ -248,3 +249,5 @@ buildConfig {
         value = project.findProperty("bypass_ssl_validation").toString().toBoolean()
     )
 }
+
+rootProject.the<NodeJsRootExtension>().versions.webpackDevServer.version = "5.2.2"

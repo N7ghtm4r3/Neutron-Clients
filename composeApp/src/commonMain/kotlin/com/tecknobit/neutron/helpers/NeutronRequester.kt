@@ -1,5 +1,6 @@
 package com.tecknobit.neutron.helpers
 
+import com.tecknobit.ametistaengine.AmetistaEngine
 import com.tecknobit.equinoxcompose.network.EquinoxRequester
 import com.tecknobit.equinoxcore.annotations.RequestPath
 import com.tecknobit.equinoxcore.annotations.Wrapper
@@ -71,10 +72,9 @@ class NeutronRequester(
 ) {
     
     init {
-        // TODO: TO INTEGRATE AFTER
-        /*attachInterceptorOnRequest {
+        attachInterceptorOnRequest {
             AmetistaEngine.ametistaEngine.notifyNetworkRequest()
-        }*/
+        }
     }
 
     /**

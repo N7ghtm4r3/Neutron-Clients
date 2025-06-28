@@ -11,6 +11,7 @@ import androidx.annotation.ContentView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
+import com.tecknobit.ametistaengine.AmetistaEngine
 import com.tecknobit.equinoxcompose.session.setUpSession
 import com.tecknobit.equinoxcore.utilities.ContextActivityProvider
 
@@ -54,7 +55,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         appUpdateManager = AppUpdateManagerFactory.create(applicationContext)
         ContextActivityProvider.setCurrentActivity(this)
-        //TODO: To integrate after AmetistaEngine.intake()
+        AmetistaEngine.intake()
         setContent {
             enableEdgeToEdge()
             setUpSession(

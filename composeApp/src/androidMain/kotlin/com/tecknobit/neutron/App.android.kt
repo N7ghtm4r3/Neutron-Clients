@@ -3,16 +3,22 @@ package com.tecknobit.neutron
 import androidx.activity.compose.LocalActivity
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import com.google.android.play.core.appupdate.AppUpdateOptions
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.UpdateAvailability.UPDATE_AVAILABLE
 import com.google.android.play.core.ktx.isImmediateUpdateAllowed
 import com.tecknobit.equinoxcompose.components.ErrorUI
+import com.tecknobit.equinoxcompose.resources.retry
 import com.tecknobit.equinoxcore.utilities.AppContext
 import com.tecknobit.equinoxcore.utilities.ContextActivityProvider
 import com.tecknobit.neutron.MainActivity.Companion.appUpdateManager
@@ -70,11 +76,22 @@ actual fun CheckForUpdatesAndLaunch() {
                 FeatureUnavailable -> checkForUpdates()
                 else -> {
                     NeutronTheme {
+                        var retry by remember { mutableStateOf(false) }
                         ErrorUI(
                             containerModifier = Modifier
                                 .fillMaxSize(),
-                            retryAction = { CheckForUpdatesAndLaunch() }
+                            retryContent = {
+                                TextButton(
+                                    onClick = { retry = true }
+                                ) {
+                                    Text(
+                                        text = stringResource(com.tecknobit.equinoxcompose.resources.Res.string.retry)
+                                    )
+                                }
+                            }
                         )
+                        if (retry)
+                            CheckForUpdatesAndLaunch()
                     }
                 }
             }

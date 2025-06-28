@@ -1,14 +1,15 @@
 package com.tecknobit.neutron
 
 import androidx.compose.ui.window.ComposeUIViewController
+import com.tecknobit.ametistaengine.AmetistaEngine
 import com.tecknobit.equinoxcompose.session.setUpSession
 
 /**
- * Method to start the of`Neutron** iOs app
+ * Method to start the of `Neutron` iOs app
  *
  */
 fun MainViewController() {
-    //TODO: To integrate after AmetistaEngine.intake()
+    AmetistaEngine.intake()
     ComposeUIViewController {
         setUpSession(
             hasBeenDisconnectedAction = {
