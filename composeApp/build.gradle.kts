@@ -27,7 +27,7 @@ kotlin {
         }
     }
 
-    /*listOf(
+    listOf(
         iosX64(),
         iosArm64(),
         iosSimulatorArm64()
@@ -36,7 +36,7 @@ kotlin {
             baseName = "Neutron"
             isStatic = true
         }
-    }*/
+    }
     
     jvm("desktop") {
         compilerOptions {
@@ -115,7 +115,7 @@ kotlin {
             implementation(libs.ktor.client.okhttp)
         }
 
-        /*val iosX64Main by getting
+        val iosX64Main by getting
         val iosArm64Main by getting
         val iosSimulatorArm64Main by getting
         val iosMain by creating {
@@ -126,7 +126,7 @@ kotlin {
             dependencies {
                 implementation(libs.ktor.client.cio)
             }
-        }*/
+        }
 
         val wasmJsMain by getting {
             dependencies {
@@ -145,8 +145,8 @@ android {
         applicationId = "com.tecknobit.neutron"
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
-        versionCode = 5
-        versionName = "1.0.2"
+        versionCode = 6
+        versionName = "1.0.3"
     }
     packaging {
         resources {
@@ -179,10 +179,10 @@ compose.desktop {
                 "jdk.security.auth"
             )
             packageName = "Neutron"
-            packageVersion = "1.0.2"
+            packageVersion = "1.0.3"
             packageName = "Neutron"
-            packageVersion = "1.0.2"
-            version = "1.0.2"
+            packageVersion = "1.0.3"
+            version = "1.0.3"
             description = "Order and ticket revenue manager for the projects you are developing"
             copyright = "© 2025 Tecknobit"
             vendor = "Tecknobit"
@@ -199,7 +199,7 @@ compose.desktop {
                 iconFile.set(project.file("src/desktopMain/resources/logo.png"))
                 packageName = "com-tecknobit-neutron"
                 debMaintainer = "infotecknobitcompany@gmail.com"
-                appRelease = "1.0.2"
+                appRelease = "1.0.3"
                 appCategory = "PERSONALIZATION"
                 rpmLicenseType = "APACHE2"
             }
