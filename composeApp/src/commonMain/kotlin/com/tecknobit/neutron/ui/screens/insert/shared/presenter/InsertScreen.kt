@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalComposeApi::class)
+
 package com.tecknobit.neutron.ui.screens.insert.shared.presenter
 
 import androidx.compose.animation.AnimatedVisibility
@@ -20,6 +22,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.ExperimentalComposeApi
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
@@ -43,8 +46,9 @@ import com.tecknobit.equinoxcompose.components.EquinoxTextField
 import com.tecknobit.equinoxcompose.components.stepper.Step
 import com.tecknobit.equinoxcompose.components.stepper.StepContent
 import com.tecknobit.equinoxcompose.components.stepper.Stepper
-import com.tecknobit.equinoxcompose.session.ManagedContent
 import com.tecknobit.equinoxcompose.session.screens.EquinoxScreen
+import com.tecknobit.equinoxcompose.session.sessionflow.SessionFlowContainer
+import com.tecknobit.equinoxcompose.session.sessionflow.rememberSessionFlowState
 import com.tecknobit.equinoxcompose.utilities.ResponsiveContent
 import com.tecknobit.equinoxcore.annotations.RequiresSuperCall
 import com.tecknobit.equinoxcore.annotations.Structure
@@ -163,11 +167,12 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
      */
     @Composable
     override fun ScreenContent() {
-        ManagedContent(
+        SessionFlowContainer(
             modifier = Modifier
                 .fillMaxSize(),
+            state = viewModel.state,
             viewModel = viewModel,
-            initialDelay = 500L,
+            initialLoadingRoutineDelay = 500L,
             loadingRoutine = if (isEditing) {
                 {
                     revenue.value != null
@@ -490,6 +495,7 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
         revenue = viewModel.revenue.collectAsState()
         viewModel.titleError = remember { mutableStateOf(false) }
         viewModel.descriptionError = remember { mutableStateOf(false) }
+        viewModel.state = rememberSessionFlowState()
     }
 
     /**

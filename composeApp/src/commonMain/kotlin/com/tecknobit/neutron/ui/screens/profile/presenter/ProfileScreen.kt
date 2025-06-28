@@ -59,7 +59,7 @@ import com.tecknobit.equinoxcompose.components.stepper.Step
 import com.tecknobit.equinoxcompose.components.stepper.StepContent
 import com.tecknobit.equinoxcompose.components.stepper.Stepper
 import com.tecknobit.equinoxcompose.session.EquinoxLocalUser.ApplicationTheme
-import com.tecknobit.equinoxcore.helpers.InputsValidator.Companion.LANGUAGES_SUPPORTED
+import com.tecknobit.equinoxcore.helpers.InputsValidator.Companion.SUPPORTED_LANGUAGES
 import com.tecknobit.equinoxcore.helpers.InputsValidator.Companion.isEmailValid
 import com.tecknobit.equinoxcore.helpers.InputsValidator.Companion.isPasswordValid
 import com.tecknobit.neutron.SPLASHSCREEN
@@ -446,7 +446,7 @@ class ProfileScreen : NeutronScreen<ProfileScreenViewModel>(
             modifier = Modifier
                 .selectableGroup()
         ) {
-            LANGUAGES_SUPPORTED.entries.forEach { entry ->
+            SUPPORTED_LANGUAGES.entries.forEach { entry ->
                 Row (
                     verticalAlignment = Alignment.CenterVertically
                 ) {

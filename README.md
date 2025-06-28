@@ -1,6 +1,6 @@
 # Neutron-Clients
 
-**v1.0.2**
+**v1.0.3**
 
 This project, based on Java and the Spring Boot framework, is an open source orders and ticket
 revenue
@@ -19,14 +19,14 @@ use!
 
 - Mobile
   - [Android](https://play.google.com/store/apps/details?id=com.tecknobit.neutron)
-  - [Neutron desktop version](https://github.com/N7ghtm4r3/Neutron-Clients/releases/tag/1.0.2)
+  - [Neutron desktop version](https://github.com/N7ghtm4r3/Neutron-Clients/releases/tag/1.0.3)
   - iOS -> source code available, but cannot distribute due
     missing [Apple Developer Program license](https://developer.apple.com/programs/)
   - [Neutron webapp version](https://github.com/N7ghtm4r3/Neutron-Webapp/blob/main/README.md)
 
 ### Backend
 
-- [Backend service "out-of-the-box"](https://github.com/N7ghtm4r3/Neutron/releases/tag/1.0.2)
+- [Backend service "out-of-the-box"](https://github.com/N7ghtm4r3/Neutron/releases/tag/1.0.3)
 
 ## Usages
 
@@ -61,7 +61,7 @@ repositories {
 }
 
 dependencies {
-  implementation 'com.tecknobit.neutroncore:neutroncore:1.0.2'
+  implementation 'com.tecknobit.neutroncore:neutroncore:1.0.3'
 }
 ```
 
@@ -74,7 +74,7 @@ repositories {
 }
 
 dependencies {
-  implementation("com.tecknobit.neutroncore:neutroncore:1.0.2")
+  implementation("com.tecknobit.neutroncore:neutroncore:1.0.3")
 }
 ```
 

@@ -1,5 +1,6 @@
 package com.tecknobit.neutron.helpers
 
+import com.tecknobit.ametistaengine.AmetistaEngine
 import com.tecknobit.equinoxcompose.network.EquinoxRequester
 import com.tecknobit.equinoxcore.annotations.RequestPath
 import com.tecknobit.equinoxcore.annotations.Wrapper
@@ -20,7 +21,7 @@ import com.tecknobit.neutroncore.GENERAL_REVENUES_KEY
 import com.tecknobit.neutroncore.IS_PROJECT_REVENUE_KEY
 import com.tecknobit.neutroncore.LABELS_KEY
 import com.tecknobit.neutroncore.PENDING_TICKETS_KEY
-import com.tecknobit.neutroncore.PROJECTS_KEY
+import com.tecknobit.neutroncore.PROJECTS_PATH_KEY
 import com.tecknobit.neutroncore.PROJECT_REVENUES_KEY
 import com.tecknobit.neutroncore.REVENUES_KEY
 import com.tecknobit.neutroncore.REVENUE_DATE_KEY
@@ -71,10 +72,9 @@ class NeutronRequester(
 ) {
     
     init {
-        // TODO: TO INTEGRATE AFTER
-        /*attachInterceptorOnRequest {
+        attachInterceptorOnRequest {
             AmetistaEngine.ametistaEngine.notifyNetworkRequest()
-        }*/
+        }
     }
 
     /**
@@ -755,7 +755,7 @@ class NeutronRequester(
     ): String {
         var baseEndpoint = "${assembleUsersEndpointPath(endpoint)}/$REVENUES_KEY"
         if(isProjectPath)
-            baseEndpoint = "$baseEndpoint$PROJECTS_KEY$revenueId$extraPath$extraId"
+            baseEndpoint = "$baseEndpoint$PROJECTS_PATH_KEY$revenueId$extraPath$extraId"
         else if (revenueId != null)
             baseEndpoint = "$baseEndpoint/$revenueId"
         return baseEndpoint
