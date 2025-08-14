@@ -111,7 +111,7 @@ const val INSERT_TICKET_SCREEN = "InsertTicketScreen"
 const val PROJECT_REVENUE_SCREEN = "ProjectRevenueScreen"
 
 /**
- * Common entry point of The `Neutron** application
+ * Common entry point of the `Neutron` application
  */
 @Composable
 fun App() {
