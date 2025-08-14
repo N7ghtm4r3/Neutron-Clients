@@ -55,7 +55,6 @@ import com.tecknobit.equinoxcore.helpers.InputsValidator.Companion.isSurnameVali
 import com.tecknobit.neutron.CloseApplicationOnNavBack
 import com.tecknobit.neutron.displayFontFamily
 import com.tecknobit.neutron.ui.screens.auth.presentation.AuthScreenViewModel
-import com.tecknobit.neutron.ui.theme.NeutronTheme
 import neutron.composeapp.generated.resources.Res
 import neutron.composeapp.generated.resources.app_version
 import neutron.composeapp.generated.resources.are_you_new_to_neutron
@@ -98,17 +97,15 @@ class AuthScreen : EquinoxScreen<AuthScreenViewModel>(
     @Composable
     override fun ArrangeScreenContent() {
         CloseApplicationOnNavBack()
-        NeutronTheme {
-            Scaffold(
-                snackbarHost = { SnackbarHost(hostState = viewModel.snackbarHostState!!) },
+        Scaffold(
+            snackbarHost = { SnackbarHost(hostState = viewModel.snackbarHostState!!) },
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
             ) {
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                ) {
-                    HeaderSection()
-                    FormSection()
-                }
+                HeaderSection()
+                FormSection()
             }
         }
     }

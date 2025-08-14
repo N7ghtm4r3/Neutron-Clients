@@ -2,7 +2,7 @@ package com.tecknobit.neutron.ui.screens.shared.presentations
 
 import androidx.compose.material3.SnackbarHostState
 import androidx.lifecycle.viewModelScope
-import com.tecknobit.equinoxcompose.viewmodels.EquinoxViewModel
+import com.tecknobit.equinoxcompose.session.viewmodels.EquinoxViewModel
 import com.tecknobit.equinoxcore.annotations.Structure
 import com.tecknobit.equinoxcore.network.sendRequest
 import com.tecknobit.neutron.requester

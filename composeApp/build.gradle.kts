@@ -1,3 +1,4 @@
+@file:OptIn(ExperimentalKotlinGradlePluginApi::class)
 
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat.Deb
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat.Exe
@@ -5,10 +6,11 @@ import org.jetbrains.compose.desktop.application.dsl.TargetFormat.Pkg
 import org.jetbrains.dokka.base.DokkaBase
 import org.jetbrains.dokka.base.DokkaBaseConfiguration
 import org.jetbrains.dokka.gradle.DokkaTask
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
+import org.jetbrains.kotlin.gradle.targets.wasm.nodejs.WasmNodeJsRootExtension
 import java.util.UUID
 
 plugins {
@@ -47,7 +49,7 @@ kotlin {
     
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
-        moduleName = "composeApp"
+        outputModuleName = "composeApp"
         browser {
             val rootDirPath = project.rootDir.path
             val projectDirPath = project.projectDir.path
@@ -61,6 +63,9 @@ kotlin {
                     }
                 }
             }
+        }
+        compilerOptions {
+            freeCompilerArgs.add("-Xwasm-attach-js-exception")
         }
         binaries.executable()
     }
@@ -76,7 +81,6 @@ kotlin {
             implementation(libs.review)
             implementation(libs.review.ktx)
             implementation(libs.ktor.client.okhttp)
-            implementation(libs.androidx.biometric)
             implementation(libs.androidx.appcompat)
         }
 
@@ -93,7 +97,6 @@ kotlin {
                 implementation(libs.androidx.lifecycle.runtime.compose)
                 implementation(libs.equinox.compose)
                 implementation(libs.equinox.core)
-                implementation(libs.precompose)
                 implementation(libs.kotlinx.serialization.json)
                 implementation(libs.lazy.pagination.compose)
                 implementation(libs.material3.window.size)
@@ -106,6 +109,8 @@ kotlin {
                 implementation(libs.colorpicker.compose)
                 implementation(libs.ametista.engine)
                 implementation(libs.neutroncore)
+                implementation(libs.compose.navigation)
+                implementation(libs.biometrik)
             }
         }
 
@@ -146,8 +151,8 @@ android {
         applicationId = "com.tecknobit.neutron"
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
-        versionCode = 6
-        versionName = "1.0.3"
+        versionCode = 7
+        versionName = "1.0.4"
     }
     packaging {
         resources {
@@ -180,10 +185,10 @@ compose.desktop {
                 "jdk.security.auth"
             )
             packageName = "Neutron"
-            packageVersion = "1.0.3"
+            packageVersion = "1.0.4"
             packageName = "Neutron"
-            packageVersion = "1.0.3"
-            version = "1.0.3"
+            packageVersion = "1.0.4"
+            version = "1.0.4"
             description = "Order and ticket revenue manager for the projects you are developing"
             copyright = "© 2025 Tecknobit"
             vendor = "Tecknobit"
@@ -200,7 +205,7 @@ compose.desktop {
                 iconFile.set(project.file("src/desktopMain/resources/logo.png"))
                 packageName = "com-tecknobit-neutron"
                 debMaintainer = "infotecknobitcompany@gmail.com"
-                appRelease = "1.0.3"
+                appRelease = "1.0.4"
                 appCategory = "PERSONALIZATION"
                 rpmLicenseType = "APACHE2"
             }
@@ -250,4 +255,4 @@ buildConfig {
     )
 }
 
-rootProject.the<NodeJsRootExtension>().versions.webpackDevServer.version = "5.2.2"
+rootProject.the<WasmNodeJsRootExtension>().versions.webpackDevServer.version = "5.2.2"

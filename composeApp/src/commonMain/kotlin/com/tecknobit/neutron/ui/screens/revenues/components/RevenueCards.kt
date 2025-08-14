@@ -37,6 +37,7 @@ import com.tecknobit.neutron.ui.screens.shared.data.ProjectRevenue
 import com.tecknobit.neutron.ui.screens.shared.data.Revenue
 import com.tecknobit.neutron.ui.screens.shared.data.RevenueLabel
 import com.tecknobit.neutroncore.PROJECT_LABEL_COLOR
+import com.tecknobit.neutroncore.REVENUE_IDENTIFIER_KEY
 import neutron.composeapp.generated.resources.Res
 import neutron.composeapp.generated.resources.last_revenue_on
 import neutron.composeapp.generated.resources.project
@@ -254,7 +255,13 @@ private fun ProjectRevenueContent(
         deleteIcon = Icons.Default.Delete,
         actionButton = {
             IconButton(
-                onClick = { navigator.navigate("$PROJECT_REVENUE_SCREEN/${revenue.id}") }
+                onClick = {
+                    val savedStateHandle = navigator.currentBackStackEntry?.savedStateHandle
+                    savedStateHandle?.let {
+                        savedStateHandle[REVENUE_IDENTIFIER_KEY] = revenue.id
+                        navigator.navigate(PROJECT_REVENUE_SCREEN)
+                    }
+                }
             ) {
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.NavigateNext,
@@ -298,7 +305,11 @@ private fun RevenueItem(
         labels = labels,
         containerColor = containerColor,
         onEdit = {
-            navigator.navigate("$INSERT_REVENUE_SCREEN/${revenue.id}")
+            val savedStateHandle = navigator.currentBackStackEntry?.savedStateHandle
+            savedStateHandle?.let {
+                savedStateHandle[REVENUE_IDENTIFIER_KEY] = revenue.id
+                navigator.navigate(INSERT_REVENUE_SCREEN)
+            }
         },
         deleteIcon = deleteIcon,
         actionButton = actionButton,

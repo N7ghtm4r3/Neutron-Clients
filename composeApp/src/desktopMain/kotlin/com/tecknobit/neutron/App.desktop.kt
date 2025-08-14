@@ -6,7 +6,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import com.tecknobit.neutron.ui.theme.NeutronTheme
 import com.tecknobit.octocatkdu.OctocatKDUConfig
 import com.tecknobit.octocatkdu.UpdaterDialog
 import neutron.composeapp.generated.resources.Res
@@ -23,17 +22,15 @@ import java.util.Locale
 @Composable
 actual fun CheckForUpdatesAndLaunch() {
     var launchApp by remember { mutableStateOf(true) }
-    NeutronTheme {
-        UpdaterDialog(
-            config = OctocatKDUConfig(
-                locale = Locale.getDefault(),
-                appName = stringResource(Res.string.app_name),
-                currentVersion = stringResource(Res.string.app_version),
-                onUpdateAvailable = { launchApp = false },
-                dismissAction = { launchApp = true }
-            )
+    UpdaterDialog(
+        config = OctocatKDUConfig(
+            locale = Locale.getDefault(),
+            appName = stringResource(Res.string.app_name),
+            currentVersion = stringResource(Res.string.app_version),
+            onUpdateAvailable = { launchApp = false },
+            dismissAction = { launchApp = true }
         )
-    }
+    )
     if (launchApp)
         startSession()
 }

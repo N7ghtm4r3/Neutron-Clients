@@ -1,7 +1,7 @@
 package com.tecknobit.neutron.ui.screens.auth.presentation
 
 import androidx.compose.material3.SnackbarHostState
-import com.tecknobit.equinoxcompose.viewmodels.EquinoxAuthViewModel
+import com.tecknobit.equinoxcompose.session.viewmodels.EquinoxAuthViewModel
 import com.tecknobit.equinoxcore.annotations.CustomParametersOrder
 import com.tecknobit.equinoxcore.annotations.RequiresSuperCall
 import com.tecknobit.equinoxcore.json.treatsAsString
