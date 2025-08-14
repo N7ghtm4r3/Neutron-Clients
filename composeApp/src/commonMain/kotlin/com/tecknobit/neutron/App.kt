@@ -186,6 +186,7 @@ fun App() {
                         )
                     }
                     insertRevenueScreen.ShowContent()
+                    savedStateHandle.remove<String>(REVENUE_IDENTIFIER_KEY)
                 }
             }
             composable(
@@ -211,17 +212,16 @@ fun App() {
                 // TODO: TO USE THE UNIQUE THEME
                 NeutronTheme {
                     val savedStateHandle = navigator.previousBackStackEntry?.savedStateHandle!!
-                    val projectId: String? = savedStateHandle[REVENUE_IDENTIFIER_KEY]
-                    projectId?.let {
-                        val ticketId: String? = savedStateHandle[TICKET_IDENTIFIER_KEY]
-                        val insertTicketScreen = equinoxScreen {
-                            InsertTicketScreen(
-                                projectId = projectId,
-                                ticketId = ticketId
-                            )
-                        }
-                        insertTicketScreen.ShowContent()
+                    val projectId: String = savedStateHandle[REVENUE_IDENTIFIER_KEY]!!
+                    val ticketId: String? = savedStateHandle[TICKET_IDENTIFIER_KEY]
+                    val insertTicketScreen = equinoxScreen {
+                        InsertTicketScreen(
+                            projectId = projectId,
+                            ticketId = ticketId
+                        )
                     }
+                    insertTicketScreen.ShowContent()
+                    savedStateHandle.remove<String>(TICKET_IDENTIFIER_KEY)
                 }
             }
         }

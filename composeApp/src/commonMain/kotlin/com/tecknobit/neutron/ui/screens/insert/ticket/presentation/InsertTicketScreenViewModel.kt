@@ -3,12 +3,10 @@ package com.tecknobit.neutron.ui.screens.insert.ticket.presentation
 import androidx.lifecycle.viewModelScope
 import com.tecknobit.equinoxcompose.session.viewmodels.EquinoxViewModel
 import com.tecknobit.equinoxcore.network.sendRequest
-import com.tecknobit.neutron.PROJECT_REVENUE_SCREEN
 import com.tecknobit.neutron.helpers.KReviewer
 import com.tecknobit.neutron.navigator
 import com.tecknobit.neutron.requester
 import com.tecknobit.neutron.ui.screens.insert.shared.presentation.InsertScreenViewModel
-import com.tecknobit.neutroncore.REVENUE_IDENTIFIER_KEY
 import kotlinx.coroutines.launch
 
 /**
@@ -49,13 +47,7 @@ class InsertTicketScreenViewModel(
                 },
                 onSuccess = {
                     val kReviewer = KReviewer()
-                    kReviewer.reviewInApp {
-                        val savedStateHandle = navigator.currentBackStackEntry?.savedStateHandle
-                        savedStateHandle?.let {
-                            savedStateHandle[REVENUE_IDENTIFIER_KEY] = projectId
-                            navigator.navigate(PROJECT_REVENUE_SCREEN)
-                        }
-                    }
+                    kReviewer.reviewInApp { navigator.popBackStack() }
                 },
                 onFailure = { showSnackbarMessage(it) }
             )
