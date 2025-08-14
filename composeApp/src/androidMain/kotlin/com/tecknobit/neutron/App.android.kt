@@ -1,5 +1,6 @@
 package com.tecknobit.neutron
 
+import androidx.activity.compose.BackHandler
 import androidx.activity.compose.LocalActivity
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.fillMaxSize
@@ -29,7 +30,6 @@ import com.tecknobit.neutron.helpers.BiometricPromptManager.BiometricResult.Auth
 import com.tecknobit.neutron.helpers.BiometricPromptManager.BiometricResult.FeatureUnavailable
 import com.tecknobit.neutron.helpers.BiometricPromptManager.BiometricResult.HardwareUnavailable
 import com.tecknobit.neutron.ui.theme.NeutronTheme
-import moe.tlaster.precompose.navigation.BackHandler
 import neutron.composeapp.generated.resources.Res
 import neutron.composeapp.generated.resources.enter_your_credentials_to_continue
 import neutron.composeapp.generated.resources.login_required

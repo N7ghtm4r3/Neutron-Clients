@@ -25,12 +25,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.tecknobit.equinoxcompose.annotations.ScreenCoordinator
 import com.tecknobit.equinoxcompose.session.screens.EquinoxScreen
+import com.tecknobit.equinoxcompose.session.viewmodels.EquinoxViewModel
 import com.tecknobit.equinoxcompose.utilities.EXPANDED_CONTAINER
-import com.tecknobit.equinoxcompose.viewmodels.EquinoxViewModel
 import com.tecknobit.equinoxcore.annotations.Structure
 import com.tecknobit.neutron.displayFontFamily
 import com.tecknobit.neutron.navigator
-import com.tecknobit.neutron.ui.theme.NeutronTheme
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -58,48 +57,46 @@ abstract class NeutronScreen<V : EquinoxViewModel>(
      */
     @Composable
     override fun ArrangeScreenContent() {
-        NeutronTheme {
-            Scaffold (
-                snackbarHost = { SnackbarHost(viewModel.snackbarHostState!!) }
+        Scaffold(
+            snackbarHost = { SnackbarHost(viewModel.snackbarHostState!!) }
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Column (
+                Column(
                     modifier = Modifier
-                        .fillMaxSize(),
-                    horizontalAlignment = Alignment.CenterHorizontally
+                        .fillMaxHeight()
+                        .widthIn(
+                            max = EXPANDED_CONTAINER
+                        ),
+                    verticalArrangement = Arrangement.spacedBy(10.dp)
                 ) {
-                    Column(
+                    Row(
                         modifier = Modifier
-                            .fillMaxHeight()
-                            .widthIn(
-                                max = EXPANDED_CONTAINER
+                            .padding(
+                                top = 35.dp
                             ),
-                        verticalArrangement = Arrangement.spacedBy(10.dp)
+                        verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Row (
-                            modifier = Modifier
-                                .padding(
-                                    top = 35.dp
-                                ),
-                            verticalAlignment = Alignment.CenterVertically
+                        IconButton(
+                            onClick = { navigator.popBackStack() }
                         ) {
-                            IconButton(
-                                onClick = { navigator.goBack() }
-                            ) {
-                                Icon(
-                                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                                    contentDescription = null
-                                )
-                            }
-                            Text(
-                                text = stringResource(title),
-                                fontSize = 35.sp,
-                                fontFamily = displayFontFamily,
-                                maxLines = 1,
-                                overflow = TextOverflow.Ellipsis
+                            Icon(
+                                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                                contentDescription = null
                             )
                         }
-                        ScreenContent()
+                        Text(
+                            text = stringResource(title),
+                            fontSize = 35.sp,
+                            fontFamily = displayFontFamily,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
                     }
+                    ScreenContent()
                 }
             }
         }

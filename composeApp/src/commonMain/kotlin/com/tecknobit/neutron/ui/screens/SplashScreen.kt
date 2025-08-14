@@ -19,7 +19,6 @@ import com.tecknobit.neutron.CheckForUpdatesAndLaunch
 import com.tecknobit.neutron.CloseApplicationOnNavBack
 import com.tecknobit.neutron.bodyFontFamily
 import com.tecknobit.neutron.displayFontFamily
-import com.tecknobit.neutron.ui.theme.NeutronTheme
 import neutron.composeapp.generated.resources.Res
 import neutron.composeapp.generated.resources.app_name
 import org.jetbrains.compose.resources.stringResource
@@ -38,40 +37,38 @@ class SplashScreen : EquinoxNoModelScreen() {
     @Composable
     override fun ArrangeScreenContent() {
         CloseApplicationOnNavBack()
-        NeutronTheme {
-            Column (
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.primary),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Column(
                 modifier = Modifier
-                    .fillMaxSize()
-                    .background(MaterialTheme.colorScheme.primary),
-                horizontalAlignment = Alignment.CenterHorizontally
+                    .weight(1f),
+                verticalArrangement = Arrangement.Bottom
             ) {
-                Column (
-                    modifier = Modifier
-                        .weight(1f),
-                    verticalArrangement = Arrangement.Bottom
-                ) {
-                    Text(
-                        text = stringResource(Res.string.app_name),
-                        color = Color.White,
-                        fontFamily = displayFontFamily,
-                        fontSize = 45.sp
+                Text(
+                    text = stringResource(Res.string.app_name),
+                    color = Color.White,
+                    fontFamily = displayFontFamily,
+                    fontSize = 45.sp
+                )
+            }
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(
+                        bottom = 16.dp
                     )
-                }
-                Column (
-                    modifier = Modifier
-                        .weight(1f)
-                        .padding(
-                            bottom = 16.dp
-                        )
-                        .navigationBarsPadding(),
-                    verticalArrangement = Arrangement.Bottom
-                ) {
-                    Text(
-                        text = "by Tecknobit",
-                        fontFamily = bodyFontFamily,
-                        color = Color.White
-                    )
-                }
+                    .navigationBarsPadding(),
+                verticalArrangement = Arrangement.Bottom
+            ) {
+                Text(
+                    text = "by Tecknobit",
+                    fontFamily = bodyFontFamily,
+                    color = Color.White
+                )
             }
         }
         CheckForUpdatesAndLaunch()

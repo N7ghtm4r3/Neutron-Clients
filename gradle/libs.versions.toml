@@ -21,12 +21,12 @@ lazyPaginationCompose = "1.7.0"
 material3WindowSize = "1.8.2"
 neutroncore = "1.0.3"
 octocatkdu = "1.0.6"
-precompose = "1.7.0-alpha03"
 kotlinxSerializationJson = "1.9.0"
 appUpdate = "2.1.0"
 review = "2.0.2"
 dokka = "2.0.0"
 filekit = "0.10.0"
+compose-navigation = "2.9.0-beta04"
 
 [libraries]
 ametista-engine = { module = "io.github.n7ghtm4r3:Ametista-Engine", version.ref = "ametistaEngine" }
@@ -52,13 +52,13 @@ lazy-pagination-compose = { module = "io.github.ahmad-hamwi:lazy-pagination-comp
 material3-window-size = { module = "org.jetbrains.compose.material3:material3-window-size-class", version.ref = "material3WindowSize" }
 neutroncore = { module = "com.tecknobit.neutroncore:neutroncore", version.ref = "neutroncore" }
 octocatkdu = { module = "io.github.n7ghtm4r3:octocatkdu", version.ref = "octocatkdu" }
-precompose = { module = "moe.tlaster:precompose", version.ref = "precompose" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 review = { module = "com.google.android.play:review", version.ref = "review" }
 review-ktx = { module = "com.google.android.play:review-ktx", version.ref = "review" }
 app-update = { module = "com.google.android.play:app-update", version.ref = "appUpdate" }
 app-update-ktx = { module = "com.google.android.play:app-update-ktx", version.ref = "appUpdate" }
 dokka-base = { module = "org.jetbrains.dokka:dokka-base", version.ref = "dokka" }
+compose-navigation = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "compose-navigation" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

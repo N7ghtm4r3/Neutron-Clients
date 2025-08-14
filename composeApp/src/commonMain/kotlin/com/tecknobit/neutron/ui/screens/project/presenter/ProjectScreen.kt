@@ -52,7 +52,6 @@ import com.tecknobit.neutron.displayFontFamily
 import com.tecknobit.neutron.localUser
 import com.tecknobit.neutron.navigator
 import com.tecknobit.neutron.ui.components.DeleteRevenue
-import com.tecknobit.neutron.ui.components.RetryButton
 import com.tecknobit.neutron.ui.screens.project.components.InitialRevenueItem
 import com.tecknobit.neutron.ui.screens.project.components.Tickets
 import com.tecknobit.neutron.ui.screens.project.components.TicketsFilterBar
@@ -60,7 +59,7 @@ import com.tecknobit.neutron.ui.screens.project.presentation.ProjectScreenViewMo
 import com.tecknobit.neutron.ui.screens.shared.data.ProjectRevenue
 import com.tecknobit.neutron.ui.screens.shared.presenters.RevenuesContainerScreen
 import com.tecknobit.neutron.ui.screens.shared.presenters.RevenuesContainerScreen.Companion.HIDE_BALANCE
-import com.tecknobit.neutron.ui.theme.NeutronTheme
+import com.tecknobit.neutroncore.REVENUE_IDENTIFIER_KEY
 import neutron.composeapp.generated.resources.Res
 import neutron.composeapp.generated.resources.add_ticket
 import neutron.composeapp.generated.resources.total_revenues
@@ -104,29 +103,27 @@ class ProjectScreen(
      */
     @Composable
     override fun ArrangeScreenContent() {
-        NeutronTheme {
-            SessionFlowContainer(
-                modifier = Modifier
-                    .fillMaxSize(),
-                state = viewModel.state,
-                viewModel = viewModel,
-                initialLoadingRoutineDelay = 1000L,
-                loadingRoutine = { project.value != null },
-                content = {
-                    Scaffold(
-                        snackbarHost = { SnackbarHost(viewModel.snackbarHostState!!) },
-                        floatingActionButton = { FabButton() }
-                    ) {
-                        ScreenContent()
-                    }
-                },
-                retryFailedFlowContent = {
-                    RetryButton(
-                        onRetry = { viewModel.retryAfterConnectionError() }
-                    )
+        SessionFlowContainer(
+            modifier = Modifier
+                .fillMaxSize(),
+            state = viewModel.state,
+            viewModel = viewModel,
+            initialLoadingRoutineDelay = 1000L,
+            loadingRoutine = { project.value != null },
+            content = {
+                Scaffold(
+                    snackbarHost = { SnackbarHost(viewModel.snackbarHostState!!) },
+                    floatingActionButton = { FabButton() }
+                ) {
+                    ScreenContent()
                 }
-            )
-        }
+            },
+            retryFailedFlowContent = {
+                com.tecknobit.equinoxcompose.components.RetryButton(
+                    onRetry = { viewModel.retryAfterConnectionError() }
+                )
+            }
+        )
     }
 
     /**
@@ -142,7 +139,11 @@ class ProjectScreen(
      * Method to navigate to the related [com.tecknobit.neutron.ui.screens.insert.shared.presenter.InsertScreen]
      */
     override fun navToInsert() {
-        navigator.navigate("$INSERT_TICKET_SCREEN/${project.value!!.id}")
+        val savedStateHandle = navigator.currentBackStackEntry?.savedStateHandle
+        savedStateHandle?.let {
+            savedStateHandle[REVENUE_IDENTIFIER_KEY] = project.value!!.id
+            navigator.navigate(INSERT_TICKET_SCREEN)
+        }
     }
 
     /**
@@ -216,7 +217,7 @@ class ProjectScreen(
     @NonRestartableComposable
     private fun NavButton() {
         IconButton(
-            onClick = { navigator.goBack() }
+            onClick = { navigator.popBackStack() }
         ) {
             Icon(
                 imageVector = Icons.AutoMirrored.Filled.ArrowBack,
@@ -236,7 +237,13 @@ class ProjectScreen(
             horizontalArrangement = Arrangement.End
         ) {
             IconButton(
-                onClick = { navigator.navigate("$INSERT_REVENUE_SCREEN/${project.value!!.id}") }
+                onClick = {
+                    val savedStateHandle = navigator.currentBackStackEntry?.savedStateHandle
+                    savedStateHandle?.let {
+                        savedStateHandle[REVENUE_IDENTIFIER_KEY] = project.value!!.id
+                        navigator.navigate(INSERT_REVENUE_SCREEN)
+                    }
+                }
             ) {
                 Icon(
                     imageVector = Icons.Default.Edit,
@@ -257,7 +264,7 @@ class ProjectScreen(
                 show = deleteProject,
                 revenue = project.value!!,
                 viewModel = viewModel,
-                onDelete = { navigator.goBack() }
+                onDelete = { navigator.popBackStack() }
             )
         }
     }

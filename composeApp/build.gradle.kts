@@ -10,6 +10,7 @@ import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
+import org.jetbrains.kotlin.gradle.targets.wasm.nodejs.WasmNodeJsRootExtension
 import java.util.UUID
 
 plugins {
@@ -94,7 +95,6 @@ kotlin {
                 implementation(libs.androidx.lifecycle.runtime.compose)
                 implementation(libs.equinox.compose)
                 implementation(libs.equinox.core)
-                implementation(libs.precompose)
                 implementation(libs.kotlinx.serialization.json)
                 implementation(libs.lazy.pagination.compose)
                 implementation(libs.material3.window.size)
@@ -107,6 +107,7 @@ kotlin {
                 implementation(libs.colorpicker.compose)
                 implementation(libs.ametista.engine)
                 implementation(libs.neutroncore)
+                implementation(libs.compose.navigation)
             }
         }
 
@@ -251,4 +252,4 @@ buildConfig {
     )
 }
 
-//rootProject.the<NodeJsRootExtension>().versions.webpackDevServer.version = "5.2.2"
+rootProject.the<WasmNodeJsRootExtension>().versions.webpackDevServer.version = "5.2.2"

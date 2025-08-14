@@ -39,6 +39,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.tecknobit.equinoxcompose.annotations.ScreenSection
+import com.tecknobit.equinoxcompose.components.RetryButton
 import com.tecknobit.equinoxcompose.session.screens.EquinoxScreen
 import com.tecknobit.equinoxcompose.session.sessionflow.SessionFlowContainer
 import com.tecknobit.equinoxcompose.session.sessionflow.rememberSessionFlowState
@@ -51,13 +52,11 @@ import com.tecknobit.neutron.displayFontFamily
 import com.tecknobit.neutron.localUser
 import com.tecknobit.neutron.navigator
 import com.tecknobit.neutron.ui.components.ProfilePic
-import com.tecknobit.neutron.ui.components.RetryButton
 import com.tecknobit.neutron.ui.screens.revenues.components.FiltersBar
 import com.tecknobit.neutron.ui.screens.revenues.components.Revenues
 import com.tecknobit.neutron.ui.screens.revenues.presentation.RevenuesScreenViewModel
 import com.tecknobit.neutron.ui.screens.shared.presenters.RevenuesContainerScreen
 import com.tecknobit.neutron.ui.screens.shared.presenters.RevenuesContainerScreen.Companion.HIDE_BALANCE
-import com.tecknobit.neutron.ui.theme.NeutronTheme
 import com.tecknobit.neutroncore.dtos.WalletStatus
 import com.tecknobit.neutroncore.enums.RevenuePeriod
 import com.tecknobit.neutroncore.enums.RevenuePeriod.ALL
@@ -112,31 +111,29 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
     @Composable
     override fun ArrangeScreenContent() {
         CloseApplicationOnNavBack()
-        NeutronTheme {
-            SessionFlowContainer(
-                modifier = Modifier
-                    .fillMaxSize(),
-                state = viewModel.state,
-                viewModel = viewModel,
-                initialLoadingRoutineDelay = 1000L,
-                loadingRoutine = { walletStatus.value != null },
-                content = {
-                    Scaffold(
-                        snackbarHost = { SnackbarHost(viewModel.snackbarHostState!!) },
-                        floatingActionButton = {
-                            FabButton()
-                        }
-                    ) {
-                        ScreenContent()
+        SessionFlowContainer(
+            modifier = Modifier
+                .fillMaxSize(),
+            state = viewModel.state,
+            viewModel = viewModel,
+            initialLoadingRoutineDelay = 1000L,
+            loadingRoutine = { walletStatus.value != null },
+            content = {
+                Scaffold(
+                    snackbarHost = { SnackbarHost(viewModel.snackbarHostState!!) },
+                    floatingActionButton = {
+                        FabButton()
                     }
-                },
-                retryFailedFlowContent = {
-                    RetryButton(
-                        onRetry = { viewModel.retryAfterConnectionError() }
-                    )
+                ) {
+                    ScreenContent()
                 }
-            )
-        }
+            },
+            retryFailedFlowContent = {
+                RetryButton(
+                    onRetry = { viewModel.retryAfterConnectionError() }
+                )
+            }
+        )
     }
 
     /**

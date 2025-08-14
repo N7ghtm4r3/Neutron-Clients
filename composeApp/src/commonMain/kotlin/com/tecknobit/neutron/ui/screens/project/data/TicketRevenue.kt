@@ -55,7 +55,7 @@ data class TicketRevenue(
     fun getTicketDuration() : Int {
         return revenueDate.daysUntil(
             closingDate
-        )
+        ).toInt()
     }
 
 }

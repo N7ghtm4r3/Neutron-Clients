@@ -2,9 +2,8 @@ package com.tecknobit.neutron.ui.screens.insert.revenue.presentation
 
 import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.viewModelScope
-import com.tecknobit.equinoxcompose.viewmodels.EquinoxViewModel
+import com.tecknobit.equinoxcompose.session.viewmodels.EquinoxViewModel
 import com.tecknobit.equinoxcore.annotations.RequiresSuperCall
-import com.tecknobit.equinoxcore.mergeIfNotContained
 import com.tecknobit.equinoxcore.network.sendRequest
 import com.tecknobit.neutron.helpers.KReviewer
 import com.tecknobit.neutron.navigator
@@ -50,8 +49,9 @@ class InsertRevenueScreenViewModel(
     ) {
         super.retrieveRevenue(
             onSuccess = {
-                if (_revenue.value != null && _revenue.value is GeneralRevenue)
-                    labels.mergeIfNotContained((_revenue.value as GeneralRevenue).labels)
+                if (_revenue.value != null && _revenue.value is GeneralRevenue) {
+                    (_revenue.value as GeneralRevenue).labels
+                }
             }
         )
     }
@@ -76,7 +76,7 @@ class InsertRevenueScreenViewModel(
                 onSuccess = {
                     val kReviewer = KReviewer()
                     kReviewer.reviewInApp {
-                        navigator.goBack()
+                        navigator.popBackStack()
                     }
                 },
                 onFailure = { showSnackbarMessage(it) }

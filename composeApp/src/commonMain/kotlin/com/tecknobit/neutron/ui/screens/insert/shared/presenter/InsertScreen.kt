@@ -1,4 +1,4 @@
-@file:OptIn(ExperimentalComposeApi::class)
+@file:OptIn(ExperimentalComposeApi::class, ExperimentalTime::class)
 
 package com.tecknobit.neutron.ui.screens.insert.shared.presenter
 
@@ -52,6 +52,8 @@ import com.tecknobit.equinoxcompose.session.sessionflow.rememberSessionFlowState
 import com.tecknobit.equinoxcompose.utilities.ResponsiveContent
 import com.tecknobit.equinoxcore.annotations.RequiresSuperCall
 import com.tecknobit.equinoxcore.annotations.Structure
+import com.tecknobit.equinoxcore.time.TimeFormatter
+import com.tecknobit.equinoxcore.time.TimeFormatter.toLocalDateTime
 import com.tecknobit.neutron.bodyFontFamily
 import com.tecknobit.neutron.displayFontFamily
 import com.tecknobit.neutron.localUser
@@ -66,10 +68,6 @@ import com.tecknobit.neutron.ui.screens.shared.presenters.NeutronScreen
 import com.tecknobit.neutroncore.helpers.NeutronInputsValidator.isRevenueDescriptionValid
 import com.tecknobit.neutroncore.helpers.NeutronInputsValidator.isRevenueTitleValid
 import dev.darkokoa.datetimewheelpicker.WheelDateTimePicker
-import kotlinx.datetime.Clock
-import kotlinx.datetime.Instant
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toLocalDateTime
 import neutron.composeapp.generated.resources.Res
 import neutron.composeapp.generated.resources.description
 import neutron.composeapp.generated.resources.description_not_valid
@@ -82,6 +80,7 @@ import neutron.composeapp.generated.resources.title
 import neutron.composeapp.generated.resources.title_not_valid
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
+import kotlin.time.ExperimentalTime
 
 /**
  * The [InsertScreen] is used to allow the user to add or to edit a revenue
@@ -535,11 +534,10 @@ abstract class InsertScreen<V : InsertScreenViewModel>(
         }
         viewModel.insertionDate = remember {
             mutableStateOf(
-                if(isEditing) {
-                    Instant.fromEpochMilliseconds(revenue.value!!.revenueDate)
-                        .toLocalDateTime(TimeZone.currentSystemDefault())
-                } else
-                    Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
+                if (isEditing)
+                    revenue.value!!.revenueDate.toLocalDateTime()
+                else
+                    TimeFormatter.currentTimestamp().toLocalDateTime()
             )
         }
     }

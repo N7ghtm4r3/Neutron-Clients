@@ -3,7 +3,7 @@ package com.tecknobit.neutron.ui.screens.profile.presentation
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.MutableState
 import androidx.lifecycle.viewModelScope
-import com.tecknobit.equinoxcompose.viewmodels.EquinoxProfileViewModel
+import com.tecknobit.equinoxcompose.session.viewmodels.EquinoxProfileViewModel
 import com.tecknobit.equinoxcore.network.sendRequest
 import com.tecknobit.neutron.localUser
 import com.tecknobit.neutron.requester
