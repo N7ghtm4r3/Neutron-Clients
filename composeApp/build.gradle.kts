@@ -64,6 +64,9 @@ kotlin {
                 }
             }
         }
+        compilerOptions {
+            freeCompilerArgs.add("-Xwasm-attach-js-exception")
+        }
         binaries.executable()
     }
     
@@ -78,7 +81,6 @@ kotlin {
             implementation(libs.review)
             implementation(libs.review.ktx)
             implementation(libs.ktor.client.okhttp)
-            implementation(libs.androidx.biometric)
             implementation(libs.androidx.appcompat)
         }
 
@@ -108,6 +110,7 @@ kotlin {
                 implementation(libs.ametista.engine)
                 implementation(libs.neutroncore)
                 implementation(libs.compose.navigation)
+                implementation(libs.biometrik)
             }
         }
 

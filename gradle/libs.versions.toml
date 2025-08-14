@@ -7,7 +7,7 @@ android-targetSdk = "36"
 androidx-activityCompose = "1.10.1"
 androidx-lifecycle = "2.9.1"
 appcompat = "1.7.1"
-biometric = "1.1.0"
+biometrik = "1.0.0beta-01"
 colorpickerCompose = "1.1.2"
 compose-multiplatform = "1.8.2"
 coilCompose = "3.3.0"
@@ -31,7 +31,7 @@ compose-navigation = "2.9.0-beta04"
 [libraries]
 ametista-engine = { module = "io.github.n7ghtm4r3:Ametista-Engine", version.ref = "ametistaEngine" }
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
-androidx-biometric = { module = "androidx.biometric:biometric", version.ref = "biometric" }
+biometrik = { module = "io.github.n7ghtm4r3:Biometrik", version.ref = "biometrik" }
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coilCompose" }
 coil-network-ktor3 = { module = "io.coil-kt.coil3:coil-network-ktor3", version.ref = "ktor" }
 colorpicker-compose = { module = "com.github.skydoves:colorpicker-compose", version.ref = "colorpickerCompose" }

@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalComposeApi::class)
+
 package com.tecknobit.neutron.ui.screens
 
 import androidx.compose.foundation.background
@@ -9,11 +11,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.ExperimentalComposeApi
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.tecknobit.biometrik.BiometrikAuthenticator
+import com.tecknobit.biometrik.rememberBiometrikState
 import com.tecknobit.equinoxcompose.session.screens.EquinoxNoModelScreen
 import com.tecknobit.neutron.CheckForUpdatesAndLaunch
 import com.tecknobit.neutron.CloseApplicationOnNavBack
@@ -21,6 +26,8 @@ import com.tecknobit.neutron.bodyFontFamily
 import com.tecknobit.neutron.displayFontFamily
 import neutron.composeapp.generated.resources.Res
 import neutron.composeapp.generated.resources.app_name
+import neutron.composeapp.generated.resources.enter_your_credentials_to_continue
+import neutron.composeapp.generated.resources.login_required
 import org.jetbrains.compose.resources.stringResource
 
 /**
@@ -71,7 +78,16 @@ class SplashScreen : EquinoxNoModelScreen() {
                 )
             }
         }
-        CheckForUpdatesAndLaunch()
+        val state = rememberBiometrikState()
+        BiometrikAuthenticator(
+            state = state,
+            appName = stringResource(Res.string.app_name),
+            title = stringResource(Res.string.login_required),
+            reason = stringResource(Res.string.enter_your_credentials_to_continue),
+            onSuccess = { CheckForUpdatesAndLaunch() },
+            onFailure = {
+            }
+        )
     }
 
     /**
