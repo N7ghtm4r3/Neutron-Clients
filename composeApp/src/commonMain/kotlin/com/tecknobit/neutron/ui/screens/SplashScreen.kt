@@ -18,7 +18,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.tecknobit.biometrik.BiometrikAuthenticator
-import com.tecknobit.biometrik.rememberBiometrikState
+import com.tecknobit.biometrik.BiometrikState
+import com.tecknobit.equinoxcompose.components.ErrorUI
+import com.tecknobit.equinoxcompose.components.RetryButton
 import com.tecknobit.equinoxcompose.session.screens.EquinoxNoModelScreen
 import com.tecknobit.neutron.CheckForUpdatesAndLaunch
 import com.tecknobit.neutron.CloseApplicationOnNavBack
@@ -33,10 +35,14 @@ import org.jetbrains.compose.resources.stringResource
 /**
  * The [SplashScreen] class is used to retrieve and load the session data and enter the application's workflow
  *
+ * @param biometrikState The state used to handle the bio authentication
+ *
  * @author N7ghtm4r3 - Tecknobit
  * @see EquinoxNoModelScreen
  */
-class SplashScreen : EquinoxNoModelScreen() {
+class SplashScreen(
+    private val biometrikState: BiometrikState,
+) : EquinoxNoModelScreen() {
 
     /**
      * Method to arrange the content of the screen to display
@@ -78,14 +84,22 @@ class SplashScreen : EquinoxNoModelScreen() {
                 )
             }
         }
-        val state = rememberBiometrikState()
         BiometrikAuthenticator(
-            state = state,
+            state = biometrikState,
             appName = stringResource(Res.string.app_name),
             title = stringResource(Res.string.login_required),
             reason = stringResource(Res.string.enter_your_credentials_to_continue),
             onSuccess = { CheckForUpdatesAndLaunch() },
             onFailure = {
+                ErrorUI(
+                    containerModifier = Modifier
+                        .fillMaxSize(),
+                    retryContent = {
+                        RetryButton(
+                            onRetry = { biometrikState.reAuth() }
+                        )
+                    }
+                )
             }
         )
     }

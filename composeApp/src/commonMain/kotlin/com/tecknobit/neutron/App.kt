@@ -19,6 +19,7 @@ import coil3.request.addLastModifiedToFileCacheKey
 import com.tecknobit.ametista.AmetistaConfig
 import com.tecknobit.ametistaengine.AmetistaEngine
 import com.tecknobit.ametistaengine.AmetistaEngine.Companion.FILES_AMETISTA_CONFIG_PATHNAME
+import com.tecknobit.biometrik.rememberBiometrikState
 import com.tecknobit.equinoxcompose.session.screens.equinoxScreen
 import com.tecknobit.equinoxcompose.session.sessionflow.SessionFlowState
 import com.tecknobit.equinoxcore.network.Requester.Companion.toResponseData
@@ -114,6 +115,7 @@ const val PROJECT_REVENUE_SCREEN = "ProjectRevenueScreen"
  */
 @Composable
 fun App() {
+    val biometrikState = rememberBiometrikState()
     // InitAmetista()
     bodyFontFamily = FontFamily(Font(Res.font.roboto))
     displayFontFamily = FontFamily(Font(Res.font.lilitaone))
@@ -142,7 +144,11 @@ fun App() {
             ) {
                 // TODO: TO USE THE UNIQUE THEME
                 NeutronTheme {
-                    val splashScreen = equinoxScreen { SplashScreen() }
+                    val splashScreen = equinoxScreen {
+                        SplashScreen(
+                            biometrikState = biometrikState
+                        )
+                    }
                     splashScreen.ShowContent()
                 }
             }
