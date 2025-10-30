@@ -11,9 +11,8 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.tecknobit.equinoxcompose.components.EquinoxAlertDialog
-import com.tecknobit.neutron.SPLASHSCREEN
 import com.tecknobit.neutron.displayFontFamily
-import com.tecknobit.neutron.navigator
+import com.tecknobit.neutron.helpers.navToSplashscreen
 import com.tecknobit.neutron.ui.screens.profile.presentation.ProfileScreenViewModel
 import com.tecknobit.neutron.ui.screens.project.data.TicketRevenue
 import com.tecknobit.neutron.ui.screens.project.presentation.ProjectScreenViewModel
@@ -128,7 +127,7 @@ fun Logout(
         confirmAction = {
             viewModel.clearSession {
                 show.value = false
-                navigator.navigate(SPLASHSCREEN)
+                navToSplashscreen()
             }
         }
     )
@@ -160,7 +159,7 @@ fun DeleteAccount(
             viewModel.deleteAccount(
                 onDelete = {
                     show.value = false
-                    navigator.navigate(SPLASHSCREEN)
+                    navToSplashscreen()
                 }
             )
         }

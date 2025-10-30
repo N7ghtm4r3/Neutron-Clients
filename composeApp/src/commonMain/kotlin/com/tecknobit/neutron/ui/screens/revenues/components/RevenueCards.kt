@@ -23,9 +23,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.tecknobit.equinoxcompose.utilities.ResponsiveContent
 import com.tecknobit.equinoxcore.time.TimeFormatter.EUROPEAN_DATE_PATTERN
-import com.tecknobit.neutron.INSERT_REVENUE_SCREEN
-import com.tecknobit.neutron.PROJECT_REVENUE_SCREEN
-import com.tecknobit.neutron.navigator
+import com.tecknobit.neutron.helpers.navToInsertRevenueScreen
+import com.tecknobit.neutron.helpers.navToProjectScreen
 import com.tecknobit.neutron.ui.components.DeleteRevenue
 import com.tecknobit.neutron.ui.components.RevenueDescription
 import com.tecknobit.neutron.ui.components.RevenueInfo
@@ -37,7 +36,6 @@ import com.tecknobit.neutron.ui.screens.shared.data.ProjectRevenue
 import com.tecknobit.neutron.ui.screens.shared.data.Revenue
 import com.tecknobit.neutron.ui.screens.shared.data.RevenueLabel
 import com.tecknobit.neutroncore.PROJECT_LABEL_COLOR
-import com.tecknobit.neutroncore.REVENUE_IDENTIFIER_KEY
 import neutron.composeapp.generated.resources.Res
 import neutron.composeapp.generated.resources.last_revenue_on
 import neutron.composeapp.generated.resources.project
@@ -256,11 +254,9 @@ private fun ProjectRevenueContent(
         actionButton = {
             IconButton(
                 onClick = {
-                    val savedStateHandle = navigator.currentBackStackEntry?.savedStateHandle
-                    savedStateHandle?.let {
-                        savedStateHandle[REVENUE_IDENTIFIER_KEY] = revenue.id
-                        navigator.navigate(PROJECT_REVENUE_SCREEN)
-                    }
+                    navToProjectScreen(
+                        project = revenue
+                    )
                 }
             ) {
                 Icon(
@@ -305,11 +301,9 @@ private fun RevenueItem(
         labels = labels,
         containerColor = containerColor,
         onEdit = {
-            val savedStateHandle = navigator.currentBackStackEntry?.savedStateHandle
-            savedStateHandle?.let {
-                savedStateHandle[REVENUE_IDENTIFIER_KEY] = revenue.id
-                navigator.navigate(INSERT_REVENUE_SCREEN)
-            }
+            navToInsertRevenueScreen(
+                revenue = revenue
+            )
         },
         deleteIcon = deleteIcon,
         actionButton = actionButton,

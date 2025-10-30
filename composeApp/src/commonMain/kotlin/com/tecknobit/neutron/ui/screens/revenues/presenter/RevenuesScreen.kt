@@ -46,11 +46,10 @@ import com.tecknobit.equinoxcompose.session.sessionflow.rememberSessionFlowState
 import com.tecknobit.equinoxcompose.utilities.EXPANDED_CONTAINER
 import com.tecknobit.equinoxcompose.utilities.ResponsiveContent
 import com.tecknobit.neutron.CloseApplicationOnNavBack
-import com.tecknobit.neutron.INSERT_REVENUE_SCREEN
-import com.tecknobit.neutron.PROFILE_SCREEN
 import com.tecknobit.neutron.displayFontFamily
+import com.tecknobit.neutron.helpers.navToInsertRevenueScreen
+import com.tecknobit.neutron.helpers.navToProfileScreen
 import com.tecknobit.neutron.localUser
-import com.tecknobit.neutron.navigator
 import com.tecknobit.neutron.ui.components.ProfilePic
 import com.tecknobit.neutron.ui.screens.revenues.components.FiltersBar
 import com.tecknobit.neutron.ui.screens.revenues.components.Revenues
@@ -149,7 +148,7 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
      * Method to navigate to the related [com.tecknobit.neutron.ui.screens.insert.shared.presenter.InsertScreen]
      */
     override fun navToInsert() {
-        navigator.navigate(INSERT_REVENUE_SCREEN)
+        navToInsertRevenueScreen()
     }
 
     /**
@@ -340,7 +339,7 @@ class RevenuesScreen : EquinoxScreen<RevenuesScreenViewModel>(
             ProfilePic(
                 profilePic = localUser.profilePic,
                 size = size,
-                onClick = { navigator.navigate(PROFILE_SCREEN) }
+                onClick = { navToProfileScreen() }
             )
         }
     }

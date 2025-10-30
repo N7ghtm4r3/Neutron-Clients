@@ -15,7 +15,6 @@ import org.jetbrains.compose.resources.stringResource
  *
  */
 fun main() {
-    //AmetistaEngine.intake()
     application {
         Window(
             onCloseRequest = ::exitApplication,

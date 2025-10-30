@@ -1,41 +1,40 @@
 [versions]
-agp = "8.12.0"
-ametistaEngine = "1.0.4"
+agp = "8.13.0"
 android-compileSdk = "36"
 android-minSdk = "30"
 android-targetSdk = "36"
-androidx-activityCompose = "1.10.1"
-androidx-lifecycle = "2.9.1"
+androidx-activityCompose = "1.11.0"
+androidx-lifecycle = "2.9.5"
 appcompat = "1.7.1"
-biometrik = "1.0.0beta-01"
+biometrik = "1.0.0"
 colorpickerCompose = "1.1.2"
-compose-multiplatform = "1.8.2"
+compose-multiplatform = "1.9.1"
 coilCompose = "3.3.0"
 datetimeWheelPicker = "1.0.3-compose1.7"
 kotlinxDatetime = "0.7.1"
 ktor = "3.0.3"
-equinox = "1.1.5"
-kotlin = "2.2.10"
+equinox = "1.1.7"
+kotlin = "2.2.21"
 kotlinx-coroutines = "1.10.2"
-lazyPaginationCompose = "1.7.0"
-material3WindowSize = "1.8.2"
-neutroncore = "1.0.3"
+lazyPaginationCompose = "1.7.1"
+material3WindowSize = "1.9.0"
+neutroncore = "1.0.4"
 octocatkdu = "1.0.6"
 kotlinxSerializationJson = "1.9.0"
 appUpdate = "2.1.0"
 review = "2.0.2"
-dokka = "2.0.0"
-filekit = "0.10.0"
-compose-navigation = "2.9.0-beta04"
+dokka = "2.1.0"
+filekit = "0.12.0"
+compose-navigation = "2.9.1"
 
 [libraries]
-ametista-engine = { module = "io.github.n7ghtm4r3:Ametista-Engine", version.ref = "ametistaEngine" }
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 biometrik = { module = "io.github.n7ghtm4r3:Biometrik", version.ref = "biometrik" }
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coilCompose" }
 coil-network-ktor3 = { module = "io.coil-kt.coil3:coil-network-ktor3", version.ref = "ktor" }
 colorpicker-compose = { module = "com.github.skydoves:colorpicker-compose", version.ref = "colorpickerCompose" }
 datetime-wheel-picker = { module = "io.github.darkokoa:datetime-wheel-picker", version.ref = "datetimeWheelPicker" }
+equinoxmisc-navigation-compose-util = { module = "io.github.n7ghtm4r3:equinoxmisc-navigation-compose-util", version.ref = "biometrik" }
 filekit-core = { module = "io.github.vinceglb:filekit-dialogs", version.ref = "filekit" }
 filekit-compose = { module = "io.github.vinceglb:filekit-dialogs-compose", version.ref = "filekit" }
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinxDatetime" }

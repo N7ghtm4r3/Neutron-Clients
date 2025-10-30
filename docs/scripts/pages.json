@@ -210,12 +210,12 @@
     ]
   },
   {
-    "name": "abstract var hideBalances: <Error class: unknown class><Boolean>",
+    "name": "abstract var hideBalances: State<Boolean>",
     "description": "com.tecknobit.neutron.ui.screens.shared.presenters.RevenuesContainerScreen.hideBalances",
     "location": "-neutron/com.tecknobit.neutron.ui.screens.shared.presenters/-revenues-container-screen/hide-balances.html",
     "searchKeys": [
       "hideBalances",
-      "abstract var hideBalances: <Error class: unknown class><Boolean>",
+      "abstract var hideBalances: State<Boolean>",
       "com.tecknobit.neutron.ui.screens.shared.presenters.RevenuesContainerScreen.hideBalances"
     ]
   },
@@ -380,23 +380,23 @@
     ]
   },
   {
-    "name": "class SplashScreen(biometrikState: BiometrikState) : EquinoxNoModelScreen",
-    "description": "com.tecknobit.neutron.ui.screens.SplashScreen",
-    "location": "-neutron/com.tecknobit.neutron.ui.screens/-splash-screen/index.html",
+    "name": "class Splashscreen(biometrikState: BiometrikState) : EquinoxNoModelScreen",
+    "description": "com.tecknobit.neutron.ui.screens.Splashscreen",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens/-splashscreen/index.html",
     "searchKeys": [
-      "SplashScreen",
-      "class SplashScreen(biometrikState: BiometrikState) : EquinoxNoModelScreen",
-      "com.tecknobit.neutron.ui.screens.SplashScreen"
+      "Splashscreen",
+      "class Splashscreen(biometrikState: BiometrikState) : EquinoxNoModelScreen",
+      "com.tecknobit.neutron.ui.screens.Splashscreen"
     ]
   },
   {
     "name": "const val AUTH_SCREEN: String",
-    "description": "com.tecknobit.neutron.AUTH_SCREEN",
-    "location": "-neutron/com.tecknobit.neutron/-a-u-t-h_-s-c-r-e-e-n.html",
+    "description": "com.tecknobit.neutron.helpers.AUTH_SCREEN",
+    "location": "-neutron/com.tecknobit.neutron.helpers/-a-u-t-h_-s-c-r-e-e-n.html",
     "searchKeys": [
       "AUTH_SCREEN",
       "const val AUTH_SCREEN: String",
-      "com.tecknobit.neutron.AUTH_SCREEN"
+      "com.tecknobit.neutron.helpers.AUTH_SCREEN"
     ]
   },
   {
@@ -411,62 +411,62 @@
   },
   {
     "name": "const val INSERT_REVENUE_SCREEN: String",
-    "description": "com.tecknobit.neutron.INSERT_REVENUE_SCREEN",
-    "location": "-neutron/com.tecknobit.neutron/-i-n-s-e-r-t_-r-e-v-e-n-u-e_-s-c-r-e-e-n.html",
+    "description": "com.tecknobit.neutron.helpers.INSERT_REVENUE_SCREEN",
+    "location": "-neutron/com.tecknobit.neutron.helpers/-i-n-s-e-r-t_-r-e-v-e-n-u-e_-s-c-r-e-e-n.html",
     "searchKeys": [
       "INSERT_REVENUE_SCREEN",
       "const val INSERT_REVENUE_SCREEN: String",
-      "com.tecknobit.neutron.INSERT_REVENUE_SCREEN"
+      "com.tecknobit.neutron.helpers.INSERT_REVENUE_SCREEN"
     ]
   },
   {
     "name": "const val INSERT_TICKET_SCREEN: String",
-    "description": "com.tecknobit.neutron.INSERT_TICKET_SCREEN",
-    "location": "-neutron/com.tecknobit.neutron/-i-n-s-e-r-t_-t-i-c-k-e-t_-s-c-r-e-e-n.html",
+    "description": "com.tecknobit.neutron.helpers.INSERT_TICKET_SCREEN",
+    "location": "-neutron/com.tecknobit.neutron.helpers/-i-n-s-e-r-t_-t-i-c-k-e-t_-s-c-r-e-e-n.html",
     "searchKeys": [
       "INSERT_TICKET_SCREEN",
       "const val INSERT_TICKET_SCREEN: String",
-      "com.tecknobit.neutron.INSERT_TICKET_SCREEN"
+      "com.tecknobit.neutron.helpers.INSERT_TICKET_SCREEN"
     ]
   },
   {
     "name": "const val PROFILE_SCREEN: String",
-    "description": "com.tecknobit.neutron.PROFILE_SCREEN",
-    "location": "-neutron/com.tecknobit.neutron/-p-r-o-f-i-l-e_-s-c-r-e-e-n.html",
+    "description": "com.tecknobit.neutron.helpers.PROFILE_SCREEN",
+    "location": "-neutron/com.tecknobit.neutron.helpers/-p-r-o-f-i-l-e_-s-c-r-e-e-n.html",
     "searchKeys": [
       "PROFILE_SCREEN",
       "const val PROFILE_SCREEN: String",
-      "com.tecknobit.neutron.PROFILE_SCREEN"
+      "com.tecknobit.neutron.helpers.PROFILE_SCREEN"
     ]
   },
   {
     "name": "const val PROJECT_REVENUE_SCREEN: String",
-    "description": "com.tecknobit.neutron.PROJECT_REVENUE_SCREEN",
-    "location": "-neutron/com.tecknobit.neutron/-p-r-o-j-e-c-t_-r-e-v-e-n-u-e_-s-c-r-e-e-n.html",
+    "description": "com.tecknobit.neutron.helpers.PROJECT_REVENUE_SCREEN",
+    "location": "-neutron/com.tecknobit.neutron.helpers/-p-r-o-j-e-c-t_-r-e-v-e-n-u-e_-s-c-r-e-e-n.html",
     "searchKeys": [
       "PROJECT_REVENUE_SCREEN",
       "const val PROJECT_REVENUE_SCREEN: String",
-      "com.tecknobit.neutron.PROJECT_REVENUE_SCREEN"
+      "com.tecknobit.neutron.helpers.PROJECT_REVENUE_SCREEN"
     ]
   },
   {
     "name": "const val REVENUES_SCREEN: String",
-    "description": "com.tecknobit.neutron.REVENUES_SCREEN",
-    "location": "-neutron/com.tecknobit.neutron/-r-e-v-e-n-u-e-s_-s-c-r-e-e-n.html",
+    "description": "com.tecknobit.neutron.helpers.REVENUES_SCREEN",
+    "location": "-neutron/com.tecknobit.neutron.helpers/-r-e-v-e-n-u-e-s_-s-c-r-e-e-n.html",
     "searchKeys": [
       "REVENUES_SCREEN",
       "const val REVENUES_SCREEN: String",
-      "com.tecknobit.neutron.REVENUES_SCREEN"
+      "com.tecknobit.neutron.helpers.REVENUES_SCREEN"
     ]
   },
   {
     "name": "const val SPLASHSCREEN: String",
-    "description": "com.tecknobit.neutron.SPLASHSCREEN",
-    "location": "-neutron/com.tecknobit.neutron/-s-p-l-a-s-h-s-c-r-e-e-n.html",
+    "description": "com.tecknobit.neutron.helpers.SPLASHSCREEN",
+    "location": "-neutron/com.tecknobit.neutron.helpers/-s-p-l-a-s-h-s-c-r-e-e-n.html",
     "searchKeys": [
       "SPLASHSCREEN",
       "const val SPLASHSCREEN: String",
-      "com.tecknobit.neutron.SPLASHSCREEN"
+      "com.tecknobit.neutron.helpers.SPLASHSCREEN"
     ]
   },
   {
@@ -561,12 +561,12 @@
   },
   {
     "name": "constructor(biometrikState: BiometrikState)",
-    "description": "com.tecknobit.neutron.ui.screens.SplashScreen.SplashScreen",
-    "location": "-neutron/com.tecknobit.neutron.ui.screens/-splash-screen/-splash-screen.html",
+    "description": "com.tecknobit.neutron.ui.screens.Splashscreen.Splashscreen",
+    "location": "-neutron/com.tecknobit.neutron.ui.screens/-splashscreen/-splashscreen.html",
     "searchKeys": [
-      "SplashScreen",
+      "Splashscreen",
       "constructor(biometrikState: BiometrikState)",
-      "com.tecknobit.neutron.ui.screens.SplashScreen.SplashScreen"
+      "com.tecknobit.neutron.ui.screens.Splashscreen.Splashscreen"
     ]
   },
   {
@@ -860,32 +860,32 @@
     ]
   },
   {
-    "name": "fun DeleteAccount(viewModel: ProfileScreenViewModel, show: <Error class: unknown class><Boolean>)",
+    "name": "fun DeleteAccount(viewModel: ProfileScreenViewModel, show: MutableState<Boolean>)",
     "description": "com.tecknobit.neutron.ui.components.DeleteAccount",
     "location": "-neutron/com.tecknobit.neutron.ui.components/-delete-account.html",
     "searchKeys": [
       "DeleteAccount",
-      "fun DeleteAccount(viewModel: ProfileScreenViewModel, show: <Error class: unknown class><Boolean>)",
+      "fun DeleteAccount(viewModel: ProfileScreenViewModel, show: MutableState<Boolean>)",
       "com.tecknobit.neutron.ui.components.DeleteAccount"
     ]
   },
   {
-    "name": "fun DeleteRevenue(show: <Error class: unknown class><Boolean>, viewModel: RevenueRelatedScreenViewModel, revenue: Revenue, onDelete: () -> Unit)",
+    "name": "fun DeleteRevenue(show: MutableState<Boolean>, viewModel: RevenueRelatedScreenViewModel, revenue: Revenue, onDelete: () -> Unit)",
     "description": "com.tecknobit.neutron.ui.components.DeleteRevenue",
     "location": "-neutron/com.tecknobit.neutron.ui.components/-delete-revenue.html",
     "searchKeys": [
       "DeleteRevenue",
-      "fun DeleteRevenue(show: <Error class: unknown class><Boolean>, viewModel: RevenueRelatedScreenViewModel, revenue: Revenue, onDelete: () -> Unit)",
+      "fun DeleteRevenue(show: MutableState<Boolean>, viewModel: RevenueRelatedScreenViewModel, revenue: Revenue, onDelete: () -> Unit)",
       "com.tecknobit.neutron.ui.components.DeleteRevenue"
     ]
   },
   {
-    "name": "fun DeleteTicket(show: <Error class: unknown class><Boolean>, viewModel: ProjectScreenViewModel, ticket: TicketRevenue)",
+    "name": "fun DeleteTicket(show: MutableState<Boolean>, viewModel: ProjectScreenViewModel, ticket: TicketRevenue)",
     "description": "com.tecknobit.neutron.ui.components.DeleteTicket",
     "location": "-neutron/com.tecknobit.neutron.ui.components/-delete-ticket.html",
     "searchKeys": [
       "DeleteTicket",
-      "fun DeleteTicket(show: <Error class: unknown class><Boolean>, viewModel: ProjectScreenViewModel, ticket: TicketRevenue)",
+      "fun DeleteTicket(show: MutableState<Boolean>, viewModel: ProjectScreenViewModel, ticket: TicketRevenue)",
       "com.tecknobit.neutron.ui.components.DeleteTicket"
     ]
   },
@@ -920,33 +920,43 @@
     ]
   },
   {
-    "name": "fun LabelsGrid(modifier: Modifier = Modifier, labelsRetriever: RevenueLabelsRetriever, labels: <Error class: unknown class><RevenueLabel>)",
+    "name": "fun LabelsGrid(modifier: Modifier = Modifier, labelsRetriever: RevenueLabelsRetriever, labels: SnapshotStateList<RevenueLabel>)",
     "description": "com.tecknobit.neutron.ui.components.LabelsGrid",
     "location": "-neutron/com.tecknobit.neutron.ui.components/-labels-grid.html",
     "searchKeys": [
       "LabelsGrid",
-      "fun LabelsGrid(modifier: Modifier = Modifier, labelsRetriever: RevenueLabelsRetriever, labels: <Error class: unknown class><RevenueLabel>)",
+      "fun LabelsGrid(modifier: Modifier = Modifier, labelsRetriever: RevenueLabelsRetriever, labels: SnapshotStateList<RevenueLabel>)",
       "com.tecknobit.neutron.ui.components.LabelsGrid"
     ]
   },
   {
-    "name": "fun LabelsPicker(show: <Error class: unknown class><Boolean>, viewModel: InsertRevenueScreenViewModel)",
+    "name": "fun LabelsPicker(show: MutableState<Boolean>, viewModel: InsertRevenueScreenViewModel)",
     "description": "com.tecknobit.neutron.ui.screens.insert.revenue.components.LabelsPicker",
     "location": "-neutron/com.tecknobit.neutron.ui.screens.insert.revenue.components/-labels-picker.html",
     "searchKeys": [
       "LabelsPicker",
-      "fun LabelsPicker(show: <Error class: unknown class><Boolean>, viewModel: InsertRevenueScreenViewModel)",
+      "fun LabelsPicker(show: MutableState<Boolean>, viewModel: InsertRevenueScreenViewModel)",
       "com.tecknobit.neutron.ui.screens.insert.revenue.components.LabelsPicker"
     ]
   },
   {
-    "name": "fun Logout(viewModel: ProfileScreenViewModel, show: <Error class: unknown class><Boolean>)",
+    "name": "fun Logout(viewModel: ProfileScreenViewModel, show: MutableState<Boolean>)",
     "description": "com.tecknobit.neutron.ui.components.Logout",
     "location": "-neutron/com.tecknobit.neutron.ui.components/-logout.html",
     "searchKeys": [
       "Logout",
-      "fun Logout(viewModel: ProfileScreenViewModel, show: <Error class: unknown class><Boolean>)",
+      "fun Logout(viewModel: ProfileScreenViewModel, show: MutableState<Boolean>)",
       "com.tecknobit.neutron.ui.components.Logout"
+    ]
+  },
+  {
+    "name": "fun MainViewController()",
+    "description": "com.tecknobit.neutron.MainViewController",
+    "location": "-neutron/com.tecknobit.neutron/-main-view-controller.html",
+    "searchKeys": [
+      "MainViewController",
+      "fun MainViewController()",
+      "com.tecknobit.neutron.MainViewController"
     ]
   },
   {
@@ -1040,12 +1050,12 @@
     ]
   },
   {
-    "name": "fun RevenueListItem(viewModel: RevenueRelatedScreenViewModel, revenue: Revenue, labels: List<RevenueLabel>, containerColor: Color, overline: (List<RevenueLabel>) -> Unit = { ticketLabel ->\n        RevenueLabels(\n            labels = ticketLabel\n        )\n    }, info: () -> Unit = {\n        RevenueInfo(\n            viewModel = viewModel,\n            revenue = revenue\n        )\n    }, allowEdit: Boolean = true, onEdit: () -> Unit, deleteIcon: ImageVector, actionButton: () -> Unit, deleteAlertDialog: (<Error class: unknown class><Boolean>) -> Unit)",
+    "name": "fun RevenueListItem(viewModel: RevenueRelatedScreenViewModel, revenue: Revenue, labels: List<RevenueLabel>, containerColor: Color, overline: (List<RevenueLabel>) -> Unit = { ticketLabel ->\n        RevenueLabels(\n            labels = ticketLabel\n        )\n    }, info: () -> Unit = {\n        RevenueInfo(\n            viewModel = viewModel,\n            revenue = revenue\n        )\n    }, allowEdit: Boolean = true, onEdit: () -> Unit, deleteIcon: ImageVector, actionButton: () -> Unit, deleteAlertDialog: (MutableState<Boolean>) -> Unit)",
     "description": "com.tecknobit.neutron.ui.components.RevenueListItem",
     "location": "-neutron/com.tecknobit.neutron.ui.components/-revenue-list-item.html",
     "searchKeys": [
       "RevenueListItem",
-      "fun RevenueListItem(viewModel: RevenueRelatedScreenViewModel, revenue: Revenue, labels: List<RevenueLabel>, containerColor: Color, overline: (List<RevenueLabel>) -> Unit = { ticketLabel ->\n        RevenueLabels(\n            labels = ticketLabel\n        )\n    }, info: () -> Unit = {\n        RevenueInfo(\n            viewModel = viewModel,\n            revenue = revenue\n        )\n    }, allowEdit: Boolean = true, onEdit: () -> Unit, deleteIcon: ImageVector, actionButton: () -> Unit, deleteAlertDialog: (<Error class: unknown class><Boolean>) -> Unit)",
+      "fun RevenueListItem(viewModel: RevenueRelatedScreenViewModel, revenue: Revenue, labels: List<RevenueLabel>, containerColor: Color, overline: (List<RevenueLabel>) -> Unit = { ticketLabel ->\n        RevenueLabels(\n            labels = ticketLabel\n        )\n    }, info: () -> Unit = {\n        RevenueInfo(\n            viewModel = viewModel,\n            revenue = revenue\n        )\n    }, allowEdit: Boolean = true, onEdit: () -> Unit, deleteIcon: ImageVector, actionButton: () -> Unit, deleteAlertDialog: (MutableState<Boolean>) -> Unit)",
       "com.tecknobit.neutron.ui.components.RevenueListItem"
     ]
   },
@@ -1280,6 +1290,16 @@
     ]
   },
   {
+    "name": "fun initCurrency(currency: NeutronCurrency)",
+    "description": "com.tecknobit.neutron.helpers.NeutronLocalUser.initCurrency",
+    "location": "-neutron/com.tecknobit.neutron.helpers/-neutron-local-user/init-currency.html",
+    "searchKeys": [
+      "initCurrency",
+      "fun initCurrency(currency: NeutronCurrency)",
+      "com.tecknobit.neutron.helpers.NeutronLocalUser.initCurrency"
+    ]
+  },
+  {
     "name": "fun insert()",
     "description": "com.tecknobit.neutron.ui.screens.insert.shared.presentation.InsertScreenViewModel.insert",
     "location": "-neutron/com.tecknobit.neutron.ui.screens.insert.shared.presentation/-insert-screen-view-model/insert.html",
@@ -1327,6 +1347,66 @@
       "manageBalancesVisibility",
       "fun manageBalancesVisibility()",
       "com.tecknobit.neutron.ui.screens.shared.presentations.RevenueRelatedScreenViewModel.manageBalancesVisibility"
+    ]
+  },
+  {
+    "name": "fun navToInsertRevenueScreen(revenue: Revenue? = null)",
+    "description": "com.tecknobit.neutron.helpers.navToInsertRevenueScreen",
+    "location": "-neutron/com.tecknobit.neutron.helpers/nav-to-insert-revenue-screen.html",
+    "searchKeys": [
+      "navToInsertRevenueScreen",
+      "fun navToInsertRevenueScreen(revenue: Revenue? = null)",
+      "com.tecknobit.neutron.helpers.navToInsertRevenueScreen"
+    ]
+  },
+  {
+    "name": "fun navToInsertTicketScreen(project: ProjectRevenue, ticket: TicketRevenue? = null)",
+    "description": "com.tecknobit.neutron.helpers.navToInsertTicketScreen",
+    "location": "-neutron/com.tecknobit.neutron.helpers/nav-to-insert-ticket-screen.html",
+    "searchKeys": [
+      "navToInsertTicketScreen",
+      "fun navToInsertTicketScreen(project: ProjectRevenue, ticket: TicketRevenue? = null)",
+      "com.tecknobit.neutron.helpers.navToInsertTicketScreen"
+    ]
+  },
+  {
+    "name": "fun navToProfileScreen()",
+    "description": "com.tecknobit.neutron.helpers.navToProfileScreen",
+    "location": "-neutron/com.tecknobit.neutron.helpers/nav-to-profile-screen.html",
+    "searchKeys": [
+      "navToProfileScreen",
+      "fun navToProfileScreen()",
+      "com.tecknobit.neutron.helpers.navToProfileScreen"
+    ]
+  },
+  {
+    "name": "fun navToProjectScreen(project: ProjectRevenue)",
+    "description": "com.tecknobit.neutron.helpers.navToProjectScreen",
+    "location": "-neutron/com.tecknobit.neutron.helpers/nav-to-project-screen.html",
+    "searchKeys": [
+      "navToProjectScreen",
+      "fun navToProjectScreen(project: ProjectRevenue)",
+      "com.tecknobit.neutron.helpers.navToProjectScreen"
+    ]
+  },
+  {
+    "name": "fun navToRevenuesScreen()",
+    "description": "com.tecknobit.neutron.helpers.navToRevenuesScreen",
+    "location": "-neutron/com.tecknobit.neutron.helpers/nav-to-revenues-screen.html",
+    "searchKeys": [
+      "navToRevenuesScreen",
+      "fun navToRevenuesScreen()",
+      "com.tecknobit.neutron.helpers.navToRevenuesScreen"
+    ]
+  },
+  {
+    "name": "fun navToSplashscreen()",
+    "description": "com.tecknobit.neutron.helpers.navToSplashscreen",
+    "location": "-neutron/com.tecknobit.neutron.helpers/nav-to-splashscreen.html",
+    "searchKeys": [
+      "navToSplashscreen",
+      "fun navToSplashscreen()",
+      "com.tecknobit.neutron.helpers.navToSplashscreen"
     ]
   },
   {
@@ -1420,12 +1500,12 @@
     ]
   },
   {
-    "name": "lateinit var addingGeneralRevenue: <Error class: unknown class><Boolean>",
+    "name": "lateinit var addingGeneralRevenue: MutableState<Boolean>",
     "description": "com.tecknobit.neutron.ui.screens.insert.shared.presentation.InsertScreenViewModel.addingGeneralRevenue",
     "location": "-neutron/com.tecknobit.neutron.ui.screens.insert.shared.presentation/-insert-screen-view-model/adding-general-revenue.html",
     "searchKeys": [
       "addingGeneralRevenue",
-      "lateinit var addingGeneralRevenue: <Error class: unknown class><Boolean>",
+      "lateinit var addingGeneralRevenue: MutableState<Boolean>",
       "com.tecknobit.neutron.ui.screens.insert.shared.presentation.InsertScreenViewModel.addingGeneralRevenue"
     ]
   },
@@ -1450,32 +1530,32 @@
     ]
   },
   {
-    "name": "lateinit var currency: <Error class: unknown class><NeutronCurrency>",
+    "name": "lateinit var currency: MutableState<NeutronCurrency>",
     "description": "com.tecknobit.neutron.ui.screens.profile.presentation.ProfileScreenViewModel.currency",
     "location": "-neutron/com.tecknobit.neutron.ui.screens.profile.presentation/-profile-screen-view-model/currency.html",
     "searchKeys": [
       "currency",
-      "lateinit var currency: <Error class: unknown class><NeutronCurrency>",
+      "lateinit var currency: MutableState<NeutronCurrency>",
       "com.tecknobit.neutron.ui.screens.profile.presentation.ProfileScreenViewModel.currency"
     ]
   },
   {
-    "name": "lateinit var description: <Error class: unknown class><String>",
+    "name": "lateinit var description: MutableState<String>",
     "description": "com.tecknobit.neutron.ui.screens.insert.shared.presentation.InsertScreenViewModel.description",
     "location": "-neutron/com.tecknobit.neutron.ui.screens.insert.shared.presentation/-insert-screen-view-model/description.html",
     "searchKeys": [
       "description",
-      "lateinit var description: <Error class: unknown class><String>",
+      "lateinit var description: MutableState<String>",
       "com.tecknobit.neutron.ui.screens.insert.shared.presentation.InsertScreenViewModel.description"
     ]
   },
   {
-    "name": "lateinit var descriptionError: <Error class: unknown class><Boolean>",
+    "name": "lateinit var descriptionError: MutableState<Boolean>",
     "description": "com.tecknobit.neutron.ui.screens.insert.shared.presentation.InsertScreenViewModel.descriptionError",
     "location": "-neutron/com.tecknobit.neutron.ui.screens.insert.shared.presentation/-insert-screen-view-model/description-error.html",
     "searchKeys": [
       "descriptionError",
-      "lateinit var descriptionError: <Error class: unknown class><Boolean>",
+      "lateinit var descriptionError: MutableState<Boolean>",
       "com.tecknobit.neutron.ui.screens.insert.shared.presentation.InsertScreenViewModel.descriptionError"
     ]
   },
@@ -1500,12 +1580,12 @@
     ]
   },
   {
-    "name": "lateinit var insertionDate: <Error class: unknown class><LocalDateTime>",
+    "name": "lateinit var insertionDate: MutableState<LocalDateTime>",
     "description": "com.tecknobit.neutron.ui.screens.insert.shared.presentation.InsertScreenViewModel.insertionDate",
     "location": "-neutron/com.tecknobit.neutron.ui.screens.insert.shared.presentation/-insert-screen-view-model/insertion-date.html",
     "searchKeys": [
       "insertionDate",
-      "lateinit var insertionDate: <Error class: unknown class><LocalDateTime>",
+      "lateinit var insertionDate: MutableState<LocalDateTime>",
       "com.tecknobit.neutron.ui.screens.insert.shared.presentation.InsertScreenViewModel.insertionDate"
     ]
   },
@@ -1531,12 +1611,12 @@
   },
   {
     "name": "lateinit var navigator: NavHostController",
-    "description": "com.tecknobit.neutron.navigator",
-    "location": "-neutron/com.tecknobit.neutron/navigator.html",
+    "description": "com.tecknobit.neutron.helpers.navigator",
+    "location": "-neutron/com.tecknobit.neutron.helpers/navigator.html",
     "searchKeys": [
       "navigator",
       "lateinit var navigator: NavHostController",
-      "com.tecknobit.neutron.navigator"
+      "com.tecknobit.neutron.helpers.navigator"
     ]
   },
   {
@@ -1580,22 +1660,22 @@
     ]
   },
   {
-    "name": "lateinit var title: <Error class: unknown class><String>",
+    "name": "lateinit var title: MutableState<String>",
     "description": "com.tecknobit.neutron.ui.screens.insert.shared.presentation.InsertScreenViewModel.title",
     "location": "-neutron/com.tecknobit.neutron.ui.screens.insert.shared.presentation/-insert-screen-view-model/title.html",
     "searchKeys": [
       "title",
-      "lateinit var title: <Error class: unknown class><String>",
+      "lateinit var title: MutableState<String>",
       "com.tecknobit.neutron.ui.screens.insert.shared.presentation.InsertScreenViewModel.title"
     ]
   },
   {
-    "name": "lateinit var titleError: <Error class: unknown class><Boolean>",
+    "name": "lateinit var titleError: MutableState<Boolean>",
     "description": "com.tecknobit.neutron.ui.screens.insert.shared.presentation.InsertScreenViewModel.titleError",
     "location": "-neutron/com.tecknobit.neutron.ui.screens.insert.shared.presentation/-insert-screen-view-model/title-error.html",
     "searchKeys": [
       "titleError",
-      "lateinit var titleError: <Error class: unknown class><Boolean>",
+      "lateinit var titleError: MutableState<Boolean>",
       "com.tecknobit.neutron.ui.screens.insert.shared.presentation.InsertScreenViewModel.titleError"
     ]
   },
@@ -1650,32 +1730,32 @@
     ]
   },
   {
-    "name": "open fun retrieveUserLabels(labels: <Error class: unknown class><RevenueLabel>)",
+    "name": "open fun retrieveUserLabels(labels: SnapshotStateList<RevenueLabel>)",
     "description": "com.tecknobit.neutron.ui.screens.shared.presentations.RevenueLabelsRetriever.retrieveUserLabels",
     "location": "-neutron/com.tecknobit.neutron.ui.screens.shared.presentations/-revenue-labels-retriever/retrieve-user-labels.html",
     "searchKeys": [
       "retrieveUserLabels",
-      "open fun retrieveUserLabels(labels: <Error class: unknown class><RevenueLabel>)",
+      "open fun retrieveUserLabels(labels: SnapshotStateList<RevenueLabel>)",
       "com.tecknobit.neutron.ui.screens.shared.presentations.RevenueLabelsRetriever.retrieveUserLabels"
     ]
   },
   {
-    "name": "open lateinit override var hideBalances: <Error class: unknown class><Boolean>",
+    "name": "open lateinit override var hideBalances: State<Boolean>",
     "description": "com.tecknobit.neutron.ui.screens.project.presenter.ProjectScreen.hideBalances",
     "location": "-neutron/com.tecknobit.neutron.ui.screens.project.presenter/-project-screen/hide-balances.html",
     "searchKeys": [
       "hideBalances",
-      "open lateinit override var hideBalances: <Error class: unknown class><Boolean>",
+      "open lateinit override var hideBalances: State<Boolean>",
       "com.tecknobit.neutron.ui.screens.project.presenter.ProjectScreen.hideBalances"
     ]
   },
   {
-    "name": "open lateinit override var hideBalances: <Error class: unknown class><Boolean>",
+    "name": "open lateinit override var hideBalances: State<Boolean>",
     "description": "com.tecknobit.neutron.ui.screens.revenues.presenter.RevenuesScreen.hideBalances",
     "location": "-neutron/com.tecknobit.neutron.ui.screens.revenues.presenter/-revenues-screen/hide-balances.html",
     "searchKeys": [
       "hideBalances",
-      "open lateinit override var hideBalances: <Error class: unknown class><Boolean>",
+      "open lateinit override var hideBalances: State<Boolean>",
       "com.tecknobit.neutron.ui.screens.revenues.presenter.RevenuesScreen.hideBalances"
     ]
   },
@@ -1740,12 +1820,12 @@
     ]
   },
   {
-    "name": "open override fun insertNewUser(hostAddress: String, name: String, surname: String, email: String, password: String, language: String, response: JsonObject, vararg custom: Any?)",
+    "name": "open override fun insertNewUser(hostAddress: String, userId: String, userToken: String, profilePic: String, name: String, surname: String, email: String, language: String, vararg custom: Any?)",
     "description": "com.tecknobit.neutron.helpers.NeutronLocalUser.insertNewUser",
     "location": "-neutron/com.tecknobit.neutron.helpers/-neutron-local-user/insert-new-user.html",
     "searchKeys": [
       "insertNewUser",
-      "open override fun insertNewUser(hostAddress: String, name: String, surname: String, email: String, password: String, language: String, response: JsonObject, vararg custom: Any?)",
+      "open override fun insertNewUser(hostAddress: String, userId: String, userToken: String, profilePic: String, name: String, surname: String, email: String, language: String, vararg custom: Any?)",
       "com.tecknobit.neutron.helpers.NeutronLocalUser.insertNewUser"
     ]
   },
@@ -2650,12 +2730,12 @@
     ]
   },
   {
-    "name": "val labels: <Error class: unknown class>",
+    "name": "val labels: SnapshotStateList<RevenueLabel>",
     "description": "com.tecknobit.neutron.ui.screens.insert.revenue.presentation.InsertRevenueScreenViewModel.labels",
     "location": "-neutron/com.tecknobit.neutron.ui.screens.insert.revenue.presentation/-insert-revenue-screen-view-model/labels.html",
     "searchKeys": [
       "labels",
-      "val labels: <Error class: unknown class>",
+      "val labels: SnapshotStateList<RevenueLabel>",
       "com.tecknobit.neutron.ui.screens.insert.revenue.presentation.InsertRevenueScreenViewModel.labels"
     ]
   },
@@ -4530,12 +4610,12 @@
     ]
   },
   {
-    "name": "var amount: <Error class: unknown class><String>",
+    "name": "var amount: MutableState<String>",
     "description": "com.tecknobit.neutron.ui.components.screenkeyboard.ScreenKeyboardState.amount",
     "location": "-neutron/com.tecknobit.neutron.ui.components.screenkeyboard/-screen-keyboard-state/amount.html",
     "searchKeys": [
       "amount",
-      "var amount: <Error class: unknown class><String>",
+      "var amount: MutableState<String>",
       "com.tecknobit.neutron.ui.components.screenkeyboard.ScreenKeyboardState.amount"
     ]
   },
@@ -4550,12 +4630,12 @@
     ]
   },
   {
-    "name": "var labelsFilter: <Error class: unknown class>",
+    "name": "var labelsFilter: SnapshotStateList<RevenueLabel>",
     "description": "com.tecknobit.neutron.ui.screens.revenues.presentation.RevenuesScreenViewModel.labelsFilter",
     "location": "-neutron/com.tecknobit.neutron.ui.screens.revenues.presentation/-revenues-screen-view-model/labels-filter.html",
     "searchKeys": [
       "labelsFilter",
-      "var labelsFilter: <Error class: unknown class>",
+      "var labelsFilter: SnapshotStateList<RevenueLabel>",
       "com.tecknobit.neutron.ui.screens.revenues.presentation.RevenuesScreenViewModel.labelsFilter"
     ]
   }

@@ -27,8 +27,7 @@ import androidx.compose.ui.unit.dp
 import com.tecknobit.equinoxcompose.utilities.ResponsiveContent
 import com.tecknobit.equinoxcompose.utilities.toColor
 import com.tecknobit.equinoxcore.time.TimeFormatter
-import com.tecknobit.neutron.INSERT_TICKET_SCREEN
-import com.tecknobit.neutron.navigator
+import com.tecknobit.neutron.helpers.navToInsertTicketScreen
 import com.tecknobit.neutron.ui.components.DeleteTicket
 import com.tecknobit.neutron.ui.components.RevenueDescription
 import com.tecknobit.neutron.ui.components.RevenueListItem
@@ -41,8 +40,6 @@ import com.tecknobit.neutron.ui.screens.shared.data.ProjectRevenue
 import com.tecknobit.neutron.ui.screens.shared.data.RevenueLabel
 import com.tecknobit.neutroncore.CLOSED_TICKET_LABEL_COLOR
 import com.tecknobit.neutroncore.PENDING_TICKET_LABEL_COLOR
-import com.tecknobit.neutroncore.REVENUE_IDENTIFIER_KEY
-import com.tecknobit.neutroncore.TICKET_IDENTIFIER_KEY
 import neutron.composeapp.generated.resources.closed_status
 import neutron.composeapp.generated.resources.pending_status
 import org.jetbrains.compose.resources.stringResource
@@ -125,12 +122,10 @@ private fun TicketRevenueContent(
             containerColor = containerColor,
             allowEdit = ticket.isPending(),
             onEdit = {
-                val savedStateHandle = navigator.currentBackStackEntry?.savedStateHandle
-                savedStateHandle?.let {
-                    savedStateHandle[REVENUE_IDENTIFIER_KEY] = project.id
-                    savedStateHandle[TICKET_IDENTIFIER_KEY] = ticket.id
-                    navigator.navigate(INSERT_TICKET_SCREEN)
-                }
+                navToInsertTicketScreen(
+                    project = project,
+                    ticket = ticket
+                )
             },
             overline = { ticketLabel ->
                 Row (

@@ -62,10 +62,9 @@ import com.tecknobit.equinoxcompose.session.EquinoxLocalUser.ApplicationTheme
 import com.tecknobit.equinoxcore.helpers.InputsValidator.Companion.SUPPORTED_LANGUAGES
 import com.tecknobit.equinoxcore.helpers.InputsValidator.Companion.isEmailValid
 import com.tecknobit.equinoxcore.helpers.InputsValidator.Companion.isPasswordValid
-import com.tecknobit.neutron.SPLASHSCREEN
 import com.tecknobit.neutron.bodyFontFamily
+import com.tecknobit.neutron.helpers.navToSplashscreen
 import com.tecknobit.neutron.localUser
-import com.tecknobit.neutron.navigator
 import com.tecknobit.neutron.ui.components.DeleteAccount
 import com.tecknobit.neutron.ui.components.Logout
 import com.tecknobit.neutron.ui.components.ProfilePic
@@ -296,7 +295,7 @@ class ProfileScreen : NeutronScreen<ProfileScreenViewModel>(
                         viewModel.changeLanguage(
                             onChange = {
                                 visible.value = false
-                                navigator.navigate(SPLASHSCREEN)
+                                navToSplashscreen()
                             }
                         )
                     }
@@ -308,10 +307,7 @@ class ProfileScreen : NeutronScreen<ProfileScreenViewModel>(
                     dismissAction = { visible -> visible.value = false },
                     confirmAction = { visible ->
                         viewModel.changeTheme(
-                            onChange = {
-                                visible.value = false
-                                navigator.navigate(SPLASHSCREEN)
-                            }
+                            onChange = { visible.value = false }
                         )
                     }
                 )
@@ -529,7 +525,6 @@ class ProfileScreen : NeutronScreen<ProfileScreenViewModel>(
     override fun CollectStates() {
         viewModel.profilePic = remember { mutableStateOf(localUser.profilePic) }
         viewModel.email = remember { mutableStateOf(localUser.email) }
-        viewModel.password = remember { mutableStateOf(localUser.password) }
         viewModel.language = remember { mutableStateOf(localUser.language) }
         viewModel.currency = remember { mutableStateOf(localUser.currency) }
         viewModel.theme = remember { mutableStateOf(localUser.theme) }

@@ -69,13 +69,6 @@ class NeutronRequester(
     debugMode = debugMode,
     byPassSSLValidation = true
 ) {
-    
-    init {
-        // TODO: REIMPLEMENT WHEN NECESSARY
-        /*attachInterceptorOnRequest {
-            AmetistaEngine.ametistaEngine.notifyNetworkRequest()
-        }*/
-    }
 
     /**
      * Method to request to change the currency of the user

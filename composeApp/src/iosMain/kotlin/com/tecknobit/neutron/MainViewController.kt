@@ -7,7 +7,6 @@ import androidx.compose.ui.window.ComposeUIViewController
  *
  */
 fun MainViewController() {
-    // AmetistaEngine.intake()
     ComposeUIViewController {
         App()
     }

@@ -3,9 +3,6 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat.Deb
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat.Exe
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat.Pkg
-import org.jetbrains.dokka.base.DokkaBase
-import org.jetbrains.dokka.base.DokkaBaseConfiguration
-import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
@@ -20,7 +17,7 @@ plugins {
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.dokka)
     kotlin("plugin.serialization") version "2.0.20"
-    id("com.github.gmazzo.buildconfig") version "5.5.1"
+    id("com.github.gmazzo.buildconfig") version "5.7.0"
 }
 
 kotlin {
@@ -107,10 +104,10 @@ kotlin {
                 implementation(libs.datetime.wheel.picker)
                 implementation(libs.kotlinx.datetime)
                 implementation(libs.colorpicker.compose)
-                implementation(libs.ametista.engine)
                 implementation(libs.neutroncore)
-                implementation(libs.compose.navigation)
                 implementation(libs.biometrik)
+                implementation(libs.compose.navigation)
+                implementation(libs.equinoxmisc.navigation.compose.util)
             }
         }
 
@@ -151,8 +148,8 @@ android {
         applicationId = "com.tecknobit.neutron"
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
-        versionCode = 7
-        versionName = "1.0.4"
+        versionCode = 8
+        versionName = "1.0.5"
     }
     packaging {
         resources {
@@ -185,10 +182,10 @@ compose.desktop {
                 "jdk.security.auth"
             )
             packageName = "Neutron"
-            packageVersion = "1.0.4"
+            packageVersion = "1.0.5"
             packageName = "Neutron"
-            packageVersion = "1.0.4"
-            version = "1.0.4"
+            packageVersion = "1.0.5"
+            version = "1.0.5"
             description = "Order and ticket revenue manager for the projects you are developing"
             copyright = "© 2025 Tecknobit"
             vendor = "Tecknobit"
@@ -205,7 +202,7 @@ compose.desktop {
                 iconFile.set(project.file("src/desktopMain/resources/logo.png"))
                 packageName = "com-tecknobit-neutron"
                 debMaintainer = "infotecknobitcompany@gmail.com"
-                appRelease = "1.0.4"
+                appRelease = "1.0.5"
                 appCategory = "PERSONALIZATION"
                 rpmLicenseType = "APACHE2"
             }
@@ -218,40 +215,28 @@ compose.desktop {
     }
 }
 
-configurations.all {
-    exclude("io.github.n7ghtm4r3", "Equinox-Compose-android")
-}
-
-tasks.withType<DokkaTask>().configureEach {
-    dokkaSourceSets {
-        moduleName.set("Neutron")
+dokka {
+    moduleName.set("Neutron")
+    dokkaPublications.html {
         outputDirectory.set(layout.projectDirectory.dir("../docs"))
     }
-
-    pluginConfiguration<DokkaBase, DokkaBaseConfiguration> {
-        customAssets = listOf(file("../docs/logo-icon.svg"))
-        footerMessage = "(c) 2025 Tecknobit"
+    pluginsConfiguration {
+        versioning {
+            version.set("1.0.5")
+        }
+        html {
+            customAssets.from("../images/logo-icon.svg")
+            footerMessage.set("(c) 2025 Tecknobit")
+        }
     }
 }
 
 buildConfig {
-    className("AmetistaConfig")
-    packageName("com.tecknobit.ametista")
+    className("NeutronConfig")
+    packageName("com.tecknobit.neutron")
     buildConfigField<String>(
-        name = "HOST",
-        value = project.findProperty("host").toString()
-    )
-    buildConfigField<String?>(
-        name = "SERVER_SECRET",
-        value = project.findProperty("server_secret").toString()
-    )
-    buildConfigField<String?>(
-        name = "APPLICATION_IDENTIFIER",
-        value = project.findProperty("application_id").toString()
-    )
-    buildConfigField<Boolean>(
-        name = "BYPASS_SSL_VALIDATION",
-        value = project.findProperty("bypass_ssl_validation").toString().toBoolean()
+        name = "LOCAL_STORAGE_PATH",
+        value = project.findProperty("localStoragePath").toString()
     )
 }
 
