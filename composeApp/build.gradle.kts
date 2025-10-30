@@ -3,9 +3,6 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat.Deb
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat.Exe
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat.Pkg
-import org.jetbrains.dokka.base.DokkaBase
-import org.jetbrains.dokka.base.DokkaBaseConfiguration
-import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
@@ -218,19 +215,19 @@ compose.desktop {
     }
 }
 
-configurations.all {
-    exclude("io.github.n7ghtm4r3", "Equinox-Compose-android")
-}
-
-tasks.withType<DokkaTask>().configureEach {
-    dokkaSourceSets {
-        moduleName.set("Neutron")
+dokka {
+    moduleName.set("Neutron")
+    dokkaPublications.html {
         outputDirectory.set(layout.projectDirectory.dir("../docs"))
     }
-
-    pluginConfiguration<DokkaBase, DokkaBaseConfiguration> {
-        customAssets = listOf(file("../docs/logo-icon.svg"))
-        footerMessage = "(c) 2025 Tecknobit"
+    pluginsConfiguration {
+        versioning {
+            version.set("1.0.5")
+        }
+        html {
+            customAssets.from("../images/logo-icon.svg")
+            footerMessage.set("(c) 2025 Tecknobit")
+        }
     }
 }
 
