@@ -1,4 +1,4 @@
-@file:OptIn(ExperimentalComposeApi::class, ExperimentalStdlibApi::class)
+@file:OptIn(ExperimentalComposeApi::class)
 
 package com.tecknobit.neutron
 
@@ -71,7 +71,7 @@ lateinit var requester: NeutronRequester
 val localUser = NeutronLocalUser()
 
 /**
- * `SPLASHSCREEN` route to navigate to the [com.tecknobit.neutron.ui.screens.splashscreen.Splashscreen]
+ * `SPLASHSCREEN` route to navigate to the [com.tecknobit.neutron.ui.screens.SplashScreen]
  */
 const val SPLASHSCREEN = "Splashscreen"
 
@@ -127,8 +127,7 @@ fun App() {
         .memoryCachePolicy(CachePolicy.ENABLED)
         .build()
     navigator = rememberNavController()
-    // TODO: TO USE THESE UNIQUE THEME
-    // NeutronTheme {
+    NeutronTheme {
         NavHost(
             navController = navigator,
             startDestination = SPLASHSCREEN
@@ -136,96 +135,75 @@ fun App() {
             composable(
                 route = SPLASHSCREEN
             ) {
-                // TODO: TO USE THE UNIQUE THEME
-                NeutronTheme {
-                    val splashScreen = equinoxScreen {
-                        SplashScreen(
-                            biometrikState = biometrikState
-                        )
-                    }
-                    splashScreen.ShowContent()
+                val splashScreen = equinoxScreen {
+                    SplashScreen(
+                        biometrikState = biometrikState
+                    )
                 }
+                splashScreen.ShowContent()
             }
             composable(
                 route = AUTH_SCREEN
             ) {
-                // TODO: TO USE THE UNIQUE THEME
-                NeutronTheme {
-                    val authScreen = equinoxScreen { AuthScreen() }
-                    authScreen.ShowContent()
-                }
+                val authScreen = equinoxScreen { AuthScreen() }
+                authScreen.ShowContent()
             }
             composable(
                 route = REVENUES_SCREEN
             ) {
-                // TODO: TO USE THE UNIQUE THEME
-                NeutronTheme {
-                    val revenuesScreen = equinoxScreen { RevenuesScreen() }
-                    revenuesScreen.ShowContent()
-                }
+                val revenuesScreen = equinoxScreen { RevenuesScreen() }
+                revenuesScreen.ShowContent()
             }
             composable(
                 route = PROFILE_SCREEN
             ) {
-                // TODO: TO USE THE UNIQUE THEME
-                NeutronTheme {
-                    val profileScreen = equinoxScreen { ProfileScreen() }
-                    profileScreen.ShowContent()
-                }
+                val profileScreen = equinoxScreen { ProfileScreen() }
+                profileScreen.ShowContent()
             }
             composable(
                 route = INSERT_REVENUE_SCREEN
             ) {
-                // TODO: TO USE THE UNIQUE THEME
-                NeutronTheme {
-                    val savedStateHandle = navigator.previousBackStackEntry?.savedStateHandle!!
-                    val revenueId: String? = savedStateHandle[REVENUE_IDENTIFIER_KEY]
-                    val insertRevenueScreen = equinoxScreen {
-                        InsertRevenueScreen(
-                            revenueId = revenueId
-                        )
-                    }
-                    insertRevenueScreen.ShowContent()
-                    savedStateHandle.remove<String>(REVENUE_IDENTIFIER_KEY)
+                val savedStateHandle = navigator.previousBackStackEntry?.savedStateHandle!!
+                val revenueId: String? = savedStateHandle[REVENUE_IDENTIFIER_KEY]
+                val insertRevenueScreen = equinoxScreen {
+                    InsertRevenueScreen(
+                        revenueId = revenueId
+                    )
                 }
+                insertRevenueScreen.ShowContent()
+                savedStateHandle.remove<String>(REVENUE_IDENTIFIER_KEY)
             }
             composable(
                 route = PROJECT_REVENUE_SCREEN
             ) {
-                // TODO: TO USE THE UNIQUE THEME
-                NeutronTheme {
-                    val savedStateHandle = navigator.previousBackStackEntry?.savedStateHandle!!
-                    val projectId: String? = savedStateHandle[REVENUE_IDENTIFIER_KEY]
-                    projectId?.let {
-                        val projectScreen = equinoxScreen {
-                            ProjectScreen(
-                                projectId = projectId
-                            )
-                        }
-                        projectScreen.ShowContent()
+                val savedStateHandle = navigator.previousBackStackEntry?.savedStateHandle!!
+                val projectId: String? = savedStateHandle[REVENUE_IDENTIFIER_KEY]
+                projectId?.let {
+                    val projectScreen = equinoxScreen {
+                        ProjectScreen(
+                            projectId = projectId
+                        )
                     }
+                    projectScreen.ShowContent()
                 }
             }
             composable(
                 route = INSERT_TICKET_SCREEN
             ) {
-                // TODO: TO USE THE UNIQUE THEME
-                NeutronTheme {
-                    val savedStateHandle = navigator.previousBackStackEntry?.savedStateHandle!!
-                    val projectId: String = savedStateHandle[REVENUE_IDENTIFIER_KEY]!!
-                    val ticketId: String? = savedStateHandle[TICKET_IDENTIFIER_KEY]
-                    val insertTicketScreen = equinoxScreen {
-                        InsertTicketScreen(
-                            projectId = projectId,
-                            ticketId = ticketId
-                        )
-                    }
-                    insertTicketScreen.ShowContent()
-                    savedStateHandle.remove<String>(TICKET_IDENTIFIER_KEY)
+                val savedStateHandle = navigator.previousBackStackEntry?.savedStateHandle!!
+                val projectId: String = savedStateHandle[REVENUE_IDENTIFIER_KEY]!!
+                val ticketId: String? = savedStateHandle[TICKET_IDENTIFIER_KEY]
+                val insertTicketScreen = equinoxScreen {
+                    InsertTicketScreen(
+                        projectId = projectId,
+                        ticketId = ticketId
+                    )
                 }
+                insertTicketScreen.ShowContent()
+                savedStateHandle.remove<String>(TICKET_IDENTIFIER_KEY)
             }
         }
-    // }
+    }
     SessionFlowState.invokeOnUserDisconnected {
         localUser.clear()
         navigator.navigate(SPLASHSCREEN)

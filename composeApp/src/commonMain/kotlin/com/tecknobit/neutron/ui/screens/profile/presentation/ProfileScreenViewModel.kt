@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
  * @author N7ghtm4r3 - Tecknobit
  * @see androidx.lifecycle.ViewModel
  * @see com.tecknobit.equinoxcompose.session.Retriever
- * @see com.tecknobit.equinoxcompose.viewmodels.EquinoxViewModel
+ * @see com.tecknobit.equinoxcompose.session.viewmodels.EquinoxViewModel
  * @see EquinoxProfileViewModel
  */
 class ProfileScreenViewModel : EquinoxProfileViewModel(
@@ -47,7 +47,9 @@ class ProfileScreenViewModel : EquinoxProfileViewModel(
                     )
                 },
                 onSuccess = {
-                    localUser.currency = currency.value
+                    localUser.initCurrency(
+                        currency = currency.value
+                    )
                     onChange.invoke()
                 },
                 onFailure = { showSnackbarMessage(it) }

@@ -308,10 +308,7 @@ class ProfileScreen : NeutronScreen<ProfileScreenViewModel>(
                     dismissAction = { visible -> visible.value = false },
                     confirmAction = { visible ->
                         viewModel.changeTheme(
-                            onChange = {
-                                visible.value = false
-                                navigator.navigate(SPLASHSCREEN)
-                            }
+                            onChange = { visible.value = false }
                         )
                     }
                 )
@@ -529,7 +526,6 @@ class ProfileScreen : NeutronScreen<ProfileScreenViewModel>(
     override fun CollectStates() {
         viewModel.profilePic = remember { mutableStateOf(localUser.profilePic) }
         viewModel.email = remember { mutableStateOf(localUser.email) }
-        viewModel.password = remember { mutableStateOf(localUser.password) }
         viewModel.language = remember { mutableStateOf(localUser.language) }
         viewModel.currency = remember { mutableStateOf(localUser.currency) }
         viewModel.theme = remember { mutableStateOf(localUser.theme) }
