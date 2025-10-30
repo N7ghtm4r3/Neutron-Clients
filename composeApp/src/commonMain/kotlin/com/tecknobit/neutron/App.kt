@@ -4,8 +4,6 @@ package com.tecknobit.neutron
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ExperimentalComposeApi
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.ui.text.font.FontFamily
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -16,9 +14,6 @@ import coil3.compose.LocalPlatformContext
 import coil3.network.ktor3.KtorNetworkFetcherFactory
 import coil3.request.CachePolicy
 import coil3.request.addLastModifiedToFileCacheKey
-import com.tecknobit.ametista.AmetistaConfig
-import com.tecknobit.ametistaengine.AmetistaEngine
-import com.tecknobit.ametistaengine.AmetistaEngine.Companion.FILES_AMETISTA_CONFIG_PATHNAME
 import com.tecknobit.biometrik.rememberBiometrikState
 import com.tecknobit.equinoxcompose.session.screens.equinoxScreen
 import com.tecknobit.equinoxcompose.session.sessionflow.SessionFlowState
@@ -116,7 +111,6 @@ const val PROJECT_REVENUE_SCREEN = "ProjectRevenueScreen"
 @Composable
 fun App() {
     val biometrikState = rememberBiometrikState()
-    // InitAmetista()
     bodyFontFamily = FontFamily(Font(Res.font.roboto))
     displayFontFamily = FontFamily(Font(Res.font.lilitaone))
     imageLoader = ImageLoader.Builder(LocalPlatformContext.current)
@@ -235,26 +229,6 @@ fun App() {
     SessionFlowState.invokeOnUserDisconnected {
         localUser.clear()
         navigator.navigate(SPLASHSCREEN)
-    }
-}
-
-/**
- * Method used to initialize the Ametista system
- */
-// TODO: REIMPLEMENT WHEN NECESSARY
-@Composable
-@NonRestartableComposable
-private fun InitAmetista() {
-    LaunchedEffect(Unit) {
-        val ametistaEngine = AmetistaEngine.ametistaEngine
-        ametistaEngine.fireUp(
-            configData = Res.readBytes(FILES_AMETISTA_CONFIG_PATHNAME),
-            host = AmetistaConfig.HOST,
-            serverSecret = AmetistaConfig.SERVER_SECRET!!,
-            applicationId = AmetistaConfig.APPLICATION_IDENTIFIER!!,
-            bypassSslValidation = AmetistaConfig.BYPASS_SSL_VALIDATION,
-            debugMode = false
-        )
     }
 }
 

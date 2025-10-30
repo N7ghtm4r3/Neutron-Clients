@@ -107,7 +107,6 @@ kotlin {
                 implementation(libs.datetime.wheel.picker)
                 implementation(libs.kotlinx.datetime)
                 implementation(libs.colorpicker.compose)
-                implementation(libs.ametista.engine)
                 implementation(libs.neutroncore)
                 implementation(libs.compose.navigation)
                 implementation(libs.biometrik)
@@ -151,8 +150,8 @@ android {
         applicationId = "com.tecknobit.neutron"
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
-        versionCode = 7
-        versionName = "1.0.4"
+        versionCode = 8
+        versionName = "1.0.5"
     }
     packaging {
         resources {
@@ -185,10 +184,10 @@ compose.desktop {
                 "jdk.security.auth"
             )
             packageName = "Neutron"
-            packageVersion = "1.0.4"
+            packageVersion = "1.0.5"
             packageName = "Neutron"
-            packageVersion = "1.0.4"
-            version = "1.0.4"
+            packageVersion = "1.0.5"
+            version = "1.0.5"
             description = "Order and ticket revenue manager for the projects you are developing"
             copyright = "© 2025 Tecknobit"
             vendor = "Tecknobit"
@@ -205,7 +204,7 @@ compose.desktop {
                 iconFile.set(project.file("src/desktopMain/resources/logo.png"))
                 packageName = "com-tecknobit-neutron"
                 debMaintainer = "infotecknobitcompany@gmail.com"
-                appRelease = "1.0.4"
+                appRelease = "1.0.5"
                 appCategory = "PERSONALIZATION"
                 rpmLicenseType = "APACHE2"
             }
