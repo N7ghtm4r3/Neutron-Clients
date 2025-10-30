@@ -29,7 +29,7 @@ import com.tecknobit.equinoxcompose.session.viewmodels.EquinoxViewModel
 import com.tecknobit.equinoxcompose.utilities.EXPANDED_CONTAINER
 import com.tecknobit.equinoxcore.annotations.Structure
 import com.tecknobit.neutron.displayFontFamily
-import com.tecknobit.neutron.navigator
+import com.tecknobit.neutron.helpers.navigator
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 

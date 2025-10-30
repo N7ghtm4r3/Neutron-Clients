@@ -33,14 +33,14 @@ import neutron.composeapp.generated.resources.login_required
 import org.jetbrains.compose.resources.stringResource
 
 /**
- * The [SplashScreen] class is used to retrieve and load the session data and enter the application's workflow
+ * The [Splashscreen] class is used to retrieve and load the session data and enter the application's workflow
  *
  * @param biometrikState The state used to handle the bio authentication
  *
  * @author N7ghtm4r3 - Tecknobit
  * @see EquinoxNoModelScreen
  */
-class SplashScreen(
+class Splashscreen(
     private val biometrikState: BiometrikState,
 ) : EquinoxNoModelScreen() {
 

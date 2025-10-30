@@ -62,10 +62,9 @@ import com.tecknobit.equinoxcompose.session.EquinoxLocalUser.ApplicationTheme
 import com.tecknobit.equinoxcore.helpers.InputsValidator.Companion.SUPPORTED_LANGUAGES
 import com.tecknobit.equinoxcore.helpers.InputsValidator.Companion.isEmailValid
 import com.tecknobit.equinoxcore.helpers.InputsValidator.Companion.isPasswordValid
-import com.tecknobit.neutron.SPLASHSCREEN
 import com.tecknobit.neutron.bodyFontFamily
+import com.tecknobit.neutron.helpers.navToSplashscreen
 import com.tecknobit.neutron.localUser
-import com.tecknobit.neutron.navigator
 import com.tecknobit.neutron.ui.components.DeleteAccount
 import com.tecknobit.neutron.ui.components.Logout
 import com.tecknobit.neutron.ui.components.ProfilePic
@@ -296,7 +295,7 @@ class ProfileScreen : NeutronScreen<ProfileScreenViewModel>(
                         viewModel.changeLanguage(
                             onChange = {
                                 visible.value = false
-                                navigator.navigate(SPLASHSCREEN)
+                                navToSplashscreen()
                             }
                         )
                     }

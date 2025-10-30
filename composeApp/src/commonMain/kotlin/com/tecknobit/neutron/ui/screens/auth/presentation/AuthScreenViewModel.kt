@@ -5,9 +5,8 @@ import com.tecknobit.equinoxcompose.session.viewmodels.EquinoxAuthViewModel
 import com.tecknobit.equinoxcore.annotations.CustomParametersOrder
 import com.tecknobit.equinoxcore.annotations.RequiresSuperCall
 import com.tecknobit.equinoxcore.json.treatsAsString
-import com.tecknobit.neutron.REVENUES_SCREEN
+import com.tecknobit.neutron.helpers.navToRevenuesScreen
 import com.tecknobit.neutron.localUser
-import com.tecknobit.neutron.navigator
 import com.tecknobit.neutron.requester
 import com.tecknobit.neutroncore.CURRENCY_KEY
 import kotlinx.serialization.json.JsonObject
@@ -61,7 +60,7 @@ class AuthScreenViewModel : EquinoxAuthViewModel(
         vararg custom: Any?
     ) {
         super.launchApp(response, name, surname, language, response[CURRENCY_KEY].treatsAsString())
-        navigator.navigate(REVENUES_SCREEN)
+        navToRevenuesScreen()
     }
 
 }

@@ -46,11 +46,11 @@ import com.tecknobit.equinoxcompose.session.screens.EquinoxScreen
 import com.tecknobit.equinoxcompose.session.sessionflow.SessionFlowContainer
 import com.tecknobit.equinoxcompose.session.sessionflow.rememberSessionFlowState
 import com.tecknobit.equinoxcompose.utilities.EXPANDED_CONTAINER
-import com.tecknobit.neutron.INSERT_REVENUE_SCREEN
-import com.tecknobit.neutron.INSERT_TICKET_SCREEN
 import com.tecknobit.neutron.displayFontFamily
+import com.tecknobit.neutron.helpers.navToInsertRevenueScreen
+import com.tecknobit.neutron.helpers.navToInsertTicketScreen
+import com.tecknobit.neutron.helpers.navigator
 import com.tecknobit.neutron.localUser
-import com.tecknobit.neutron.navigator
 import com.tecknobit.neutron.ui.components.DeleteRevenue
 import com.tecknobit.neutron.ui.screens.project.components.InitialRevenueItem
 import com.tecknobit.neutron.ui.screens.project.components.Tickets
@@ -59,7 +59,6 @@ import com.tecknobit.neutron.ui.screens.project.presentation.ProjectScreenViewMo
 import com.tecknobit.neutron.ui.screens.shared.data.ProjectRevenue
 import com.tecknobit.neutron.ui.screens.shared.presenters.RevenuesContainerScreen
 import com.tecknobit.neutron.ui.screens.shared.presenters.RevenuesContainerScreen.Companion.HIDE_BALANCE
-import com.tecknobit.neutroncore.REVENUE_IDENTIFIER_KEY
 import neutron.composeapp.generated.resources.Res
 import neutron.composeapp.generated.resources.add_ticket
 import neutron.composeapp.generated.resources.total_revenues
@@ -139,11 +138,9 @@ class ProjectScreen(
      * Method to navigate to the related [com.tecknobit.neutron.ui.screens.insert.shared.presenter.InsertScreen]
      */
     override fun navToInsert() {
-        val savedStateHandle = navigator.currentBackStackEntry?.savedStateHandle
-        savedStateHandle?.let {
-            savedStateHandle[REVENUE_IDENTIFIER_KEY] = project.value!!.id
-            navigator.navigate(INSERT_TICKET_SCREEN)
-        }
+        navToInsertTicketScreen(
+            project = project.value!!
+        )
     }
 
     /**
@@ -238,11 +235,9 @@ class ProjectScreen(
         ) {
             IconButton(
                 onClick = {
-                    val savedStateHandle = navigator.currentBackStackEntry?.savedStateHandle
-                    savedStateHandle?.let {
-                        savedStateHandle[REVENUE_IDENTIFIER_KEY] = project.value!!.id
-                        navigator.navigate(INSERT_REVENUE_SCREEN)
-                    }
+                    navToInsertRevenueScreen(
+                        revenue = project.value!!
+                    )
                 }
             ) {
                 Icon(

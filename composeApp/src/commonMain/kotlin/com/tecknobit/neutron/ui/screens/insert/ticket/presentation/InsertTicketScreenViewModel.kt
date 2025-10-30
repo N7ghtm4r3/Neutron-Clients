@@ -4,7 +4,7 @@ import androidx.lifecycle.viewModelScope
 import com.tecknobit.equinoxcompose.session.viewmodels.EquinoxViewModel
 import com.tecknobit.equinoxcore.network.sendRequest
 import com.tecknobit.neutron.helpers.KReviewer
-import com.tecknobit.neutron.navigator
+import com.tecknobit.neutron.helpers.navigator
 import com.tecknobit.neutron.requester
 import com.tecknobit.neutron.ui.screens.insert.shared.presentation.InsertScreenViewModel
 import kotlinx.coroutines.launch

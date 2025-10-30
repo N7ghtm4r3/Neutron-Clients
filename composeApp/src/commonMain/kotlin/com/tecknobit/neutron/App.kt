@@ -1,11 +1,10 @@
-@file:OptIn(ExperimentalComposeApi::class)
+@file:OptIn(ExperimentalComposeApi::class, ExperimentalStdlibApi::class)
 
 package com.tecknobit.neutron
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ExperimentalComposeApi
 import androidx.compose.ui.text.font.FontFamily
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -19,10 +18,20 @@ import com.tecknobit.equinoxcompose.session.screens.equinoxScreen
 import com.tecknobit.equinoxcompose.session.sessionflow.SessionFlowState
 import com.tecknobit.equinoxcore.network.Requester.Companion.toResponseData
 import com.tecknobit.equinoxcore.network.sendRequest
+import com.tecknobit.equinoxmisc.navigationcomposeutil.getDestinationNavData
+import com.tecknobit.neutron.helpers.AUTH_SCREEN
+import com.tecknobit.neutron.helpers.INSERT_REVENUE_SCREEN
+import com.tecknobit.neutron.helpers.INSERT_TICKET_SCREEN
 import com.tecknobit.neutron.helpers.NeutronLocalUser
 import com.tecknobit.neutron.helpers.NeutronRequester
+import com.tecknobit.neutron.helpers.PROFILE_SCREEN
+import com.tecknobit.neutron.helpers.PROJECT_REVENUE_SCREEN
+import com.tecknobit.neutron.helpers.REVENUES_SCREEN
+import com.tecknobit.neutron.helpers.SPLASHSCREEN
 import com.tecknobit.neutron.helpers.customHttpClient
-import com.tecknobit.neutron.ui.screens.SplashScreen
+import com.tecknobit.neutron.helpers.navToSplashscreen
+import com.tecknobit.neutron.helpers.navigator
+import com.tecknobit.neutron.ui.screens.Splashscreen
 import com.tecknobit.neutron.ui.screens.auth.presenter.AuthScreen
 import com.tecknobit.neutron.ui.screens.insert.revenue.presenter.InsertRevenueScreen
 import com.tecknobit.neutron.ui.screens.insert.ticket.presenter.InsertTicketScreen
@@ -50,11 +59,6 @@ lateinit var bodyFontFamily: FontFamily
 lateinit var displayFontFamily: FontFamily
 
 /**
- * `navigator` -> the navigator instance is useful to manage the navigation between the screens of the application
- */
-lateinit var navigator: NavHostController
-
-/**
  *`imageLoader` the image loader used by coil library to load the image and by-passing the https self-signed certificates
  */
 lateinit var imageLoader: ImageLoader
@@ -69,41 +73,6 @@ lateinit var requester: NeutronRequester
  * the device
  */
 val localUser = NeutronLocalUser()
-
-/**
- * `SPLASHSCREEN` route to navigate to the [com.tecknobit.neutron.ui.screens.SplashScreen]
- */
-const val SPLASHSCREEN = "Splashscreen"
-
-/**
- * `AUTH_SCREEN` route to navigate to the [com.tecknobit.neutron.ui.screens.auth.presenter.AuthScreen]
- */
-const val AUTH_SCREEN = "AuthScreen"
-
-/**
- * `REVENUES_SCREEN` route to navigate to the [com.tecknobit.neutron.ui.screens.auth.presenter.AuthScreen]
- */
-const val REVENUES_SCREEN = "RevenuesScreen"
-
-/**
- * `PROFILE_SCREEN` route to navigate to the [com.tecknobit.neutron.ui.screens.profile.presenter.ProfileScreen]
- */
-const val PROFILE_SCREEN = "ProfileScreen"
-
-/**
- * `INSERT_REVENUE_SCREEN` route to navigate to the [com.tecknobit.neutron.ui.screens.insert.revenue.presenter.InsertRevenueScreen]
- */
-const val INSERT_REVENUE_SCREEN = "InsertRevenueScreen"
-
-/**
- * `INSERT_TICKET_SCREEN` route to navigate to the [com.tecknobit.neutron.ui.screens.insert.ticket.presenter.InsertTicketScreen]
- */
-const val INSERT_TICKET_SCREEN = "InsertTicketScreen"
-
-/**
- * `PROJECT_REVENUE_SCREEN` route to navigate to the [com.tecknobit.neutron.ui.screens.project.presenter.ProjectScreen]
- */
-const val PROJECT_REVENUE_SCREEN = "ProjectRevenueScreen"
 
 /**
  * Common entry point of the `Neutron` application
@@ -136,7 +105,7 @@ fun App() {
                 route = SPLASHSCREEN
             ) {
                 val splashScreen = equinoxScreen {
-                    SplashScreen(
+                    Splashscreen(
                         biometrikState = biometrikState
                     )
                 }
@@ -163,21 +132,22 @@ fun App() {
             composable(
                 route = INSERT_REVENUE_SCREEN
             ) {
-                val savedStateHandle = navigator.previousBackStackEntry?.savedStateHandle!!
-                val revenueId: String? = savedStateHandle[REVENUE_IDENTIFIER_KEY]
+                val revenueId: String? = navigator.getDestinationNavData(
+                    key = REVENUE_IDENTIFIER_KEY
+                )
                 val insertRevenueScreen = equinoxScreen {
                     InsertRevenueScreen(
                         revenueId = revenueId
                     )
                 }
                 insertRevenueScreen.ShowContent()
-                savedStateHandle.remove<String>(REVENUE_IDENTIFIER_KEY)
             }
             composable(
                 route = PROJECT_REVENUE_SCREEN
             ) {
-                val savedStateHandle = navigator.previousBackStackEntry?.savedStateHandle!!
-                val projectId: String? = savedStateHandle[REVENUE_IDENTIFIER_KEY]
+                val projectId: String? = navigator.getDestinationNavData(
+                    key = REVENUE_IDENTIFIER_KEY
+                )
                 projectId?.let {
                     val projectScreen = equinoxScreen {
                         ProjectScreen(
@@ -190,9 +160,13 @@ fun App() {
             composable(
                 route = INSERT_TICKET_SCREEN
             ) {
-                val savedStateHandle = navigator.previousBackStackEntry?.savedStateHandle!!
-                val projectId: String = savedStateHandle[REVENUE_IDENTIFIER_KEY]!!
-                val ticketId: String? = savedStateHandle[TICKET_IDENTIFIER_KEY]
+                val projectId: String = navigator.getDestinationNavData(
+                    key = REVENUE_IDENTIFIER_KEY,
+                    defaultValue = ""
+                )!!
+                val ticketId: String? = navigator.getDestinationNavData(
+                    key = TICKET_IDENTIFIER_KEY
+                )
                 val insertTicketScreen = equinoxScreen {
                     InsertTicketScreen(
                         projectId = projectId,
@@ -200,13 +174,12 @@ fun App() {
                     )
                 }
                 insertTicketScreen.ShowContent()
-                savedStateHandle.remove<String>(TICKET_IDENTIFIER_KEY)
             }
         }
     }
     SessionFlowState.invokeOnUserDisconnected {
         localUser.clear()
-        navigator.navigate(SPLASHSCREEN)
+        navToSplashscreen()
     }
 }
 

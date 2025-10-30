@@ -108,8 +108,9 @@ kotlin {
                 implementation(libs.kotlinx.datetime)
                 implementation(libs.colorpicker.compose)
                 implementation(libs.neutroncore)
-                implementation(libs.compose.navigation)
                 implementation(libs.biometrik)
+                implementation(libs.compose.navigation)
+                implementation(libs.equinoxmisc.navigation.compose.util)
             }
         }
 
